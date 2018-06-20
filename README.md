@@ -82,10 +82,15 @@ or pass configuration to constructor (see in tests - BaseTest.php)
         };
             
             self::$api = new HtmlApi($configuration);
-            self::$storage = new StorageApi();
-            self::$storage->apiClient->apiKey = $configuration['apiKey'];
-            self::$storage->apiClient->appSid = $configuration['appSID'];
-            self::$storage->apiClient->apiServer = $configuration['basePath'];
+
+// Storage api for upload data to remove storage (see tests)           
+            $storage_cfg = new \Aspose\Storage\Configuration();
+            $storage_cfg->setAppKey($configuration['apiKey'])->
+                setAppSid($configuration['appSID'])->
+                setHost("https://api-qa.aspose.cloud/");
+
+            self::$storage = new StorageApi($storage_cfg);
+
 // optional for test
             self::$testFolder = realpath(__DIR__ . '/../..') . $configuration['testData'];
             self::$testResult = realpath(__DIR__ . '/../..') . $configuration['testResult'];
@@ -151,6 +156,9 @@ Class | Method | HTTP request | Description
 *OcrApi* | [**GetRecognizeAndTranslateToHtml**](docs/Api/OcrApi.md#Getrecognizeandtranslatetohtml) | **GET** /html/{name}/ocr/translate/{srcLang}/{resLang} | Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
 *TranslationApi* | [**GetTranslateDocument**](docs/Api/TranslationApi.md#Gettranslatedocument) | **GET** /html/{name}/translate/{srcLang}/{resLang} | Translate the HTML document specified by the name from default or specified storage.
 *TranslationApi* | [**GetTranslateDocumentByUrl**](docs/Api/TranslationApi.md#Gettranslatedocumentbyurl) | **GET** /html/translate/{srcLang}/{resLang} | Translate the HTML document from Web specified by its URL.
+*SummarizationApi* | [**GetDetectHtmlKeywords**](docs/Api/SummarizationApi.md#getdetecthtmlkeywords) | **GET** /html/{name}/summ/keywords | Get the HTML document keywords using the keyword detection service.
+*SummarizationApi* | [**GetDetectHtmlKeywordsByUrl**](docs/Api/SummarizationApi.md#getdetecthtmlkeywordsbyurl) | **GET** /html/summ/keywords | Get the keywords from HTML document from Web specified by its URL using the keyword detection service
+
 
 
 ## Documentation For Authorization
@@ -163,8 +171,10 @@ Class | Method | HTTP request | Description
 - **Scopes**: N/A
 
 ### Examples
+Test uses [StorageApi](https://github.com/aspose-storage-cloud/aspose-storage-cloud-php) for upload file to remote storage. 
 
 [Tests](./test/Api/) contain various examples of using the Aspose.HTML SDK.
+
 
 ## Author
 Alexander Makogon
