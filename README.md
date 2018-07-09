@@ -30,7 +30,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
     }
   ],
   "require": {
-    "aspose-html-cloud/aspose-html-cloud-php.git": "*@dev"
+    "aspose-html-cloud/aspose-html-cloud-php": "*@dev"
   }
 }
 ```
