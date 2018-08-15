@@ -18,7 +18,20 @@ Translate the HTML document specified by the name from default or specified stor
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Client\Invoker\Api\HtmlApi();
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
 
 $name = "name_example"; // string | Document name.
 $src_lang = "src_lang_example"; // string | Source language.
@@ -30,7 +43,7 @@ try {
     $result = $apiInstance->GetTranslateDocument($name, $src_lang, $res_lang, $storage, $folder);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TranslationApi->GetTranslateDocument: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling $apiInstance->GetTranslateDocument: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -47,13 +60,15 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**\SplFileObject**
+**\SplFileObject**   
+
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: multipart/form-data
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
 
 # **GetTranslateDocumentByUrl**
 > \SplFileObject GetTranslateDocumentByUrl($source_url, $src_lang, $res_lang)
@@ -65,7 +80,20 @@ Translate the HTML document from Web specified by its URL.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Client\Invoker\Api\HtmlApi();
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
 
 $source_url = "source_url_example"; // string | Source document URL.
 $src_lang = "src_lang_example"; // string | Source language.
@@ -75,7 +103,7 @@ try {
     $result = $apiInstance->GetTranslateDocumentByUrl($source_url, $src_lang, $res_lang);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TranslationApi->GetTranslateDocumentByUrl: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling $apiInstance->GetTranslateDocumentByUrl: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -90,7 +118,8 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**\SplFileObject**
+**\SplFileObject**   
+
 ### HTTP request headers
 
  - **Content-Type**: application/json

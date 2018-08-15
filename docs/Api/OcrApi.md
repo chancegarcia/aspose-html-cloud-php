@@ -18,7 +18,20 @@ Recognize text from the image file in the storage and import it to HTML format.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Client\Invoker\Api\HtmlApi();
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
 
 $name = "name_example"; // string | The image file name.
 $ocr_engine_lang = "en"; // string | OCR engine language - language
@@ -29,7 +42,7 @@ try {
     $result = $apiInstance->GetRecognizeAndImportToHtml($name, $ocr_engine_lang, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OcrApi->GetRecognizeAndImportToHtml: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling $apiInstance->GetRecognizeAndImportToHtml: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -64,7 +77,20 @@ Recognize text from the image file in the storage, import it to HTML format and 
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Client\Invoker\Api\HtmlApi();
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
 
 $name = "name_example"; // string | The image file name.
 $src_lang = "src_lang_example"; // string | Source language - also supposed as the OCR engine language.
@@ -76,7 +102,7 @@ try {
     $result = $apiInstance->GetRecognizeAndTranslateToHtml($name, $src_lang, $res_lang, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling OcrApi->GetRecognizeAndTranslateToHtml: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling $apiInstance->GetRecognizeAndTranslateToHtml: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```

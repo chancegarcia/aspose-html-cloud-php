@@ -143,23 +143,29 @@ All URIs are relative to *https://api.aspose.cloud/v1.1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ConversionApi* | [**GetConvertDocumentToImage**](docs/Api/ConversionApi.md#Getconvertdocumenttoimage) | **GET** /html/{name}/convert/image/{outFormat} | Convert the HTML document from the storage by its name to the specified image format.
-*ConversionApi* | [**GetConvertDocumentToImageByUrl**](docs/Api/ConversionApi.md#Getconvertdocumenttoimagebyurl) | **GET** /html/convert/image/{outFormat} | Convert the HTML page from the web by its URL to the specified image format.
-*ConversionApi* | [**GetConvertDocumentToPdf**](docs/Api/ConversionApi.md#Getconvertdocumenttopdf) | **GET** /html/{name}/convert/pdf | Convert the HTML document from the storage by its name to PDF.
-*ConversionApi* | [**GetConvertDocumentToPdfByUrl**](docs/Api/ConversionApi.md#Getconvertdocumenttopdfbyurl) | **GET** /html/convert/pdf | Convert the HTML page from the web by its URL to PDF.
-*ConversionApi* | [**GetConvertDocumentToXps**](docs/Api/ConversionApi.md#Getconvertdocumenttoxps) | **GET** /html/{name}/convert/xps | Convert the HTML document from the storage by its name to XPS.
-*ConversionApi* | [**GetConvertDocumentToXpsByUrl**](docs/Api/ConversionApi.md#Getconvertdocumenttoxpsbyurl) | **GET** /html/convert/xps | Convert the HTML page from the web by its URL to XPS.
-*DocumentApi* | [**GetDocument**](docs/Api/DocumentApi.md#Getdocument) | **GET** /html/{name} | Return the HTML document by the name from default or specified storage.
-*DocumentApi* | [**GetDocumentFragmentByXPath**](docs/Api/DocumentApi.md#Getdocumentfragmentbyxpath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
-*DocumentApi* | [**GetDocumentImages**](docs/Api/DocumentApi.md#Getdocumentimages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
-*OcrApi* | [**GetRecognizeAndImportToHtml**](docs/Api/OcrApi.md#Getrecognizeandimporttohtml) | **GET** /html/{name}/ocr/import | Recognize text from the image file in the storage and import it to HTML format.
-*OcrApi* | [**GetRecognizeAndTranslateToHtml**](docs/Api/OcrApi.md#Getrecognizeandtranslatetohtml) | **GET** /html/{name}/ocr/translate/{srcLang}/{resLang} | Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
-*TranslationApi* | [**GetTranslateDocument**](docs/Api/TranslationApi.md#Gettranslatedocument) | **GET** /html/{name}/translate/{srcLang}/{resLang} | Translate the HTML document specified by the name from default or specified storage.
-*TranslationApi* | [**GetTranslateDocumentByUrl**](docs/Api/TranslationApi.md#Gettranslatedocumentbyurl) | **GET** /html/translate/{srcLang}/{resLang} | Translate the HTML document from Web specified by its URL.
-*SummarizationApi* | [**GetDetectHtmlKeywords**](docs/Api/SummarizationApi.md#getdetecthtmlkeywords) | **GET** /html/{name}/summ/keywords | Get the HTML document keywords using the keyword detection service.
-*SummarizationApi* | [**GetDetectHtmlKeywordsByUrl**](docs/Api/SummarizationApi.md#getdetecthtmlkeywordsbyurl) | **GET** /html/summ/keywords | Get the keywords from HTML document from Web specified by its URL using the keyword detection service
-
-
+*HtmlApi* | [**GetConvertDocumentToImage**](docs/Api/ConversionApi.md#Getconvertdocumenttoimage) | **GET** /html/{name}/convert/image/{outFormat} | Convert the HTML document from the storage by its name to the specified image format.
+*HtmlApi* | [**GetConvertDocumentToImageByUrl**](docs/Api/ConversionApi.md#Getconvertdocumenttoimagebyurl) | **GET** /html/convert/image/{outFormat} | Convert the HTML page from the web by its URL to the specified image format.
+*HtmlApi* | [**GetConvertDocumentToPdf**](docs/Api/ConversionApi.md#Getconvertdocumenttopdf) | **GET** /html/{name}/convert/pdf | Convert the HTML document from the storage by its name to PDF.
+*HtmlApi* | [**GetConvertDocumentToPdfByUrl**](docs/Api/ConversionApi.md#Getconvertdocumenttopdfbyurl) | **GET** /html/convert/pdf | Convert the HTML page from the web by its URL to PDF.
+*HtmlApi* | [**GetConvertDocumentToXps**](docs/Api/ConversionApi.md#Getconvertdocumenttoxps) | **GET** /html/{name}/convert/xps | Convert the HTML document from the storage by its name to XPS.
+*HtmlApi* | [**GetConvertDocumentToXpsByUrl**](docs/Api/ConversionApi.md#Getconvertdocumenttoxpsbyurl) | **GET** /html/convert/xps | Convert the HTML page from the web by its URL to XPS.
+*HtmlApi* | [**PutConvertDocumentInRequestToImage**](docs/Api/ConversionApi.md#putconvertdocumentinrequesttoimage) | **PUT** /html/convert/image/{outFormat} | Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
+*HtmlApi* | [**PutConvertDocumentInRequestToPdf**](docs/Api/ConversionApi.md#putconvertdocumentinrequesttopdf) | **PUT** /html/convert/pdf | Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
+*HtmlApi* | [**PutConvertDocumentInRequestToXps**](docs/Api/ConversionApi.md#putconvertdocumentinrequesttoxps) | **PUT** /html/convert/xps | Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**PutConvertDocumentToImage**](docs/Api/ConversionApi.md#putconvertdocumenttoimage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
+*HtmlApi* | [**PutConvertDocumentToPdf**](docs/Api/ConversionApi.md#putconvertdocumenttopdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
+*HtmlApi* | [**PutConvertDocumentToXps**](docs/Api/ConversionApi.md#putconvertdocumenttoxps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**GetDocument**](docs/Api/DocumentApi.md#Getdocument) | **GET** /html/{name} | Return the HTML document by the name from default or specified storage.
+*HtmlApi* | [**GetDocumentFragmentByXPath**](docs/Api/DocumentApi.md#Getdocumentfragmentbyxpath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
+*HtmlApi* | [**GetDocumentFragmentByXPathByUrl**](docs/Api/DocumentApi.md#Getdocumentfragmentbyxpathbyurl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
+*HtmlApi* | [**GetDocumentImages**](docs/Api/DocumentApi.md#Getdocumentimages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
+*HtmlApi* | [**GetDocumentImagesByUrl**](docs/Api/DocumentApi.md#getdocumentimagesbyurl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
+*HtmlApi* | [**GetRecognizeAndImportToHtml**](docs/Api/OcrApi.md#Getrecognizeandimporttohtml) | **GET** /html/{name}/ocr/import | Recognize text from the image file in the storage and import it to HTML format.
+*HtmlApi* | [**GetRecognizeAndTranslateToHtml**](docs/Api/OcrApi.md#Getrecognizeandtranslatetohtml) | **GET** /html/{name}/ocr/translate/{srcLang}/{resLang} | Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+*HtmlApi* | [**GetTranslateDocument**](docs/Api/TranslationApi.md#Gettranslatedocument) | **GET** /html/{name}/translate/{srcLang}/{resLang} | Translate the HTML document specified by the name from default or specified storage.
+*HtmlApi* | [**GetTranslateDocumentByUrl**](docs/Api/TranslationApi.md#Gettranslatedocumentbyurl) | **GET** /html/translate/{srcLang}/{resLang} | Translate the HTML document from Web specified by its URL.
+*HtmlApi* | [**GetDetectHtmlKeywords**](docs/Api/SummarizationApi.md#getdetecthtmlkeywords) | **GET** /html/{name}/summ/keywords | Get the HTML document keywords using the keyword detection service.
+*HtmlApi* | [**GetDetectHtmlKeywordsByUrl**](docs/Api/SummarizationApi.md#getdetecthtmlkeywordsbyurl) | **GET** /html/summ/keywords | Get the keywords from HTML document from Web specified by its URL using the keyword detection service
 
 ## Documentation For Authorization
 
@@ -171,7 +177,7 @@ Class | Method | HTTP request | Description
 - **Scopes**: N/A
 
 ### Examples
-Test uses [StorageApi](https://github.com/aspose-storage-cloud/aspose-storage-cloud-php) for upload file to remote storage. 
+Test uses [StorageApi](https://github.com/aspose-storage-cloud/aspose-storage-cloud-php) for upload(download) file to(from) remote storage. 
 
 [Tests](./test/Api/) contain various examples of using the Aspose.HTML SDK.
 

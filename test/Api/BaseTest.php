@@ -80,7 +80,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             $storage_cfg = new \Aspose\Storage\Configuration();
             $storage_cfg->setAppKey($configuration['apiKey'])->
                 setAppSid($configuration['appSID'])->
-                setHost("http://sikorsky-js3.dynabic.com:9083/");
+                setHost("https://api.aspose.cloud/");
 
             self::$storage = new StorageApi($storage_cfg);
 
@@ -93,7 +93,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             $storage_cfg = new \Aspose\Storage\Configuration();
             $storage_cfg->setAppKey(self::$api->config['apiKey'])->
                 setAppSid(self::$api->config['appSID'])->
-                setHost("http://sikorsky-js3.dynabic.com:9083/");
+                setHost("https://api.aspose.cloud/");
 
             self::$storage = new StorageApi($storage_cfg);
 

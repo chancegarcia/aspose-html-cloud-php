@@ -32,6 +32,7 @@ $configuration = array(
 );
 
 $apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
 $name = "name_example"; // string | Document name.
 $folder = "folder_example"; // string | Document folder.
 $storage = "storage_example"; // string | Document storage.
@@ -40,7 +41,7 @@ try {
     $result = $apiInstance->GetDetectHtmlKeywords($name, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling SummarizationApi->GetDetectHtmlKeywords: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling $apiInstance->GetDetectHtmlKeywords: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -63,7 +64,7 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
 
 # **GetDetectHtmlKeywordsByUrl**
 > \SplFileObject GetDetectHtmlKeywordsByUrl($source_url)
@@ -89,13 +90,14 @@ $configuration = array(
 );
 
 $apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
 $source_url = "source_url_example"; // string | Source document URL.
 
 try {
     $result = $apiInstance->GetDetectHtmlKeywordsByUrl($source_url);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling SummarizationApi->GetDetectHtmlKeywordsByUrl: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling $apiInstance->GetDetectHtmlKeywordsByUrl: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -115,5 +117,5 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
 

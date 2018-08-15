@@ -28,6 +28,8 @@
 
 namespace Client\Invoker\Api;
 
+use Aspose\Storage\Model\Requests;
+
 /**
  * ConversionApiTest Class Doc Comment
  *
@@ -393,5 +395,309 @@ class ConversionApiTest extends BaseTest
 
         //Copy result to testFolder
         copy($result->getRealPath(), self::$testResult . $resultFile . '.xps');
+    }
+
+    /**
+     * Test case for PutConvertDocumentInRequestToImage
+     * Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
+     * @param  string $out_format out_format (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
+     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
+     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerConversionToImage
+     *
+     */
+
+    public function testPutConvertDocumentInRequestToImage
+    ( $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
+      $bottom_margin = null, $x_resolution = null, $y_resolution = null)
+    {
+        $resolution = $x_resolution;
+        $resultFile = "putConvertToImg_";
+        $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
+        $resultFile .= isset($x_resolution) && isset($y_resolution) ? $x_resolution . "x" . $y_resolution . "_" : "-x-_";
+        $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
+        $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
+        $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
+        $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+
+        //Convert html to image
+        $filename = "test1.html";
+        $out_path = "HtmlTestDoc/" +  $resultFile;
+        $file = self::$testFolder . $filename;
+        $result = self::$api->PutConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
+             $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+    }
+
+    /**
+     * Test case for PutConvertDocumentInRequestToPdf
+     *
+     * Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
+     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
+     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerConversionToPdfOrXps
+     *
+     */
+    public function testPutConvertDocumentInRequestToPdf
+    ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
+     $bottom_margin = null)
+    {
+        $resultFile = "putConvertToPdf_";
+        $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
+        $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
+        $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
+        $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
+        $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+
+        //Convert html to pdf
+        $filename = "test1.html";
+        $out_path = "HtmlTestDoc/" +  $resultFile;
+        $file = self::$testFolder . $filename;
+        $result = self::$api->PutConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
+            $left_margin, $right_margin, $top_margin, $bottom_margin);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+    }
+
+    /**
+     * Test case for PutConvertDocumentInRequestToXps
+     *
+     * Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
+     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
+     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     *
+     * @dataProvider providerConversionToPdfOrXps
+     *
+     */
+    public function testPutConvertDocumentInRequestToXps
+    ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
+     $bottom_margin = null)
+    {
+        $resultFile = "putConvertToXps_";
+        $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
+        $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
+        $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
+        $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
+        $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+
+        //Convert html to xps
+        $filename = "test1.html";
+        $out_path = "HtmlTestDoc/" +  $resultFile;
+        $file = self::$testFolder . $filename;
+        $result = self::$api->PutConvertDocumentInRequestToXps($out_path, $file, $width, $height,
+            $left_margin, $right_margin, $top_margin, $bottom_margin);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+    }
+
+    /**
+     * Test case for PutConvertDocumentToImage
+     *
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
+     * @param  string $out_format out_format (required)
+     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
+     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
+     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerConversionToImage
+     *
+     */
+    public function testPutConvertDocumentToImage
+   ( $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
+      $bottom_margin = null, $x_resolution = null, $y_resolution = null)
+    {
+        $resolution = $x_resolution;
+        $resultFile = "putConvertDocToImg_";
+        $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
+        $resultFile .= isset($x_resolution) && isset($y_resolution) ? $x_resolution . "x" . $y_resolution . "_" : "-x-_";
+        $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
+        $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
+        $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
+        $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+
+        //test1.html already in storage
+        $filename = "test1.html";
+
+        $out_path = "HtmlTestDoc/" +  $resultFile;
+        $folder = "HtmlTestDoc";
+        $storage = null;
+        $result = self::$api->PutConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
+             $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+    }
+
+    /**
+     * Test case for PutConvertDocumentToPdf
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
+     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
+     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerConversionToPdfOrXps
+     *
+     */
+    public function testPutConvertDocumentToPdf
+    ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
+     $bottom_margin = null)
+    {
+        $resultFile = "putConvertDocToPdf_";
+        $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
+        $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
+        $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
+        $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
+        $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+
+        //Convert html to pdf in storage
+        $filename = "test1.html";
+        $out_path = "HtmlTestDoc/" +  $resultFile;
+        $folder = "HtmlTestDoc";
+        $storage = null;
+
+        $result = self::$api->PutConvertDocumentToPdf($filename, $out_path, $width, $height,
+            $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+    }
+
+
+    /**
+     * Test case for PutConvertDocumentToXps
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
+     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
+     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
+     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
+     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerConversionToPdfOrXps
+     *
+     */
+    public function testPutConvertDocumentToXps
+    ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
+     $bottom_margin = null)
+    {
+        $resultFile = "putConvertDocToXps_";
+        $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
+        $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
+        $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
+        $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
+        $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+
+        //Convert html to xps
+        $filename = "test1.html";
+        $out_path = "HtmlTestDoc/" +  $resultFile;
+        $folder = "HtmlTestDoc";
+        $storage = null;
+        $result = self::$api->PutConvertDocumentToXps($filename, $out_path, $width, $height,
+            $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
     }
 }

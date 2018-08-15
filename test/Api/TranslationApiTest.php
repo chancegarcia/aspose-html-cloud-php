@@ -64,7 +64,7 @@ class TranslationApiTest extends BaseTest
         $this->assertTrue($result->getSize() > 0,"Zero result");
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . "TranslateDoc_" . $src_lang . "_" . $res_lang . ".zip");
+        copy($result->getRealPath(), self::$testResult . "TranslateDoc_" . $src_lang . "_" . $res_lang . ".html");
     }
 
 
@@ -97,7 +97,7 @@ class TranslationApiTest extends BaseTest
         $this->assertTrue($result->getSize() > 0,"Zero result");
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . "TranslateUrl_" . $src_lang . "_" . $res_lang . ".zip");
+        copy($result->getRealPath(), self::$testResult . "TranslateUrl_" . $src_lang . "_" . $res_lang . ".html");
     }
 
     public function providerTranslateUrl()

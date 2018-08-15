@@ -51,7 +51,7 @@ class DocumentApiTest extends BaseTest
         $this->uploadFile($fileName);
         $result = self::$api->GetDocument($fileName,null,self::$api->config['remoteFolder']);
 
-        $this->assertTrue($result->isFile(),"Error result after recognize");
+        $this->assertTrue($result->isFile(),"Error result after get document");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
 
         //Copy result to testFolder
@@ -85,7 +85,7 @@ class DocumentApiTest extends BaseTest
         $this->uploadFile($fileName);
         $result = self::$api->GetDocumentFragmentByXPath($fileName, $xPath, $outFormat, null, self::$api->config['remoteFolder']);
 
-        $this->assertTrue($result->isFile(),"Error result after recognize");
+        $this->assertTrue($result->isFile(),"Error result after get document xpath");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
 
         $ext = "";
@@ -109,6 +109,44 @@ class DocumentApiTest extends BaseTest
     	];
     }
 
+    /**
+     * Test case for GetDocumentFragmentByXPathByUrl
+     *
+     * Return list of HTML fragments matching the specified XPath query from url.
+     * @param  integer $num_test Source page URL. (required for test)
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $x_path XPath query string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @dataProvider providerGetDocumentFragmentByXPathByUrl
+     *
+     */
+    public function testGetDocumentFragmentByXPathByUrl($num_test, $source_url, $x_path, $out_format)
+    {
+        $result = self::$api->GetDocumentFragmentByXPathByUrl($source_url, $x_path, $out_format);
+
+        $this->assertTrue($result->isFile(),"Error result after get xPath from url");
+        $this->assertTrue($result->getSize() > 0,"Size of file is zero");
+
+        $ext = "";
+        if($out_format == "plain") {
+            $ext = ".html";
+        }else if($out_format == "json") {
+            $ext = ".json";
+        }
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . "GetDocXPathByUrl_" . $num_test . $ext);
+    }
+
+    public function providerGetDocumentFragmentByXPathByUrl()
+    {
+        return [
+            [1, "https://stallman.org/articles/anonymous-payments-thru-phones.html",".//p", "plain"],
+            [2, "https://stallman.org/articles/anonymous-payments-thru-phones.html",".//p", "json"]
+        ];
+    }
+
 
     /**
      * Test case for GetDocumentImages
@@ -124,7 +162,7 @@ class DocumentApiTest extends BaseTest
         $result = self::$api->GetDocumentImages($fileName,self::$api->config['remoteFolder'],null);
         print_r($result);
 
-        $this->assertTrue($result->isFile(),"Error result after recognize");
+        $this->assertTrue($result->isFile(),"Error result after get document images");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
 
         //Copy result to testFolder
@@ -140,4 +178,33 @@ class DocumentApiTest extends BaseTest
             ["test4.html.zip"]
         ];
     }
+
+    /**
+     * Test case for GetDocumentImagesByUrl
+     *
+     * Return all HTML document images packaged as a ZIP archive. from url
+     * @param  string $source_url The document URL. (required)
+     *
+     * @dataProvider providerGetDocumentImagesByUrl
+     */
+    public function testGetDocumentImagesByUrl($num_test, $source_url)
+    {
+        $result = self::$api->GetDocumentImagesByUrl($source_url);
+
+        $this->assertTrue($result->isFile(),"Error result after get images from url");
+        $this->assertTrue($result->getSize() > 0,"Size of file is zero");
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult .$num_test . "get_images_by_url.zip");
+    }
+
+    public function providerGetDocumentImagesByUrl()
+    {
+        return [
+            [1, "https://www.google.com"],
+            [2, "https://www.yahoo.com"]
+        ];
+    }
+
+
 }

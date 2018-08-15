@@ -638,6 +638,307 @@ trait DocumentApi
     }
 
     /**
+     * Operation GetDocumentFragmentByXPathByUrl
+     *
+     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $x_path XPath query string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function GetDocumentFragmentByXPathByUrl($source_url, $x_path, $out_format)
+    {
+        list($response) = $this->GetDocumentFragmentByXPathByUrlWithHttpInfo($source_url, $x_path, $out_format);
+        return $response;
+    }
+
+    /**
+     * Operation GetDocumentFragmentByXPathByUrlWithHttpInfo
+     *
+     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $x_path XPath query string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function GetDocumentFragmentByXPathByUrlWithHttpInfo($source_url, $x_path, $out_format)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentFragmentByXPathByUrlRequest($source_url, $x_path, $out_format);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation GetDocumentFragmentByXPathByUrlAsync
+     *
+     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $x_path XPath query string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentFragmentByXPathByUrlAsync($source_url, $x_path, $out_format)
+    {
+        return $this->GetDocumentFragmentByXPathByUrlAsyncWithHttpInfo($source_url, $x_path, $out_format)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation GetDocumentFragmentByXPathByUrlAsyncWithHttpInfo
+     *
+     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $x_path XPath query string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentFragmentByXPathByUrlAsyncWithHttpInfo($source_url, $x_path, $out_format)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentFragmentByXPathByUrlRequest($source_url, $x_path, $out_format);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'GetDocumentFragmentByXPathByUrl'
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $x_path XPath query string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function GetDocumentFragmentByXPathByUrlRequest($source_url, $x_path, $out_format)
+    {
+        // verify the required parameter 'source_url' is set
+        if ($source_url === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source_url when calling GetDocumentFragmentByXPathByUrl'
+            );
+        }
+        // verify the required parameter 'x_path' is set
+        if ($x_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_path when calling GetDocumentFragmentByXPathByUrl'
+            );
+        }
+        // verify the required parameter 'out_format' is set
+        if ($out_format === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_format when calling GetDocumentFragmentByXPathByUrl'
+            );
+        }
+
+        $resourcePath = '/html/fragments/{outFormat}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($source_url !== null) {
+            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+        }
+        // query params
+        if ($x_path !== null) {
+            $queryParams['xPath'] = ObjectSerializer::toQueryValue($x_path);
+        }
+
+        // path params
+        if ($out_format !== null) {
+            $resourcePath = str_replace(
+                '{' . 'outFormat' . '}',
+                ObjectSerializer::toPathValue($out_format),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/zip']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/zip'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+    /**
      * Operation GetDocumentImages
      *
      * Return all HTML document images packaged as a ZIP archive.
@@ -852,6 +1153,273 @@ trait DocumentApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/zip']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/zip'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+    /**
+     * Operation GetDocumentImagesByUrl
+     *
+     * Return all HTML page images packaged as a ZIP archive by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function GetDocumentImagesByUrl($source_url)
+    {
+        list($response) = $this->GetDocumentImagesByUrlWithHttpInfo($source_url);
+        return $response;
+    }
+
+    /**
+     * Operation GetDocumentImagesByUrlWithHttpInfo
+     *
+     * Return all HTML page images packaged as a ZIP archive by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function GetDocumentImagesByUrlWithHttpInfo($source_url)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentImagesByUrlRequest($source_url);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation GetDocumentImagesByUrlAsync
+     *
+     * Return all HTML page images packaged as a ZIP archive by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentImagesByUrlAsync($source_url)
+    {
+        return $this->GetDocumentImagesByUrlAsyncWithHttpInfo($source_url)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation GetDocumentImagesByUrlAsyncWithHttpInfo
+     *
+     * Return all HTML page images packaged as a ZIP archive by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentImagesByUrlAsyncWithHttpInfo($source_url)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentImagesByUrlRequest($source_url);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'GetDocumentImagesByUrl'
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function GetDocumentImagesByUrlRequest($source_url)
+    {
+        // verify the required parameter 'source_url' is set
+        if ($source_url === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source_url when calling GetDocumentImagesByUrl'
+            );
+        }
+
+        $resourcePath = '/html/images/all';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($source_url !== null) {
+            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+        }
+
 
         // body params
         $_tempBody = null;
