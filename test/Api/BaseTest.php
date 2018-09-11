@@ -75,12 +75,14 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 //            "debug" => false
 //        );
 
+        $base_host = "http://api.aspose.cloud";
+
         if (isset($configuration)){
             self::$api = new HtmlApi($configuration);
             $storage_cfg = new \Aspose\Storage\Configuration();
             $storage_cfg->setAppKey($configuration['apiKey'])->
                 setAppSid($configuration['appSID'])->
-                setHost("https://api.aspose.cloud/");
+                setHost($base_host);
 
             self::$storage = new StorageApi($storage_cfg);
 
@@ -93,7 +95,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             $storage_cfg = new \Aspose\Storage\Configuration();
             $storage_cfg->setAppKey(self::$api->config['apiKey'])->
                 setAppSid(self::$api->config['appSID'])->
-                setHost("https://api.aspose.cloud/");
+                setHost($base_host);
 
             self::$storage = new StorageApi($storage_cfg);
 

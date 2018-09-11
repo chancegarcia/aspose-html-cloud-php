@@ -939,6 +939,653 @@ trait DocumentApi
 
 
     /**
+     * Operation GetDocumentFragmentsByCSSSelector
+     *
+     * Return list of HTML fragments matching the specified CSS selector.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $storage The document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function GetDocumentFragmentsByCSSSelector($name, $selector, $out_format, $folder = null, $storage = null)
+    {
+        list($response) = $this->GetDocumentFragmentsByCSSSelectorWithHttpInfo($name, $selector, $out_format, $folder, $storage);
+        return $response;
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorWithHttpInfo
+     *
+     * Return list of HTML fragments matching the specified CSS selector.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $storage The document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function GetDocumentFragmentsByCSSSelectorWithHttpInfo($name, $selector, $out_format, $folder = null, $storage = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentFragmentsByCSSSelectorRequest($name, $selector, $out_format, $folder, $storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 204:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorAsync
+     *
+     * Return list of HTML fragments matching the specified CSS selector.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $storage The document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentFragmentsByCSSSelectorAsync($name, $selector, $out_format, $folder = null, $storage = null)
+    {
+        return $this->GetDocumentFragmentsByCSSSelectorAsyncWithHttpInfo($name, $selector, $out_format, $folder, $storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorAsyncWithHttpInfo
+     *
+     * Return list of HTML fragments matching the specified CSS selector.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $storage The document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentFragmentsByCSSSelectorAsyncWithHttpInfo($name, $selector, $out_format, $folder = null, $storage = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentFragmentsByCSSSelectorRequest($name, $selector, $out_format, $folder, $storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'GetDocumentFragmentsByCSSSelector'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $storage The document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function GetDocumentFragmentsByCSSSelectorRequest($name, $selector, $out_format, $folder = null, $storage = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling GetDocumentFragmentsByCSSSelector'
+            );
+        }
+        // verify the required parameter 'selector' is set
+        if ($selector === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $selector when calling GetDocumentFragmentsByCSSSelector'
+            );
+        }
+        // verify the required parameter 'out_format' is set
+        if ($out_format === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_format when calling GetDocumentFragmentsByCSSSelector'
+            );
+        }
+
+        $resourcePath = '/html/{name}/fragments/css/{outFormat}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($selector !== null) {
+            $queryParams['selector'] = ObjectSerializer::toQueryValue($selector);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($out_format !== null) {
+            $resourcePath = str_replace(
+                '{' . 'outFormat' . '}',
+                ObjectSerializer::toPathValue($out_format),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorByUrl
+     *
+     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function GetDocumentFragmentsByCSSSelectorByUrl($source_url, $selector, $out_format)
+    {
+        list($response) = $this->GetDocumentFragmentsByCSSSelectorByUrlWithHttpInfo($source_url, $selector, $out_format);
+        return $response;
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorByUrlWithHttpInfo
+     *
+     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function GetDocumentFragmentsByCSSSelectorByUrlWithHttpInfo($source_url, $selector, $out_format)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentFragmentsByCSSSelectorByUrlRequest($source_url, $selector, $out_format);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 204:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorByUrlAsync
+     *
+     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentFragmentsByCSSSelectorByUrlAsync($source_url, $selector, $out_format)
+    {
+        return $this->GetDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo($source_url, $selector, $out_format)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo
+     *
+     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo($source_url, $selector, $out_format)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetDocumentFragmentsByCSSSelectorByUrlRequest($source_url, $selector, $out_format);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'GetDocumentFragmentsByCSSSelectorByUrl'
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function GetDocumentFragmentsByCSSSelectorByUrlRequest($source_url, $selector, $out_format)
+    {
+        // verify the required parameter 'source_url' is set
+        if ($source_url === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source_url when calling GetDocumentFragmentsByCSSSelectorByUrl'
+            );
+        }
+        // verify the required parameter 'selector' is set
+        if ($selector === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $selector when calling GetDocumentFragmentsByCSSSelectorByUrl'
+            );
+        }
+        // verify the required parameter 'out_format' is set
+        if ($out_format === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_format when calling GetDocumentFragmentsByCSSSelectorByUrl'
+            );
+        }
+
+        $resourcePath = '/html/fragments/css/{outFormat}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($source_url !== null) {
+            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+        }
+        // query params
+        if ($selector !== null) {
+            $queryParams['selector'] = ObjectSerializer::toQueryValue($selector);
+        }
+
+        // path params
+        if ($out_format !== null) {
+            $resourcePath = str_replace(
+                '{' . 'outFormat' . '}',
+                ObjectSerializer::toPathValue($out_format),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+    /**
      * Operation GetDocumentImages
      *
      * Return all HTML document images packaged as a ZIP archive.

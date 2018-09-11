@@ -158,6 +158,8 @@ Class | Method | HTTP request | Description
 *HtmlApi* | [**GetDocument**](docs/Api/DocumentApi.md#Getdocument) | **GET** /html/{name} | Return the HTML document by the name from default or specified storage.
 *HtmlApi* | [**GetDocumentFragmentByXPath**](docs/Api/DocumentApi.md#Getdocumentfragmentbyxpath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
 *HtmlApi* | [**GetDocumentFragmentByXPathByUrl**](docs/Api/DocumentApi.md#Getdocumentfragmentbyxpathbyurl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
+*HtmlApi* | [**GetDocumentFragmentsByCSSSelector**](docs/Api/DocumentApi.md#getdocumentfragmentsbycssselector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
+*HtmlApi* | [**GetDocumentFragmentsByCSSSelectorByUrl**](docs/Api/DocumentApi.md#getdocumentfragmentsbycssselectorbyurl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
 *HtmlApi* | [**GetDocumentImages**](docs/Api/DocumentApi.md#Getdocumentimages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
 *HtmlApi* | [**GetDocumentImagesByUrl**](docs/Api/DocumentApi.md#getdocumentimagesbyurl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
 *HtmlApi* | [**GetRecognizeAndImportToHtml**](docs/Api/OcrApi.md#Getrecognizeandimporttohtml) | **GET** /html/{name}/ocr/import | Recognize text from the image file in the storage and import it to HTML format.
@@ -183,4 +185,4 @@ Test uses [StorageApi](https://github.com/aspose-storage-cloud/aspose-storage-cl
 
 
 ## Author
-Alexander Makogon
+Aspose

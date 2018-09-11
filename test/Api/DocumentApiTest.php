@@ -139,11 +139,100 @@ class DocumentApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . "GetDocXPathByUrl_" . $num_test . $ext);
     }
 
+
     public function providerGetDocumentFragmentByXPathByUrl()
     {
         return [
             [1, "https://stallman.org/articles/anonymous-payments-thru-phones.html",".//p", "plain"],
             [2, "https://stallman.org/articles/anonymous-payments-thru-phones.html",".//p", "json"]
+        ];
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelector
+     *
+     * Return list of HTML fragments matching the specified CSS selector.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $storage The document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerGetDocumentFragmentsByCSSSelector
+     */
+    public function testGetDocumentFragmentsByCSSSelector($name, $selector, $out_format)
+    {
+        $this->uploadFile($name);
+        $result = self::$api->GetDocumentFragmentsByCSSSelector($name, $selector, $out_format, self::$api->config['remoteFolder'], null);
+
+        $this->assertTrue($result->isFile(),"Error result after get document xpath");
+        $this->assertTrue($result->getSize() > 0,"Size of file is zero");
+
+        $ext = "";
+        if($out_format == "plain") {
+            $ext = ".html";
+        }else if($out_format == "json") {
+            $ext = ".json";
+        }
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . "GetDocCSS_" . $name . $ext);
+    }
+
+    public function providerGetDocumentFragmentsByCSSSelector()
+    {
+        return [
+            ["test2.html.zip","div p", "plain"],
+            ["test3.html.zip","div", "plain"],
+            ["test4.html.zip","p", "plain"],
+            ["test2.html","ol li", "json"]
+        ];
+    }
+
+    /**
+     * Operation GetDocumentFragmentsByCSSSelectorByUrl
+     *
+     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     *
+     * @param  string $source_url Source page URL. (required)
+     * @param  string $selector CSS selector string. (required)
+     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerGetDocumentFragmentsByCSSSelectorByUrl
+     */
+    public function testGetDocumentFragmentsByCSSSelectorByUrl($num_test, $source_url, $selector, $out_format)
+    {
+        $result = self::$api->GetDocumentFragmentsByCSSSelectorByUrl($source_url, $selector, $out_format);
+
+        $this->assertTrue($result->isFile(),"Error result after get xPath from url");
+        $this->assertTrue($result->getSize() > 0,"Size of file is zero");
+
+        $ext = "";
+        if($out_format == "plain") {
+            $ext = ".html";
+        }else if($out_format == "json") {
+            $ext = ".json";
+        }
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . "GetDocCSSByUrl_" . $num_test . $ext);
+    }
+
+
+    public function providerGetDocumentFragmentsByCSSSelectorByUrl()
+    {
+        return [
+            [1, "https://www.w3schools.com/cssref/css_selectors.asp",'a[href$=".asp"]', "plain"],
+            [2, "https://www.w3schools.com/cssref/css_selectors.asp",'a[href$=".asp"]', "json"]
         ];
     }
 
