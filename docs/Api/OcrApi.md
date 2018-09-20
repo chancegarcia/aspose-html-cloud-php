@@ -52,7 +52,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| The image file name. |
- **ocr_engine_lang** | **string**| OCR engine language - language | [optional] [default to en]
+ **ocr_engine_lang** | **string**| OCR engine language - language | [optional] [default to en] Allowed values is "en", "de", "fr", "ru".
  **folder** | **string**| The source image folder. | [optional]
  **storage** | **string**| The source image storage. | [optional]
 
@@ -112,8 +112,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| The image file name. |
- **src_lang** | **string**| Source language - also supposed as the OCR engine language. |
- **res_lang** | **string**| Result language. |
+ **src_lang** | **string**| Source language - also supposed as the OCR engine language. | Allowed values is "en", "de", "fr", "ru".
+ **res_lang** | **string**| Result language. | Allowed values is "en", "de", "fr", "ru".
  **folder** | **string**| The source image folder. | [optional]
  **storage** | **string**| The source image storage. | [optional]
 
