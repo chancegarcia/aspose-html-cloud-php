@@ -28,6 +28,7 @@
 
 namespace Client\Invoker\Api;
 
+use Client\Invoker\Client\TemplateMergeApi;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use Client\Invoker\Config;
@@ -38,6 +39,8 @@ require_once('DocumentApi.php');
 require_once('OcrApi.php');
 require_once('TranslationApi.php');
 require_once('SummarizationApi.php');
+require_once('TemplateMergeApi.php');
+
 
 /**
  * HtmlApi Class Doc Comment
@@ -47,7 +50,7 @@ require_once('SummarizationApi.php');
  */
 class HtmlApi
 {
-    use ConversionApi,DocumentApi,OcrApi,TranslationApi,SummarizationApi;
+    use ConversionApi, DocumentApi, OcrApi, TranslationApi, SummarizationApi, TemplateMergeApi;
 
     /**
      * @var ClientInterface

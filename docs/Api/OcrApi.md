@@ -11,7 +11,8 @@ Method | HTTP request | Description
 # **GetRecognizeAndImportToHtml**
 > \SplFileObject GetRecognizeAndImportToHtml($name, $ocr_engine_lang, $folder, $storage)
 
-Recognize text from the image file in the storage and import it to HTML format.
+Recognize text from the image file in the storage and import it to HTML format.     
+Acceptable image formats is jpg, gif, png, bmp, tiff.
 
 ### Example
 ```php
@@ -70,7 +71,8 @@ Name | Type | Description  | Notes
 # **GetRecognizeAndTranslateToHtml**
 > \SplFileObject GetRecognizeAndTranslateToHtml($name, $src_lang, $res_lang, $folder, $storage)
 
-Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+Recognize text from the image file in the storage, import it to HTML format and translate to specified language.    
+Acceptable image formats is jpg, gif, png, bmp, tiff.
 
 ### Example
 ```php

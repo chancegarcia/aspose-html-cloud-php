@@ -39,37 +39,6 @@ class DocumentApiTest extends BaseTest
 {
 
     /**
-     * Test case for GetDocument
-     *
-     * Return the HTML document by the name from default or specified storage.
-     * @param  string $fileName The document name. (required)
-     *
-     * @dataProvider providerGetDocument
-     */
-    public function testGetDocument($fileName)
-    {
-        $this->uploadFile($fileName);
-        $result = self::$api->GetDocument($fileName,null,self::$api->config['remoteFolder']);
-
-        $this->assertTrue($result->isFile(),"Error result after get document");
-        $this->assertTrue($result->getSize() > 0,"Size of file is zero");
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . "GetDoc_" . $fileName);
-    }
-
-    public function providerGetDocument()
-    {
-        return [
-            ["test1.html.zip"],
-            ["test2.html.zip"],
-            ["test3.html.zip"],
-            ["test4.html.zip"],
-            ["test.txt"]
-        ];
-    }
-
-    /**
      * Test case for GetDocumentFragmentByXPath
      *
      * Return list of HTML fragments matching the specified XPath query..

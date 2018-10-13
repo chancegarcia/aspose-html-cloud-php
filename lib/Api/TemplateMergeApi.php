@@ -1,7 +1,7 @@
 <?php
 /*
 * --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="OcrApi.php">
+* <copyright company="Aspose" file="TemplateMergeApi.php">
 *   Copyright (c) 2018 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
@@ -26,54 +26,61 @@
 * --------------------------------------------------------------------------------------------------------------------
 */
 
-namespace Client\Invoker\Api;
+namespace Client\Invoker\Client;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\RequestOptions;
 use Client\Invoker\ApiException;
+use Client\Invoker\Configuration;
+use Client\Invoker\HeaderSelector;
 use Client\Invoker\ObjectSerializer;
 
-trait OcrApi
+trait TemplateMergeApi
 {
     /**
-     * Operation GetRecognizeAndImportToHtml
+     * Operation GetMergeHtmlTemplate
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Populate HTML document template with data located as a file in the storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $data_path Data source file path in the storage. Supported data format: XML (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \Client\Invoker\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function GetRecognizeAndImportToHtml($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
+    public function GetMergeHtmlTemplate($template_name, $data_path, $options = null, $folder = null, $storage = null)
     {
-        list($response) = $this->GetRecognizeAndImportToHtmlWithHttpInfo($name, $ocr_engine_lang, $folder, $storage);
+        list($response) = $this->GetMergeHtmlTemplateWithHttpInfo($template_name, $data_path, $options, $folder, $storage);
         return $response;
     }
 
     /**
-     * Operation GetRecognizeAndImportToHtmlWithHttpInfo
+     * Operation GetMergeHtmlTemplateWithHttpInfo
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Populate HTML document template with data located as a file in the storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $data_path Data source file path in the storage. Supported data format: XML (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \Client\Invoker\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function GetRecognizeAndImportToHtmlWithHttpInfo($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
+    public function GetMergeHtmlTemplateWithHttpInfo($template_name, $data_path, $options = null, $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndImportToHtmlRequest($name, $ocr_engine_lang, $folder, $storage);
+        $request = $this->GetMergeHtmlTemplateRequest($template_name, $data_path, $options, $folder, $storage);
 
         try {
             $options = $this->createHttpClientOption();
@@ -129,27 +136,44 @@ trait OcrApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetRecognizeAndImportToHtmlAsync
+     * Operation GetMergeHtmlTemplateAsync
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Populate HTML document template with data located as a file in the storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $data_path Data source file path in the storage. Supported data format: XML (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetRecognizeAndImportToHtmlAsync($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
+    public function GetMergeHtmlTemplateAsync($template_name, $data_path, $options = null, $folder = null, $storage = null)
     {
-        return $this->GetRecognizeAndImportToHtmlAsyncWithHttpInfo($name, $ocr_engine_lang, $folder, $storage)
+        return $this->GetMergeHtmlTemplateAsyncWithHttpInfo($template_name, $data_path, $options, $folder, $storage)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -158,22 +182,23 @@ trait OcrApi
     }
 
     /**
-     * Operation GetRecognizeAndImportToHtmlAsyncWithHttpInfo
+     * Operation GetMergeHtmlTemplateAsyncWithHttpInfo
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Populate HTML document template with data located as a file in the storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $data_path Data source file path in the storage. Supported data format: XML (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetRecognizeAndImportToHtmlAsyncWithHttpInfo($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
+    public function GetMergeHtmlTemplateAsyncWithHttpInfo($template_name, $data_path, $options = null, $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndImportToHtmlRequest($name, $ocr_engine_lang, $folder, $storage);
+        $request = $this->GetMergeHtmlTemplateRequest($template_name, $data_path, $options, $folder, $storage);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -213,35 +238,44 @@ trait OcrApi
     }
 
     /**
-     * Create request for operation 'GetRecognizeAndImportToHtml'
+     * Create request for operation 'GetMergeHtmlTemplate'
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $data_path Data source file path in the storage. Supported data format: XML (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function GetRecognizeAndImportToHtmlRequest($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
+    protected function GetMergeHtmlTemplateRequest($template_name, $data_path, $options = null, $folder = null, $storage = null)
     {
-        // verify the required parameter 'name' is set
-        if ($name === null) {
+        // verify the required parameter 'template_name' is set
+        if ($template_name === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetRecognizeAndImportToHtml'
+                'Missing the required parameter $template_name when calling GetMergeHtmlTemplate'
+            );
+        }
+        // verify the required parameter 'data_path' is set
+        if ($data_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $data_path when calling GetMergeHtmlTemplate'
             );
         }
 
-        $resourcePath = '/html/{name}/ocr/import';
-        $formParams = [];
+        $resourcePath = '/html/{templateName}/merge';
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
-        $multipart = false;
 
         // query params
-        if ($ocr_engine_lang !== null) {
-            $queryParams['ocrEngineLang'] = ObjectSerializer::toQueryValue($ocr_engine_lang);
+        if ($data_path !== null) {
+            $queryParams['dataPath'] = ObjectSerializer::toQueryValue($data_path);
+        }
+        // query params
+        if ($options !== null) {
+            $queryParams['options'] = ObjectSerializer::toQueryValue($options);
         }
         // query params
         if ($folder !== null) {
@@ -253,55 +287,12 @@ trait OcrApi
         }
 
         // path params
-        if ($name !== null) {
+        if ($template_name !== null) {
             $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
+                '{' . 'templateName' . '}',
+                ObjectSerializer::toPathValue($template_name),
                 $resourcePath
             );
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['multipart/form-data']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['multipart/form-data'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
         }
 
 
@@ -312,8 +303,7 @@ trait OcrApi
 
         $headers = array_merge(
             $defaultHeaders,
-            $headerParams,
-            $headers
+            $headerParams
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
@@ -326,45 +316,47 @@ trait OcrApi
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtml
+     * Operation PutMergeHtmlTemplate
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Populate HTML document template with data from the request body. Result document will be saved to storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $out_path Result document path. (required)
+     * @param  \SplFileObject $file A data file to populate template. (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \Client\Invoker\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function GetRecognizeAndTranslateToHtml($name, $src_lang, $res_lang, $folder = null, $storage = null)
+    public function PutMergeHtmlTemplate($template_name, $out_path, $file, $options = null, $folder = null, $storage = null)
     {
-        list($response) = $this->GetRecognizeAndTranslateToHtmlWithHttpInfo($name, $src_lang, $res_lang, $folder, $storage);
+        list($response) = $this->PutMergeHtmlTemplateWithHttpInfo($template_name, $out_path, $file, $options, $folder, $storage);
         return $response;
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtmlWithHttpInfo
+     * Operation PutMergeHtmlTemplateWithHttpInfo
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Populate HTML document template with data from the request body. Result document will be saved to storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $out_path Result document path. (required)
+     * @param  \SplFileObject $file A data file to populate template. (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \Client\Invoker\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function GetRecognizeAndTranslateToHtmlWithHttpInfo($name, $src_lang, $res_lang, $folder = null, $storage = null)
+    public function PutMergeHtmlTemplateWithHttpInfo($template_name, $out_path, $file, $options = null, $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndTranslateToHtmlRequest($name, $src_lang, $res_lang, $folder, $storage);
+        $request = $this->PutMergeHtmlTemplateRequest($template_name, $out_path, $file, $options, $folder, $storage);
 
         try {
             $options = $this->createHttpClientOption();
@@ -420,28 +412,45 @@ trait OcrApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtmlAsync
+     * Operation PutMergeHtmlTemplateAsync
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Populate HTML document template with data from the request body. Result document will be saved to storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $out_path Result document path. (required)
+     * @param  \SplFileObject $file A data file to populate template. (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetRecognizeAndTranslateToHtmlAsync($name, $src_lang, $res_lang, $folder = null, $storage = null)
+    public function PutMergeHtmlTemplateAsync($template_name, $out_path, $file, $options = null, $folder = null, $storage = null)
     {
-        return $this->GetRecognizeAndTranslateToHtmlAsyncWithHttpInfo($name, $src_lang, $res_lang, $folder, $storage)
+        return $this->PutMergeHtmlTemplateAsyncWithHttpInfo($template_name, $out_path, $file, $options, $folder, $storage)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -450,23 +459,24 @@ trait OcrApi
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtmlAsyncWithHttpInfo
+     * Operation PutMergeHtmlTemplateAsyncWithHttpInfo
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Populate HTML document template with data from the request body. Result document will be saved to storage.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $out_path Result document path. (required)
+     * @param  \SplFileObject $file A data file to populate template. (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetRecognizeAndTranslateToHtmlAsyncWithHttpInfo($name, $src_lang, $res_lang, $folder = null, $storage = null)
+    public function PutMergeHtmlTemplateAsyncWithHttpInfo($template_name, $out_path, $file, $options = null, $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndTranslateToHtmlRequest($name, $src_lang, $res_lang, $folder, $storage);
+        $request = $this->PutMergeHtmlTemplateRequest($template_name, $out_path, $file, $options, $folder, $storage);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -506,45 +516,51 @@ trait OcrApi
     }
 
     /**
-     * Create request for operation 'GetRecognizeAndTranslateToHtml'
+     * Create request for operation 'PutMergeHtmlTemplate'
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
+     * @param  string $out_path Result document path. (required)
+     * @param  \SplFileObject $file A data file to populate template. (required)
+     * @param  string $options Template merge options: reserved for further implementation. (optional)
+     * @param  string $folder The template document folder. (optional)
+     * @param  string $storage The template document and data source storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function GetRecognizeAndTranslateToHtmlRequest($name, $src_lang, $res_lang, $folder = null, $storage = null)
+    protected function PutMergeHtmlTemplateRequest($template_name, $out_path, $file, $options = null, $folder = null, $storage = null)
     {
-        // verify the required parameter 'name' is set
-        if ($name === null) {
+        // verify the required parameter 'template_name' is set
+        if ($template_name === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetRecognizeAndTranslateToHtml'
+                'Missing the required parameter $template_name when calling PutMergeHtmlTemplate'
             );
         }
-        // verify the required parameter 'src_lang' is set
-        if ($src_lang === null) {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $src_lang when calling GetRecognizeAndTranslateToHtml'
+                'Missing the required parameter $out_path when calling PutMergeHtmlTemplate'
             );
         }
-        // verify the required parameter 'res_lang' is set
-        if ($res_lang === null) {
+        // verify the required parameter 'file' is set
+        if ($file === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $res_lang when calling GetRecognizeAndTranslateToHtml'
+                'Missing the required parameter $file when calling PutMergeHtmlTemplate'
             );
         }
 
-        $resourcePath = '/html/{name}/ocr/translate/{srcLang}/{resLang}';
-        $formParams = [];
+        $resourcePath = '/html/{templateName}/merge';
         $queryParams = [];
         $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
 
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($options !== null) {
+            $queryParams['options'] = ObjectSerializer::toQueryValue($options);
+        }
         // query params
         if ($folder !== null) {
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
@@ -555,88 +571,32 @@ trait OcrApi
         }
 
         // path params
-        if ($name !== null) {
+        if ($template_name !== null) {
             $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($src_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'srcLang' . '}',
-                ObjectSerializer::toPathValue($src_lang),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($res_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'resLang' . '}',
-                ObjectSerializer::toPathValue($res_lang),
+                '{' . 'templateName' . '}',
+                ObjectSerializer::toPathValue($template_name),
                 $resourcePath
             );
         }
 
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['multipart/form-data']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['multipart/form-data'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
+        $handle = fopen($file, 'rb');
+        $httpBody = fread($handle, filesize($file));
+        fclose($handle);
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
             $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
         }
 
+
         $headers = array_merge(
             $defaultHeaders,
-            $headerParams,
-            $headers
+            $headerParams
         );
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
-            'GET',
+            'PUT',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

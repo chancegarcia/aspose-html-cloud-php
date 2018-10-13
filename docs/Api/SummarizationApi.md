@@ -50,7 +50,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. | Html file in the storage.
  **folder** | **string**| Document folder. | [optional]
  **storage** | **string**| Document storage. | [optional]
 

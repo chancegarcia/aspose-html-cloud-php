@@ -11,7 +11,8 @@ Method | HTTP request | Description
 # **GetTranslateDocument**
 > \SplFileObject GetTranslateDocument($name, $src_lang, $res_lang, $storage, $folder)
 
-Translate the HTML document specified by the name from default or specified storage.
+Translate the HTML document specified by the name from default or specified storage.    
+Allowed values for language pairs is en-de, en-fr, en-ru, de-en, ru-en, en-zh, zh-en.
 
 ### Example
 ```php
@@ -52,7 +53,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. | Html file in the storage.
  **src_lang** | **string**| Source language. | Allowed values is "en" (alias "eng", "english"), "de" (alias "deu", "deutsch", "german"), "fr" (alias "fra", "french"), "ru" (alias "rus", "russian"), "zh", alias ("chinese").
  **res_lang** | **string**| Result language. | Allowed values is "en" (alias "eng", "english"), "de" (alias "deu", "deutsch", "german"), "fr" (alias "fra", "french"), "ru" (alias "rus", "russian"), "zh", alias ("chinese").
  **storage** | **string**| The source document storage. | [optional]
@@ -73,7 +74,8 @@ Name | Type | Description  | Notes
 # **GetTranslateDocumentByUrl**
 > \SplFileObject GetTranslateDocumentByUrl($source_url, $src_lang, $res_lang)
 
-Translate the HTML document from Web specified by its URL.
+Translate the HTML document from Web specified by its URL.    
+Allowed values for language pairs is en-de, en-fr, en-ru, de-en, ru-en, en-zh, zh-en.
 
 ### Example
 ```php

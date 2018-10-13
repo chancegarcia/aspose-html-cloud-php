@@ -61,21 +61,23 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
 
-// Configuration - pass by constructor
-//        $configuration = array(
-//            "basePath" => "https://api.aspose.cloud/v1.1",
-//            "authPath" => "https://api.aspose.cloud/oauth2/token",
+ //Configuration - pass by constructor
+        $configuration = array(
+            "basePath" => "https://api-qa.aspose.cloud/v1.1",
+            "authPath" => "https://api-qa.aspose.cloud/oauth2/token",
 //            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "apiKey" => "60487a72d6325241191177e37ae52146",
 //            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-//            "testResult" => "\\testresult\\",
-//            "testData" => "\\testdata\\",
-//            "remoteFolder" => "HtmlTestDoc",
-//            "defaultUserAgent" => "Webkit",
-//            "debugFile" => "php://output",
-//            "debug" => false
-//        );
+            "appSID" => "80e32ca5-a828-46a4-9d54-7199dfd3764a",
+            "testResult" => "\\testresult\\",
+            "testData" => "\\testdata\\",
+            "remoteFolder" => "HtmlTestDoc",
+            "defaultUserAgent" => "Webkit",
+            "debugFile" => "php://output",
+            "debug" => false
+        );
 
-        $base_host = "http://api.aspose.cloud";
+        $base_host = "http://api-qa.aspose.cloud";
 
         if (isset($configuration)){
             self::$api = new HtmlApi($configuration);

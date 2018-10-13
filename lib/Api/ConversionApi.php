@@ -28,15 +28,10 @@
 
 namespace Client\Invoker\Api;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\RequestOptions;
 use Client\Invoker\ApiException;
-use Client\Invoker\Config;
-use Client\Invoker\HeaderSelector;
 use Client\Invoker\ObjectSerializer;
 
 
