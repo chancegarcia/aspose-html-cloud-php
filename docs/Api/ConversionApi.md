@@ -16,6 +16,10 @@ Method | HTTP request | Description
 [**PutConvertDocumentToImage**](ConversionApi.md#PutConvertDocumentToImage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
 [**PutConvertDocumentToPdf**](ConversionApi.md#PutConvertDocumentToPdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
 [**PutConvertDocumentToXps**](ConversionApi.md#PutConvertDocumentToXps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+[**GetConvertDocumentToMHTMLByUrl**](ConversionApi.md#GetConvertDocumentToMHTMLByUrl) | **GET** /html/convert/mhtml | Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+[**GetConvertDocumentToMarkdown**](ConversionApi.md#GetConvertDocumentToMarkdown) | **GET** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+[**PutConvertDocumentInRequestToMarkdown**](ConversionApi.md#PutConvertDocumentInRequestToMarkdown) | **PUT** /html/convert/md | Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+[**PutConvertDocumentToMarkdown**](ConversionApi.md#PutConvertDocumentToMarkdown) | **PUT** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
 
 
 # **GetConvertDocumentToImage**
@@ -867,4 +871,240 @@ Name | Type | Description  | Notes
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
+
+# **GetConvertDocumentToMHTMLByUrl**
+> \SplFileObject GetConvertDocumentToMHTMLByUrl($source_url)
+
+
+Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
+$source_url = "source_url_example"; // string | Source page URL.
+
+try {
+    $result = $apiInstance->GetConvertDocumentToMHTMLByUrl($source_url);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConversionApi->conversionGetConvertDocumentToMHTMLByUrl: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **source_url** | **string**| Source page URL. |
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
+
+# **GetConvertDocumentToMarkdown**
+> \SplFileObject GetConvertDocumentToMarkdown($name, $use_git, $folder, $storage)
+
+Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
+$name = "name_example"; // string | Document name.
+$use_git = "false"; // string ("true"/"false") | Use Git Markdown flavor to save.
+$folder = "folder_example"; // string | Source document folder.
+$storage = "storage_example"; // string | Source document storage.
+
+try {
+    $result = $apiInstance->GetConvertDocumentToMarkdown($name, $use_git, $folder, $storage);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConversionApi->GetConvertDocumentToMarkdown: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Document name. |
+ **use_git** | **string**| Use Git Markdown flavor to save ("true"/"false"). | [optional] [default to "false"]
+ **folder** | **string**| Source document folder. | [optional]
+ **storage** | **string**| Source document storage. | [optional]
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: multipart/form-data
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
+
+# **PutConvertDocumentInRequestToMarkdown**
+> \SplFileObject PutConvertDocumentInRequestToMarkdown($out_path, $file, $use_git)
+
+Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
+$out_path = "out_path_example"; // string | Full resulting file path in the storage (ex. /folder1/folder2/result.md)
+$file = "/path/to/file.txt"; // \SplFileObject | A file to be converted.
+$use_git = "false"; // string ("true"/"false") | Use Git Markdown flavor to save.
+
+try {
+    $result = $apiInstance->PutConvertDocumentInRequestToMarkdown($out_path, $file, $use_git);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConversionApi->PutConvertDocumentInRequestToMarkdown: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **out_path** | **string**| Full resulting file path in the storage (ex. /folder1/folder2/result.md) |
+ **file** | **\SplFileObject**| A file to be converted. |
+ **use_git** | **string**| Use Git Markdown flavor to save ("true"/"false"). | [optional] [default to "false"]
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
+
+# **PutConvertDocumentToMarkdown**
+> \SplFileObject PutConvertDocumentToMarkdown($name, $out_path, $use_git, $folder, $storage)
+
+Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendorequire_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
+$name = "name_example"; // string | Document name.
+$out_path = "out_path_example"; // string | Full resulting file path in the storage (ex. /folder1/folder2/result.md)
+$use_git = "false"; // string ("true"/"false") | Use Git Markdown flavor to save .
+$folder = "folder_example"; // string | The source document folder.
+$storage = "storage_example"; // string | The source and resulting document storage.
+
+try {
+    $result = $apiInstance->PutConvertDocumentToMarkdown($name, $out_path, $use_git, $folder, $storage);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ConversionApi->PutConvertDocumentToMarkdown: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Document name. |
+ **out_path** | **string**| Full resulting file path in the storage (ex. /folder1/folder2/result.md) |
+ **use_git** | **string**| Use Git Markdown flavor to save ("true"/"false"). | [optional] [default to "false"]
+ **folder** | **string**| The source document folder. | [optional]
+ **storage** | **string**| The source and resulting document storage. | [optional]
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
 

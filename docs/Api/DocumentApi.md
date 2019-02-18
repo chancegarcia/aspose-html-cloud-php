@@ -4,12 +4,68 @@ All URIs are relative to *https://api.aspose.cloud/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetDocumentByUrl**](DocumentApi.md#GetDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
 [**GetDocumentFragmentByXPath**](DocumentApi.md#GetDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
 [**GetDocumentFragmentByXPathByUrl**](DocumentApi.md#GetDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
 [**GetDocumentFragmentsByCSSSelector**](DocumentApi.md#dGetDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
 [**GetDocumentFragmentsByCSSSelectorByUrl**](DocumentApi.md#GetDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
 [**GetDocumentImages**](DocumentApi.md#GetDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
 [**GetDocumentImagesByUrl**](DocumentApi.md#GetDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
+
+
+# **GetDocumentByUrl**
+> \SplFileObject GetDocumentByUrl($source_url)
+
+Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = array(
+    "basePath" => "https://api.aspose.cloud/v1.1",
+    "authPath" => "https://api.aspose.cloud/oauth2/token",
+    "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "testResult" => "\\testresult\\",
+    "testData" => "\\testdata\\",
+    "remoteFolder" => "HtmlTestDoc",
+    "defaultUserAgent" => "Webkit",
+    "debugFile" => "php://output",
+    "debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($configuration);
+
+$source_url = "source_url_example"; // string | Source page URL.
+
+try {
+    $result = $apiInstance->GetDocumentByUrl($source_url);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling $apiInstance->GetDocumentByUrl: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **source_url** | **string**| Source page URL. |
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/zip
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
+
 
 # **GetDocumentFragmentByXPath**
 > \SplFileObject GetDocumentFragmentByXPath($name, $x_path, $out_format, $storage, $folder)

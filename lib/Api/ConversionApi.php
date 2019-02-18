@@ -2336,7 +2336,7 @@ trait ConversionApi
             );
         }
         // verify the required parameter 'file' is set
-        if ($file === null) {
+        if ($file === null || (is_array($file) && count($file) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $file when calling PutConvertDocumentInRequestToImage'
             );
@@ -4053,4 +4053,1110 @@ trait ConversionApi
     }
 
 
+    /**
+     * Operation GetConvertDocumentToMHTMLByUrl
+     *
+     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function GetConvertDocumentToMHTMLByUrl($source_url)
+    {
+        list($response) = $this->GetConvertDocumentToMHTMLByUrlWithHttpInfo($source_url);
+        return $response;
+    }
+
+    /**
+     * Operation GetConvertDocumentToMHTMLByUrlWithHttpInfo
+     *
+     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function GetConvertDocumentToMHTMLByUrlWithHttpInfo($source_url)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetConvertDocumentToMHTMLByUrlRequest($source_url);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation GetConvertDocumentToMHTMLByUrlAsync
+     *
+     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetConvertDocumentToMHTMLByUrlAsync($source_url)
+    {
+        return $this->GetConvertDocumentToMHTMLByUrlAsyncWithHttpInfo($source_url)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation GetConvertDocumentToMHTMLByUrlAsyncWithHttpInfo
+     *
+     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetConvertDocumentToMHTMLByUrlAsyncWithHttpInfo($source_url)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetConvertDocumentToMHTMLByUrlRequest($source_url);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'GetConvertDocumentToMHTMLByUrl'
+     *
+     * @param  string $source_url Source page URL. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function GetConvertDocumentToMHTMLByUrlRequest($source_url)
+    {
+        // verify the required parameter 'source_url' is set
+        if ($source_url === null || (is_array($source_url) && count($source_url) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source_url when calling GetConvertDocumentToMHTMLByUrl'
+            );
+        }
+
+        $resourcePath = '/html/convert/mhtml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($source_url !== null) {
+            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation GetConvertDocumentToMarkdown
+     *
+     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder Source document folder. (optional)
+     * @param  string $storage Source document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function GetConvertDocumentToMarkdown($name, $use_git = 'false', $folder = null, $storage = null)
+    {
+        list($response) = $this->GetConvertDocumentToMarkdownWithHttpInfo($name, $use_git, $folder, $storage);
+        return $response;
+    }
+
+    /**
+     * Operation GetConvertDocumentToMarkdownWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder Source document folder. (optional)
+     * @param  string $storage Source document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function GetConvertDocumentToMarkdownWithHttpInfo($name, $use_git = 'false', $folder = null, $storage = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetConvertDocumentToMarkdownRequest($name, $use_git, $folder, $storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation GetConvertDocumentToMarkdownAsync
+     *
+     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder Source document folder. (optional)
+     * @param  string $storage Source document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetConvertDocumentToMarkdownAsync($name, $use_git = 'false', $folder = null, $storage = null)
+    {
+        return $this->GetConvertDocumentToMarkdownAsyncWithHttpInfo($name, $use_git, $folder, $storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation GetConvertDocumentToMarkdownAsyncWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder Source document folder. (optional)
+     * @param  string $storage Source document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function GetConvertDocumentToMarkdownAsyncWithHttpInfo($name, $use_git = 'false', $folder = null, $storage = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->GetConvertDocumentToMarkdownRequest($name, $use_git, $folder, $storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'GetConvertDocumentToMarkdown'
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder Source document folder. (optional)
+     * @param  string $storage Source document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function GetConvertDocumentToMarkdownRequest($name, $use_git = 'false', $folder = null, $storage = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null || (is_array($name) && count($name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling GetConvertDocumentToMarkdown'
+            );
+        }
+
+        $resourcePath = '/html/{name}/convert/md';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($use_git !== null) {
+            $queryParams['useGit'] = ObjectSerializer::toQueryValue($use_git);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+    /**
+     * Operation PutConvertDocumentInRequestToMarkdown
+     *
+     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function PutConvertDocumentInRequestToMarkdown($out_path, $file, $use_git = 'false')
+    {
+        list($response) = $this->PutConvertDocumentInRequestToMarkdownWithHttpInfo($out_path, $file, $use_git);
+        return $response;
+    }
+
+    /**
+     * Operation PutConvertDocumentInRequestToMarkdownWithHttpInfo
+     *
+     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function PutConvertDocumentInRequestToMarkdownWithHttpInfo($out_path, $file, $use_git = 'false')
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->PutConvertDocumentInRequestToMarkdownRequest($out_path, $file, $use_git);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation PutConvertDocumentInRequestToMarkdownAsync
+     *
+     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function PutConvertDocumentInRequestToMarkdownAsync($out_path, $file, $use_git = 'false')
+    {
+        return $this->PutConvertDocumentInRequestToMarkdownAsyncWithHttpInfo($out_path, $file, $use_git)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation PutConvertDocumentInRequestToMarkdownAsyncWithHttpInfo
+     *
+     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function PutConvertDocumentInRequestToMarkdownAsyncWithHttpInfo($out_path, $file, $use_git = 'false')
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->PutConvertDocumentInRequestToMarkdownRequest($out_path, $file, $use_git);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'PutConvertDocumentInRequestToMarkdown'
+     *
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function PutConvertDocumentInRequestToMarkdownRequest($out_path, $file, $use_git = 'false')
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null || (is_array($out_path) && count($out_path) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling PutConvertDocumentInRequestToMarkdown'
+            );
+        }
+        // verify the required parameter 'file' is set
+        if ($file === null || (is_array($file) && count($file) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $file when calling PutConvertDocumentInRequestToMarkdown'
+            );
+        }
+
+        $resourcePath = '/html/convert/md';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($use_git !== null) {
+            $queryParams['useGit'] = ObjectSerializer::toQueryValue($use_git);
+        }
+
+        $handle = fopen($file, 'rb');
+        $httpBody = fread($handle, filesize($file));
+        fclose($handle);
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+    /**
+     * Operation PutConvertDocumentToMarkdown
+     *
+     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function PutConvertDocumentToMarkdown($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
+    {
+        list($response) = $this->PutConvertDocumentToMarkdownWithHttpInfo($name, $out_path, $use_git, $folder, $storage);
+        return $response;
+    }
+
+    /**
+     * Operation PutConvertDocumentToMarkdownWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function PutConvertDocumentToMarkdownWithHttpInfo($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->PutConvertDocumentToMarkdownRequest($name, $out_path, $use_git, $folder, $storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation PutConvertDocumentToMarkdownAsync
+     *
+     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function PutConvertDocumentToMarkdownAsync($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
+    {
+        return $this->PutConvertDocumentToMarkdownAsyncWithHttpInfo($name, $out_path, $use_git, $folder, $storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation PutConvertDocumentToMarkdownAsyncWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function PutConvertDocumentToMarkdownAsyncWithHttpInfo($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->PutConvertDocumentToMarkdownRequest($name, $out_path, $use_git, $folder, $storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'PutConvertDocumentToMarkdown'
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function PutConvertDocumentToMarkdownRequest($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null || (is_array($name) && count($name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling PutConvertDocumentToMarkdown'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null || (is_array($out_path) && count($out_path) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling PutConvertDocumentToMarkdown'
+            );
+        }
+
+        $resourcePath = '/html/{name}/convert/md';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($use_git !== null) {
+            $queryParams['useGit'] = ObjectSerializer::toQueryValue($use_git);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config['defaultUserAgent']) {
+            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
 }

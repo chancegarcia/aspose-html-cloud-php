@@ -63,8 +63,10 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
  //Configuration - pass by constructor
         $configuration = array(
-            "basePath" => "https://api-qa.aspose.cloud/v1.1",
-            "authPath" => "https://api-qa.aspose.cloud/oauth2/token",
+            "basePath" => "http://sikorsky-js3.dynabic.com:9083/v1.1",
+//            "basePath" => "https://api-qa.aspose.cloud/v1.1",
+            "authPath" => "http://sikorsky-js3.dynabic.com:9083/oauth2/token",
+//            "authPath" => "https://api-qa.aspose.cloud/oauth2/token",
 //            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
             "apiKey" => "60487a72d6325241191177e37ae52146",
 //            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -77,7 +79,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             "debug" => false
         );
 
-        $base_host = "http://api-qa.aspose.cloud";
+        $base_host = "http://sikorsky-js3.dynabic.com:9083";
 
         if (isset($configuration)){
             self::$api = new HtmlApi($configuration);

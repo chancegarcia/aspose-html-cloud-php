@@ -39,6 +39,34 @@ class DocumentApiTest extends BaseTest
 {
 
     /**
+     * Test case for GetDocumentByUrl
+     *
+     * Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+     * @param  string $source_url The document URL. (required)
+     *
+     * @dataProvider providerGetDocumentByUrl
+     */
+    public function testGetDocumentByUrl($num_test, $source_url)
+    {
+        $result = self::$api->GetDocumentByUrl($source_url);
+
+        $this->assertTrue($result->isFile(),"Error result after get site from url");
+        $this->assertTrue($result->getSize() > 0,"Size of file is zero");
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult .$num_test . "get_site_by_url.zip");
+    }
+
+    public function providerGetDocumentByUrl()
+    {
+        return [
+            [1, "https://lenta.ru"],
+            [2, "https://www.yahoo.com"]
+        ];
+    }
+
+
+    /**
      * Test case for GetDocumentFragmentByXPath
      *
      * Return list of HTML fragments matching the specified XPath query..

@@ -700,4 +700,144 @@ class ConversionApiTest extends BaseTest
         //Copy result to testFolder
         copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
     }
+
+    public function providerMarkdown()
+    {
+        return [ ["true"], ["false"] ];
+    }
+
+
+
+    public function testGetConvertDocumentToMHTMLByUrl()
+    {
+        $source_url = "https://www.yahoo.com";
+
+        //Request to server Api
+        $result = self::$api->GetConvertDocumentToMHTMLByUrl($source_url);
+
+        $this->assertTrue($result->isFile(),"Error result after recognize");
+        $this->assertTrue($result->getSize() > 0,"Zero result");
+
+        $resultFile = "UrlToMhtml.mht";
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile);
+    }
+
+    /**
+     * Test case for GetConvertDocumentToMarkdown
+     *
+     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder Source document folder. (optional)
+     * @param  string $storage Source document storage. (optional)
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerMarkdown
+     *
+     */
+    public function testGetConvertDocumentToMarkdown($use_git)
+    {
+        $fileName = "test_md.html";
+        $folder = "HtmlTestDoc";
+        $storage = null;
+
+        $this->uploadFile($fileName);
+
+        //Request to server Api
+        $result = self::$api->GetConvertDocumentToMarkdown($fileName, $use_git, $folder, $storage);
+
+        $this->assertTrue($result->isFile(),"Error result after GetConvertDocumentToMarkdown");
+        $this->assertTrue($result->getSize() > 0,"Zero result");
+
+        $resultFile = "GetHtmlToMarkdown_";
+        $resultFile .= $use_git == "true" ? "useGit" : "not_useGit";
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile . '.md');
+    }
+
+    /**
+     * Test case for PutConvertDocumentInRequestToMarkdown
+     *
+     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     *
+     * @throws \Client\Invoker\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     *
+     * @dataProvider providerMarkdown
+     *
+     */
+    public function testPutConvertDocumentInRequestToMarkdown($use_git)
+    {
+        $filename = "test_md.html";
+        $folder = "HtmlTestDoc";
+        $resultFile = "putConvDocInReqToMarkdownJS_";
+        $resultFile .= $use_git == "true" ? "useGit.md" : "not_useGit.md";
+        $file = self::$testFolder . $filename;
+        $out_path = $folder . "/" .  $resultFile;
+
+        //Request to server Api
+        $result = self::$api->PutConvertDocumentInRequestToMarkdown($out_path, $file, $use_git);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile);
+
+        $this->assertTrue($result->isFile(),"Error result after putConvDocInReqToMarkdown");
+        $this->assertTrue($result->getSize() > 0,"Zero result");
+    }
+
+    /**
+     * Test case for PutConvertDocumentToMarkdown
+     *
+     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param  string $name Document name. (required)
+     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
+     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param  string $folder The source document folder. (optional)
+     * @param  string $storage The source and resulting document storage. (optional)
+     *
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     *
+     * @dataProvider providerMarkdown
+     *
+     */
+    public function testPutConvertDocumentToMarkdown($use_git)
+    {
+        $filename = "test_md.html";
+        $folder = "HtmlTestDoc";
+        $resultFile = "putConvDocToMarkdownJS_";
+        $resultFile .= $use_git == "true" ? "useGit.md" : "not_useGit.md";
+        $out_path = $folder . "/" .  $resultFile;
+
+        //Request to server Api
+        $result = self::$api->PutConvertDocumentToMarkdown($filename, $out_path, $use_git, $folder, null);
+
+        //Download result from storage
+        $request = new Requests\GetDownloadRequest($out_path, null, null);
+        $result = self::$storage->GetDownload($request);
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . $resultFile);
+
+        $this->assertTrue($result->isFile(),"Error result after putConvDocInReqToMarkdown");
+        $this->assertTrue($result->getSize() > 0,"Zero result");
+    }
 }

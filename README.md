@@ -96,6 +96,15 @@ or pass configuration to constructor (see in tests - BaseTest.php)
             self::$testResult = realpath(__DIR__ . '/../..') . $configuration['testResult'];
 ```
 
+###Note: do not forget to add in php.ini
+```code
+...
+upload_max_filesize = 200M
+...
+curl.cainfo = "path_to_cert\cacert.pem"
+...
+```
+
 ## Tests
 
 To run the unit tests:
@@ -155,7 +164,12 @@ Class | Method | HTTP request | Description
 *HtmlApi* | [**PutConvertDocumentToImage**](docs/Api/ConversionApi.md#PutConvertDocumentToImage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
 *HtmlApi* | [**PutConvertDocumentToPdf**](docs/Api/ConversionApi.md#PutConvertDocumentToPdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
 *HtmlApi* | [**PutConvertDocumentToXps**](docs/Api/ConversionApi.md#PutConvertDocumentToXps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**GetConvertDocumentToMHTMLByUrl**](docs/Api/ConversionApi.md#GetConvertDocumentToMHTMLByUrl) | **GET** /html/convert/mhtml | Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+*HtmlApi* | [**GetConvertDocumentToMarkdown**](docs/Api/ConversionApi.md#GetConvertDocumentToMarkdown) | **GET** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+*HtmlApi* | [**PutConvertDocumentInRequestToMarkdown**](docs/Api/ConversionApi.md#PutConvertDocumentInRequestToMarkdown) | **PUT** /html/convert/md | Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+*HtmlApi* | [**PutConvertDocumentToMarkdown**](docs/Api/ConversionApi.md#PutConvertDocumentToMarkdown) | **PUT** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
 *HtmlApi* | [**GetDocumentFragmentByXPath**](docs/Api/DocumentApi.md#GetDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
+*HtmlApi* | [**GetDocumentByUrl**](docs/Api/DocumentApi.md#GetDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
 *HtmlApi* | [**GetDocumentFragmentByXPathByUrl**](docs/Api/DocumentApi.md#GetDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
 *HtmlApi* | [**GetDocumentFragmentsByCSSSelector**](docs/Api/DocumentApi.md#GetDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
 *HtmlApi* | [**GetDocumentFragmentsByCSSSelectorByUrl**](docs/Api/DocumentApi.md#GetDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
