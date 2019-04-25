@@ -131,13 +131,12 @@ $left_margin = 10; // int | Left resulting image margin.
 $right_margin = 10; // int | Right resulting image margin.
 $top_margin = 10; // int | Top resulting image margin.
 $bottom_margin = 10; // int | Bottom resulting image margin.
-$x_resolution = 300; // int | Horizontal resolution of resulting image.
-$y_resolution = 300; // int | Vertical resolution of resulting image.
+$resolution = 300; // int | Resolution of resulting image.
 $folder = "folder_example"; // string | The source document folder.
 $storage = "storage_example"; // string | The source document storage.
 
 try {
-    $result = $apiInstance->GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+    $result = $apiInstance->GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling HtmlApi->GetConvertDocumentToImage: ', $e->getMessage(), PHP_EOL;

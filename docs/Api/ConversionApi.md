@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 
 # **GetConvertDocumentToImage**
-> \SplFileObject GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage)
+> \SplFileObject GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
 
 Convert the HTML document from the storage by its name to the specified image format.
 
@@ -55,13 +55,12 @@ $left_margin = 56; // int | Left resulting image margin.
 $right_margin = 56; // int | Right resulting image margin.
 $top_margin = 56; // int | Top resulting image margin.
 $bottom_margin = 56; // int | Bottom resulting image margin.
-$x_resolution = 56; // int | Horizontal resolution of resulting image.
-$y_resolution = 56; // int | Vertical resolution of resulting image.
+$resolution = 56; // int | Resolution of resulting image.
 $folder = "folder_example"; // string | The source document folder.
 $storage = "storage_example"; // string | The source document storage.
 
 try {
-    $result = $apiInstance->GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+    $result = $apiInstance->GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling $apiInstance->GetConvertDocumentToImage: ', $e->getMessage(), PHP_EOL;
@@ -73,16 +72,15 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
- **out_format** | **string**| Resulting image format. |
+ **name** | **string**| Document name. | html, epub, svg
+ **out_format** | **string**| Resulting image format. | jpeg, png, bmp, tiff 
  **width** | **int**| Resulting image width. | [optional]
  **height** | **int**| Resulting image height. | [optional]
  **left_margin** | **int**| Left resulting image margin. | [optional]
  **right_margin** | **int**| Right resulting image margin. | [optional]
  **top_margin** | **int**| Top resulting image margin. | [optional]
  **bottom_margin** | **int**| Bottom resulting image margin. | [optional]
- **x_resolution** | **int**| Horizontal resolution of resulting image. | [optional]
- **y_resolution** | **int**| Vertical resolution of resulting image. | [optional]
+ **resolution** | **int**| Resolution of resulting image. | [optional]
  **folder** | **string**| The source document folder. | [optional]
  **storage** | **string**| The source document storage. | [optional]
 
@@ -98,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)  [[Back to README]](../../README.md)
 
 # **GetConvertDocumentToImageByUrl**
-> \SplFileObject GetConvertDocumentToImageByUrl($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage)
+> \SplFileObject GetConvertDocumentToImageByUrl($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
 
 Convert the HTML page from the web by its URL to the specified image format.
 
@@ -130,13 +128,12 @@ $left_margin = 56; // int | Left resulting image margin.
 $right_margin = 56; // int | Right resulting image margin.
 $top_margin = 56; // int | Top resulting image margin.
 $bottom_margin = 56; // int | Bottom resulting image margin.
-$x_resolution = 56; // int | Horizontal resolution of resulting image.
-$y_resolution = 56; // int | Vertical resolution of resulting image.
+$resolution = 56; // int | Resolution of resulting image.
 $folder = "folder_example"; // string | The document folder.
 $storage = "storage_example"; // string | The document storage.
 
 try {
-    $result = $apiInstance->GetConvertDocumentToImageByUrl($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+    $result = $apiInstance->GetConvertDocumentToImageByUrl($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling $apiInstance->GetConvertDocumentToImageByUrl: ', $e->getMessage(), PHP_EOL;
@@ -156,8 +153,7 @@ Name | Type | Description  | Notes
  **right_margin** | **int**| Right resulting image margin. | [optional]
  **top_margin** | **int**| Top resulting image margin. | [optional]
  **bottom_margin** | **int**| Bottom resulting image margin. | [optional]
- **x_resolution** | **int**| Horizontal resolution of resulting image. | [optional]
- **y_resolution** | **int**| Vertical resolution of resulting image. | [optional]
+ **resolution** | **int**| Resolution of resulting image. | [optional]
  **folder** | **string**| The document folder. | [optional]
  **storage** | **string**| The document storage. | [optional]
 
@@ -220,7 +216,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. |  html, epub, svg
  **width** | **int**| Resulting image width. | [optional]
  **height** | **int**| Resulting image height. | [optional]
  **left_margin** | **int**| Left resulting image margin. | [optional]
@@ -358,7 +354,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. |  html, epub, svg
  **width** | **int**| Resulting image width. | [optional]
  **height** | **int**| Resulting image height. | [optional]
  **left_margin** | **int**| Left resulting image margin. | [optional]
@@ -499,8 +495,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **out_path** | **string**| Full resulting filename (ex. /folder1/folder2/result.jpg) |
- **out_format** | **string**|  |
- **file** | **\SplFileObject**| A file to be converted. |
+ **out_format** | **string**|  | jpeg, png, bmp, tiff
+ **file** | **\SplFileObject**| A file to be converted. |  html, epub, svg
  **width** | **int**| Resulting document page width in points (1/96 inch). | [optional]
  **height** | **int**| Resulting document page height in points (1/96 inch). | [optional]
  **left_margin** | **int**| Left resulting document page margin in points (1/96 inch). | [optional]
@@ -568,7 +564,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **out_path** | **string**| Full resulting filename (ex. /folder1/folder2/result.pdf) |
- **file** | **\SplFileObject**| A file to be converted. |
+ **file** | **\SplFileObject**| A file to be converted. | html, epub, svg
  **width** | **int**| Resulting document page width in points (1/96 inch). | [optional]
  **height** | **int**| Resulting document page height in points (1/96 inch). | [optional]
  **left_margin** | **int**| Left resulting document page margin in points (1/96 inch). | [optional]
@@ -635,7 +631,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **out_path** | **string**| Full resulting filename (ex. /folder1/folder2/result.xps) |
- **file** | **\SplFileObject**| A file to be converted. |
+ **file** | **\SplFileObject**| A file to be converted. | html, epub, svg
  **width** | **int**| Resulting document page width in points (1/96 inch). | [optional]
  **height** | **int**| Resulting document page height in points (1/96 inch). | [optional]
  **left_margin** | **int**| Left resulting document page margin in points (1/96 inch). | [optional]
@@ -705,9 +701,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. | html, epub, svg
  **out_path** | **string**| Full resulting filename (ex. /folder1/folder2/result.jpg) |
- **out_format** | **string**|  |
+ **out_format** | **string**|  | jpeg, png, bmp, tiff
  **width** | **int**| Resulting document page width in points (1/96 inch). | [optional]
  **height** | **int**| Resulting document page height in points (1/96 inch). | [optional]
  **left_margin** | **int**| Left resulting document page margin in points (1/96 inch). | [optional]
@@ -779,7 +775,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. | html, epub, svg
  **out_path** | **string**| Full resulting filename (ex. /folder1/folder2/result.pdf) |
  **width** | **int**| Resulting document page width in points (1/96 inch). | [optional]
  **height** | **int**| Resulting document page height in points (1/96 inch). | [optional]
@@ -850,7 +846,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **string**| Document name. |
+ **name** | **string**| Document name. | html, epub, svg
  **out_path** | **string**| Full resulting filename (ex. /folder1/folder2/result.xps) |
  **width** | **int**| Resulting document page width in points (1/96 inch). | [optional]
  **height** | **int**| Resulting document page height in points (1/96 inch). | [optional]
@@ -905,7 +901,7 @@ try {
     $result = $apiInstance->GetConvertDocumentToMHTMLByUrl($source_url);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ConversionApi->conversionGetConvertDocumentToMHTMLByUrl: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ConversionApi->GetConvertDocumentToMHTMLByUrl: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```

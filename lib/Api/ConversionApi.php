@@ -50,8 +50,7 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source document storage. (optional)
      *
@@ -59,9 +58,12 @@ trait ConversionApi
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function GetConvertDocumentToImage($name, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImage($name, $out_format, $width = null, $height = null, $left_margin = null,
+            $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+            $folder = null, $storage = null)
     {
-        list($response) = $this->GetConvertDocumentToImageWithHttpInfo($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+        list($response) = $this->GetConvertDocumentToImageWithHttpInfo($name, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
         return $response;
     }
 
@@ -78,8 +80,7 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source document storage. (optional)
      *
@@ -87,10 +88,13 @@ trait ConversionApi
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function GetConvertDocumentToImageWithHttpInfo($name, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageWithHttpInfo($name, $out_format, $width = null, $height = null,
+           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+           $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageRequest($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+        $request = $this->GetConvertDocumentToImageRequest($name, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         try {
             $options = $this->createHttpClientOption();
@@ -164,17 +168,19 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source document storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetConvertDocumentToImageAsync($name, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageAsync($name, $out_format, $width = null, $height = null,
+           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+           $folder = null, $storage = null)
     {
-        return $this->GetConvertDocumentToImageAsyncWithHttpInfo($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage)
+        return $this->GetConvertDocumentToImageAsyncWithHttpInfo($name, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -195,18 +201,20 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source document storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetConvertDocumentToImageAsyncWithHttpInfo($name, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageAsyncWithHttpInfo($name, $out_format, $width = null, $height = null,
+           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+           $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageRequest($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+        $request = $this->GetConvertDocumentToImageRequest($name, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -256,15 +264,16 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source document storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function GetConvertDocumentToImageRequest($name, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    protected function GetConvertDocumentToImageRequest($name, $out_format, $width = null, $height = null,
+              $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+              $folder = null, $storage = null)
     {
         // verify the required parameter 'name' is set
         if ($name === null) {
@@ -311,12 +320,8 @@ trait ConversionApi
             $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
-        if ($x_resolution !== null) {
-            $queryParams['xResolution'] = ObjectSerializer::toQueryValue($x_resolution);
-        }
-        // query params
-        if ($y_resolution !== null) {
-            $queryParams['yResolution'] = ObjectSerializer::toQueryValue($y_resolution);
+        if ($resolution !== null) {
+            $queryParams['resolution'] = ObjectSerializer::toQueryValue($resolution);
         }
         // query params
         if ($folder !== null) {
@@ -421,8 +426,7 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -430,9 +434,12 @@ trait ConversionApi
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function GetConvertDocumentToImageByUrl($source_url, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageByUrl($source_url, $out_format, $width = null, $height = null,
+           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+           $folder = null, $storage = null)
     {
-        list($response) = $this->GetConvertDocumentToImageByUrlWithHttpInfo($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+        list($response) = $this->GetConvertDocumentToImageByUrlWithHttpInfo($source_url, $out_format, $width, $height,
+            $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
         return $response;
     }
 
@@ -449,8 +456,7 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -458,10 +464,13 @@ trait ConversionApi
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function GetConvertDocumentToImageByUrlWithHttpInfo($source_url, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageByUrlWithHttpInfo($source_url, $out_format, $width = null, $height = null,
+           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+           $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+        $request = $this->GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         try {
             $options = $this->createHttpClientOption();
@@ -535,17 +544,19 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetConvertDocumentToImageByUrlAsync($source_url, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageByUrlAsync($source_url, $out_format, $width = null, $height = null,
+           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+           $folder = null, $storage = null)
     {
-        return $this->GetConvertDocumentToImageByUrlAsyncWithHttpInfo($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage)
+        return $this->GetConvertDocumentToImageByUrlAsyncWithHttpInfo($source_url, $out_format, $width, $height,
+            $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -566,18 +577,20 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function GetConvertDocumentToImageByUrlAsyncWithHttpInfo($source_url, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    public function GetConvertDocumentToImageByUrlAsyncWithHttpInfo($source_url, $out_format, $width = null,
+           $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null,
+           $resolution = null, $folder = null, $storage = null)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $x_resolution, $y_resolution, $folder, $storage);
+        $request = $this->GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -627,15 +640,16 @@ trait ConversionApi
      * @param  int $right_margin Right resulting image margin. (optional)
      * @param  int $top_margin Top resulting image margin. (optional)
      * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $x_resolution Horizontal resolution of resulting image. (optional)
-     * @param  int $y_resolution Vertical resolution of resulting image. (optional)
+     * @param  int $resolution Resolution of resulting image. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $x_resolution = null, $y_resolution = null, $folder = null, $storage = null)
+    protected function GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width = null, $height = null,
+              $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
+              $folder = null, $storage = null)
     {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
@@ -686,12 +700,8 @@ trait ConversionApi
             $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
-        if ($x_resolution !== null) {
-            $queryParams['xResolution'] = ObjectSerializer::toQueryValue($x_resolution);
-        }
-        // query params
-        if ($y_resolution !== null) {
-            $queryParams['yResolution'] = ObjectSerializer::toQueryValue($y_resolution);
+        if ($resolution !== null) {
+            $queryParams['resolution'] = ObjectSerializer::toQueryValue($resolution);
         }
         // query params
         if ($folder !== null) {
