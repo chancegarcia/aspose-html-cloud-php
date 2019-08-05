@@ -1,81 +1,107 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="TranslationApi.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
 use Client\Invoker\ApiException;
 use Client\Invoker\ObjectSerializer;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\json_encode;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
+use SplFileObject;
+use stdClass;
 
+/**
+ * Translate the HTML document
+ *
+ * @category TranslateApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 trait TranslationApi
 {
     /**
-     * Operation GetTranslateDocument
+     * Operation getTranslateDocument
      *
-     * Translate the HTML document specified by the name from default or specified storage.
+     * Translate the HTML document specified by the name from default or
+     * specified storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $storage The source document storage. (optional)
-     * @param  string $folder The source document folder. (optional)
+     * @param string $name     Document name. (required)
+     * @param string $src_lang Source language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $storage  The source document storage. (optional)
+     * @param string $folder   The source document folder. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetTranslateDocument($name, $src_lang, $res_lang, $storage = null, $folder = null)
-    {
-        list($response) = $this->GetTranslateDocumentWithHttpInfo($name, $src_lang, $res_lang, $storage, $folder);
+    public function getTranslateDocument(
+        $name, $src_lang, $res_lang, $storage = null, $folder = null
+    ) {
+        list($response) = $this->getTranslateDocumentWithHttpInfo(
+            $name, $src_lang, $res_lang, $storage, $folder
+        );
         return $response;
     }
 
     /**
-     * Operation GetTranslateDocumentWithHttpInfo
+     * Operation getTranslateDocumentWithHttpInfo
      *
-     * Translate the HTML document specified by the name from default or specified storage.
+     * Translate the HTML document specified by the name from default or
+     * specified storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $storage The source document storage. (optional)
-     * @param  string $folder The source document folder. (optional)
+     * @param string $name     Document name. (required)
+     * @param string $src_lang Source language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $storage  The source document storage. (optional)
+     * @param string $folder   The source document folder. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
      */
-    public function GetTranslateDocumentWithHttpInfo($name, $src_lang, $res_lang, $storage = null, $folder = null)
-    {
+    public function getTranslateDocumentWithHttpInfo(
+        $name, $src_lang, $res_lang, $storage = null, $folder = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetTranslateDocumentRequest($name, $src_lang, $res_lang, $storage, $folder);
+        $request = $this->getTranslateDocumentRequest(
+            $name, $src_lang, $res_lang, $storage, $folder
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -85,8 +111,10 @@ trait TranslationApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -123,61 +151,68 @@ trait TranslationApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetTranslateDocumentAsync
+     * Operation getTranslateDocumentAsync
      *
-     * Translate the HTML document specified by the name from default or specified storage.
+     * Translate the HTML document specified by the name from default
+     * or specified storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $storage The source document storage. (optional)
-     * @param  string $folder The source document folder. (optional)
+     * @param string $name     Document name. (required)
+     * @param string $src_lang Source language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $storage  The source document storage. (optional)
+     * @param string $folder   The source document folder. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetTranslateDocumentAsync($name, $src_lang, $res_lang, $storage = null, $folder = null)
-    {
-        return $this->GetTranslateDocumentAsyncWithHttpInfo($name, $src_lang, $res_lang, $storage, $folder)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getTranslateDocumentAsync(
+        $name, $src_lang, $res_lang, $storage = null, $folder = null
+    ) {
+        return $this->getTranslateDocumentAsyncWithHttpInfo(
+            $name, $src_lang, $res_lang, $storage, $folder
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetTranslateDocumentAsyncWithHttpInfo
+     * Operation getTranslateDocumentAsyncWithHttpInfo
      *
-     * Translate the HTML document specified by the name from default or specified storage.
+     * Translate the HTML document specified by the name from default
+     * or specified storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $storage The source document storage. (optional)
-     * @param  string $folder The source document folder. (optional)
+     * @param string $name     Document name. (required)
+     * @param string $src_lang Source language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $storage  The source document storage. (optional)
+     * @param string $folder   The source document folder. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetTranslateDocumentAsyncWithHttpInfo($name, $src_lang, $res_lang, $storage = null, $folder = null)
-    {
+    public function getTranslateDocumentAsyncWithHttpInfo(
+        $name, $src_lang, $res_lang, $storage = null, $folder = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetTranslateDocumentRequest($name, $src_lang, $res_lang, $storage, $folder);
+        $request = $this->getTranslateDocumentRequest(
+            $name, $src_lang, $res_lang, $storage, $folder
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -217,35 +252,39 @@ trait TranslationApi
     }
 
     /**
-     * Create request for operation 'GetTranslateDocument'
+     * Create request for operation 'getTranslateDocument'
      *
-     * @param  string $name Document name. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $storage The source document storage. (optional)
-     * @param  string $folder The source document folder. (optional)
+     * @param string $name     Document name. (required)
+     * @param string $src_lang Source language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $storage  The source document storage. (optional)
+     * @param string $folder   The source document folder. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetTranslateDocumentRequest($name, $src_lang, $res_lang, $storage = null, $folder = null)
-    {
+    protected function getTranslateDocumentRequest(
+        $name, $src_lang, $res_lang, $storage = null, $folder = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetTranslateDocument'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '.
+                '$name when calling getTranslateDocument'
             );
         }
         // verify the required parameter 'src_lang' is set
         if ($src_lang === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $src_lang when calling GetTranslateDocument'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$src_lang when calling getTranslateDocument'
             );
         }
         // verify the required parameter 'res_lang' is set
         if ($res_lang === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $res_lang when calling GetTranslateDocument'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$res_lang when calling getTranslateDocument'
             );
         }
 
@@ -256,6 +295,25 @@ trait TranslationApi
         $httpBody = '';
         $multipart = false;
 
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'srcLang' . '}',
+            ObjectSerializer::toPathValue($src_lang),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'resLang' . '}',
+            ObjectSerializer::toPathValue($res_lang),
+            $resourcePath
+        );
+
         // query params
         if ($storage !== null) {
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
@@ -265,40 +323,15 @@ trait TranslationApi
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($src_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'srcLang' . '}',
-                ObjectSerializer::toPathValue($src_lang),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($res_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'resLang' . '}',
-                ObjectSerializer::toPathValue($res_lang),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -309,8 +342,10 @@ trait TranslationApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -325,14 +360,13 @@ trait TranslationApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -345,7 +379,7 @@ trait TranslationApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -355,41 +389,47 @@ trait TranslationApi
     }
 
     /**
-     * Operation GetTranslateDocumentByUrl
+     * Operation getTranslateDocumentByUrl
      *
      * Translate the HTML document from Web specified by its URL.
      *
-     * @param  string $source_url Source document URL. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
+     * @param string $source_url Source document URL. (required)
+     * @param string $src_lang   Source language. (required)
+     * @param string $res_lang   Result language. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetTranslateDocumentByUrl($source_url, $src_lang, $res_lang)
+    public function getTranslateDocumentByUrl($source_url, $src_lang, $res_lang)
     {
-        list($response) = $this->GetTranslateDocumentByUrlWithHttpInfo($source_url, $src_lang, $res_lang);
+        list($response) = $this->getTranslateDocumentByUrlWithHttpInfo(
+            $source_url, $src_lang, $res_lang
+        );
         return $response;
     }
 
     /**
-     * Operation GetTranslateDocumentByUrlWithHttpInfo
+     * Operation getTranslateDocumentByUrlWithHttpInfo
      *
      * Translate the HTML document from Web specified by its URL.
      *
-     * @param  string $source_url Source document URL. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
+     * @param string $source_url Source document URL. (required)
+     * @param string $src_lang   Source language. (required)
+     * @param string $res_lang   Result language. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetTranslateDocumentByUrlWithHttpInfo($source_url, $src_lang, $res_lang)
-    {
+    public function getTranslateDocumentByUrlWithHttpInfo(
+        $source_url, $src_lang, $res_lang
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetTranslateDocumentByUrlRequest($source_url, $src_lang, $res_lang);
+        $request = $this->getTranslateDocumentByUrlRequest(
+            $source_url, $src_lang, $res_lang
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -399,8 +439,10 @@ trait TranslationApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -437,57 +479,61 @@ trait TranslationApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetTranslateDocumentByUrlAsync
+     * Operation getTranslateDocumentByUrlAsync
      *
      * Translate the HTML document from Web specified by its URL.
      *
-     * @param  string $source_url Source document URL. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
+     * @param string $source_url Source document URL. (required)
+     * @param string $src_lang   Source language. (required)
+     * @param string $res_lang   Result language. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetTranslateDocumentByUrlAsync($source_url, $src_lang, $res_lang)
+    public function getTranslateDocumentByUrlAsync($source_url, $src_lang, $res_lang)
     {
-        return $this->GetTranslateDocumentByUrlAsyncWithHttpInfo($source_url, $src_lang, $res_lang)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+        return $this->getTranslateDocumentByUrlAsyncWithHttpInfo(
+            $source_url, $src_lang, $res_lang
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetTranslateDocumentByUrlAsyncWithHttpInfo
+     * Operation getTranslateDocumentByUrlAsyncWithHttpInfo
      *
      * Translate the HTML document from Web specified by its URL.
      *
-     * @param  string $source_url Source document URL. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
+     * @param string $source_url Source document URL. (required)
+     * @param string $src_lang   Source language. (required)
+     * @param string $res_lang   Result language. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetTranslateDocumentByUrlAsyncWithHttpInfo($source_url, $src_lang, $res_lang)
-    {
+    public function getTranslateDocumentByUrlAsyncWithHttpInfo(
+        $source_url, $src_lang, $res_lang
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetTranslateDocumentByUrlRequest($source_url, $src_lang, $res_lang);
+        $request = $this->getTranslateDocumentByUrlRequest(
+            $source_url, $src_lang, $res_lang
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -527,33 +573,37 @@ trait TranslationApi
     }
 
     /**
-     * Create request for operation 'GetTranslateDocumentByUrl'
+     * Create request for operation 'getTranslateDocumentByUrl'
      *
-     * @param  string $source_url Source document URL. (required)
-     * @param  string $src_lang Source language. (required)
-     * @param  string $res_lang Result language. (required)
+     * @param string $source_url Source document URL. (required)
+     * @param string $src_lang   Source language. (required)
+     * @param string $res_lang   Result language. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetTranslateDocumentByUrlRequest($source_url, $src_lang, $res_lang)
-    {
+    protected function getTranslateDocumentByUrlRequest(
+        $source_url, $src_lang, $res_lang
+    ) {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetTranslateDocumentByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getTranslateDocumentByUrl'
             );
         }
         // verify the required parameter 'src_lang' is set
         if ($src_lang === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $src_lang when calling GetTranslateDocumentByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$src_lang when calling getTranslateDocumentByUrl'
             );
         }
         // verify the required parameter 'res_lang' is set
         if ($res_lang === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $res_lang when calling GetTranslateDocumentByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$res_lang when calling getTranslateDocumentByUrl'
             );
         }
 
@@ -564,37 +614,31 @@ trait TranslationApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'srcLang' . '}',
+            ObjectSerializer::toPathValue($src_lang),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'resLang' . '}',
+            ObjectSerializer::toPathValue($res_lang),
+            $resourcePath
+        );
 
-        // path params
-        if ($src_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'srcLang' . '}',
-                ObjectSerializer::toPathValue($src_lang),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($res_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'resLang' . '}',
-                ObjectSerializer::toPathValue($res_lang),
-                $resourcePath
-            );
-        }
+        // query params
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -605,8 +649,10 @@ trait TranslationApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -621,14 +667,13 @@ trait TranslationApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -641,7 +686,7 @@ trait TranslationApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),

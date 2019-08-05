@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="BaseTest.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
+*   Copyright (c) 2019 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,21 +29,21 @@
 
 namespace Client\Invoker\Api;
 
-use Aspose\Storage\Api\StorageApi;
-use Aspose\Storage\Model\Requests;
+use PHPUnit_Framework_TestCase;
+use SplFileObject;
 
-abstract class BaseTest extends \PHPUnit_Framework_TestCase
+abstract class BaseTest extends PHPUnit_Framework_TestCase
 {
 
     /**
      * Api object
      */
-    protected static $api;
+    protected static $api_html;
 
     /**
      * Storage Api
      */
-    protected static $storage;
+    protected static $api_stor;
 
     /**
      * Folder with test samples
@@ -63,14 +63,10 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
  //Configuration - pass by constructor
         $configuration = array(
-            "basePath" => "http://sikorsky-js3.dynabic.com:9083/v1.1",
-//            "basePath" => "https://api-qa.aspose.cloud/v1.1",
-            "authPath" => "http://sikorsky-js3.dynabic.com:9083/oauth2/token",
-//            "authPath" => "https://api-qa.aspose.cloud/oauth2/token",
-//            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            "apiKey" => "60487a72d6325241191177e37ae52146",
-//            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-            "appSID" => "80e32ca5-a828-46a4-9d54-7199dfd3764a",
+            "basePath" => "https://api-qa.aspose.cloud/v3.0",
+            "authPath" => "https://api-qa.aspose.cloud/connect/token",
+            "apiKey" => "html.cloud",
+            "appSID" => "html.cloud",
             "testResult" => "\\testresult\\",
             "testData" => "\\testdata\\",
             "remoteFolder" => "HtmlTestDoc",
@@ -79,54 +75,42 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             "debug" => false
         );
 
-        $base_host = "http://sikorsky-js3.dynabic.com:9083";
-
-        if (isset($configuration)){
-            self::$api = new HtmlApi($configuration);
-            $storage_cfg = new \Aspose\Storage\Configuration();
-            $storage_cfg->setAppKey($configuration['apiKey'])->
-                setAppSid($configuration['appSID'])->
-                setHost($base_host);
-
-            self::$storage = new StorageApi($storage_cfg);
-
-            self::$testFolder = realpath(__DIR__ . '/../..') . $configuration['testData'];
-            self::$testResult = realpath(__DIR__ . '/../..') . $configuration['testResult'];
-
-        }else{
-            self::$api = new HtmlApi();
-
-            $storage_cfg = new \Aspose\Storage\Configuration();
-            $storage_cfg->setAppKey(self::$api->config['apiKey'])->
-                setAppSid(self::$api->config['appSID'])->
-                setHost($base_host);
-
-            self::$storage = new StorageApi($storage_cfg);
-
-            self::$testFolder = realpath(__DIR__ . '/../..') . self::$api->config['testData'];
-            self::$testResult = realpath(__DIR__ . '/../..') . self::$api->config['testResult'];
-        }
+        self::$api_html = new HtmlApi($configuration);
+        self::$api_stor = new StorageApi($configuration);
+        self::$testFolder = realpath(__DIR__ . '/../..') . $configuration['testData'];
+        self::$testResult = realpath(__DIR__ . '/../..') . $configuration['testResult'];
     }
 
-    public function uploadFile($filename, $uploadFolder = null)
+    public function downloadHelper($path)
     {
-        $folder = $uploadFolder ?: self::$api->config['remoteFolder'];
+        $storage_name = null;
+        $version_id = null;
+
+        $result = self::$api_stor->downloadFile($path, $storage_name, $version_id);
+
+        $this->assertTrue($result->isFile(),"Error download file");
+        $this->assertTrue($result->getSize() > 0,"Zero result");
+
+        //Copy result to testFolder
+        copy($result->getRealPath(), self::$testResult . "".basename($path));
+    }
+
+    public function uploadHelper($filename, $uploadFolder = null)
+    {
+        $file = $file = new SplFileObject(self::$testFolder . $filename);
+        $folder = $uploadFolder ?: self::$api_html->config['remoteFolder'];
         $path = $folder . "/" . $filename;
-        $versionId = null;
-        $storage = null;
-        $file = self::$testFolder . $filename;
-        $request = new Requests\PutCreateRequest($path, $file, $versionId, $storage);
+        $storage_name = null;
 
-        // Upload file to storage
-        $result = self::$storage->putCreate($request);
-        $this->assertEquals(200, $result->getCode());
-
+        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
+        $this->assertTrue(count($response->getUploaded()) == 1);
+        $this->assertTrue(count($response->getErrors()) == 0);
 
         //Assert - file exist
-        $request = new Requests\GetIsExistRequest($path, $versionId, $storage);
+        $version_id = null;
 
-        $result = self::$storage->getIsExist($request);
-        $this->assertEquals(200, $result->getCode());
-        $this->assertTrue($result->getFileExist()["isExist"]);
+        $result = self::$api_stor->objectExists($path, $storage_name, $version_id);
+        $this->assertTrue($result->getExists());
+        $this->assertFalse($result->getIsFolder());
    }
 }

@@ -1,84 +1,99 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="SummarizationApi.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
 use Client\Invoker\ApiException;
 use Client\Invoker\ObjectSerializer;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\json_encode;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
+use SplFileObject;
+use stdClass;
 
 /**
- * SummarizationApi Class Doc Comment
+ * Get the HTML document keywords using the keyword detection service.
  *
- * @category Class
- * @package  Client\Invoker\Api
+ * @category SummarizationApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
  */
 trait SummarizationApi
 {
 
     /**
-     * Operation GetDetectHtmlKeywords
+     * Operation getDetectHtmlKeywords
      *
      * Get the HTML document keywords using the keyword detection service.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $folder Document folder. (optional)
-     * @param  string $storage Document storage. (optional)
+     * @param string $name    Document name. (required)
+     * @param string $folder  Document folder. (optional)
+     * @param string $storage Document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDetectHtmlKeywords($name, $folder = null, $storage = null)
+    public function getDetectHtmlKeywords($name, $folder = null, $storage = null)
     {
-        list($response) = $this->GetDetectHtmlKeywordsWithHttpInfo($name, $folder, $storage);
+        list($response) = $this->getDetectHtmlKeywordsWithHttpInfo(
+            $name, $folder, $storage
+        );
         return $response;
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsWithHttpInfo
+     * Operation getDetectHtmlKeywordsWithHttpInfo
      *
      * Get the HTML document keywords using the keyword detection service.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $folder Document folder. (optional)
-     * @param  string $storage Document storage. (optional)
+     * @param string $name    Document name. (required)
+     * @param string $folder  Document folder. (optional)
+     * @param string $storage Document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDetectHtmlKeywordsWithHttpInfo($name, $folder = null, $storage = null)
-    {
+    public function getDetectHtmlKeywordsWithHttpInfo(
+        $name, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDetectHtmlKeywordsRequest($name, $folder, $storage);
+        $request = $this->getDetectHtmlKeywordsRequest($name, $folder, $storage);
 
         try {
             $options = $this->createHttpClientOption();
@@ -88,8 +103,10 @@ trait SummarizationApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -126,57 +143,60 @@ trait SummarizationApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsAsync
+     * Operation getDetectHtmlKeywordsAsync
      *
      * Get the HTML document keywords using the keyword detection service.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $folder Document folder. (optional)
-     * @param  string $storage Document storage. (optional)
+     * @param string $name    Document name. (required)
+     * @param string $folder  Document folder. (optional)
+     * @param string $storage Document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDetectHtmlKeywordsAsync($name, $folder = null, $storage = null)
-    {
-        return $this->GetDetectHtmlKeywordsAsyncWithHttpInfo($name, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getDetectHtmlKeywordsAsync(
+        $name, $folder = null, $storage = null
+    ) {
+        return $this->getDetectHtmlKeywordsAsyncWithHttpInfo(
+            $name, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsAsyncWithHttpInfo
+     * Operation getDetectHtmlKeywordsAsyncWithHttpInfo
      *
      * Get the HTML document keywords using the keyword detection service.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $folder Document folder. (optional)
-     * @param  string $storage Document storage. (optional)
+     * @param string $name    Document name. (required)
+     * @param string $folder  Document folder. (optional)
+     * @param string $storage Document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDetectHtmlKeywordsAsyncWithHttpInfo($name, $folder = null, $storage = null)
-    {
+    public function getDetectHtmlKeywordsAsyncWithHttpInfo(
+        $name, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDetectHtmlKeywordsRequest($name, $folder, $storage);
+        $request = $this->getDetectHtmlKeywordsRequest($name, $folder, $storage);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -216,21 +236,23 @@ trait SummarizationApi
     }
 
     /**
-     * Create request for operation 'GetDetectHtmlKeywords'
+     * Create request for operation 'getDetectHtmlKeywords'
      *
-     * @param  string $name Document name. (required)
-     * @param  string $folder Document folder. (optional)
-     * @param  string $storage Document storage. (optional)
+     * @param string $name    Document name. (required)
+     * @param string $folder  Document folder. (optional)
+     * @param string $storage Document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDetectHtmlKeywordsRequest($name, $folder = null, $storage = null)
-    {
+    protected function getDetectHtmlKeywordsRequest(
+        $name, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetDetectHtmlKeywords'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getDetectHtmlKeywords'
             );
         }
 
@@ -241,6 +263,12 @@ trait SummarizationApi
         $httpBody = '';
         $multipart = false;
 
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+
         // query params
         if ($folder !== null) {
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
@@ -250,24 +278,15 @@ trait SummarizationApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/json'],
                 ['application/json']
             );
@@ -278,8 +297,10 @@ trait SummarizationApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -294,14 +315,13 @@ trait SummarizationApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -314,7 +334,7 @@ trait SummarizationApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -324,37 +344,40 @@ trait SummarizationApi
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsByUrl
+     * Operation getDetectHtmlKeywordsByUrl
      *
-     * Get the keywords from HTML document from Web specified by its URL using the keyword detection service
+     * Get the keywords from HTML document from Web specified by its
+     * URL using the keyword detection service
      *
-     * @param  string $source_url Source document URL. (required)
+     * @param string $source_url Source document URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDetectHtmlKeywordsByUrl($source_url)
+    public function getDetectHtmlKeywordsByUrl($source_url)
     {
-        list($response) = $this->GetDetectHtmlKeywordsByUrlWithHttpInfo($source_url);
+        list($response) = $this->getDetectHtmlKeywordsByUrlWithHttpInfo($source_url);
         return $response;
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsByUrlWithHttpInfo
+     * Operation getDetectHtmlKeywordsByUrlWithHttpInfo
      *
-     * Get the keywords from HTML document from Web specified by its URL using the keyword detection service
+     * Get the keywords from HTML document from Web specified by its
+     * URL using the keyword detection service
      *
-     * @param  string $source_url Source document URL. (required)
+     * @param string $source_url Source document URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDetectHtmlKeywordsByUrlWithHttpInfo($source_url)
+    public function getDetectHtmlKeywordsByUrlWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetDetectHtmlKeywordsByUrlRequest($source_url);
+        $request = $this->getDetectHtmlKeywordsByUrlRequest($source_url);
 
         try {
             $options = $this->createHttpClientOption();
@@ -364,8 +387,10 @@ trait SummarizationApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -402,32 +427,33 @@ trait SummarizationApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsByUrlAsync
+     * Operation getDetectHtmlKeywordsByUrlAsync
      *
-     * Get the keywords from HTML document from Web specified by its URL using the keyword detection service
+     * Get the keywords from HTML document from Web specified by its URL
+     * using the keyword detection service
      *
-     * @param  string $source_url Source document URL. (required)
+     * @param string $source_url Source document URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDetectHtmlKeywordsByUrlAsync($source_url)
+    public function getDetectHtmlKeywordsByUrlAsync($source_url)
     {
-        return $this->GetDetectHtmlKeywordsByUrlAsyncWithHttpInfo($source_url)
+        return $this->getDetectHtmlKeywordsByUrlAsyncWithHttpInfo($source_url)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -436,19 +462,20 @@ trait SummarizationApi
     }
 
     /**
-     * Operation GetDetectHtmlKeywordsByUrlAsyncWithHttpInfo
+     * Operation getDetectHtmlKeywordsByUrlAsyncWithHttpInfo
      *
-     * Get the keywords from HTML document from Web specified by its URL using the keyword detection service
+     * Get the keywords from HTML document from Web specified by its
+     * URL using the keyword detection service
      *
-     * @param  string $source_url Source document URL. (required)
+     * @param string $source_url Source document URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDetectHtmlKeywordsByUrlAsyncWithHttpInfo($source_url)
+    public function getDetectHtmlKeywordsByUrlAsyncWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetDetectHtmlKeywordsByUrlRequest($source_url);
+        $request = $this->getDetectHtmlKeywordsByUrlRequest($source_url);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -488,19 +515,20 @@ trait SummarizationApi
     }
 
     /**
-     * Create request for operation 'GetDetectHtmlKeywordsByUrl'
+     * Create request for operation 'getDetectHtmlKeywordsByUrl'
      *
-     * @param  string $source_url Source document URL. (required)
+     * @param string $source_url Source document URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDetectHtmlKeywordsByUrlRequest($source_url)
+    protected function getDetectHtmlKeywordsByUrlRequest($source_url)
     {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetDetectHtmlKeywordsByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getDetectHtmlKeywordsByUrl'
             );
         }
 
@@ -511,21 +539,17 @@ trait SummarizationApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
-
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/json'],
                 ['application/json']
             );
@@ -536,8 +560,10 @@ trait SummarizationApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -552,14 +578,13 @@ trait SummarizationApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -572,7 +597,7 @@ trait SummarizationApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),

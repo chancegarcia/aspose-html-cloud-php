@@ -1,75 +1,95 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="DocumentApi.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
-
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 namespace Client\Invoker\Api;
 
-
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\json_encode;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use Client\Invoker\ApiException;
 use Client\Invoker\ObjectSerializer;
+use InvalidArgumentException;
+use SplFileObject;
+use stdClass;
 
-
+/**
+ * Downloading a site with all resources.
+ * Get document with XPath filters from zip or url.
+ * Get document with CSS selector filters from zip or url.
+ * Extract all images from document or url.
+ *
+ * @category DocumentApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 trait DocumentApi
 {
     /**
-     * Operation GetDocumentByUrl
+     * Operation getDocumentByUrl
      *
-     * Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+     * Return all HTML page with linked resources packaged as a
+     * ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentByUrl($source_url)
+    public function getDocumentByUrl($source_url)
     {
-        list($response) = $this->GetDocumentByUrlWithHttpInfo($source_url);
+        list($response) = $this->getDocumentByUrlWithHttpInfo($source_url);
         return $response;
     }
 
     /**
-     * Operation GetDocumentByUrlWithHttpInfo
+     * Operation getDocumentByUrlWithHttpInfo
      *
-     * Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+     * Return all HTML page with linked resources packaged as a
+     * ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentByUrlWithHttpInfo($source_url)
+    public function getDocumentByUrlWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentByUrlRequest($source_url);
+        $request = $this->getDocumentByUrlRequest($source_url);
 
         try {
             $options = $this->createHttpClientOption();
@@ -79,8 +99,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -117,40 +139,34 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+            case 401:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentByUrlAsync
+     * Operation getDocumentByUrlAsync
      *
-     * Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+     * Return all HTML page with linked resources packaged as a
+     * ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentByUrlAsync($source_url)
+    public function getDocumentByUrlAsync($source_url)
     {
-        return $this->GetDocumentByUrlAsyncWithHttpInfo($source_url)
+        return $this->getDocumentByUrlAsyncWithHttpInfo($source_url)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -159,19 +175,20 @@ trait DocumentApi
     }
 
     /**
-     * Operation GetDocumentByUrlAsyncWithHttpInfo
+     * Operation getDocumentByUrlAsyncWithHttpInfo
      *
-     * Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+     * Return all HTML page with linked resources packaged as a
+     * ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentByUrlAsyncWithHttpInfo($source_url)
+    public function getDocumentByUrlAsyncWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentByUrlRequest($source_url);
+        $request = $this->getDocumentByUrlRequest($source_url);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -211,19 +228,22 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentByUrl'
+     * Create request for operation 'getDocumentByUrl'
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentByUrlRequest($source_url)
+    protected function getDocumentByUrlRequest($source_url)
     {
         // verify the required parameter 'source_url' is set
-        if ($source_url === null || (is_array($source_url) && count($source_url) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetDocumentByUrl'
+        if (($source_url === null)
+            || (is_array($source_url) && count($source_url) === 0)
+        ) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getDocumentByUrl'
             );
         }
 
@@ -234,21 +254,17 @@ trait DocumentApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
-
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/zip']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/zip'],
                 ['application/json']
             );
@@ -259,8 +275,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -275,14 +293,13 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -295,7 +312,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -305,45 +322,54 @@ trait DocumentApi
     }
 
     /**
-     * Operation GetDocumentFragmentByXPath
+     * Operation getDocumentFragmentByXPath
      *
      * Return list of HTML fragments matching the specified XPath query.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $storage    The document storage. (optional)
+     * @param string $folder     The document folder. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentFragmentByXPath($name, $x_path, $out_format, $storage = null, $folder = null)
-    {
-        list($response) = $this->GetDocumentFragmentByXPathWithHttpInfo($name, $x_path, $out_format, $storage, $folder);
+    public function getDocumentFragmentByXPath(
+        $name, $x_path, $out_format, $storage = null, $folder = null
+    ) {
+        list($response) = $this->getDocumentFragmentByXPathWithHttpInfo(
+            $name, $x_path, $out_format, $storage, $folder
+        );
         return $response;
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathWithHttpInfo
+     * Operation getDocumentFragmentByXPathWithHttpInfo
      *
      * Return list of HTML fragments matching the specified XPath query.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $storage    The document storage. (optional)
+     * @param string $folder     The document folder. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentFragmentByXPathWithHttpInfo($name, $x_path, $out_format, $storage = null, $folder = null)
-    {
+    public function getDocumentFragmentByXPathWithHttpInfo(
+        $name, $x_path, $out_format, $storage = null, $folder = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentByXPathRequest($name, $x_path, $out_format, $storage, $folder);
+        $request = $this->getDocumentFragmentByXPathRequest(
+            $name, $x_path, $out_format, $storage, $folder
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -353,8 +379,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -391,61 +419,68 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathAsync
+     * Operation getDocumentFragmentByXPathAsync
      *
      * Return list of HTML fragments matching the specified XPath query.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $storage    The document storage. (optional)
+     * @param string $folder     The document folder. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentByXPathAsync($name, $x_path, $out_format, $storage = null, $folder = null)
-    {
-        return $this->GetDocumentFragmentByXPathAsyncWithHttpInfo($name, $x_path, $out_format, $storage, $folder)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getDocumentFragmentByXPathAsync(
+        $name, $x_path, $out_format, $storage = null, $folder = null
+    ) {
+        return $this->getDocumentFragmentByXPathAsyncWithHttpInfo(
+            $name, $x_path, $out_format, $storage, $folder
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathAsyncWithHttpInfo
+     * Operation getDocumentFragmentByXPathAsyncWithHttpInfo
      *
      * Return list of HTML fragments matching the specified XPath query.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $storage    The document storage. (optional)
+     * @param string $folder     The document folder. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentByXPathAsyncWithHttpInfo($name, $x_path, $out_format, $storage = null, $folder = null)
-    {
+    public function getDocumentFragmentByXPathAsyncWithHttpInfo(
+        $name, $x_path, $out_format, $storage = null, $folder = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentByXPathRequest($name, $x_path, $out_format, $storage, $folder);
+        $request = $this->getDocumentFragmentByXPathRequest(
+            $name, $x_path, $out_format, $storage, $folder
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -485,35 +520,40 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentFragmentByXPath'
+     * Create request for operation 'getDocumentFragmentByXPath'
      *
-     * @param  string $name The document name. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $storage    The document storage. (optional)
+     * @param string $folder     The document folder. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentFragmentByXPathRequest($name, $x_path, $out_format, $storage = null, $folder = null)
-    {
+    protected function getDocumentFragmentByXPathRequest(
+        $name, $x_path, $out_format, $storage = null, $folder = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetDocumentFragmentByXPath'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getDocumentFragmentByXPath'
             );
         }
         // verify the required parameter 'x_path' is set
         if ($x_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $x_path when calling GetDocumentFragmentByXPath'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$x_path when calling getDocumentFragmentByXPath'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling GetDocumentFragmentByXPath'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling getDocumentFragmentByXPath'
             );
         }
 
@@ -524,10 +564,22 @@ trait DocumentApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($x_path !== null) {
-            $queryParams['xPath'] = ObjectSerializer::toQueryValue($x_path);
-        }
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
+
+        $queryParams['xPath'] = ObjectSerializer::toQueryValue($x_path);
+
         // query params
         if ($storage !== null) {
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
@@ -537,32 +589,15 @@ trait DocumentApi
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -573,8 +608,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -589,14 +626,13 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -609,7 +645,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -619,41 +655,52 @@ trait DocumentApi
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathByUrl
+     * Operation getDocumentFragmentByXPathByUrl
      *
-     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * XPath query by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentFragmentByXPathByUrl($source_url, $x_path, $out_format)
-    {
-        list($response) = $this->GetDocumentFragmentByXPathByUrlWithHttpInfo($source_url, $x_path, $out_format);
+    public function getDocumentFragmentByXPathByUrl(
+        $source_url, $x_path, $out_format
+    ) {
+        list($response) = $this->getDocumentFragmentByXPathByUrlWithHttpInfo(
+            $source_url, $x_path, $out_format
+        );
         return $response;
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathByUrlWithHttpInfo
+     * Operation getDocumentFragmentByXPathByUrlWithHttpInfo
      *
-     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * XPath query by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentFragmentByXPathByUrlWithHttpInfo($source_url, $x_path, $out_format)
-    {
+    public function getDocumentFragmentByXPathByUrlWithHttpInfo(
+        $source_url, $x_path, $out_format
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentByXPathByUrlRequest($source_url, $x_path, $out_format);
+        $request = $this->getDocumentFragmentByXPathByUrlRequest(
+            $source_url, $x_path, $out_format
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -663,8 +710,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -701,65 +750,67 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+            case 401:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathByUrlAsync
+     * Operation getDocumentFragmentByXPathByUrlAsync
      *
-     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * XPath query by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentByXPathByUrlAsync($source_url, $x_path, $out_format)
-    {
-        return $this->GetDocumentFragmentByXPathByUrlAsyncWithHttpInfo($source_url, $x_path, $out_format)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getDocumentFragmentByXPathByUrlAsync(
+        $source_url, $x_path, $out_format
+    ) {
+        return $this->getDocumentFragmentByXPathByUrlAsyncWithHttpInfo(
+            $source_url, $x_path, $out_format
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetDocumentFragmentByXPathByUrlAsyncWithHttpInfo
+     * Operation getDocumentFragmentByXPathByUrlAsyncWithHttpInfo
      *
-     * Return list of HTML fragments matching the specified XPath query by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * XPath query by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentByXPathByUrlAsyncWithHttpInfo($source_url, $x_path, $out_format)
-    {
+    public function getDocumentFragmentByXPathByUrlAsyncWithHttpInfo(
+        $source_url, $x_path, $out_format
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentByXPathByUrlRequest($source_url, $x_path, $out_format);
+        $request = $this->getDocumentFragmentByXPathByUrlRequest(
+            $source_url, $x_path, $out_format
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -799,33 +850,38 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentFragmentByXPathByUrl'
+     * Create request for operation 'getDocumentFragmentByXPathByUrl'
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $x_path XPath query string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $x_path     XPath query string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentFragmentByXPathByUrlRequest($source_url, $x_path, $out_format)
-    {
+    protected function getDocumentFragmentByXPathByUrlRequest(
+        $source_url, $x_path, $out_format
+    ) {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetDocumentFragmentByXPathByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getDocumentFragmentByXPathByUrl'
             );
         }
         // verify the required parameter 'x_path' is set
         if ($x_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $x_path when calling GetDocumentFragmentByXPathByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$x_path when calling getDocumentFragmentByXPathByUrl'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling GetDocumentFragmentByXPathByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling getDocumentFragmentByXPathByUrl'
             );
         }
 
@@ -836,33 +892,23 @@ trait DocumentApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
-        // query params
-        if ($x_path !== null) {
-            $queryParams['xPath'] = ObjectSerializer::toQueryValue($x_path);
-        }
-
-        // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+        $queryParams['xPath'] = ObjectSerializer::toQueryValue($x_path);
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/zip']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/zip'],
                 ['application/json']
             );
@@ -873,8 +919,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -889,11 +937,11 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
 
@@ -909,7 +957,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -920,45 +968,54 @@ trait DocumentApi
 
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelector
+     * Operation getDocumentFragmentsByCSSSelector
      *
      * Return list of HTML fragments matching the specified CSS selector.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $folder     The document folder. (optional)
+     * @param string $storage    The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentFragmentsByCSSSelector($name, $selector, $out_format, $folder = null, $storage = null)
-    {
-        list($response) = $this->GetDocumentFragmentsByCSSSelectorWithHttpInfo($name, $selector, $out_format, $folder, $storage);
+    public function getDocumentFragmentsByCSSSelector(
+        $name, $selector, $out_format, $folder = null, $storage = null
+    ) {
+        list($response) = $this->getDocumentFragmentsByCSSSelectorWithHttpInfo(
+            $name, $selector, $out_format, $folder, $storage
+        );
         return $response;
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorWithHttpInfo
+     * Operation getDocumentFragmentsByCSSSelectorWithHttpInfo
      *
      * Return list of HTML fragments matching the specified CSS selector.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $folder     The document folder. (optional)
+     * @param string $storage    The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentFragmentsByCSSSelectorWithHttpInfo($name, $selector, $out_format, $folder = null, $storage = null)
-    {
+    public function getDocumentFragmentsByCSSSelectorWithHttpInfo(
+        $name, $selector, $out_format, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentsByCSSSelectorRequest($name, $selector, $out_format, $folder, $storage);
+        $request = $this->getDocumentFragmentsByCSSSelectorRequest(
+            $name, $selector, $out_format, $folder, $storage
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -968,8 +1025,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -1006,85 +1065,71 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 204:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+            case 204:
+            case 401:
+            case 404:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorAsync
+     * Operation getDocumentFragmentsByCSSSelectorAsync
      *
      * Return list of HTML fragments matching the specified CSS selector.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $folder     The document folder. (optional)
+     * @param string $storage    The document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentsByCSSSelectorAsync($name, $selector, $out_format, $folder = null, $storage = null)
-    {
-        return $this->GetDocumentFragmentsByCSSSelectorAsyncWithHttpInfo($name, $selector, $out_format, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getDocumentFragmentsByCSSSelectorAsync(
+        $name, $selector, $out_format, $folder = null, $storage = null
+    ) {
+        return $this->getDocumentFragmentsByCSSSelectorAsyncWithHttpInfo(
+            $name, $selector, $out_format, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorAsyncWithHttpInfo
+     * Operation getDocumentFragmentsByCSSSelectorAsyncWithHttpInfo
      *
      * Return list of HTML fragments matching the specified CSS selector.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $folder     The document folder. (optional)
+     * @param string $storage    The document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentsByCSSSelectorAsyncWithHttpInfo($name, $selector, $out_format, $folder = null, $storage = null)
-    {
+    public function getDocumentFragmentsByCSSSelectorAsyncWithHttpInfo(
+        $name, $selector, $out_format, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentsByCSSSelectorRequest($name, $selector, $out_format, $folder, $storage);
+        $request = $this->getDocumentFragmentsByCSSSelectorRequest(
+            $name, $selector, $out_format, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1124,35 +1169,40 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentFragmentsByCSSSelector'
+     * Create request for operation 'getDocumentFragmentsByCSSSelector'
      *
-     * @param  string $name The document name. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name       The document name. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
+     * @param string $folder     The document folder. (optional)
+     * @param string $storage    The document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentFragmentsByCSSSelectorRequest($name, $selector, $out_format, $folder = null, $storage = null)
-    {
+    protected function getDocumentFragmentsByCSSSelectorRequest(
+        $name, $selector, $out_format, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetDocumentFragmentsByCSSSelector'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getDocumentFragmentsByCSSSelector'
             );
         }
         // verify the required parameter 'selector' is set
         if ($selector === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $selector when calling GetDocumentFragmentsByCSSSelector'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$selector when calling getDocumentFragmentsByCSSSelector'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling GetDocumentFragmentsByCSSSelector'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling getDocumentFragmentsByCSSSelector'
             );
         }
 
@@ -1163,10 +1213,21 @@ trait DocumentApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($selector !== null) {
-            $queryParams['selector'] = ObjectSerializer::toQueryValue($selector);
-        }
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
+
+        $queryParams['selector'] = ObjectSerializer::toQueryValue($selector);
+
         // query params
         if ($folder !== null) {
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
@@ -1176,32 +1237,15 @@ trait DocumentApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->__headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -1212,8 +1256,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1228,11 +1274,11 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
 
@@ -1248,7 +1294,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1258,41 +1304,52 @@ trait DocumentApi
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorByUrl
+     * Operation getDocumentFragmentsByCSSSelectorByUrl
      *
-     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * CSS selector by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentFragmentsByCSSSelectorByUrl($source_url, $selector, $out_format)
-    {
-        list($response) = $this->GetDocumentFragmentsByCSSSelectorByUrlWithHttpInfo($source_url, $selector, $out_format);
+    public function getDocumentFragmentsByCSSSelectorByUrl(
+        $source_url, $selector, $out_format
+    ) {
+        list($response) = $this->getDocumentFragmentsByCSSSelectorByUrlWithHttpInfo(
+            $source_url, $selector, $out_format
+        );
         return $response;
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorByUrlWithHttpInfo
+     * Operation getDocumentFragmentsByCSSSelectorByUrlWithHttpInfo
      *
-     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * CSS selector by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentFragmentsByCSSSelectorByUrlWithHttpInfo($source_url, $selector, $out_format)
-    {
+    public function getDocumentFragmentsByCSSSelectorByUrlWithHttpInfo(
+        $source_url, $selector, $out_format
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentsByCSSSelectorByUrlRequest($source_url, $selector, $out_format);
+        $request = $this->getDocumentFragmentsByCSSSelectorByUrlRequest(
+            $source_url, $selector, $out_format
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -1302,8 +1359,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -1340,73 +1399,68 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 204:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+            case 204:
+            case 401:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorByUrlAsync
+     * Operation getDocumentFragmentsByCSSSelectorByUrlAsync
      *
-     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * CSS selector by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentsByCSSSelectorByUrlAsync($source_url, $selector, $out_format)
-    {
-        return $this->GetDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo($source_url, $selector, $out_format)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getDocumentFragmentsByCSSSelectorByUrlAsync(
+        $source_url, $selector, $out_format
+    ) {
+        return $this->getDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo(
+            $source_url, $selector, $out_format
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo
+     * Operation getDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo
      *
-     * Return list of HTML fragments matching the specified CSS selector by the source page URL.
+     * Return list of HTML fragments matching the specified
+     * CSS selector by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo($source_url, $selector, $out_format)
-    {
+    public function getDocumentFragmentsByCSSSelectorByUrlAsyncWithHttpInfo(
+        $source_url, $selector, $out_format
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentFragmentsByCSSSelectorByUrlRequest($source_url, $selector, $out_format);
+        $request = $this->getDocumentFragmentsByCSSSelectorByUrlRequest(
+            $source_url, $selector, $out_format
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1446,33 +1500,38 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentFragmentsByCSSSelectorByUrl'
+     * Create request for operation 'getDocumentFragmentsByCSSSelectorByUrl'
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $selector CSS selector string. (required)
-     * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
+     * @param string $source_url Source page URL. (required)
+     * @param string $selector   CSS selector string. (required)
+     * @param string $out_format Output format. Possible values:
+     *                           'plain' and 'json'. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentFragmentsByCSSSelectorByUrlRequest($source_url, $selector, $out_format)
-    {
+    protected function getDocumentFragmentsByCSSSelectorByUrlRequest(
+        $source_url, $selector, $out_format
+    ) {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetDocumentFragmentsByCSSSelectorByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getDocumentFragmentsByCSSSelectorByUrl'
             );
         }
         // verify the required parameter 'selector' is set
         if ($selector === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $selector when calling GetDocumentFragmentsByCSSSelectorByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$selector when calling getDocumentFragmentsByCSSSelectorByUrl'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling GetDocumentFragmentsByCSSSelectorByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling getDocumentFragmentsByCSSSelectorByUrl'
             );
         }
 
@@ -1483,33 +1542,25 @@ trait DocumentApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
-        // query params
-        if ($selector !== null) {
-            $queryParams['selector'] = ObjectSerializer::toQueryValue($selector);
-        }
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+        $queryParams['selector'] = ObjectSerializer::toQueryValue($selector);
 
         // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -1520,8 +1571,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1536,11 +1589,11 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
 
@@ -1556,7 +1609,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1567,41 +1620,45 @@ trait DocumentApi
 
 
     /**
-     * Operation GetDocumentImages
+     * Operation getDocumentImages
      *
      * Return all HTML document images packaged as a ZIP archive.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name    The document name. (required)
+     * @param string $folder  The document folder. (optional)
+     * @param string $storage The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentImages($name, $folder = null, $storage = null)
+    public function getDocumentImages($name, $folder = null, $storage = null)
     {
-        list($response) = $this->GetDocumentImagesWithHttpInfo($name, $folder, $storage);
+        list($response) = $this->getDocumentImagesWithHttpInfo(
+            $name, $folder, $storage
+        );
         return $response;
     }
 
     /**
-     * Operation GetDocumentImagesWithHttpInfo
+     * Operation getDocumentImagesWithHttpInfo
      *
      * Return all HTML document images packaged as a ZIP archive.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name    The document name. (required)
+     * @param string $folder  The document folder. (optional)
+     * @param string $storage The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentImagesWithHttpInfo($name, $folder = null, $storage = null)
-    {
+    public function getDocumentImagesWithHttpInfo(
+        $name, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentImagesRequest($name, $folder, $storage);
+        $request = $this->getDocumentImagesRequest($name, $folder, $storage);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1611,8 +1668,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -1649,34 +1708,34 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentImagesAsync
+     * Operation getDocumentImagesAsync
      *
      * Return all HTML document images packaged as a ZIP archive.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name    The document name. (required)
+     * @param string $folder  The document folder. (optional)
+     * @param string $storage The document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentImagesAsync($name, $folder = null, $storage = null)
+    public function getDocumentImagesAsync($name, $folder = null, $storage = null)
     {
-        return $this->GetDocumentImagesAsyncWithHttpInfo($name, $folder, $storage)
+        return $this->getDocumentImagesAsyncWithHttpInfo($name, $folder, $storage)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1685,21 +1744,22 @@ trait DocumentApi
     }
 
     /**
-     * Operation GetDocumentImagesAsyncWithHttpInfo
+     * Operation getDocumentImagesAsyncWithHttpInfo
      *
      * Return all HTML document images packaged as a ZIP archive.
      *
-     * @param  string $name The document name. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name    The document name. (required)
+     * @param string $folder  The document folder. (optional)
+     * @param string $storage The document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentImagesAsyncWithHttpInfo($name, $folder = null, $storage = null)
-    {
+    public function getDocumentImagesAsyncWithHttpInfo(
+        $name, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentImagesRequest($name, $folder, $storage);
+        $request = $this->getDocumentImagesRequest($name, $folder, $storage);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1739,21 +1799,23 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentImages'
+     * Create request for operation 'getDocumentImages'
      *
-     * @param  string $name The document name. (required)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name    The document name. (required)
+     * @param string $folder  The document folder. (optional)
+     * @param string $storage The document storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentImagesRequest($name, $folder = null, $storage = null)
-    {
+    protected function getDocumentImagesRequest(
+        $name, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetDocumentImages'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getDocumentImages'
             );
         }
 
@@ -1774,23 +1836,21 @@ trait DocumentApi
         }
 
         // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/zip']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/zip'],
                 ['application/json']
             );
@@ -1801,8 +1861,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1817,14 +1879,13 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -1837,7 +1898,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1848,37 +1909,38 @@ trait DocumentApi
 
 
     /**
-     * Operation GetDocumentImagesByUrl
+     * Operation getDocumentImagesByUrl
      *
      * Return all HTML page images packaged as a ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetDocumentImagesByUrl($source_url)
+    public function getDocumentImagesByUrl($source_url)
     {
-        list($response) = $this->GetDocumentImagesByUrlWithHttpInfo($source_url);
+        list($response) = $this->getDocumentImagesByUrlWithHttpInfo($source_url);
         return $response;
     }
 
     /**
-     * Operation GetDocumentImagesByUrlWithHttpInfo
+     * Operation getDocumentImagesByUrlWithHttpInfo
      *
      * Return all HTML page images packaged as a ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetDocumentImagesByUrlWithHttpInfo($source_url)
+    public function getDocumentImagesByUrlWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentImagesByUrlRequest($source_url);
+        $request = $this->getDocumentImagesByUrlRequest($source_url);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1888,8 +1950,10 @@ trait DocumentApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -1926,40 +1990,34 @@ trait DocumentApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+            case 401:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetDocumentImagesByUrlAsync
+     * Operation getDocumentImagesByUrlAsync
      *
-     * Return all HTML page images packaged as a ZIP archive by the source page URL.
+     * Return all HTML page images packaged as a
+     * ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentImagesByUrlAsync($source_url)
+    public function getDocumentImagesByUrlAsync($source_url)
     {
-        return $this->GetDocumentImagesByUrlAsyncWithHttpInfo($source_url)
+        return $this->getDocumentImagesByUrlAsyncWithHttpInfo($source_url)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1968,19 +2026,20 @@ trait DocumentApi
     }
 
     /**
-     * Operation GetDocumentImagesByUrlAsyncWithHttpInfo
+     * Operation getDocumentImagesByUrlAsyncWithHttpInfo
      *
-     * Return all HTML page images packaged as a ZIP archive by the source page URL.
+     * Return all HTML page images packaged as a
+     * ZIP archive by the source page URL.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetDocumentImagesByUrlAsyncWithHttpInfo($source_url)
+    public function getDocumentImagesByUrlAsyncWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetDocumentImagesByUrlRequest($source_url);
+        $request = $this->getDocumentImagesByUrlRequest($source_url);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2020,19 +2079,20 @@ trait DocumentApi
     }
 
     /**
-     * Create request for operation 'GetDocumentImagesByUrl'
+     * Create request for operation 'getDocumentImagesByUrl'
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetDocumentImagesByUrlRequest($source_url)
+    protected function getDocumentImagesByUrlRequest($source_url)
     {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetDocumentImagesByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getDocumentImagesByUrl'
             );
         }
 
@@ -2043,21 +2103,17 @@ trait DocumentApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
-
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/zip']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/zip'],
                 ['application/json']
             );
@@ -2068,8 +2124,10 @@ trait DocumentApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2084,11 +2142,11 @@ trait DocumentApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
 
@@ -2104,7 +2162,7 @@ trait DocumentApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),

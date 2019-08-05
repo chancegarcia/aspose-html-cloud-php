@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="SummarizationApiTest.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
+*   Copyright (c) 2019 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,22 +40,22 @@ class SummarizationApiTest extends BaseTest
 
 
     /**
-     * Test case for GetDetectHtmlKeywords
+     * Test case for getDetectHtmlKeywords
      *
      * Get the HTML document keywords using the keyword detection service..
      *
-     * @dataProvider providerGetDetectHtmlKeywords
+     * @dataProvider providergetDetectHtmlKeywords
      *
      */
-    public function testGetDetectHtmlKeywords($fileName)
+    public function testgetDetectHtmlKeywords($fileName)
     {
-        $this->uploadFile($fileName);
-        $folder = self::$api->config['remoteFolder'];
+        $this->uploadHelper($fileName);
+        $folder = self::$api_html->config['remoteFolder'];
         $storage = null;
 
 
         //Request to server Api
-        $result = self::$api->GetDetectHtmlKeywords($fileName, $folder, $storage);
+        $result = self::$api_html->getDetectHtmlKeywords($fileName, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
         $this->assertTrue($result->getSize() > 0,"Zero result");
@@ -65,7 +65,7 @@ class SummarizationApiTest extends BaseTest
     }
 
 
-    public function providerGetDetectHtmlKeywords()
+    public function providergetDetectHtmlKeywords()
     {
         return [
             ["test_en.html"],
@@ -75,17 +75,17 @@ class SummarizationApiTest extends BaseTest
 
 
     /**
-     * Test case for GetDetectHtmlKeywordsByUrl
+     * Test case for getDetectHtmlKeywordsByUrl
      *
      * Get the keywords from HTML document from Web specified by its URL using the keyword detection service.
      *
-     * @dataProvider providerGetDetectHtmlKeywordsByUrl
+     * @dataProvider providergetDetectHtmlKeywordsByUrl
      *
      */
-    public function testGetDetectHtmlKeywordsByUrl($source_url, $num_test)
+    public function testgetDetectHtmlKeywordsByUrl($source_url, $num_test)
     {
         //Request to server Api
-        $result = self::$api->GetDetectHtmlKeywordsByUrl($source_url);
+        $result = self::$api_html->getDetectHtmlKeywordsByUrl($source_url);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
         $this->assertTrue($result->getSize() > 0,"Zero result");
@@ -94,7 +94,7 @@ class SummarizationApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . "KeywordUrl_" . $num_test  . ".json");
     }
 
-    public function providerGetDetectHtmlKeywordsByUrl()
+    public function providergetDetectHtmlKeywordsByUrl()
     {
         return [
             ["https://www.le.ac.uk/oerresources/bdra/html/page_01.htm", 1],

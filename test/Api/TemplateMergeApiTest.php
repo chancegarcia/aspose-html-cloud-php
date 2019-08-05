@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="TemplateMergeApiTest.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
+*   Copyright (c) 2019 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,7 +28,10 @@
 
 namespace Client\Invoker\Api;
 
-use Aspose\Storage\Model\Requests;
+use Client\Invoker\ApiException;
+use InvalidArgumentException;
+use SplFileObject;
+
 /**
  * TemplateMergeApiTest Class Doc Comment
  *
@@ -39,7 +42,7 @@ class TemplateMergeApiTest extends BaseTest
 {
 
     /**
-     * Operation GetMergeHtmlTemplate
+     * Operation getMergeHtmlTemplate
      *
      * Populate HTML document template with data located as a file in the storage.
      *
@@ -49,24 +52,24 @@ class TemplateMergeApiTest extends BaseTest
      * @param  string $folder The template document folder. (optional)
      * @param  string $storage The template document and data source storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function testGetMergeHtmlTemplate()
+    public function testgetMergeHtmlTemplate()
     {
         $template_name = "HtmlTemplate.html";
         $data_name = "XmlSourceData.xml";
-        $folder = self::$api->config['remoteFolder'];
+        $folder = self::$api_html->config['remoteFolder'];
         $options = "";
         $storage = null;
         $data_path = $folder . "/" . $data_name;
-        $result_name = "GetMergeHtmlTemplatePHP.html";
+        $result_name = "getMergeHtmlTemplatePHP.html";
 
-        $this->uploadFile($template_name);
-        $this->uploadFile($data_name);
+        $this->uploadHelper($template_name);
+        $this->uploadHelper($data_name);
 
-        $result = self::$api->GetMergeHtmlTemplate($template_name, $data_path, $options, $folder, $storage);
+        $result = self::$api_html->getMergeHtmlTemplate($template_name, $data_path, $options, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
         $this->assertTrue($result->getSize() > 0,"Zero result");
@@ -76,40 +79,35 @@ class TemplateMergeApiTest extends BaseTest
     }
 
     /**
-     * Operation PutMergeHtmlTemplate
+     * Operation postMergeHtmlTemplate
      *
      * Populate HTML document template with data from the request body. Result document will be saved to storage.
      *
      * @param  string $template_name Template document name. Template document is HTML or zipped HTML. (required)
      * @param  string $out_path Result document path. (required)
-     * @param  \SplFileObject $file A data file to populate template. (required)
+     * @param  SplFileObject $file A data file to populate template. (required)
      * @param  string $options Template merge options: reserved for further implementation. (optional)
      * @param  string $folder The template document folder. (optional)
      * @param  string $storage The template document and data source storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function testPutMergeHtmlTemplate()
+    public function testpostMergeHtmlTemplate()
     {
         $template_name = "HtmlTemplate.html";
         $data_name = "XmlSourceData.xml";
-        $folder = self::$api->config['remoteFolder'];
+        $folder = self::$api_html->config['remoteFolder'];
         $options = "";
         $storage = null;
-        $result_name = "PutMergeHtmlTemplatePHP.html";
+        $result_name = "postMergeHtmlTemplatePHP.html";
         $out_path = $folder . "/" . $result_name;
         $file = self::$testFolder . $data_name;
 
-        self::$api->PutMergeHtmlTemplate($template_name, $out_path, $file, $options, $folder, $storage);
+        self::$api_html->postMergeHtmlTemplate($template_name, $out_path, $file, $options, $folder, $storage);
 
-        //Download result file from storage.
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $result_name);
+        //Download result from storage
+        $this->downloadHelper($out_path);
     }
 }

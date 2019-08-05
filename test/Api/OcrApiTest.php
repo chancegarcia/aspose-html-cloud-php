@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="OcrApiTest.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
+*   Copyright (c) 2019 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -38,21 +38,21 @@ class OcrApiTest extends BaseTest
 {
 
     /**
-     * Test case for GetRecognizeAndImportToHtml
+     * Test case for getRecognizeAndImportToHtml
      *
-     * @dataProvider providerGetRecognizeAndImportToHtml
+     * @dataProvider providergetRecognizeAndImportToHtml
      *
      * Recognize text from the image file in the storage and import it to HTML format..
      *
      */
-    public function testGetRecognizeAndImportToHtml($fileName, $ocr_engine_lang = 'en', $folder = null, $storage = null)
+    public function testgetRecognizeAndImportToHtml($fileName, $ocr_engine_lang = 'en', $folder = null, $storage = null)
     {
-        $this->uploadFile($fileName);
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $this->uploadHelper($fileName);
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
 
         //Request to server Api
-        $result = self::$api->GetRecognizeAndImportToHtml($fileName, $ocr_engine_lang , $folder, $storage);
+        $result = self::$api_html->getRecognizeAndImportToHtml($fileName, $ocr_engine_lang , $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
         $this->assertTrue($result->getSize() > 0,"Zero result");
@@ -61,7 +61,7 @@ class OcrApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . $fileName . "_" . $ocr_engine_lang .".html");
     }
 
-    public function providerGetRecognizeAndImportToHtml()
+    public function providergetRecognizeAndImportToHtml()
     {
         return [
             ["test_ocr.png","en"],
@@ -71,21 +71,21 @@ class OcrApiTest extends BaseTest
 
 
     /**
-     * Test case for GetRecognizeAndTranslateToHtml
+     * Test case for getRecognizeAndTranslateToHtml
      *
-     * @dataProvider providerGetRecognizeAndTranslateToHtml
+     * @dataProvider providergetRecognizeAndTranslateToHtml
      *
      * Recognize text from the image file in the storage, import it to HTML format and translate to specified language..
      *
      */
-    public function testGetRecognizeAndTranslateToHtml($fileName, $src_lang, $res_lang, $folder = null, $storage = null)
+    public function testgetRecognizeAndTranslateToHtml($fileName, $src_lang, $res_lang, $folder = null, $storage = null)
     {
-        $this->uploadFile($fileName);
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $this->uploadHelper($fileName);
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
 
         //Request to server Api
-        $result = self::$api->GetRecognizeAndTranslateToHtml($fileName, $src_lang, $res_lang, $folder, $storage);
+        $result = self::$api_html->getRecognizeAndTranslateToHtml($fileName, $src_lang, $res_lang, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
         $this->assertTrue($result->getSize() > 0,"Zero result");
@@ -94,7 +94,7 @@ class OcrApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . $fileName . "_" . $src_lang . "_". $res_lang . ".html");
     }
 
-    public function providerGetRecognizeAndTranslateToHtml()
+    public function providergetRecognizeAndTranslateToHtml()
     {
         return [
             ["test_ocr.png","en","fr"],

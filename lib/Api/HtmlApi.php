@@ -1,96 +1,114 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="HtmlApi.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker\Api;
 
-use Client\Invoker\Client\TemplateMergeApi;
+use Client\Invoker\Configuration;
+use Client\Invoker\HeaderSelector;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
-use Client\Invoker\Config;
-use Client\Invoker\HeaderSelector;
+use RuntimeException;
 
-require_once('ConversionApi.php');
-require_once('DocumentApi.php');
-require_once('OcrApi.php');
-require_once('TranslationApi.php');
-require_once('SummarizationApi.php');
-require_once('TemplateMergeApi.php');
+require_once 'ConversionApi.php';
+require_once 'DocumentApi.php';
+require_once 'OcrApi.php';
+require_once 'TranslationApi.php';
+require_once 'SummarizationApi.php';
+require_once 'TemplateMergeApi.php';
+require_once 'ImportApi.php';
 
 
 /**
- * HtmlApi Class Doc Comment
+ * Collecting all HtmlApi
  *
- * @category Class
- * @package  Client\Invoker\Api
+ * @category HtmlApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
  */
 class HtmlApi
 {
-    use ConversionApi, DocumentApi, OcrApi, TranslationApi, SummarizationApi, TemplateMergeApi;
+    use ConversionApi, DocumentApi, OcrApi, TranslationApi, SummarizationApi,
+        TemplateMergeApi, ImportApi;
 
     /**
+     * Http client
+     *
      * @var ClientInterface
      */
     public $client;
 
     /**
-     * @var Config
+     * Configuration endpoint and security
+     *
+     * @var Configuration
      */
     public $config;
+    /**
+     * Selector custom headers
+     *
+     * @var HeaderSelector
+     */
+    private $_headerSelector;
 
     /**
-     * @param Config Configuration
-     * @param HeaderSelector $selector
+     * Create HtmlApi
+     *
+     * @param Configuration  $params   Configuration Api
+     * @param HeaderSelector $selector Headers
      */
-    public function __construct($params = null, HeaderSelector $selector = null)
+    public function __construct($params, HeaderSelector $selector = null)
     {
-        if($params == null){
-            $this->client = Config::getClient();
-            $this->config = Config::getConfig();
-        }else{
-            $this->client = Config::getClient($params);
-            $this->config = $params;
-        }
-        $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->client = Configuration::getClient($params);
+        $this->config = $params;
+        $this->_headerSelector = $selector ?: new HeaderSelector();
     }
 
     /**
      * Create http client option
      *
-     * @throws \RuntimeException on file opening failure
+     * @throws RuntimeException on file opening failure
      * @return array of http client options
      */
     protected function createHttpClientOption()
     {
         $options = [];
         if ($this->config['debug']) {
-            $options[RequestOptions::DEBUG] = fopen($this->config['debugFile'], 'a');
+            $options[RequestOptions::DEBUG]
+                = fopen($this->config['debugFile'], 'a');
             if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: ' . $this->config['debugFile']);
+                throw new RuntimeException(
+                    'Failed to open the debug file: '
+                    . $this->config['debugFile']
+                );
             }
         }
 

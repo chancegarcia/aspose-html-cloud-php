@@ -1,79 +1,110 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="OcrApi.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
 use Client\Invoker\ApiException;
 use Client\Invoker\ObjectSerializer;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\json_encode;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
+use SplFileObject;
+use stdClass;
+
+/**
+ * Recognize text from the image file in the storage and import it to HTML format.
+ * Recognize text from the image file in the storage, import it to HTML format
+ * and translate to specified language.
+ *
+ * @category OcrApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 trait OcrApi
 {
     /**
-     * Operation GetRecognizeAndImportToHtml
+     * Operation getRecognizeAndImportToHtml
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Recognize text from the image file in the storage and
+     * import it to HTML format.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name            The image file name. (required)
+     * @param string $ocr_engine_lang OCR engine language - language
+     *                                (optional, default to en)
+     * @param string $folder          The source image folder. (optional)
+     * @param string $storage         The source image storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetRecognizeAndImportToHtml($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
-    {
-        list($response) = $this->GetRecognizeAndImportToHtmlWithHttpInfo($name, $ocr_engine_lang, $folder, $storage);
+    public function getRecognizeAndImportToHtml(
+        $name, $ocr_engine_lang = 'en', $folder = null, $storage = null
+    ) {
+        list($response) = $this->getRecognizeAndImportToHtmlWithHttpInfo(
+            $name, $ocr_engine_lang, $folder, $storage
+        );
         return $response;
     }
 
     /**
-     * Operation GetRecognizeAndImportToHtmlWithHttpInfo
+     * Operation getRecognizeAndImportToHtmlWithHttpInfo
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Recognize text from the image file in the storage and
+     * import it to HTML format.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name            The image file name. (required)
+     * @param string $ocr_engine_lang OCR engine language - language
+     *                                (optional, default to en)
+     * @param string $folder          The source image folder. (optional)
+     * @param string $storage         The source image storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetRecognizeAndImportToHtmlWithHttpInfo($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
-    {
+    public function getRecognizeAndImportToHtmlWithHttpInfo(
+        $name, $ocr_engine_lang = 'en', $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndImportToHtmlRequest($name, $ocr_engine_lang, $folder, $storage);
+        $request = $this->getRecognizeAndImportToHtmlRequest(
+            $name, $ocr_engine_lang, $folder, $storage
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -83,8 +114,10 @@ trait OcrApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -121,59 +154,68 @@ trait OcrApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetRecognizeAndImportToHtmlAsync
+     * Operation getRecognizeAndImportToHtmlAsync
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Recognize text from the image file in the storage
+     * and import it to HTML format.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name            The image file name. (required)
+     * @param string $ocr_engine_lang OCR engine language - language
+     *                                (optional, default to en)
+     * @param string $folder          The source image folder. (optional)
+     * @param string $storage         The source image storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetRecognizeAndImportToHtmlAsync($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
-    {
-        return $this->GetRecognizeAndImportToHtmlAsyncWithHttpInfo($name, $ocr_engine_lang, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getRecognizeAndImportToHtmlAsync(
+        $name, $ocr_engine_lang = 'en', $folder = null, $storage = null
+    ) {
+        return $this->getRecognizeAndImportToHtmlAsyncWithHttpInfo(
+            $name, $ocr_engine_lang, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetRecognizeAndImportToHtmlAsyncWithHttpInfo
+     * Operation getRecognizeAndImportToHtmlAsyncWithHttpInfo
      *
-     * Recognize text from the image file in the storage and import it to HTML format.
+     * Recognize text from the image file in the storage and
+     * import it to HTML format.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name            The image file name. (required)
+     * @param string $ocr_engine_lang OCR engine language
+     *                                (optional, default to en)
+     * @param string $folder          The source image folder. (optional)
+     * @param string $storage         The source image storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetRecognizeAndImportToHtmlAsyncWithHttpInfo($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
-    {
+    public function getRecognizeAndImportToHtmlAsyncWithHttpInfo(
+        $name, $ocr_engine_lang = 'en', $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndImportToHtmlRequest($name, $ocr_engine_lang, $folder, $storage);
+        $request = $this->getRecognizeAndImportToHtmlRequest(
+            $name, $ocr_engine_lang, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -213,22 +255,25 @@ trait OcrApi
     }
 
     /**
-     * Create request for operation 'GetRecognizeAndImportToHtml'
+     * Create request for operation 'getRecognizeAndImportToHtml'
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $ocr_engine_lang OCR engine language - language (optional, default to en)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name            The image file name. (required)
+     * @param string $ocr_engine_lang OCR engine language
+     *                                (optional, default to en)
+     * @param string $folder          The source image folder. (optional)
+     * @param string $storage         The source image storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetRecognizeAndImportToHtmlRequest($name, $ocr_engine_lang = 'en', $folder = null, $storage = null)
-    {
+    protected function getRecognizeAndImportToHtmlRequest(
+        $name, $ocr_engine_lang = 'en', $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetRecognizeAndImportToHtml'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getRecognizeAndImportToHtml'
             );
         }
 
@@ -239,9 +284,17 @@ trait OcrApi
         $httpBody = '';
         $multipart = false;
 
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+
         // query params
         if ($ocr_engine_lang !== null) {
-            $queryParams['ocrEngineLang'] = ObjectSerializer::toQueryValue($ocr_engine_lang);
+            $queryParams['ocrEngineLang']
+                = ObjectSerializer::toQueryValue($ocr_engine_lang);
         }
         // query params
         if ($folder !== null) {
@@ -252,24 +305,15 @@ trait OcrApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -280,8 +324,10 @@ trait OcrApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -296,14 +342,13 @@ trait OcrApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -316,7 +361,7 @@ trait OcrApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -326,45 +371,56 @@ trait OcrApi
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtml
+     * Operation getRecognizeAndTranslateToHtml
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Recognize text from the image file in the storage,
+     * import it to HTML format and translate to specified language.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name     The image file name. (required)
+     * @param string $src_lang Source language - also supposed as the OCR engine
+     *                         language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $folder   The source image folder. (optional)
+     * @param string $storage  The source image storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      */
-    public function GetRecognizeAndTranslateToHtml($name, $src_lang, $res_lang, $folder = null, $storage = null)
-    {
-        list($response) = $this->GetRecognizeAndTranslateToHtmlWithHttpInfo($name, $src_lang, $res_lang, $folder, $storage);
+    public function getRecognizeAndTranslateToHtml(
+        $name, $src_lang, $res_lang, $folder = null, $storage = null
+    ) {
+        list($response) = $this->getRecognizeAndTranslateToHtmlWithHttpInfo(
+            $name, $src_lang, $res_lang, $folder, $storage
+        );
         return $response;
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtmlWithHttpInfo
+     * Operation getRecognizeAndTranslateToHtmlWithHttpInfo
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Recognize text from the image file in the storage, import it to
+     * HTML format and translate to specified language.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name     The image file name. (required)
+     * @param string $src_lang Source language - also supposed as the OCR
+     *                         engine language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $folder   The source image folder. (optional)
+     * @param string $storage  The source image storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
      */
-    public function GetRecognizeAndTranslateToHtmlWithHttpInfo($name, $src_lang, $res_lang, $folder = null, $storage = null)
-    {
+    public function getRecognizeAndTranslateToHtmlWithHttpInfo(
+        $name, $src_lang, $res_lang, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndTranslateToHtmlRequest($name, $src_lang, $res_lang, $folder, $storage);
+        $request = $this->getRecognizeAndTranslateToHtmlRequest(
+            $name, $src_lang, $res_lang, $folder, $storage
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -374,8 +430,10 @@ trait OcrApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -412,61 +470,70 @@ trait OcrApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtmlAsync
+     * Operation getRecognizeAndTranslateToHtmlAsync
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Recognize text from the image file in the storage, import it to
+     * HTML format and translate to specified language.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name     The image file name. (required)
+     * @param string $src_lang Source language - also supposed as the
+     *                         OCR engine language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $folder   The source image folder. (optional)
+     * @param string $storage  The source image storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetRecognizeAndTranslateToHtmlAsync($name, $src_lang, $res_lang, $folder = null, $storage = null)
-    {
-        return $this->GetRecognizeAndTranslateToHtmlAsyncWithHttpInfo($name, $src_lang, $res_lang, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
+    public function getRecognizeAndTranslateToHtmlAsync(
+        $name, $src_lang, $res_lang, $folder = null, $storage = null
+    ) {
+        return $this->getRecognizeAndTranslateToHtmlAsyncWithHttpInfo(
+            $name, $src_lang, $res_lang, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetRecognizeAndTranslateToHtmlAsyncWithHttpInfo
+     * Operation getRecognizeAndTranslateToHtmlAsyncWithHttpInfo
      *
-     * Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+     * Recognize text from the image file in the storage, import it to HTML
+     * format and translate to specified language.
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name     The image file name. (required)
+     * @param string $src_lang Source language - also supposed as the OCR engine
+     *                         language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $folder   The source image folder. (optional)
+     * @param string $storage  The source image storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
      */
-    public function GetRecognizeAndTranslateToHtmlAsyncWithHttpInfo($name, $src_lang, $res_lang, $folder = null, $storage = null)
-    {
+    public function getRecognizeAndTranslateToHtmlAsyncWithHttpInfo(
+        $name, $src_lang, $res_lang, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetRecognizeAndTranslateToHtmlRequest($name, $src_lang, $res_lang, $folder, $storage);
+        $request = $this->getRecognizeAndTranslateToHtmlRequest(
+            $name, $src_lang, $res_lang, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -506,35 +573,40 @@ trait OcrApi
     }
 
     /**
-     * Create request for operation 'GetRecognizeAndTranslateToHtml'
+     * Create request for operation 'getRecognizeAndTranslateToHtml'
      *
-     * @param  string $name The image file name. (required)
-     * @param  string $src_lang Source language - also supposed as the OCR engine language. (required)
-     * @param  string $res_lang Result language. (required)
-     * @param  string $folder The source image folder. (optional)
-     * @param  string $storage The source image storage. (optional)
+     * @param string $name     The image file name. (required)
+     * @param string $src_lang Source language - also supposed as the OCR
+     *                         engine language. (required)
+     * @param string $res_lang Result language. (required)
+     * @param string $folder   The source image folder. (optional)
+     * @param string $storage  The source image storage. (optional)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @throws InvalidArgumentException
+     * @return Request
      */
-    protected function GetRecognizeAndTranslateToHtmlRequest($name, $src_lang, $res_lang, $folder = null, $storage = null)
-    {
+    protected function getRecognizeAndTranslateToHtmlRequest(
+        $name, $src_lang, $res_lang, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetRecognizeAndTranslateToHtml'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getRecognizeAndTranslateToHtml'
             );
         }
         // verify the required parameter 'src_lang' is set
         if ($src_lang === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $src_lang when calling GetRecognizeAndTranslateToHtml'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$src_lang when calling getRecognizeAndTranslateToHtml'
             );
         }
         // verify the required parameter 'res_lang' is set
         if ($res_lang === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $res_lang when calling GetRecognizeAndTranslateToHtml'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$res_lang when calling getRecognizeAndTranslateToHtml'
             );
         }
 
@@ -545,6 +617,25 @@ trait OcrApi
         $httpBody = '';
         $multipart = false;
 
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'srcLang' . '}',
+            ObjectSerializer::toPathValue($src_lang),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'resLang' . '}',
+            ObjectSerializer::toPathValue($res_lang),
+            $resourcePath
+        );
+
         // query params
         if ($folder !== null) {
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
@@ -554,40 +645,15 @@ trait OcrApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($src_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'srcLang' . '}',
-                ObjectSerializer::toPathValue($src_lang),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($res_lang !== null) {
-            $resourcePath = str_replace(
-                '{' . 'resLang' . '}',
-                ObjectSerializer::toPathValue($res_lang),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -598,8 +664,10 @@ trait OcrApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -614,14 +682,13 @@ trait OcrApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -634,7 +701,7 @@ trait OcrApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),

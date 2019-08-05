@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="DocumentApiTest.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
+*   Copyright (c) 2019 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,6 +29,10 @@
 namespace Client\Invoker\Api;
 
 
+use Client\Invoker\ApiException;
+use InvalidArgumentException;
+use SplFileObject;
+
 /**
  * DocumentApiTest Class Doc Comment
  *
@@ -39,16 +43,16 @@ class DocumentApiTest extends BaseTest
 {
 
     /**
-     * Test case for GetDocumentByUrl
+     * Test case for getDocumentByUrl
      *
      * Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
      * @param  string $source_url The document URL. (required)
      *
-     * @dataProvider providerGetDocumentByUrl
+     * @dataProvider providergetDocumentByUrl
      */
-    public function testGetDocumentByUrl($num_test, $source_url)
+    public function testgetDocumentByUrl($num_test, $source_url)
     {
-        $result = self::$api->GetDocumentByUrl($source_url);
+        $result = self::$api_html->getDocumentByUrl($source_url);
 
         $this->assertTrue($result->isFile(),"Error result after get site from url");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
@@ -57,7 +61,7 @@ class DocumentApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult .$num_test . "get_site_by_url.zip");
     }
 
-    public function providerGetDocumentByUrl()
+    public function providergetDocumentByUrl()
     {
         return [
             [1, "https://lenta.ru"],
@@ -67,20 +71,20 @@ class DocumentApiTest extends BaseTest
 
 
     /**
-     * Test case for GetDocumentFragmentByXPath
+     * Test case for getDocumentFragmentByXPath
      *
      * Return list of HTML fragments matching the specified XPath query..
      * @param  string $fileName The document name. (required)
      * @param  string $xPath XPath query string. (required)
      * @param  string $outFormat Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
      *
-     * @dataProvider providerGetDocumentFragmentByXPath
+     * @dataProvider providergetDocumentFragmentByXPath
      *
      */
-    public function testGetDocumentFragmentByXPath($fileName, $xPath, $outFormat)
+    public function testgetDocumentFragmentByXPath($fileName, $xPath, $outFormat)
     {
-        $this->uploadFile($fileName);
-        $result = self::$api->GetDocumentFragmentByXPath($fileName, $xPath, $outFormat, null, self::$api->config['remoteFolder']);
+        $this->uploadHelper($fileName);
+        $result = self::$api_html->getDocumentFragmentByXPath($fileName, $xPath, $outFormat, null, self::$api_html->config['remoteFolder']);
 
         $this->assertTrue($result->isFile(),"Error result after get document xpath");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
@@ -96,7 +100,7 @@ class DocumentApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . "GetDocXPath_" . $fileName . $ext);
     }
 
-    public function providerGetDocumentFragmentByXPath()
+    public function providergetDocumentFragmentByXPath()
     {
         return [
     		["test2.html.zip",".//p", "plain"],
@@ -107,7 +111,7 @@ class DocumentApiTest extends BaseTest
     }
 
     /**
-     * Test case for GetDocumentFragmentByXPathByUrl
+     * Test case for getDocumentFragmentByXPathByUrl
      *
      * Return list of HTML fragments matching the specified XPath query from url.
      * @param  integer $num_test Source page URL. (required for test)
@@ -115,12 +119,12 @@ class DocumentApiTest extends BaseTest
      * @param  string $x_path XPath query string. (required)
      * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
      *
-     * @dataProvider providerGetDocumentFragmentByXPathByUrl
+     * @dataProvider providergetDocumentFragmentByXPathByUrl
      *
      */
-    public function testGetDocumentFragmentByXPathByUrl($num_test, $source_url, $x_path, $out_format)
+    public function testgetDocumentFragmentByXPathByUrl($num_test, $source_url, $x_path, $out_format)
     {
-        $result = self::$api->GetDocumentFragmentByXPathByUrl($source_url, $x_path, $out_format);
+        $result = self::$api_html->getDocumentFragmentByXPathByUrl($source_url, $x_path, $out_format);
 
         $this->assertTrue($result->isFile(),"Error result after get xPath from url");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
@@ -137,7 +141,7 @@ class DocumentApiTest extends BaseTest
     }
 
 
-    public function providerGetDocumentFragmentByXPathByUrl()
+    public function providergetDocumentFragmentByXPathByUrl()
     {
         return [
             [1, "https://stallman.org/articles/anonymous-payments-thru-phones.html",".//p", "plain"],
@@ -146,7 +150,7 @@ class DocumentApiTest extends BaseTest
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelector
+     * Operation getDocumentFragmentsByCSSSelector
      *
      * Return list of HTML fragments matching the specified CSS selector.
      *
@@ -156,16 +160,16 @@ class DocumentApiTest extends BaseTest
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
-     * @dataProvider providerGetDocumentFragmentsByCSSSelector
+     * @dataProvider providergetDocumentFragmentsByCSSSelector
      */
-    public function testGetDocumentFragmentsByCSSSelector($name, $selector, $out_format)
+    public function testgetDocumentFragmentsByCSSSelector($name, $selector, $out_format)
     {
-        $this->uploadFile($name);
-        $result = self::$api->GetDocumentFragmentsByCSSSelector($name, $selector, $out_format, self::$api->config['remoteFolder'], null);
+        $this->uploadHelper($name);
+        $result = self::$api_html->getDocumentFragmentsByCSSSelector($name, $selector, $out_format, self::$api_html->config['remoteFolder'], null);
 
         $this->assertTrue($result->isFile(),"Error result after get document xpath");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
@@ -181,7 +185,7 @@ class DocumentApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . "GetDocCSS_" . $name . $ext);
     }
 
-    public function providerGetDocumentFragmentsByCSSSelector()
+    public function providergetDocumentFragmentsByCSSSelector()
     {
         return [
             ["test2.html.zip","div p", "plain"],
@@ -192,7 +196,7 @@ class DocumentApiTest extends BaseTest
     }
 
     /**
-     * Operation GetDocumentFragmentsByCSSSelectorByUrl
+     * Operation getDocumentFragmentsByCSSSelectorByUrl
      *
      * Return list of HTML fragments matching the specified CSS selector by the source page URL.
      *
@@ -200,15 +204,15 @@ class DocumentApiTest extends BaseTest
      * @param  string $selector CSS selector string. (required)
      * @param  string $out_format Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
-     * @dataProvider providerGetDocumentFragmentsByCSSSelectorByUrl
+     * @dataProvider providergetDocumentFragmentsByCSSSelectorByUrl
      */
-    public function testGetDocumentFragmentsByCSSSelectorByUrl($num_test, $source_url, $selector, $out_format)
+    public function testgetDocumentFragmentsByCSSSelectorByUrl($num_test, $source_url, $selector, $out_format)
     {
-        $result = self::$api->GetDocumentFragmentsByCSSSelectorByUrl($source_url, $selector, $out_format);
+        $result = self::$api_html->getDocumentFragmentsByCSSSelectorByUrl($source_url, $selector, $out_format);
 
         $this->assertTrue($result->isFile(),"Error result after get xPath from url");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
@@ -225,7 +229,7 @@ class DocumentApiTest extends BaseTest
     }
 
 
-    public function providerGetDocumentFragmentsByCSSSelectorByUrl()
+    public function providergetDocumentFragmentsByCSSSelectorByUrl()
     {
         return [
             [1, "https://www.w3schools.com/cssref/css_selectors.asp",'a[href$=".asp"]', "plain"],
@@ -235,17 +239,17 @@ class DocumentApiTest extends BaseTest
 
 
     /**
-     * Test case for GetDocumentImages
+     * Test case for getDocumentImages
      *
      * Return all HTML document images packaged as a ZIP archive..
      * @param  string $fileName The document name. (required)
      *
-     * @dataProvider providerGetDocumentImages
+     * @dataProvider providergetDocumentImages
      */
-    public function testGetDocumentImages($fileName)
+    public function testgetDocumentImages($fileName)
     {
-        $this->uploadFile($fileName);
-        $result = self::$api->GetDocumentImages($fileName,self::$api->config['remoteFolder'],null);
+        $this->uploadHelper($fileName);
+        $result = self::$api_html->getDocumentImages($fileName,self::$api_html->config['remoteFolder'],null);
         print_r($result);
 
         $this->assertTrue($result->isFile(),"Error result after get document images");
@@ -255,7 +259,7 @@ class DocumentApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult . $fileName);
     }
 
-    public function providerGetDocumentImages()
+    public function providergetDocumentImages()
     {
         return [
             ["test1.html.zip"],
@@ -266,16 +270,16 @@ class DocumentApiTest extends BaseTest
     }
 
     /**
-     * Test case for GetDocumentImagesByUrl
+     * Test case for getDocumentImagesByUrl
      *
      * Return all HTML document images packaged as a ZIP archive. from url
      * @param  string $source_url The document URL. (required)
      *
-     * @dataProvider providerGetDocumentImagesByUrl
+     * @dataProvider providergetDocumentImagesByUrl
      */
-    public function testGetDocumentImagesByUrl($num_test, $source_url)
+    public function testgetDocumentImagesByUrl($num_test, $source_url)
     {
-        $result = self::$api->GetDocumentImagesByUrl($source_url);
+        $result = self::$api_html->getDocumentImagesByUrl($source_url);
 
         $this->assertTrue($result->isFile(),"Error result after get images from url");
         $this->assertTrue($result->getSize() > 0,"Size of file is zero");
@@ -284,7 +288,7 @@ class DocumentApiTest extends BaseTest
         copy($result->getRealPath(), self::$testResult .$num_test . "get_images_by_url.zip");
     }
 
-    public function providerGetDocumentImagesByUrl()
+    public function providergetDocumentImagesByUrl()
     {
         return [
             [1, "https://www.google.com"],

@@ -1,66 +1,73 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="HeaderSelector.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker;
 
-use \Exception;
-
 /**
- * ApiException Class Doc Comment
+ * Header selector class.
  *
- * @category Class
- * @package  Client\Invoker
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @category HeaderSelector
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
  */
 class HeaderSelector
 {
 
     /**
-     * @param string[] $accept
-     * @param string[] $contentTypes
+     * Select headers
+     *
+     * @param string[] $accept       Accept header
+     * @param string[] $contentTypes Content
+     *
      * @return array
      */
     public function selectHeaders($accept, $contentTypes)
     {
         $headers = [];
 
-        $accept = $this->selectAcceptHeader($accept);
+        $accept = $this->_selectAcceptHeader($accept);
         if ($accept !== null) {
             $headers['Accept'] = $accept;
         }
 
-        $headers['Content-Type'] = $this->selectContentTypeHeader($contentTypes);
+        $headers['Content-Type'] = $this->_selectContentTypeHeader($contentTypes);
         return $headers;
     }
 
     /**
-     * @param string[] $accept
+     * Header for multipart
+     *
+     * @param string[] $accept Accept headers
+     *
      * @return array
      */
     public function selectHeadersForMultipart($accept)
@@ -78,7 +85,7 @@ class HeaderSelector
      *
      * @return string Accept (e.g. application/json)
      */
-    private function selectAcceptHeader($accept)
+    private function _selectAcceptHeader($accept)
     {
         if (count($accept) === 0 || (count($accept) === 1 && $accept[0] === '')) {
             return null;
@@ -96,9 +103,11 @@ class HeaderSelector
      *
      * @return string Content-Type (e.g. application/json)
      */
-    private function selectContentTypeHeader($contentType)
+    private function _selectContentTypeHeader($contentType)
     {
-        if (count($contentType) === 0 || (count($contentType) === 1 && $contentType[0] === '')) {
+        if ((count($contentType) === 0)
+            || (count($contentType) === 1 && $contentType[0] === '')
+        ) {
             return 'application/json';
         } elseif (preg_grep("/application\/json/i", $contentType)) {
             return 'application/json';
@@ -107,4 +116,3 @@ class HeaderSelector
         }
     }
 }
-

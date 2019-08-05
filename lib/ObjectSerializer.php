@@ -1,40 +1,49 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="ObjectSerializer.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker;
 
+use DateTime;
+use Exception;
+use InvalidArgumentException;
+use Psr\Http\Message\StreamInterface;
+use SplFileObject;
+
 /**
- * ObjectSerializer Class Doc Comment
+ * Helper for serialization
  *
- * @category Class
- * @package  Client\Invoker
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @category HtmlApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
  */
 class ObjectSerializer
 {
@@ -42,17 +51,19 @@ class ObjectSerializer
      * Serialize data
      *
      * @param mixed  $data   the data to serialize
-     * @param string $type   the SwaggerType of the data
-     * @param string $format the format of the Swagger type of the data
+     * @param string $type   the type of the data
+     * @param string $format the format of the data
      *
      * @return string|object serialized form of $data
      */
-    public static function sanitizeForSerialization($data, $type = null, $format = null)
-    {
+    public static function sanitizeForSerialization(
+        $data, $type = null, $format = null
+    ) {
         if (is_scalar($data) || null === $data) {
             return $data;
-        } elseif ($data instanceof \DateTime) {
-            return ($format === 'date') ? $data->format('Y-m-d') : $data->format(\DateTime::ATOM);
+        } elseif ($data instanceof DateTime) {
+            return ($format === 'date')
+                ? $data->format('Y-m-d') : $data->format(DateTime::ATOM);
         } elseif (is_array($data)) {
             foreach ($data as $property => $value) {
                 $data[$property] = self::sanitizeForSerialization($value);
@@ -65,14 +76,35 @@ class ObjectSerializer
                 $getter = $data::getters()[$property];
                 $value = $data->$getter();
                 if ($value !== null
-                    && !in_array($swaggerType, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)
-                    && method_exists($swaggerType, 'getAllowableEnumValues')
-                    && !in_array($value, $swaggerType::getAllowableEnumValues())) {
-                    $imploded = implode("', '", $swaggerType::getAllowableEnumValues());
-                    throw new \InvalidArgumentException("Invalid value for enum '$swaggerType', must be one of: '$imploded'");
+                    && !in_array(
+                        $swaggerType,
+                        [ 'DateTime', 'bool', 'boolean', 'byte', 'double', 'float',
+                          'int', 'integer', 'mixed', 'number', 'object', 'string',
+                          'void'
+                        ],
+                        true
+                    )
+                    && method_exists(
+                        $swaggerType,
+                        'getAllowableEnumValues'
+                    )
+                    && !in_array($value, $swaggerType::getAllowableEnumValues())
+                ) {
+                    $imploded = implode(
+                        "', 
+                        '",
+                        $swaggerType::getAllowableEnumValues()
+                    );
+                    throw new InvalidArgumentException(
+                        "Invalid value for enum '$swaggerType', "
+                        ."must be one of: '$imploded'"
+                    );
                 }
                 if ($value !== null) {
-                    $values[$data::attributeMap()[$property]] = self::sanitizeForSerialization($value, $swaggerType, $formats[$property]);
+                    $values[$data::attributeMap()[$property]]
+                        = self::sanitizeForSerialization(
+                            $value, $swaggerType, $formats[$property]
+                        );
                 }
             }
             return (object)$values;
@@ -117,7 +149,7 @@ class ObjectSerializer
      * If it's a string, pass through unchanged. It will be url-encoded
      * later.
      *
-     * @param string[]|string|\DateTime $object an object to be serialized to a string
+     * @param string[]|string|DateTime $object an object to be serialized to a string
      *
      * @return string the serialized object
      */
@@ -149,13 +181,13 @@ class ObjectSerializer
      * the http body (form parameter). If it's a string, pass through unchanged
      * If it's a datetime object, format it in ISO8601
      *
-     * @param string|\SplFileObject $value the value of the form parameter
+     * @param string|SplFileObject $value the value of the form parameter
      *
      * @return string the form string
      */
     public static function toFormValue($value)
     {
-        if ($value instanceof \SplFileObject) {
+        if ($value instanceof SplFileObject) {
             return $value->getRealPath();
         } else {
             return self::toString($value);
@@ -167,14 +199,14 @@ class ObjectSerializer
      * the parameter. If it's a string, pass through unchanged
      * If it's a datetime object, format it in ISO8601
      *
-     * @param string|\DateTime $value the value of the parameter
+     * @param string|DateTime $value the value of the parameter
      *
      * @return string the header string
      */
     public static function toString($value)
     {
-        if ($value instanceof \DateTime) { // datetime in ISO8601 format
-            return $value->format(\DateTime::ATOM);
+        if ($value instanceof DateTime) { // datetime in ISO8601 format
+            return $value->format(DateTime::ATOM);
         } else {
             return $value;
         }
@@ -183,59 +215,68 @@ class ObjectSerializer
     /**
      * Serialize an array to a string.
      *
-     * @param array  $collection                 collection to serialize to a string
-     * @param string $collectionFormat           the format use for serialization (csv,
-     * ssv, tsv, pipes, multi)
-     * @param bool   $allowCollectionFormatMulti allow collection format to be a multidimensional array
+     * @param array  $collection                 collection to serialize
+     *                                           to a string
+     * @param string $collectionFormat           the format use for serialization
+     *                                           (csv, ssv, tsv, pipes, multi)
+     * @param bool   $allowCollectionFormatMulti allow collection format to be
+     *                                           a multidimensional array
      *
      * @return string
      */
-    public static function serializeCollection(array $collection, $collectionFormat, $allowCollectionFormatMulti = false)
-    {
+    public static function serializeCollection(
+        array $collection, $collectionFormat, $allowCollectionFormatMulti = false
+    ) {
         if ($allowCollectionFormatMulti && ('multi' === $collectionFormat)) {
             // http_build_query() almost does the job for us. We just
             // need to fix the result of multidimensional arrays.
-            return preg_replace('/%5B[0-9]+%5D=/', '=', http_build_query($collection, '', '&'));
+            return preg_replace(
+                '/%5B[0-9]+%5D=/',
+                '=',
+                http_build_query($collection, '', '&')
+            );
         }
         switch ($collectionFormat) {
-            case 'pipes':
-                return implode('|', $collection);
+        case 'pipes':
+            return implode('|', $collection);
 
-            case 'tsv':
-                return implode("\t", $collection);
+        case 'tsv':
+            return implode("\t", $collection);
 
-            case 'ssv':
-                return implode(' ', $collection);
+        case 'ssv':
+            return implode(' ', $collection);
 
-            case 'csv':
-                // Deliberate fall through. CSV is default format.
-            default:
-                return implode(',', $collection);
+        case 'csv':
+            // Deliberate fall through. CSV is default format.
+        default:
+            return implode(',', $collection);
         }
     }
 
     /**
      * Deserialize a JSON string into an object
      *
-     * @param mixed    $data          object or primitive to be deserialized
-     * @param string   $class         class name is passed as a string
-     * @param string[] $httpHeaders   HTTP headers
-     * @param string   $discriminator discriminator if polymorphism is used
+     * @param mixed    $data        Object or primitive to be deserialized
+     * @param string   $class       Class name is passed as a string
+     * @param string[] $httpHeaders HTTP headers
      *
+     * @throws Exception
      * @return object|array|null an single or an array of $class instances
      */
     public static function deserialize($data, $class, $httpHeaders = null)
     {
         if (null === $data) {
             return null;
-        } elseif (substr($class, 0, 4) === 'map[') { // for associative array e.g. map[string,int]
+            // for associative array e.g. map[string,int]
+        } elseif (substr($class, 0, 4) === 'map[') {
             $inner = substr($class, 4, -1);
             $deserialized = [];
             if (strrpos($inner, ",") !== false) {
                 $subClass_array = explode(',', $inner, 2);
                 $subClass = $subClass_array[1];
                 foreach ($data as $key => $value) {
-                    $deserialized[$key] = self::deserialize($value, $subClass, null);
+                    $deserialized[$key]
+                        = self::deserialize($value, $subClass, null);
                 }
             }
             return $deserialized;
@@ -257,19 +298,41 @@ class ObjectSerializer
             // be interpreted as a missing field/value. Let's handle
             // this graceful.
             if (!empty($data)) {
-                return new \DateTime($data);
+                return new DateTime($data);
             } else {
                 return null;
             }
-        } elseif (in_array($class, ['DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
+        } elseif (in_array(
+            $class,
+            [
+                'DateTime',
+                'bool',
+                'boolean',
+                'byte',
+                'double',
+                'float',
+                'int',
+                'integer',
+                'mixed',
+                'number',
+                'object',
+                'string',
+                'void'
+            ],
+            true
+        )
+        ) {
             settype($data, $class);
             return $data;
         } elseif ($class === '\SplFileObject') {
-            /** @var \Psr\Http\Message\StreamInterface $data */
-
-            // determine file name
-            if (array_key_exists('Content-Disposition', $httpHeaders) &&
-                preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)) {
+            $exist_filename
+                = array_key_exists('Content-Disposition', $httpHeaders)
+                && preg_match(
+                    '/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i',
+                    $httpHeaders['Content-Disposition'],
+                    $match
+                );
+            if ($exist_filename) {
                 $filename = sys_get_temp_dir() . self::sanitizeFilename($match[1]);
             } else {
                 $filename = tempnam(sys_get_temp_dir(), '');
@@ -281,17 +344,23 @@ class ObjectSerializer
             }
             fclose($file);
 
-            return new \SplFileObject($filename, 'r');
+            return new SplFileObject($filename, 'r');
         } elseif (method_exists($class, 'getAllowableEnumValues')) {
             if (!in_array($data, $class::getAllowableEnumValues())) {
                 $imploded = implode("', '", $class::getAllowableEnumValues());
-                throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
+                throw new InvalidArgumentException(
+                    "Invalid value for enum '$class', "
+                    ."must be one of: '$imploded'"
+                );
             }
             return $data;
         } else {
             // If a discriminator is defined and points to a valid subclass, use it.
             $discriminator = $class::DISCRIMINATOR;
-            if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {
+            if ((!empty($discriminator))
+                && isset($data->{$discriminator})
+                && is_string($data->{$discriminator})
+            ) {
                 $subclass = '\Client\Invoker\Model\\' . $data->{$discriminator};
                 if (is_subclass_of($subclass, $class)) {
                     $class = $subclass;
@@ -301,13 +370,17 @@ class ObjectSerializer
             foreach ($instance::swaggerTypes() as $property => $type) {
                 $propertySetter = $instance::setters()[$property];
 
-                if (!isset($propertySetter) || !isset($data->{$instance::attributeMap()[$property]})) {
+                if (!isset($propertySetter)
+                    || !isset($data->{$instance::attributeMap()[$property]})
+                ) {
                     continue;
                 }
 
                 $propertyValue = $data->{$instance::attributeMap()[$property]};
                 if (isset($propertyValue)) {
-                    $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
+                    $instance->$propertySetter(
+                        self::deserialize($propertyValue, $type, null)
+                    );
                 }
             }
             return $instance;

@@ -9,7 +9,7 @@ The complete source code is available in this repository folder, you can either 
 
 ## Requirements
 
-PHP 5.5 and later
+PHP 5.6 and later
 
 ### Prerequisites
 
@@ -30,7 +30,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
     }
   ],
   "require": {
-    "aspose-html-cloud/aspose-html-cloud-php": "*@dev"
+    "aspose/aspose-html-cloud-php": "dev-master"
   }
 }
 ```
@@ -47,30 +47,13 @@ Download the files and include `autoload.php`:
 
 ## Getting Started
 
-Before fill all fields in /setting/config.json   
-
 Example:   
-```json
-{
-    "basePath":"https://api.aspose.cloud/v1.1",
-    "authPath":"https://api.aspose.cloud/oauth2/token",
-    "apiKey":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    "appSID":"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-    "testResult":"\\testresult\\",
-    "testData":"\\testdata\\",
-	"remoteFolder":"HtmlTestDoc",
-	"defaultUserAgent":"Webkit",
-	"debugFile":"php://output",
-	"debug":false
-}
-```
-
-or pass configuration to constructor (see in tests - BaseTest.php) 
+Pass configuration to constructor (see in tests - BaseTest.php) 
 
 ```php
-        $configuration = array(
-            "basePath" => "https://api-qa.aspose.cloud/v1.1",
-            "authPath" => "https://api-qa.aspose.cloud/oauth2/token",
+        $conf = array(
+            "basePath" => "https://api.aspose.cloud/v3.0",
+            "authPath" => "https://api.aspose.cloud/connect/token",
             "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
             "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
             "testResult" => "\\testresult\\",
@@ -79,17 +62,10 @@ or pass configuration to constructor (see in tests - BaseTest.php)
             "defaultUserAgent" => "Webkit",
             "debugFile" => "php://output",
             "debug" => false
-        };
+        );
             
-            self::$api = new HtmlApi($configuration);
-
-// Storage api for upload data to remove storage (see tests)           
-            $storage_cfg = new \Aspose\Storage\Configuration();
-            $storage_cfg->setAppKey($configuration['apiKey'])->
-                setAppSid($configuration['appSID'])->
-                setHost("https://api-qa.aspose.cloud/");
-
-            self::$storage = new StorageApi($storage_cfg);
+            self::$api_html = new HtmlApi($configuration);
+            self::$api_stor = new StorageApi($configuration);
 
 // optional for test
             self::$testFolder = realpath(__DIR__ . '/../..') . $configuration['testData'];
@@ -114,14 +90,26 @@ composer install
 ./vendor/bin/phpunit
 ```
 
-
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$apiInstance = new Client\Invoker\Api\HtmlApi();
+$conf = array(
+	"basePath" => "https://api.aspose.cloud/v3.0",
+	"authPath" => "https://api.aspose.cloud/connect/token",
+	"apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	"appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+	"testResult" => "\\testresult\\",
+	"testData" => "\\testdata\\",
+	"remoteFolder" => "HtmlTestDoc",
+	"defaultUserAgent" => "Webkit",
+	"debugFile" => "php://output",
+	"debug" => false
+);
+
+$apiInstance = new Client\Invoker\Api\HtmlApi($conf);
 
 $name = "name_example"; // string | Document name.
 $out_format = "png"; // string | Resulting image format.
@@ -136,10 +124,10 @@ $folder = "folder_example"; // string | The source document folder.
 $storage = "storage_example"; // string | The source document storage.
 
 try {
-    $result = $apiInstance->GetConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
+    $result = $apiInstance->getConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling HtmlApi->GetConvertDocumentToImage: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling HtmlApi->getConvertDocumentToImage: ', $e->getMessage(), PHP_EOL;
 }
 
 ?>
@@ -147,42 +135,78 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.aspose.cloud/v1.1*
+All URIs are relative to *https://api.aspose.cloud/v3.0*
+
+<a name="html_api"></a>
+## HTML API
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*HtmlApi* | [**GetConvertDocumentToImage**](docs/Api/ConversionApi.md#GetConvertDocumentToImage) | **GET** /html/{name}/convert/image/{outFormat} | Convert the HTML document from the storage by its name to the specified image format.
-*HtmlApi* | [**GetConvertDocumentToImageByUrl**](docs/Api/ConversionApi.md#GetConvertDocumentToImageByUrl) | **GET** /html/convert/image/{outFormat} | Convert the HTML page from the web by its URL to the specified image format.
-*HtmlApi* | [**GetConvertDocumentToPdf**](docs/Api/ConversionApi.md#GetConvertDocumentToPdf) | **GET** /html/{name}/convert/pdf | Convert the HTML document from the storage by its name to PDF.
-*HtmlApi* | [**GetConvertDocumentToPdfByUrl**](docs/Api/ConversionApi.md#GetConvertDocumentToPdfByUrl) | **GET** /html/convert/pdf | Convert the HTML page from the web by its URL to PDF.
-*HtmlApi* | [**GetConvertDocumentToXps**](docs/Api/ConversionApi.md#GetConvertDocumentToXps) | **GET** /html/{name}/convert/xps | Convert the HTML document from the storage by its name to XPS.
-*HtmlApi* | [**GetConvertDocumentToXpsByUrl**](docs/Api/ConversionApi.md#GetConvertDocumentToXpsByUrl) | **GET** /html/convert/xps | Convert the HTML page from the web by its URL to XPS.
-*HtmlApi* | [**PutConvertDocumentInRequestToImage**](docs/Api/ConversionApi.md#PutConvertDocumentInRequestToImage) | **PUT** /html/convert/image/{outFormat} | Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
-*HtmlApi* | [**PutConvertDocumentInRequestToPdf**](docs/Api/ConversionApi.md#PutConvertDocumentInRequestToPdf) | **PUT** /html/convert/pdf | Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
-*HtmlApi* | [**PutConvertDocumentInRequestToXps**](docs/Api/ConversionApi.md#PutConvertDocumentInRequestToXps) | **PUT** /html/convert/xps | Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
-*HtmlApi* | [**PutConvertDocumentToImage**](docs/Api/ConversionApi.md#PutConvertDocumentToImage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
-*HtmlApi* | [**PutConvertDocumentToPdf**](docs/Api/ConversionApi.md#PutConvertDocumentToPdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
-*HtmlApi* | [**PutConvertDocumentToXps**](docs/Api/ConversionApi.md#PutConvertDocumentToXps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
-*HtmlApi* | [**GetConvertDocumentToMHTMLByUrl**](docs/Api/ConversionApi.md#GetConvertDocumentToMHTMLByUrl) | **GET** /html/convert/mhtml | Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
-*HtmlApi* | [**GetConvertDocumentToMarkdown**](docs/Api/ConversionApi.md#GetConvertDocumentToMarkdown) | **GET** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
-*HtmlApi* | [**PutConvertDocumentInRequestToMarkdown**](docs/Api/ConversionApi.md#PutConvertDocumentInRequestToMarkdown) | **PUT** /html/convert/md | Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
-*HtmlApi* | [**PutConvertDocumentToMarkdown**](docs/Api/ConversionApi.md#PutConvertDocumentToMarkdown) | **PUT** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
-*HtmlApi* | [**GetDocumentFragmentByXPath**](docs/Api/DocumentApi.md#GetDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
-*HtmlApi* | [**GetDocumentByUrl**](docs/Api/DocumentApi.md#GetDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
-*HtmlApi* | [**GetDocumentFragmentByXPathByUrl**](docs/Api/DocumentApi.md#GetDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
-*HtmlApi* | [**GetDocumentFragmentsByCSSSelector**](docs/Api/DocumentApi.md#GetDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
-*HtmlApi* | [**GetDocumentFragmentsByCSSSelectorByUrl**](docs/Api/DocumentApi.md#GetDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
-*HtmlApi* | [**GetDocumentImages**](docs/Api/DocumentApi.md#GetDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
-*HtmlApi* | [**GetDocumentImagesByUrl**](docs/Api/DocumentApi.md#GetDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
-*HtmlApi* | [**GetRecognizeAndImportToHtml**](docs/Api/OcrApi.md#GetRecognizeAndImportToHtml) | **GET** /html/{name}/ocr/import | Recognize text from the image file in the storage and import it to HTML format.
-*HtmlApi* | [**GetRecognizeAndTranslateToHtml**](docs/Api/OcrApi.md#GetRecognizeAndTranslateToHtml) | **GET** /html/{name}/ocr/translate/{srcLang}/{resLang} | Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
-*HtmlApi* | [**GetTranslateDocument**](docs/Api/TranslationApi.md#GetTranslateDocument) | **GET** /html/{name}/translate/{srcLang}/{resLang} | Translate the HTML document specified by the name from default or specified storage.
-*HtmlApi* | [**GetTranslateDocumentByUrl**](docs/Api/TranslationApi.md#GetTranslateDocumentByUrl) | **GET** /html/translate/{srcLang}/{resLang} | Translate the HTML document from Web specified by its URL.
-*HtmlApi* | [**GetDetectHtmlKeywords**](docs/Api/SummarizationApi.md#GetDetectHtmlKeywords) | **GET** /html/{name}/summ/keywords | Get the HTML document keywords using the keyword detection service.
-*HtmlApi* | [**GetDetectHtmlKeywordsByUrl**](docs/Api/SummarizationApi.md#GetDetectHtmlKeywordsByUrl) | **GET** /html/summ/keywords | Get the keywords from HTML document from Web specified by its URL using the keyword detection service
-*HtmlApi* | [**GetMergeHtmlTemplate**](docs/Api/TemplateMergeApi.md#GetMergeHtmlTemplate) | **GET** /html/{templateName}/merge | Populate HTML document template with data located as a file in the storage.
-*HtmlApi* | [**PutMergeHtmlTemplate**](docs/Api/TemplateMergeApi.md#PutMergeHtmlTemplate) | **PUT** /html/{templateName}/merge | Populate HTML document template with data from the request body. Result document will be saved to storage.
+*HtmlApi* | [**getConvertDocumentToImage**](docs/ConversionApi.md#getConvertDocumentToImage) | **GET** /html/{name}/convert/image/{outFormat} | Convert the HTML document from the storage by its name to the specified image format.
+*HtmlApi* | [**getConvertDocumentToImageByUrl**](docs/ConversionApi.md#getConvertDocumentToImageByUrl) | **GET** /html/convert/image/{outFormat} | Convert the HTML page from the web by its URL to the specified image format.
+*HtmlApi* | [**getConvertDocumentToPdf**](docs/ConversionApi.md#getConvertDocumentToPdf) | **GET** /html/{name}/convert/pdf | Convert the HTML document from the storage by its name to PDF.
+*HtmlApi* | [**getConvertDocumentToPdfByUrl**](docs/ConversionApi.md#getConvertDocumentToPdfByUrl) | **GET** /html/convert/pdf | Convert the HTML page from the web by its URL to PDF.
+*HtmlApi* | [**getConvertDocumentToXps**](docs/ConversionApi.md#getConvertDocumentToXps) | **GET** /html/{name}/convert/xps | Convert the HTML document from the storage by its name to XPS.
+*HtmlApi* | [**getConvertDocumentToXpsByUrl**](docs/ConversionApi.md#getConvertDocumentToXpsByUrl) | **GET** /html/convert/xps | Convert the HTML page from the web by its URL to XPS.
+*HtmlApi* | [**postConvertDocumentInRequestToImage**](docs/ConversionApi.md#postConvertDocumentInRequestToImage) | **POST** /html/convert/image/{outFormat} | Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
+*HtmlApi* | [**postConvertDocumentInRequestToPdf**](docs/ConversionApi.md#postConvertDocumentInRequestToPdf) | **POST** /html/convert/pdf | Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
+*HtmlApi* | [**postConvertDocumentInRequestToXps**](docs/ConversionApi.md#postConvertDocumentInRequestToXps) | **POST** /html/convert/xps | Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**putConvertDocumentToImage**](docs/ConversionApi.md#putConvertDocumentToImage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
+*HtmlApi* | [**putConvertDocumentToPdf**](docs/ConversionApi.md#putConvertDocumentToPdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
+*HtmlApi* | [**putConvertDocumentToXps**](docs/ConversionApi.md#putConvertDocumentToXps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**getConvertDocumentToMHTMLByUrl**](docs/ConversionApi.md#getConvertDocumentToMHTMLByUrl) | **GET** /html/convert/mhtml | Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+*HtmlApi* | [**getConvertDocumentToMarkdown**](docs/ConversionApi.md#getConvertDocumentToMarkdown) | **GET** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+*HtmlApi* | [**postConvertDocumentInRequestToMarkdown**](docs/ConversionApi.md#postConvertDocumentInRequestToMarkdown) | **POST** /html/convert/md | Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+*HtmlApi* | [**putConvertDocumentToMarkdown**](docs/ConversionApi.md#putConvertDocumentToMarkdown) | **PUT** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+*HtmlApi* | [**getConvertMarkdownToHtml**](docs/ImportApi.md#getConvertMarkdownToHtml) | **GET** /html/{name}/import/md | Converts the Markdown document (located on storage) to HTML and returns resulting file in response content.
+*HtmlApi* | [**postConvertMarkdownInRequestToHtml**](docs/ImportApi.md#postConvertMarkdownInRequestToHtml) | **POST** /html/import/md | Converts the Markdown document (in request content) to HTML and uploads resulting file to storage by specified path.
+*HtmlApi* | [**putConvertMarkdownToHtml**](docs/ImportApi.md#putConvertMarkdownToHtml) | **PUT** /html/{name}/import/md | Converts the Markdown document (located on storage) to HTML and uploads resulting file to storage by specified path.
+*HtmlApi* | [**getDocumentFragmentByXPath**](docs/DocumentApi.md#getDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
+*HtmlApi* | [**getDocumentByUrl**](docs/DocumentApi.md#getDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+*HtmlApi* | [**getDocumentFragmentByXPathByUrl**](docs/DocumentApi.md#getDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
+*HtmlApi* | [**getDocumentFragmentsByCSSSelector**](docs/DocumentApi.md#getDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
+*HtmlApi* | [**getDocumentFragmentsByCSSSelectorByUrl**](docs/DocumentApi.md#getDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
+*HtmlApi* | [**getDocumentImages**](docs/DocumentApi.md#getDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
+*HtmlApi* | [**getDocumentImagesByUrl**](docs/DocumentApi.md#getDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
+*HtmlApi* | [**getRecognizeAndImportToHtml**](docs/OcrApi.md#getRecognizeAndImportToHtml) | **GET** /html/{name}/ocr/import | Recognize text from the image file in the storage and import it to HTML format.
+*HtmlApi* | [**getRecognizeAndTranslateToHtml**](docs/OcrApi.md#getRecognizeAndTranslateToHtml) | **GET** /html/{name}/ocr/translate/{srcLang}/{resLang} | Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
+*HtmlApi* | [**getTranslateDocument**](docs/TranslationApi.md#getTranslateDocument) | **GET** /html/{name}/translate/{srcLang}/{resLang} | Translate the HTML document specified by the name from default or specified storage.
+*HtmlApi* | [**getTranslateDocumentByUrl**](docs/TranslationApi.md#getTranslateDocumentByUrl) | **GET** /html/translate/{srcLang}/{resLang} | Translate the HTML document from Web specified by its URL.
+*HtmlApi* | [**getDetectHtmlKeywords**](docs/SummarizationApi.md#getDetectHtmlKeywords) | **GET** /html/{name}/summ/keywords | Get the HTML document keywords using the keyword detection service.
+*HtmlApi* | [**getDetectHtmlKeywordsByUrl**](docs/SummarizationApi.md#getDetectHtmlKeywordsByUrl) | **GET** /html/summ/keywords | Get the keywords from HTML document from Web specified by its URL using the keyword detection service
+*HtmlApi* | [**getMergeHtmlTemplate**](docs/TemplateMergeApi.md#getMergeHtmlTemplate) | **GET** /html/{templateName}/merge | Populate HTML document template with data located as a file in the storage.
+*HtmlApi* | [**postMergeHtmlTemplate**](docs/TemplateMergeApi.md#postMergeHtmlTemplate) | **POST** /html/{templateName}/merge | Populate HTML document template with data from the request body. Result document will be saved to storage.
 
+<a name="storage_api"></a>
+## STORAGE API  
+
+*StorageApi* | [**copyFile**](docs/FileApi.md#copyfile) | **PUT** /html/storage/file/copy/{srcPath} | Copy file
+*StorageApi* | [**deleteFile**](docs/FileApi.md#deletefile) | **DELETE** /html/storage/file/{path} | Delete file
+*StorageApi* | [**downloadFile**](docs/FileApi.md#downloadfile) | **GET** /html/storage/file/{path} | Download file
+*StorageApi* | [**moveFile**](docs/FileApi.md#movefile) | **PUT** /html/storage/file/move/{srcPath} | Move file
+*StorageApi* | [**uploadFile**](docs/FileApi.md#uploadfile) | **PUT** /html/storage/file/{path} | Upload file
+*StorageApi* | [**copyFolder**](docs/FolderApi.md#copyfolder) | **PUT** /html/storage/folder/copy/{srcPath} | Copy folder
+*StorageApi* | [**createFolder**](docs/FolderApi.md#createfolder) | **PUT** /html/storage/folder/{path} | Create the folder
+*StorageApi* | [**deleteFolder**](docs/FolderApi.md#deletefolder) | **DELETE** /html/storage/folder/{path} | Delete folder
+*StorageApi* | [**getFilesList**](docs/FolderApi.md#getfileslist) | **GET** /html/storage/folder/{path} | Get all files and folders within a folder
+*StorageApi* | [**moveFolder**](docs/FolderApi.md#movefolder) | **PUT** /html/storage/folder/move/{srcPath} | Move folder
+*StorageApi* | [**getDiscUsage**](docs/StorageApi.md#getdiscusage) | **GET** /html/storage/disc | Get disc usage
+*StorageApi* | [**getFileVersions**](docs/StorageApi.md#getfileversions) | **GET** /html/storage/version/{path} | Get file versions
+*StorageApi* | [**objectExists**](docs/StorageApi.md#objectexists) | **GET** /html/storage/exist/{path} | Check if file or folder exists
+*StorageApi* | [**storageExists**](docs/StorageApi.md#storageexists) | **GET** /html/storage/{storageName}/exist | Check if storage exists
+
+## Documentation For Models
+
+ - [DiscUsage](docs/DiscUsage.md)
+ - [Error](docs/Error.md)
+ - [ErrorDetails](docs/ErrorDetails.md)
+ - [FileVersions](docs/FileVersions.md)
+ - [FilesList](docs/FilesList.md)
+ - [FilesUploadResult](docs/FilesUploadResult.md)
+ - [ObjectExist](docs/ObjectExist.md)
+ - [StorageExist](docs/StorageExist.md)
+ - [StorageFile](docs/StorageFile.md)
+ - [FileVersion](docs/FileVersion.md)
 
 ## Documentation For Authorization
 
@@ -194,10 +218,8 @@ Class | Method | HTTP request | Description
 - **Scopes**: N/A
 
 ### Examples
-Test uses [StorageApi](https://github.com/aspose-storage-cloud/aspose-storage-cloud-php) for upload(download) file to(from) remote storage. 
 
 [Tests](./test/Api/) contain various examples of using the Aspose.HTML SDK.
-
 
 ## Author
 Aspose

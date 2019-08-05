@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="ConversionApiTest.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
+*   Copyright (c) 2019 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,7 +28,9 @@
 
 namespace Client\Invoker\Api;
 
-use Aspose\Storage\Model\Requests;
+use Client\Invoker\ApiException;
+use InvalidArgumentException;
+use SplFileObject;
 
 /**
  * ConversionApiTest Class Doc Comment
@@ -40,7 +42,7 @@ class ConversionApiTest extends BaseTest
 {
 
     /**
-     * Test case for GetConvertDocumentToImage for html format
+     * Test case for getConvertDocumentToImage for html format
      *
      * Convert the HTML document from the storage by its name to the specified image format..
      * @param  string $out_format Resulting image format. (required)
@@ -62,12 +64,12 @@ class ConversionApiTest extends BaseTest
       $bottom_margin = null, $resolution = null, $folder = null, $storage = null )
     {
         $fileName = "test1.html";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToImage
+        $result = self::$api_html->getConvertDocumentToImage
         ( $fileName, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin,
           $resolution, $folder, $storage);
 
@@ -87,7 +89,7 @@ class ConversionApiTest extends BaseTest
     }
 
     /**
-     * Test case for GetConvertDocumentToImage for epub format
+     * Test case for getConvertDocumentToImage for epub format
      *
      * Convert the EPUB document from the storage by its name to the specified image format..
      * @param  string $out_format Resulting image format. (required)
@@ -109,12 +111,12 @@ class ConversionApiTest extends BaseTest
       $bottom_margin = null, $resolution = null, $folder = null, $storage = null )
     {
         $fileName = "georgia.epub";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToImage
+        $result = self::$api_html->getConvertDocumentToImage
         ( $fileName, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin,
             $resolution, $folder, $storage);
 
@@ -130,12 +132,12 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.' . $out_format);
+        copy($result->getRealPath(), self::$testResult . $resultFile . '.' . $out_format . ".zip");
     }
 
 
     /**
-     * Test case for GetConvertDocumentToImage from svg format
+     * Test case for getConvertDocumentToImage from svg format
      *
      * Convert the SVG document from the storage by its name to the specified image format..
      * @param  string $out_format Resulting image format. (required)
@@ -157,12 +159,12 @@ class ConversionApiTest extends BaseTest
       $bottom_margin = null, $resolution = null, $folder = null, $storage = null )
     {
         $fileName = "Map-World.svg";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToImage
+        $result = self::$api_html->getConvertDocumentToImage
         ( $fileName, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin,
             $resolution, $folder, $storage);
 
@@ -186,50 +188,50 @@ class ConversionApiTest extends BaseTest
         return [
     		["jpeg"],
     		["jpeg", 500, 500],
-    		["jpeg", 600, 600],
     		["jpeg", 700,  700,  50, 100, 150, 200, 120],
     		["jpeg", 800,  800, 200, 150, 100,  50, 300],
     		["jpeg", 800, 1000,  50,  50,  50,  50, 200],
     		["jpeg", 800, 1200, 100, 100, 100, 100,  96],
     		["jpeg", 800, 1400, 150, 150, 150, 150,  96],
-    		["jpeg", 800, 1600, 200, 200, 200, 200,  96],
 
     		["png"],
     		["png", 500, 500],
-    		["png", 600, 600],
     		["png", 700, 700,   50, 100, 150, 200, 120],
     		["png", 800, 800,  200, 150, 100,  50, 300],
     		["png", 800, 1000,  50,  50,  50,  50, 200],
     		["png", 800, 1200, 100, 100, 100, 100,  96],
     		["png", 800, 1400, 150, 150, 150, 150,  96],
-    		["png", 800, 1600, 200, 200, 200, 200,  96],
 
     		["bmp"],
     		["bmp", 500, 500],
-    		["bmp", 600, 600],
     		["bmp", 700, 700,  200, 150,  10,  50, 120],
     		["bmp", 800, 800,   50, 100, 150, 200, 300],
     		["bmp", 800, 1000,  50,  50,  50,  50, 200],
     		["bmp", 800, 1200, 100, 100, 100, 100,  96],
     		["bmp", 800, 1400, 300, 200, 100,   0,  96],
-    		["bmp", 800, 1600, 150, 150, 150, 150,  96],
 
     		["tiff"],
     		["tiff", 500, 500],
-    		["tiff", 600, 600],
     		["tiff", 700, 700,  200, 150, 100,  50, 120],
     		["tiff", 800, 800,   50, 100, 150, 200, 300],
     		["tiff", 800, 1000,  50,  50,  50,  50, 200],
     		["tiff", 800, 1200, 100, 100, 100, 100,  96],
     		["tiff", 800, 1400, 150, 150, 150, 150,  96],
-    		["tiff", 800, 1600, 200, 200, 200, 200,  96]
+
+            ["gif"],
+            ["gif", 500, 500],
+            ["gif", 700, 700,  200, 150, 100,  50, 120],
+            ["gif", 800, 800,   50, 100, 150, 200, 300],
+            ["gif", 800, 1000,  50,  50,  50,  50, 200],
+            ["gif", 800, 1200, 100, 100, 100, 100,  96],
+            ["gif", 800, 1400, 150, 150, 150, 150,  96]
         ];
     }
 
 
 
     /**
-     * Test case for GetConvertDocumentToImageByUrl
+     * Test case for getConvertDocumentToImageByUrl
      *
      * Convert the HTML page from the web by its URL to the specified image format..
      * @param  string $out_format Resulting image format. (required)
@@ -247,15 +249,15 @@ class ConversionApiTest extends BaseTest
      * @dataProvider providerConversionToImage
      *
      */
-    public function testGetConvertDocumentToImageByUrl
+    public function testgetConvertDocumentToImageByUrl
     ($out_format, $width = null, $height = null, $left_margin = null, $right_margin = null,
      $top_margin = null, $bottom_margin = null, $resolution = null, $folder = null, $storage = null)
     {
         $source_url = "https://stallman.org/articles/anonymous-payments-thru-phones.html";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToImageByUrl
+        $result = self::$api_html->getConvertDocumentToImageByUrl
         ( $source_url, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin,
           $resolution, $folder, $storage);
 
@@ -276,7 +278,7 @@ class ConversionApiTest extends BaseTest
 
 
     /**
-     * Test case for GetConvertDocumentToPdf from html format
+     * Test case for getConvertDocumentToPdf from html format
      *
      * Convert the HTML document from the storage by its name to PDF.
      *
@@ -297,12 +299,12 @@ class ConversionApiTest extends BaseTest
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $fileName = "test1.html";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToPdf($fileName, $width, $height, $left_margin, $right_margin,
+        $result = self::$api_html->getConvertDocumentToPdf($fileName, $width, $height, $left_margin, $right_margin,
             $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
@@ -314,13 +316,14 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".pdf";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.pdf');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
     /**
-     * Test case for GetConvertDocumentToPdf from epub format
+     * Test case for getConvertDocumentToPdf from epub format
      *
      * Convert the EPUB document from the storage by its name to PDF.
      *
@@ -341,12 +344,12 @@ class ConversionApiTest extends BaseTest
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $fileName = "georgia.epub";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToPdf($fileName, $width, $height, $left_margin, $right_margin,
+        $result = self::$api_html->getConvertDocumentToPdf($fileName, $width, $height, $left_margin, $right_margin,
             $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after convert epub to pdf");
@@ -358,13 +361,14 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".pdf";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.pdf');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
     /**
-     * Test case for GetConvertDocumentToPdf from svg format
+     * Test case for getConvertDocumentToPdf from svg format
      *
      * Convert the SVG document from the storage by its name to PDF.
      *
@@ -385,12 +389,12 @@ class ConversionApiTest extends BaseTest
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $fileName = "Map-World.svg";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToPdf($fileName, $width, $height, $left_margin, $right_margin,
+        $result = self::$api_html->getConvertDocumentToPdf($fileName, $width, $height, $left_margin, $right_margin,
             $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after convert svg to pdf");
@@ -450,7 +454,7 @@ class ConversionApiTest extends BaseTest
     }
 
     /**
-     * Test case for GetConvertDocumentToPdfByUrl
+     * Test case for getConvertDocumentToPdfByUrl
      *
      * Convert the HTML page from the web by its URL to PDF.
      *
@@ -466,15 +470,15 @@ class ConversionApiTest extends BaseTest
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testGetConvertDocumentToPdfByUrl
+    public function testgetConvertDocumentToPdfByUrl
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $source_url = "https://stallman.org/articles/anonymous-payments-thru-phones.html";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToPdfByUrl($source_url, $width, $height, $left_margin,
+        $result = self::$api_html->getConvertDocumentToPdfByUrl($source_url, $width, $height, $left_margin,
             $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
@@ -486,13 +490,14 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".pdf";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.pdf');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
     /**
-     * Test case for GetConvertDocumentToXps from html format
+     * Test case for getConvertDocumentToXps from html format
      *
      * Convert the HTML document from the storage by its name to XPS..
      *
@@ -513,12 +518,12 @@ class ConversionApiTest extends BaseTest
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $fileName = "test1.html";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToXps($fileName, $width, $height, $left_margin, $right_margin,
+        $result = self::$api_html->getConvertDocumentToXps($fileName, $width, $height, $left_margin, $right_margin,
             $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after conversion from html format");
@@ -530,13 +535,14 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".xps";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.xps');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
     /**
-     * Test case for GetConvertDocumentToXps from epub format
+     * Test case for getConvertDocumentToXps from epub format
      *
      * Convert the EPUB document from the storage by its name to XPS..
      *
@@ -557,12 +563,12 @@ class ConversionApiTest extends BaseTest
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $fileName = "georgia.epub";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToXps($fileName, $width, $height, $left_margin, $right_margin,
+        $result = self::$api_html->getConvertDocumentToXps($fileName, $width, $height, $left_margin, $right_margin,
             $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after conversion from epub format");
@@ -574,13 +580,14 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".xps";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.xps');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
     /**
-     * Test case for GetConvertDocumentToXps from svg format
+     * Test case for getConvertDocumentToXps from svg format
      *
      * Convert the SVG document from the storage by its name to XPS..
      *
@@ -601,12 +608,12 @@ class ConversionApiTest extends BaseTest
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $fileName = "Map-World.svg";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToXps($fileName, $width, $height, $left_margin, $right_margin,
+        $result = self::$api_html->getConvertDocumentToXps($fileName, $width, $height, $left_margin, $right_margin,
             $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after conversion from svg format");
@@ -618,13 +625,14 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".xps";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.xps');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
     /**
-     * Test case for GetConvertDocumentToXpsByUrl
+     * Test case for getConvertDocumentToXpsByUrl
      *
      * Convert the HTML page from the web by its URL to XPS.
      *
@@ -641,15 +649,15 @@ class ConversionApiTest extends BaseTest
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testGetConvertDocumentToXpsByUrl
+    public function testgetConvertDocumentToXpsByUrl
     ($width = null, $height = null,  $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null, $folder = null, $storage = null)
     {
         $source_url = "https://stallman.org/articles/anonymous-payments-thru-phones.html";
-        $folder = $folder ?: self::$api->config['remoteFolder'];
+        $folder = $folder ?: self::$api_html->config['remoteFolder'];
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToXpsByUrl($source_url, $width, $height, $left_margin,
+        $result = self::$api_html->getConvertDocumentToXpsByUrl($source_url, $width, $height, $left_margin,
             $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
@@ -661,20 +669,21 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".xps";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.xps');
+        copy($result->getRealPath(), self::$testResult . $resultFile);
     }
 
 
     /**
-     * Test case for PutConvertDocumentInRequestToImage for html format
+     * Test case for postConvertDocumentInRequestToImage for html format
      *
      * Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
      * @param  string $out_format out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -683,49 +692,46 @@ class ConversionApiTest extends BaseTest
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToImage
      *
      */
-    public function testPutHtmlInRequestToImage
+    public function testPostHtmlInRequestToImage
     ( $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
       $bottom_margin = null, $resolution = null)
     {
-        $resultFile = "putHtmlToImgInReq_";
+        $resultFile = "postHtmlToImgInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($resolution) ? $resolution . "x" . $resolution . "_" : "-x-_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .="." . $out_format;
 
-        //Convert html to image
+            //Convert html to image
         $filename = "test1.html";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
+
+        self::$api_html->postConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
              $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToImage for epub format
+     * Test case for postConvertDocumentInRequestToImage for epub format
      *
      * Converts the EPUB document (in request content) to the specified image format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
      * @param  string $out_format out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -734,49 +740,45 @@ class ConversionApiTest extends BaseTest
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToImage
      *
      */
-    public function testPutEpubInRequestToImage
+    public function testPostEpubInRequestToImage
     ( $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
       $bottom_margin = null, $resolution = null)
     {
-        $resultFile = "putEpubToImgInReq_";
+        $resultFile = "postEpubToImgInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($resolution) ? $resolution . "x" . $resolution . "_" : "-x-_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= "." . $out_format . ".zip";
 
-        //Convert html to image
+            //Convert html to image
         $filename = "georgia.epub";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToImage for svg format
+     * Test case for postConvertDocumentInRequestToImage for svg format
      *
      * Converts the SVG document (in request content) to the specified image format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
      * @param  string $out_format out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -785,48 +787,44 @@ class ConversionApiTest extends BaseTest
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToImage
      *
      */
-    public function testPutSvgInRequestToImage
+    public function testPostSvgInRequestToImage
     ( $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
       $bottom_margin = null, $resolution = null)
     {
-        $resultFile = "putSvgToImgInReq_";
+        $resultFile = "postSvgToImgInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($resolution) ? $resolution . "x" . $resolution . "_" : "-x-_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= "." . $out_format;
 
-        //Convert html to image
+        //Convert svg to image
         $filename = "Map-World.svg";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToImage($out_path, $out_format, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToPdf from html format
+     * Test case for postConvertDocumentInRequestToPdf from html format
      *
      * Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -834,47 +832,43 @@ class ConversionApiTest extends BaseTest
      * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testPutHtmlInRequestToPdf
+    public function testPostHtmlInRequestToPdf
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null)
     {
-        $resultFile = "putHtmlToPdfInReq_";
+        $resultFile = "postHtmlToPdfInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".pdf";
 
         //Convert html to pdf
         $filename = "test1.html";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToPdf from epub format
+     * Test case for postConvertDocumentInRequestToPdf from epub format
      *
      * Converts the EPUB document (in request content) to PDF and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -882,47 +876,43 @@ class ConversionApiTest extends BaseTest
      * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testPutEpubInRequestToPdf
+    public function testPostEpubInRequestToPdf
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null)
     {
-        $resultFile = "putEpubToPdfInReq_";
+        $resultFile = "postEpubToPdfInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".pdf";
 
-        //Convert html to pdf
+        //Convert epub to pdf
         $filename = "georgia.epub";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToPdf from svg format
+     * Test case for postConvertDocumentInRequestToPdf from svg format
      *
      * Converts the SVG document (in request content) to PDF and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -930,48 +920,44 @@ class ConversionApiTest extends BaseTest
      * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testPutSvgInRequestToPdf
+    public function testPostSvgInRequestToPdf
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null)
     {
-        $resultFile = "putSvgToPdfInReq_";
+        $resultFile = "postSvgToPdfInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".pdf";
 
-        //Convert html to pdf
+            //Convert svg to pdf
         $filename = "Map-World.svg";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToPdf($out_path, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+        $this->downloadHelper($out_path);
     }
 
 
     /**
-     * Test case for PutConvertDocumentInRequestToXps from html format
+     * Test case for postConvertDocumentInRequestToXps from html format
      *
      * Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -979,48 +965,44 @@ class ConversionApiTest extends BaseTest
      * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      *
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testPutHtmlInRequestToXps
+    public function testPostHtmlInRequestToXps
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null)
     {
-        $resultFile = "putHtmlToXpsInReq_";
+        $resultFile = "postHtmlToXpsInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .=".xps";
 
-        //Convert html to xps
+            //Convert html to xps
         $filename = "test1.html";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToXps($out_path, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToXps($out_path, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToXps from epub format
+     * Test case for postConvertDocumentInRequestToXps from epub format
      *
      * Converts the EPUB document (in request content) to XPS and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -1028,48 +1010,44 @@ class ConversionApiTest extends BaseTest
      * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      *
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testPutEpubInRequestToXps
+    public function testPostEpubInRequestToXps
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null)
     {
-        $resultFile = "putEpubToXpsInReq_";
+        $resultFile = "postEpubToXpsInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".xps";
 
-        //Convert html to xps
+        //Convert epub to xps
         $filename = "georgia.epub";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToXps($out_path, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToXps($out_path, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToXps from svg format
+     * Test case for postConvertDocumentInRequestToXps from svg format
      *
      * Converts the SVG document (in request content) to XPS and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  int $width Resulting document page width in points (1/96 inch). (optional)
      * @param  int $height Resulting document page height in points (1/96 inch). (optional)
      * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
@@ -1077,43 +1055,39 @@ class ConversionApiTest extends BaseTest
      * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
      * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      *
      * @dataProvider providerConversionToPdfOrXps
      *
      */
-    public function testPutSvgInRequestToXps
+    public function testPostSvgInRequestToXps
     ($width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null,
      $bottom_margin = null)
     {
-        $resultFile = "putSvgToXpsInReq_";
+        $resultFile = "postSvgToXpsInReq_";
         $resultFile .= isset($width) && isset($height) ? $width . "x" . $height . "_" : "--x--_";
         $resultFile .= isset($left_margin) ? "L" . $left_margin . "_" : "L_";
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".xps";
 
-        //Convert html to xps
+        //Convert svg to xps
         $filename = "Map-World.svg";
         $out_path = "HtmlTestDoc/".$resultFile;
         $file = self::$testFolder . $filename;
-        $result = self::$api->PutConvertDocumentInRequestToXps($out_path, $file, $width, $height,
+        self::$api_html->postConvertDocumentInRequestToXps($out_path, $file, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToImage from html format
+     * Test case for putConvertDocumentToImage from html format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
@@ -1128,9 +1102,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToImage
      *
@@ -1146,6 +1120,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= "." . $out_format;
 
         //test1.html already in storage
         $filename = "test1.html";
@@ -1153,20 +1128,15 @@ class ConversionApiTest extends BaseTest
         $out_path = "HtmlTestDoc/".$resultFile;
         $folder = "HtmlTestDoc";
         $storage = null;
-        $result = self::$api->PutConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
+        self::$api_html->putConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
              $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToImage from epub format
+     * Test case for putConvertDocumentToImage from epub format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
@@ -1181,9 +1151,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToImage
      *
@@ -1199,6 +1169,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= "." . $out_format . ".zip";
 
         //test1.html already in storage
         $filename = "georgia.epub";
@@ -1206,20 +1177,15 @@ class ConversionApiTest extends BaseTest
         $out_path = "HtmlTestDoc/".$resultFile;
         $folder = "HtmlTestDoc";
         $storage = null;
-        $result = self::$api->PutConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
+        self::$api_html->putConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToImage from svg format
+     * Test case for putConvertDocumentToImage from svg format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
@@ -1234,9 +1200,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToImage
      *
@@ -1252,6 +1218,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= "." . $out_format;
 
         //test1.html already in storage
         $filename = "Map-World.svg";
@@ -1259,20 +1226,15 @@ class ConversionApiTest extends BaseTest
         $out_path = "HtmlTestDoc/".$resultFile;
         $folder = "HtmlTestDoc";
         $storage = null;
-        $result = self::$api->PutConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
+        self::$api_html->putConvertDocumentToImage($filename, $out_path, $out_format, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . "." . $out_format);
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToPdf from html format
+     * Test case for putConvertDocumentToPdf from html format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
@@ -1285,9 +1247,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
@@ -1302,6 +1264,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".pdf";
 
         //Convert html to pdf in storage
         $filename = "test1.html";
@@ -1309,20 +1272,15 @@ class ConversionApiTest extends BaseTest
         $folder = "HtmlTestDoc";
         $storage = null;
 
-        $result = self::$api->PutConvertDocumentToPdf($filename, $out_path, $width, $height,
+        self::$api_html->putConvertDocumentToPdf($filename, $out_path, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToPdf from epub format
+     * Test case for putConvertDocumentToPdf from epub format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
@@ -1335,9 +1293,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
@@ -1352,6 +1310,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".pdf";
 
         //Convert html to pdf in storage
         $filename = "georgia.epub";
@@ -1359,20 +1318,15 @@ class ConversionApiTest extends BaseTest
         $folder = "HtmlTestDoc";
         $storage = null;
 
-        $result = self::$api->PutConvertDocumentToPdf($filename, $out_path, $width, $height,
+        self::$api_html->putConvertDocumentToPdf($filename, $out_path, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToPdf from svg format
+     * Test case for putConvertDocumentToPdf from svg format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
@@ -1385,9 +1339,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
@@ -1402,6 +1356,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".pdf";
 
         //Convert html to pdf in storage
         $filename = "Map-World.svg";
@@ -1409,20 +1364,15 @@ class ConversionApiTest extends BaseTest
         $folder = "HtmlTestDoc";
         $storage = null;
 
-        $result = self::$api->PutConvertDocumentToPdf($filename, $out_path, $width, $height,
+        self::$api_html->putConvertDocumentToPdf($filename, $out_path, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".pdf");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToXps from html format
+     * Test case for putConvertDocumentToXps from html format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
@@ -1435,9 +1385,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
@@ -1452,26 +1402,22 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".xps";
 
         //Convert html to xps
         $filename = "test1.html";
         $out_path = "HtmlTestDoc/".$resultFile;
         $folder = "HtmlTestDoc";
         $storage = null;
-        $result = self::$api->PutConvertDocumentToXps($filename, $out_path, $width, $height,
+        self::$api_html->putConvertDocumentToXps($filename, $out_path, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToXps from epub format
+     * Test case for putConvertDocumentToXps from epub format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
@@ -1484,9 +1430,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
@@ -1501,26 +1447,22 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".xps";
 
-        //Convert html to xps
+        //Convert epub to xps
         $filename = "georgia.epub";
         $out_path = "HtmlTestDoc/".$resultFile;
         $folder = "HtmlTestDoc";
         $storage = null;
-        $result = self::$api->PutConvertDocumentToXps($filename, $out_path, $width, $height,
+        self::$api_html->putConvertDocumentToXps($filename, $out_path, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToXps from svg format
+     * Test case for putConvertDocumentToXps from svg format
      *
      * @param  string $name Document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
@@ -1533,9 +1475,9 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerConversionToPdfOrXps
      *
@@ -1550,22 +1492,18 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
+        $resultFile .= ".xps";
 
-        //Convert html to xps
+        //Convert svg to xps
         $filename = "Map-World.svg";
         $out_path = "HtmlTestDoc/".$resultFile;
         $folder = "HtmlTestDoc";
         $storage = null;
-        $result = self::$api->PutConvertDocumentToXps($filename, $out_path, $width, $height,
+        self::$api_html->putConvertDocumentToXps($filename, $out_path, $width, $height,
             $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . ".xps");
+        $this->downloadHelper($out_path);
     }
 
     public function providerMarkdown()
@@ -1573,12 +1511,12 @@ class ConversionApiTest extends BaseTest
         return [ ["true"], ["false"] ];
     }
 
-    public function testGetConvertDocumentToMHTMLByUrl()
+    public function testgetConvertDocumentToMHTMLByUrl()
     {
         $source_url = "https://www.yahoo.com";
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToMHTMLByUrl($source_url);
+        $result = self::$api_html->getConvertDocumentToMHTMLByUrl($source_url);
 
         $this->assertTrue($result->isFile(),"Error result after recognize");
         $this->assertTrue($result->getSize() > 0,"Zero result");
@@ -1590,7 +1528,7 @@ class ConversionApiTest extends BaseTest
     }
 
     /**
-     * Test case for GetConvertDocumentToMarkdown
+     * Test case for getConvertDocumentToMarkdown
      *
      * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
      *
@@ -1599,25 +1537,25 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder Source document folder. (optional)
      * @param  string $storage Source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerMarkdown
      *
      */
-    public function testGetConvertDocumentToMarkdown($use_git)
+    public function testgetConvertDocumentToMarkdown($use_git)
     {
         $fileName = "test_md.html";
         $folder = "HtmlTestDoc";
         $storage = null;
 
-        $this->uploadFile($fileName);
+        $this->uploadHelper($fileName);
 
         //Request to server Api
-        $result = self::$api->GetConvertDocumentToMarkdown($fileName, $use_git, $folder, $storage);
+        $result = self::$api_html->getConvertDocumentToMarkdown($fileName, $use_git, $folder, $storage);
 
-        $this->assertTrue($result->isFile(),"Error result after GetConvertDocumentToMarkdown");
+        $this->assertTrue($result->isFile(),"Error result after getConvertDocumentToMarkdown");
         $this->assertTrue($result->getSize() > 0,"Zero result");
 
         $resultFile = "GetHtmlToMarkdown_";
@@ -1628,46 +1566,39 @@ class ConversionApiTest extends BaseTest
     }
 
     /**
-     * Test case for PutConvertDocumentInRequestToMarkdown
+     * Test case for postConvertDocumentInRequestToMarkdown
      *
      * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
      *
      * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
+     * @param  SplFileObject $file A file to be converted. (required)
      * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @return SplFileObject
      *
      * @dataProvider providerMarkdown
      *
      */
-    public function testPutConvertDocumentInRequestToMarkdown($use_git)
+    public function testpostConvertDocumentInRequestToMarkdown($use_git)
     {
         $filename = "test_md.html";
         $folder = "HtmlTestDoc";
-        $resultFile = "putConvDocInReqToMarkdownJS_";
+        $resultFile = "postConvDocInReqToMarkdownJS_";
         $resultFile .= $use_git == "true" ? "useGit.md" : "not_useGit.md";
         $file = self::$testFolder . $filename;
         $out_path = $folder . "/" .  $resultFile;
 
         //Request to server Api
-        $result = self::$api->PutConvertDocumentInRequestToMarkdown($out_path, $file, $use_git);
+        self::$api_html->postConvertDocumentInRequestToMarkdown($out_path, $file, $use_git);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile);
-
-        $this->assertTrue($result->isFile(),"Error result after putConvDocInReqToMarkdown");
-        $this->assertTrue($result->getSize() > 0,"Zero result");
+        $this->downloadHelper($out_path);
     }
 
     /**
-     * Test case for PutConvertDocumentToMarkdown
+     * Test case for putConvertDocumentToMarkdown
      *
      * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
      *
@@ -1677,14 +1608,14 @@ class ConversionApiTest extends BaseTest
      * @param  string $folder The source document folder. (optional)
      * @param  string $storage The source and resulting document storage. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      *
      * @dataProvider providerMarkdown
      *
      */
-    public function testPutConvertDocumentToMarkdown($use_git)
+    public function testputConvertDocumentToMarkdown($use_git)
     {
         $filename = "test_md.html";
         $folder = "HtmlTestDoc";
@@ -1693,16 +1624,9 @@ class ConversionApiTest extends BaseTest
         $out_path = $folder . "/" .  $resultFile;
 
         //Request to server Api
-        $result = self::$api->PutConvertDocumentToMarkdown($filename, $out_path, $use_git, $folder, null);
+        self::$api_html->putConvertDocumentToMarkdown($filename, $out_path, $use_git, $folder, null);
 
         //Download result from storage
-        $request = new Requests\GetDownloadRequest($out_path, null, null);
-        $result = self::$storage->GetDownload($request);
-
-        //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile);
-
-        $this->assertTrue($result->isFile(),"Error result after putConvDocInReqToMarkdown");
-        $this->assertTrue($result->getSize() > 0,"Zero result");
+        $this->downloadHelper($out_path);
     }
 }

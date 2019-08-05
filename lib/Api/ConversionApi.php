@@ -1,100 +1,129 @@
 <?php
-/*
-* --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="ConversionApi.php">
-*   Copyright (c) 2018 Aspose.HTML for Cloud
-* </copyright>
-* <summary>
-*   Permission is hereby granted, free of charge, to any person obtaining a copy
-*  of this software and associated documentation files (the "Software"), to deal
-*  in the Software without restriction, including without limitation the rights
-*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-*  copies of the Software, and to permit persons to whom the Software is
-*  furnished to do so, subject to the following conditions:
-*
-*  The above copyright notice and this permission notice shall be included in all
-*  copies or substantial portions of the Software.
-*
-*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-*  SOFTWARE.
-* </summary>
-* --------------------------------------------------------------------------------------------------------------------
-*/
+/**
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * php version 5.6
+ *
+ * @category  Aspose_Html_Cloud_SDK
+ * @package   Asposehtmlcloudphp
+ * @author    Alexander Makogon <alexander.makogon@aspose.com>
+ * @copyright 2019 Aspose
+ * @license   https://opensource.org/licenses/mit-license.php  MIT License
+ * @version   GIT: @19.5.0@
+ * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 
 namespace Client\Invoker\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
 use Client\Invoker\ApiException;
 use Client\Invoker\ObjectSerializer;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\json_encode;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
+use SplFileObject;
+use stdClass;
+use function GuzzleHttp\Psr7\try_fopen;
 
-
+/**
+ * Conversion from html, epub, svg formats to
+ * images (gif, tiff, png, bmp, jpeg), xps and pdf formats.
+ * Conversion from html to markdown format.
+ *
+ * @category ConversionApi
+ * @package  Asposehtmlcloudphp
+ * @author   Alexander Makogon <alexander.makogon@aspose.com>
+ * @license  https://opensource.org/licenses/mit-license.php  MIT License
+ * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
+ */
 trait ConversionApi
 {
     /**
-     * Operation GetConvertDocumentToImage
+     * Operation getConvertDocumentToImage
      *
-     * Convert the HTML document from the storage by its name to the specified image format.
+     * Convert the HTML document from the storage by its name to the specified
+     * image format.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToImage($name, $out_format, $width = null, $height = null, $left_margin = null,
-            $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-            $folder = null, $storage = null)
-    {
-        list($response) = $this->GetConvertDocumentToImageWithHttpInfo($name, $out_format, $width, $height, $left_margin,
-            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
+    public function getConvertDocumentToImage(
+        $name, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToImageWithHttpInfo(
+            $name, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution,
+            $folder, $storage
+        );
         return $response;
     }
 
     /**
-     * Operation GetConvertDocumentToImageWithHttpInfo
+     * Operation getConvertDocumentToImageWithHttpInfo
      *
-     * Convert the HTML document from the storage by its name to the specified image format.
+     * Convert the HTML document from the storage by its name to the specified
+     * image format.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToImageWithHttpInfo($name, $out_format, $width = null, $height = null,
-           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-           $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToImageWithHttpInfo(
+        $name, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageRequest($name, $out_format, $width, $height, $left_margin,
-            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
+        $request = $this->getConvertDocumentToImageRequest(
+            $name, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        );
 
         try {
             $options = $this->createHttpClientOption();
@@ -104,8 +133,10 @@ trait ConversionApi
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
                 );
             }
 
@@ -142,149 +173,54 @@ trait ConversionApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation GetConvertDocumentToImageAsync
+     * Create request for operation 'getConvertDocumentToImage'
      *
-     * Convert the HTML document from the storage by its name to the specified image format.
+     * @param string $name          Document name. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source document storage. (optional)
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return Request
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToImageAsync($name, $out_format, $width = null, $height = null,
-           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-           $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToImageAsyncWithHttpInfo($name, $out_format, $width, $height, $left_margin,
-            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToImageAsyncWithHttpInfo
-     *
-     * Convert the HTML document from the storage by its name to the specified image format.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToImageAsyncWithHttpInfo($name, $out_format, $width = null, $height = null,
-           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-           $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageRequest($name, $out_format, $width, $height, $left_margin,
-            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'GetConvertDocumentToImage'
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function GetConvertDocumentToImageRequest($name, $out_format, $width = null, $height = null,
-              $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-              $folder = null, $storage = null)
-    {
+    protected function getConvertDocumentToImageRequest(
+        $name, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetConvertDocumentToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getConvertDocumentToImage'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling GetConvertDocumentToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling getConvertDocumentToImage'
             );
         }
 
@@ -295,6 +231,19 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -305,11 +254,13 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
@@ -317,11 +268,13 @@ trait ConversionApi
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($resolution !== null) {
-            $queryParams['resolution'] = ObjectSerializer::toQueryValue($resolution);
+            $queryParams['resolution']
+                = ObjectSerializer::toQueryValue($resolution);
         }
         // query params
         if ($folder !== null) {
@@ -332,32 +285,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -368,8 +304,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -384,14 +322,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -404,7 +341,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -414,184 +351,72 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToImageByUrl
+     * Operation getConvertDocumentToImageAsync
      *
-     * Convert the HTML page from the web by its URL to the specified image format.
+     * Convert the HTML document from the storage by its name to the specified
+     * image format.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToImageByUrl($source_url, $out_format, $width = null, $height = null,
-           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-           $folder = null, $storage = null)
-    {
-        list($response) = $this->GetConvertDocumentToImageByUrlWithHttpInfo($source_url, $out_format, $width, $height,
-            $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-        return $response;
+    public function getConvertDocumentToImageAsync(
+        $name, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToImageAsyncWithHttpInfo(
+            $name, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetConvertDocumentToImageByUrlWithHttpInfo
+     * Operation getConvertDocumentToImageAsyncWithHttpInfo
      *
-     * Convert the HTML page from the web by its URL to the specified image format.
+     * Convert the HTML document from the storage by its name to the specified
+     * image format.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToImageByUrlWithHttpInfo($source_url, $out_format, $width = null, $height = null,
-           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-           $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToImageAsyncWithHttpInfo(
+        $name, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width, $height, $left_margin,
-            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToImageByUrlAsync
-     *
-     * Convert the HTML page from the web by its URL to the specified image format.
-     *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToImageByUrlAsync($source_url, $out_format, $width = null, $height = null,
-           $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-           $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToImageByUrlAsyncWithHttpInfo($source_url, $out_format, $width, $height,
-            $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToImageByUrlAsyncWithHttpInfo
-     *
-     * Convert the HTML page from the web by its URL to the specified image format.
-     *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToImageByUrlAsyncWithHttpInfo($source_url, $out_format, $width = null,
-           $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null,
-           $resolution = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width, $height, $left_margin,
-            $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-
+        $request = $this->getConvertDocumentToImageRequest(
+            $name, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        );
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
@@ -630,37 +455,167 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToImageByUrl'
+     * Operation getConvertDocumentToImageByUrl
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  string $out_format Resulting image format. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  int $resolution Resolution of resulting image. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * Convert the HTML page from the web by its URL to the specified image format.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $source_url    Source page URL. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function GetConvertDocumentToImageByUrlRequest($source_url, $out_format, $width = null, $height = null,
-              $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null,
-              $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToImageByUrl(
+        $source_url, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToImageByUrlWithHttpInfo(
+            $source_url, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToImageByUrlWithHttpInfo
+     *
+     * Convert the HTML page from the web by its URL to the specified image format.
+     *
+     * @param string $source_url    Source page URL. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function getConvertDocumentToImageByUrlWithHttpInfo(
+        $source_url, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToImageByUrlRequest(
+            $source_url, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToImageByUrl'
+     *
+     * @param string $source_url    Source page URL. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToImageByUrlRequest(
+        $source_url, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetConvertDocumentToImageByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getConvertDocumentToImageByUrl'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling GetConvertDocumentToImageByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling getConvertDocumentToImageByUrl'
             );
         }
 
@@ -671,10 +626,15 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
+
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -685,23 +645,28 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($resolution !== null) {
-            $queryParams['resolution'] = ObjectSerializer::toQueryValue($resolution);
+            $queryParams['resolution']
+                = ObjectSerializer::toQueryValue($resolution);
         }
         // query params
         if ($folder !== null) {
@@ -712,24 +677,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -740,8 +696,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -756,14 +714,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -776,7 +733,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -786,163 +743,70 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToPdf
+     * Operation getConvertDocumentToImageByUrlAsync
      *
-     * Convert the HTML document from the storage by its name to PDF.
+     * Convert the HTML page from the web by its URL to the specified image format.
      *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $source_url    Source page URL. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToPdf($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->GetConvertDocumentToPdfWithHttpInfo($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-        return $response;
+    public function getConvertDocumentToImageByUrlAsync(
+        $source_url, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToImageByUrlAsyncWithHttpInfo(
+            $source_url, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetConvertDocumentToPdfWithHttpInfo
+     * Operation getConvertDocumentToImageByUrlAsyncWithHttpInfo
      *
-     * Convert the HTML document from the storage by its name to PDF.
+     * Convert the HTML page from the web by its URL to the specified image format.
      *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $source_url    Source page URL. (required)
+     * @param string $out_format    Resulting image format. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param int    $resolution    Resolution of resulting image. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToPdfWithHttpInfo($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToImageByUrlAsyncWithHttpInfo(
+        $source_url, $out_format, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $resolution = null, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToPdfRequest($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToPdfAsync
-     *
-     * Convert the HTML document from the storage by its name to PDF.
-     *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToPdfAsync($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToPdfAsyncWithHttpInfo($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToPdfAsyncWithHttpInfo
-     *
-     * Convert the HTML document from the storage by its name to PDF.
-     *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToPdfAsyncWithHttpInfo($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToPdfRequest($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+        $request = $this->getConvertDocumentToImageByUrlRequest(
+            $source_url, $out_format, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $resolution, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -982,27 +846,154 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToPdf'
+     * Operation getConvertDocumentToPdf
      *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * Convert the HTML document from the storage by its name to PDF.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function GetConvertDocumentToPdfRequest($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToPdf(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToPdfWithHttpInfo(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToPdfWithHttpInfo
+     *
+     * Convert the HTML document from the storage by its name to PDF.
+     *
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function getConvertDocumentToPdfWithHttpInfo(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToPdfRequest(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToPdf'
+     *
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToPdfRequest(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetConvertDocumentToPdf'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getConvertDocumentToPdf'
             );
         }
 
@@ -1013,6 +1004,13 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -1023,19 +1021,23 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($folder !== null) {
@@ -1046,24 +1048,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -1074,8 +1067,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1090,14 +1085,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -1110,7 +1104,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1120,163 +1114,66 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToPdfByUrl
+     * Operation getConvertDocumentToPdfAsync
      *
-     * Convert the HTML page from the web by its URL to PDF.
+     * Convert the HTML document from the storage by its name to PDF.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToPdfByUrl($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->GetConvertDocumentToPdfByUrlWithHttpInfo($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-        return $response;
+    public function getConvertDocumentToPdfAsync(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToPdfAsyncWithHttpInfo(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetConvertDocumentToPdfByUrlWithHttpInfo
+     * Operation getConvertDocumentToPdfAsyncWithHttpInfo
      *
-     * Convert the HTML page from the web by its URL to PDF.
+     * Convert the HTML document from the storage by its name to PDF.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToPdfByUrlWithHttpInfo($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToPdfAsyncWithHttpInfo(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToPdfByUrlRequest($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToPdfByUrlAsync
-     *
-     * Convert the HTML page from the web by its URL to PDF.
-     *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToPdfByUrlAsync($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToPdfByUrlAsyncWithHttpInfo($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToPdfByUrlAsyncWithHttpInfo
-     *
-     * Convert the HTML page from the web by its URL to PDF.
-     *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToPdfByUrlAsyncWithHttpInfo($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToPdfByUrlRequest($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+        $request = $this->getConvertDocumentToPdfRequest(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1316,27 +1213,154 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToPdfByUrl'
+     * Operation getConvertDocumentToPdfByUrl
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * Convert the HTML page from the web by its URL to PDF.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function GetConvertDocumentToPdfByUrlRequest($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToPdfByUrl(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToPdfByUrlWithHttpInfo(
+            $source_url, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToPdfByUrlWithHttpInfo
+     *
+     * Convert the HTML page from the web by its URL to PDF.
+     *
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function getConvertDocumentToPdfByUrlWithHttpInfo(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToPdfByUrlRequest(
+            $source_url, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToPdfByUrl'
+     *
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToPdfByUrlRequest(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetConvertDocumentToPdfByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getConvertDocumentToPdfByUrl'
             );
         }
 
@@ -1347,10 +1371,8 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -1361,19 +1383,23 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($folder !== null) {
@@ -1384,16 +1410,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -1404,8 +1429,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1420,14 +1447,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -1440,7 +1466,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1450,163 +1476,66 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToXps
+     * Operation getConvertDocumentToPdfByUrlAsync
      *
-     * Convert the HTML document from the storage by its name to XPS.
+     * Convert the HTML page from the web by its URL to PDF.
      *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToXps($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->GetConvertDocumentToXpsWithHttpInfo($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-        return $response;
+    public function getConvertDocumentToPdfByUrlAsync(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToPdfByUrlAsyncWithHttpInfo(
+            $source_url, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetConvertDocumentToXpsWithHttpInfo
+     * Operation getConvertDocumentToPdfByUrlAsyncWithHttpInfo
      *
-     * Convert the HTML document from the storage by its name to XPS.
+     * Convert the HTML page from the web by its URL to PDF.
      *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToXpsWithHttpInfo($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToPdfByUrlAsyncWithHttpInfo(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToXpsRequest($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToXpsAsync
-     *
-     * Convert the HTML document from the storage by its name to XPS.
-     *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToXpsAsync($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToXpsAsyncWithHttpInfo($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToXpsAsyncWithHttpInfo
-     *
-     * Convert the HTML document from the storage by its name to XPS.
-     *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToXpsAsyncWithHttpInfo($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToXpsRequest($name, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+        $request = $this->getConvertDocumentToPdfByUrlRequest(
+            $source_url, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1646,27 +1575,154 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToXps'
+     * Operation getConvertDocumentToXps
      *
-     * @param  string $name Document name. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * Convert the HTML document from the storage by its name to XPS.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function GetConvertDocumentToXpsRequest($name, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToXps(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToXpsWithHttpInfo(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToXpsWithHttpInfo
+     *
+     * Convert the HTML document from the storage by its name to XPS.
+     *
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function getConvertDocumentToXpsWithHttpInfo(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToXpsRequest(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToXps'
+     *
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToXpsRequest(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetConvertDocumentToXps'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getConvertDocumentToXps'
             );
         }
 
@@ -1677,6 +1733,13 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -1687,19 +1750,23 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($folder !== null) {
@@ -1710,24 +1777,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -1738,8 +1796,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1754,14 +1814,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -1774,7 +1833,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1784,163 +1843,66 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToXpsByUrl
+     * Operation getConvertDocumentToXpsAsync
      *
-     * Convert the HTML page from the web by its URL to XPS.
+     * Convert the HTML document from the storage by its name to XPS.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToXpsByUrl($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->GetConvertDocumentToXpsByUrlWithHttpInfo($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-        return $response;
+    public function getConvertDocumentToXpsAsync(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToXpsAsyncWithHttpInfo(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetConvertDocumentToXpsByUrlWithHttpInfo
+     * Operation getConvertDocumentToXpsAsyncWithHttpInfo
      *
-     * Convert the HTML page from the web by its URL to XPS.
+     * Convert the HTML document from the storage by its name to XPS.
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToXpsByUrlWithHttpInfo($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToXpsAsyncWithHttpInfo(
+        $name, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToXpsByUrlRequest($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToXpsByUrlAsync
-     *
-     * Convert the HTML page from the web by its URL to XPS.
-     *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToXpsByUrlAsync($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToXpsByUrlAsyncWithHttpInfo($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToXpsByUrlAsyncWithHttpInfo
-     *
-     * Convert the HTML page from the web by its URL to XPS.
-     *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToXpsByUrlAsyncWithHttpInfo($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToXpsByUrlRequest($source_url, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+        $request = $this->getConvertDocumentToXpsRequest(
+            $name, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1980,27 +1942,154 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToXpsByUrl'
+     * Operation getConvertDocumentToXpsByUrl
      *
-     * @param  string $source_url Source page URL. (required)
-     * @param  int $width Resulting image width. (optional)
-     * @param  int $height Resulting image height. (optional)
-     * @param  int $left_margin Left resulting image margin. (optional)
-     * @param  int $right_margin Right resulting image margin. (optional)
-     * @param  int $top_margin Top resulting image margin. (optional)
-     * @param  int $bottom_margin Bottom resulting image margin. (optional)
-     * @param  string $folder The document folder. (optional)
-     * @param  string $storage The document storage. (optional)
+     * Convert the HTML page from the web by its URL to XPS.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function GetConvertDocumentToXpsByUrlRequest($source_url, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToXpsByUrl(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToXpsByUrlWithHttpInfo(
+            $source_url, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToXpsByUrlWithHttpInfo
+     *
+     * Convert the HTML page from the web by its URL to XPS.
+     *
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function getConvertDocumentToXpsByUrlWithHttpInfo(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToXpsByUrlRequest(
+            $source_url, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToXpsByUrl'
+     *
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToXpsByUrlRequest(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         // verify the required parameter 'source_url' is set
         if ($source_url === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetConvertDocumentToXpsByUrl'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getConvertDocumentToXpsByUrl'
             );
         }
 
@@ -2011,10 +2100,8 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
-        }
+        $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -2025,19 +2112,23 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($folder !== null) {
@@ -2048,16 +2139,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -2068,8 +2158,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2084,14 +2176,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -2104,7 +2195,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2113,169 +2204,67 @@ trait ConversionApi
         );
     }
 
-
     /**
-     * Operation PutConvertDocumentInRequestToImage
+     * Operation getConvertDocumentToXpsByUrlAsync
      *
-     * Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
+     * Convert the HTML page from the web by its URL to XPS.
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToImage($out_path, $out_format, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null)
-    {
-        list($response) = $this->PutConvertDocumentInRequestToImageWithHttpInfo($out_path, $out_format, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
-        return $response;
+    public function getConvertDocumentToXpsByUrlAsync(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToXpsByUrlAsyncWithHttpInfo(
+            $source_url, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentInRequestToImageWithHttpInfo
+     * Operation getConvertDocumentToXpsByUrlAsyncWithHttpInfo
      *
-     * Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
+     * Convert the HTML page from the web by its URL to XPS.
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
+     * @param string $source_url    Source page URL. (required)
+     * @param int    $width         Resulting image width. (optional)
+     * @param int    $height        Resulting image height. (optional)
+     * @param int    $left_margin   Left resulting image margin. (optional)
+     * @param int    $right_margin  Right resulting image margin. (optional)
+     * @param int    $top_margin    Top resulting image margin. (optional)
+     * @param int    $bottom_margin Bottom resulting image margin. (optional)
+     * @param string $folder        The document folder. (optional)
+     * @param string $storage       The document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToImageWithHttpInfo($out_path, $out_format, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null)
-    {
+    public function getConvertDocumentToXpsByUrlAsyncWithHttpInfo(
+        $source_url, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToImageRequest($out_path, $out_format, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToImageAsync
-     *
-     * Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
-     *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToImageAsync($out_path, $out_format, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null)
-    {
-        return $this->PutConvertDocumentInRequestToImageAsyncWithHttpInfo($out_path, $out_format, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToImageAsyncWithHttpInfo
-     *
-     * Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
-     *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToImageAsyncWithHttpInfo($out_path, $out_format, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToImageRequest($out_path, $out_format, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution);
+        $request = $this->getConvertDocumentToXpsByUrlRequest(
+            $source_url, $width, $height, $left_margin, $right_margin, $top_margin,
+            $bottom_margin, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2315,40 +2304,199 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentInRequestToImage'
+     * Operation postConvertDocumentInRequestToImage
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
+     * Converts the HTML document (in request content) to the specified image
+     * format and uploads resulting file to storage.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string        $out_path      Full resulting
+     *                                     filename (ex. /folder1/folder2/result.jpg)
+     *                                     (required)
+     * @param string        $out_format    Out format (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page
+     *                                     margin in points (1/96 inch). (optional)
+     * @param int           $resolution    Resolution of resulting image.
+     *                                     Default is 96 dpi. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function PutConvertDocumentInRequestToImageRequest($out_path, $out_format, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null)
-    {
+    public function postConvertDocumentInRequestToImage(
+        $out_path, $out_format, $file, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null
+    ) {
+        list($response) = $this->postConvertDocumentInRequestToImageWithHttpInfo(
+            $out_path, $out_format, $file, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution
+        );
+        return $response;
+    }
+    /**
+     * Operation postConvertDocumentInRequestToImageWithHttpInfo
+     *
+     * Converts the HTML document (in request content) to the specified image
+     * format and uploads resulting file to storage.
+     *
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.jpg)
+     *                                     (required)
+     * @param string        $out_format    Out format (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $resolution    Resolution of resulting image.
+     *                                     Default is 96 dpi. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function postConvertDocumentInRequestToImageWithHttpInfo(
+        $out_path, $out_format, $file, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->postConvertDocumentInRequestToImageRequest(
+            $out_path, $out_format, $file, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postConvertDocumentInRequestToImage'
+     *
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.jpg)
+     *                                     (required)
+     * @param string        $out_format    Out format (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page
+     *                                     margin in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page
+     *                                     margin in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page
+     *                                     margin in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page
+     *                                     margin in points (1/96 inch). (optional)
+     * @param int           $resolution    Resolution of resulting image.
+     *                                     Default is 96 dpi. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function postConvertDocumentInRequestToImageRequest(
+        $out_path, $out_format, $file, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null
+    ) {
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentInRequestToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling postConvertDocumentInRequestToImage'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling PutConvertDocumentInRequestToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling postConvertDocumentInRequestToImage'
             );
         }
         // verify the required parameter 'file' is set
         if ($file === null || (is_array($file) && count($file) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $file when calling PutConvertDocumentInRequestToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$file when calling postConvertDocumentInRequestToImage'
             );
         }
 
@@ -2357,12 +2505,14 @@ trait ConversionApi
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
-        $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        // form params
+        $multipart = true;
+        $formParams['file']
+            = try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -2373,23 +2523,28 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($resolution !== null) {
-            $queryParams['resolution'] = ObjectSerializer::toQueryValue($resolution);
+            $queryParams['resolution']
+                = ObjectSerializer::toQueryValue($resolution);
         }
 
         // path params
@@ -2401,9 +2556,50 @@ trait ConversionApi
             );
         }
 
-        $handle = fopen($file, 'rb');
-        $httpBody = fread($handle, filesize($file));
-        fclose($handle);
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->_headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = build_query($formParams);
+            }
+        }
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -2415,9 +2611,9 @@ trait ConversionApi
             $headerParams
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
-            'PUT',
+            'POST',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2425,159 +2621,88 @@ trait ConversionApi
     }
 
     /**
-     * Operation PutConvertDocumentInRequestToPdf
+     * Operation postConvertDocumentInRequestToImageAsync
      *
-     * Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
+     * Converts the HTML document (in request content) to the specified
+     * image format and uploads resulting file to storage.
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.jpg)
+     *                                     (required)
+     * @param string        $out_format    Out format (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $resolution    Resolution of resulting image.
+     *                                     Default is 96 dpi. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToPdf($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
-        list($response) = $this->PutConvertDocumentInRequestToPdfWithHttpInfo($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin);
-        return $response;
+    public function postConvertDocumentInRequestToImageAsync(
+        $out_path, $out_format, $file, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null
+    ) {
+        return $this->postConvertDocumentInRequestToImageAsyncWithHttpInfo(
+            $out_path, $out_format, $file, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentInRequestToPdfWithHttpInfo
+     * Operation postConvertDocumentInRequestToImageAsyncWithHttpInfo
      *
-     * Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
+     * Converts the HTML document (in request content) to the
+     * specified image format and uploads resulting file to storage.
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.jpg)
+     *                                     (required)
+     * @param string        $out_format    Out format (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin in
+     *                                     points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $resolution    Resolution of resulting image.
+     *                                     Default is 96 dpi. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToPdfWithHttpInfo($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
+    public function postConvertDocumentInRequestToImageAsyncWithHttpInfo(
+        $out_path, $out_format, $file, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToPdfRequest($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToPdfAsync
-     *
-     * Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
-     *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToPdfAsync($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
-        return $this->PutConvertDocumentInRequestToPdfAsyncWithHttpInfo($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToPdfAsyncWithHttpInfo
-     *
-     * Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
-     *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToPdfAsyncWithHttpInfo($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToPdfRequest($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin);
+        $request = $this->postConvertDocumentInRequestToImageRequest(
+            $out_path, $out_format, $file, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2617,32 +2742,181 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentInRequestToPdf'
+     * Operation postConvertDocumentInRequestToPdf
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * Converts the HTML document (in request content) to PDF and uploads
+     * resulting file to storage.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.pdf)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function PutConvertDocumentInRequestToPdfRequest($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
+    public function postConvertDocumentInRequestToPdf(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
+        list($response) = $this->postConvertDocumentInRequestToPdfWithHttpInfo(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        );
+        return $response;
+    }
+
+    /**
+     * Operation postConvertDocumentInRequestToPdfWithHttpInfo
+     *
+     * Converts the HTML document (in request content) to PDF
+     * and uploads resulting file to storage.
+     *
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.pdf)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function postConvertDocumentInRequestToPdfWithHttpInfo(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->postConvertDocumentInRequestToPdfRequest(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postConvertDocumentInRequestToPdf'
+     *
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.pdf)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function postConvertDocumentInRequestToPdfRequest(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentInRequestToPdf'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling postConvertDocumentInRequestToPdf'
             );
         }
         // verify the required parameter 'file' is set
         if ($file === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $file when calling PutConvertDocumentInRequestToPdf'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$file when calling postConvertDocumentInRequestToPdf'
             );
         }
 
@@ -2651,12 +2925,13 @@ trait ConversionApi
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
-        $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        $multipart = true;
+        $formParams['file']
+            = try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -2667,25 +2942,69 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
 
-        $handle = fopen($file, 'rb');
-        $httpBody = fread($handle, filesize($file));
-        fclose($handle);
+        // body params
+        $_tempBody = null;
 
+        if ($multipart) {
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->_headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = build_query($formParams);
+            }
+        }
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -2697,9 +3016,9 @@ trait ConversionApi
             $headerParams
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
-            'PUT',
+            'POST',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2707,159 +3026,80 @@ trait ConversionApi
     }
 
     /**
-     * Operation PutConvertDocumentInRequestToXps
+     * Operation postConvertDocumentInRequestToPdfAsync
      *
-     * Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
+     * Converts the HTML document (in request content) to PDF
+     * and uploads resulting file to storage.
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.pdf)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToXps($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
-        list($response) = $this->PutConvertDocumentInRequestToXpsWithHttpInfo($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin);
-        return $response;
+    public function postConvertDocumentInRequestToPdfAsync(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
+        return $this->postConvertDocumentInRequestToPdfAsyncWithHttpInfo(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentInRequestToXpsWithHttpInfo
+     * Operation postConvertDocumentInRequestToPdfAsyncWithHttpInfo
      *
-     * Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
+     * Converts the HTML document (in request content) to PDF
+     * and uploads resulting file to storage.
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.pdf)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToXpsWithHttpInfo($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
+    public function postConvertDocumentInRequestToPdfAsyncWithHttpInfo(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToXpsRequest($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToXpsAsync
-     *
-     * Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
-     *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToXpsAsync($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
-        return $this->PutConvertDocumentInRequestToXpsAsyncWithHttpInfo($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToXpsAsyncWithHttpInfo
-     *
-     * Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
-     *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToXpsAsyncWithHttpInfo($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToXpsRequest($out_path, $file, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin);
+        $request = $this->postConvertDocumentInRequestToPdfRequest(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2899,32 +3139,181 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentInRequestToXps'
+     * Operation postConvertDocumentInRequestToXps
      *
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
+     * Converts the HTML document (in request content) to XPS
+     * and uploads resulting file to storage.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.xps)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function PutConvertDocumentInRequestToXpsRequest($out_path, $file, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null)
-    {
+    public function postConvertDocumentInRequestToXps(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
+        list($response) = $this->postConvertDocumentInRequestToXpsWithHttpInfo(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        );
+        return $response;
+    }
+
+    /**
+     * Operation postConvertDocumentInRequestToXpsWithHttpInfo
+     *
+     * Converts the HTML document (in request content) to XPS
+     * and uploads resulting file to storage.
+     *
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.xps)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code, HTTP response
+     * headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function postConvertDocumentInRequestToXpsWithHttpInfo(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->postConvertDocumentInRequestToXpsRequest(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postConvertDocumentInRequestToXps'
+     *
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.xps)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function postConvertDocumentInRequestToXpsRequest(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentInRequestToXps'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling postConvertDocumentInRequestToXps'
             );
         }
         // verify the required parameter 'file' is set
         if ($file === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $file when calling PutConvertDocumentInRequestToXps'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$file when calling postConvertDocumentInRequestToXps'
             );
         }
 
@@ -2935,10 +3324,8 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -2949,24 +3336,76 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
 
-        $handle = fopen($file, 'rb');
-        $httpBody = fread($handle, filesize($file));
-        fclose($handle);
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $formParams['file']
+                = try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->_headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = build_query($formParams);
+            }
+        }
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -2978,9 +3417,9 @@ trait ConversionApi
             $headerParams
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
-            'PUT',
+            'POST',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2988,175 +3427,80 @@ trait ConversionApi
     }
 
     /**
-     * Operation PutConvertDocumentToImage
+     * Operation postConvertDocumentInRequestToXpsAsync
      *
-     * Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
+     * Converts the HTML document (in request content) to XPS
+     * and uploads resulting file to storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format out_format (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.xps)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToImage($name, $out_path, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->PutConvertDocumentToImageWithHttpInfo($name, $out_path, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-        return $response;
+    public function postConvertDocumentInRequestToXpsAsync(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
+        return $this->postConvertDocumentInRequestToXpsAsyncWithHttpInfo(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentToImageWithHttpInfo
+     * Operation postConvertDocumentInRequestToXpsAsyncWithHttpInfo
      *
-     * Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
+     * Converts the HTML document (in request content) to XPS
+     * and uploads resulting file to storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string        $out_path      Full resulting filename
+     *                                     (ex. /folder1/folder2/result.xps)
+     *                                     (required)
+     * @param SplFileObject $file          A file to be converted. (required)
+     * @param int           $width         Resulting document page width
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $height        Resulting document page height
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $left_margin   Left resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $right_margin  Right resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $top_margin    Top resulting document page margin
+     *                                     in points (1/96 inch). (optional)
+     * @param int           $bottom_margin Bottom resulting document page margin
+     *                                     in points (1/96 inch). (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToImageWithHttpInfo($name, $out_path, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null, $folder = null, $storage = null)
-    {
+    public function postConvertDocumentInRequestToXpsAsyncWithHttpInfo(
+        $out_path, $file, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToImageRequest($name, $out_path, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentToImageAsync
-     *
-     * Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToImageAsync($name, $out_path, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null, $folder = null, $storage = null)
-    {
-        return $this->PutConvertDocumentToImageAsyncWithHttpInfo($name, $out_path, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentToImageAsyncWithHttpInfo
-     *
-     * Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToImageAsyncWithHttpInfo($name, $out_path, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToImageRequest($name, $out_path, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
+        $request = $this->postConvertDocumentInRequestToXpsRequest(
+            $out_path, $file, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3196,42 +3540,211 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentToImage'
+     * Operation putConvertDocumentToImage
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.jpg) (required)
-     * @param  string $out_format (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $resolution Resolution of resulting image. Default is 96 dpi. (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * Converts the HTML document (located on storage) to the
+     * specified image format and uploads resulting file to storage.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.jpg)
+     *                              (required)
+     * @param string $out_format    Out format (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $resolution    Resolution of resulting image.
+     *                              Default is 96 dpi. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function PutConvertDocumentToImageRequest($name, $out_path, $out_format, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $resolution = null, $folder = null, $storage = null)
-    {
+    public function putConvertDocumentToImage(
+        $name, $out_path, $out_format, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null, $folder = null, $storage = null
+    ) {
+        list($response) = $this->putConvertDocumentToImageWithHttpInfo(
+            $name, $out_path, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution,
+            $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation putConvertDocumentToImageWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to the
+     * specified image format and uploads resulting file to storage.
+     *
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.jpg)
+     *                              (required)
+     * @param string $out_format    Out format (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $resolution    Resolution of resulting image.
+     *                              Default is 96 dpi. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function putConvertDocumentToImageWithHttpInfo(
+        $name, $out_path, $out_format, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null, $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->putConvertDocumentToImageRequest(
+            $name, $out_path, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution,
+            $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'putConvertDocumentToImage'
+     *
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.jpg)
+     *                              (required)
+     * @param string $out_format    Out format(required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $resolution    Resolution of resulting image.
+     *                              Default is 96 dpi. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function putConvertDocumentToImageRequest(
+        $name, $out_path, $out_format, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null, $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling PutConvertDocumentToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling putConvertDocumentToImage'
             );
         }
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling putConvertDocumentToImage'
             );
         }
         // verify the required parameter 'out_format' is set
         if ($out_format === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_format when calling PutConvertDocumentToImage'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_format when calling putConvertDocumentToImage'
             );
         }
 
@@ -3242,10 +3755,21 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
+
+        $resourcePath = str_replace(
+            '{' . 'outFormat' . '}',
+            ObjectSerializer::toPathValue($out_format),
+            $resourcePath
+        );
+
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -3256,23 +3780,28 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($resolution !== null) {
-            $queryParams['resolution'] = ObjectSerializer::toQueryValue($resolution);
+            $queryParams['resolution']
+                = ObjectSerializer::toQueryValue($resolution);
         }
         // query params
         if ($folder !== null) {
@@ -3283,34 +3812,17 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($out_format !== null) {
-            $resourcePath = str_replace(
-                '{' . 'outFormat' . '}',
-                ObjectSerializer::toPathValue($out_format),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/json']
+                ['multipart/form-data']
             );
         }
 
@@ -3319,8 +3831,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3335,14 +3849,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -3355,7 +3868,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'PUT',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -3365,167 +3878,96 @@ trait ConversionApi
     }
 
     /**
-     * Operation PutConvertDocumentToPdf
+     * Operation putConvertDocumentToImageAsync
      *
-     * Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
+     * Converts the HTML document (located on storage) to the specified
+     * image format and uploads resulting file to storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.jpg)
+     *                              (required)
+     * @param string $out_format    Out format (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $resolution    Resolution of resulting image.
+     *                              Default is 96 dpi. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToPdf($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->PutConvertDocumentToPdfWithHttpInfo($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-        return $response;
+    public function putConvertDocumentToImageAsync(
+        $name, $out_path, $out_format, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null, $folder = null, $storage = null
+    ) {
+        return $this->putConvertDocumentToImageAsyncWithHttpInfo(
+            $name, $out_path, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution,
+            $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentToPdfWithHttpInfo
+     * Operation putConvertDocumentToImageAsyncWithHttpInfo
      *
-     * Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
+     * Converts the HTML document (located on storage) to the
+     * specified image format and uploads resulting file to storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.jpg)
+     *                              (required)
+     * @param string $out_format    Out format (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $resolution    Resolution of resulting image.
+     *                              Default is 96 dpi. (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToPdfWithHttpInfo($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function putConvertDocumentToImageAsyncWithHttpInfo(
+        $name, $out_path, $out_format, $width = null, $height = null,
+        $left_margin = null, $right_margin = null, $top_margin = null,
+        $bottom_margin = null, $resolution = null, $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToPdfRequest($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentToPdfAsync
-     *
-     * Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToPdfAsync($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        return $this->PutConvertDocumentToPdfAsyncWithHttpInfo($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentToPdfAsyncWithHttpInfo
-     *
-     * Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToPdfAsyncWithHttpInfo($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToPdfRequest($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+        $request = $this->putConvertDocumentToImageRequest(
+            $name, $out_path, $out_format, $width, $height, $left_margin,
+            $right_margin, $top_margin, $bottom_margin, $resolution,
+            $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3565,34 +4007,193 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentToPdf'
+     * Operation putConvertDocumentToPdf
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * Converts the HTML document (located on storage) to PDF
+     * and uploads resulting file to storage.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.pdf)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function PutConvertDocumentToPdfRequest($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function putConvertDocumentToPdf(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        list($response) = $this->putConvertDocumentToPdfWithHttpInfo(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation putConvertDocumentToPdfWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to PDF
+     * and uploads resulting file to storage.
+     *
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.pdf)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function putConvertDocumentToPdfWithHttpInfo(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->putConvertDocumentToPdfRequest(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'putConvertDocumentToPdf'
+     *
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.pdf)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function putConvertDocumentToPdfRequest(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling PutConvertDocumentToPdf'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling putConvertDocumentToPdf'
             );
         }
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentToPdf'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling putConvertDocumentToPdf'
             );
         }
 
@@ -3603,10 +4204,8 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -3617,19 +4216,23 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($folder !== null) {
@@ -3653,13 +4256,13 @@ trait ConversionApi
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/json']
+                ['multipart/form-data']
             );
         }
 
@@ -3668,8 +4271,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3684,14 +4289,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -3704,7 +4308,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'PUT',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -3714,167 +4318,88 @@ trait ConversionApi
     }
 
     /**
-     * Operation PutConvertDocumentToXps
+     * Operation putConvertDocumentToPdfAsync
      *
-     * Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+     * Converts the HTML document (located on storage) to PDF
+     * and uploads resulting file to storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.pdf)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToXps($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        list($response) = $this->PutConvertDocumentToXpsWithHttpInfo($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-        return $response;
+    public function putConvertDocumentToPdfAsync(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        return $this->putConvertDocumentToPdfAsyncWithHttpInfo(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentToXpsWithHttpInfo
+     * Operation putConvertDocumentToPdfAsyncWithHttpInfo
      *
-     * Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+     * Converts the HTML document (located on storage) to PDF
+     * and uploads resulting file to storage.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.pdf)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToXpsWithHttpInfo($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function putConvertDocumentToPdfAsyncWithHttpInfo(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToXpsRequest($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentToXpsAsync
-     *
-     * Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToXpsAsync($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        return $this->PutConvertDocumentToXpsAsyncWithHttpInfo($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentToXpsAsyncWithHttpInfo
-     *
-     * Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToXpsAsyncWithHttpInfo($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToXpsRequest($name, $out_path, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $folder, $storage);
+        $request = $this->putConvertDocumentToPdfRequest(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3914,34 +4439,193 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentToXps'
+     * Operation putConvertDocumentToXps
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xps) (required)
-     * @param  int $width Resulting document page width in points (1/96 inch). (optional)
-     * @param  int $height Resulting document page height in points (1/96 inch). (optional)
-     * @param  int $left_margin Left resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $right_margin Right resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $top_margin Top resulting document page margin in points (1/96 inch). (optional)
-     * @param  int $bottom_margin Bottom resulting document page margin in points (1/96 inch). (optional)
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * Converts the HTML document (located on storage) to XPS
+     * and uploads resulting file to storage.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.xps)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
-    protected function PutConvertDocumentToXpsRequest($name, $out_path, $width = null, $height = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $folder = null, $storage = null)
-    {
+    public function putConvertDocumentToXps(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        list($response) = $this->putConvertDocumentToXpsWithHttpInfo(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation putConvertDocumentToXpsWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to XPS
+     * and uploads resulting file to storage.
+     *
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.xps)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     */
+    public function putConvertDocumentToXpsWithHttpInfo(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->putConvertDocumentToXpsRequest(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'putConvertDocumentToXps'
+     *
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.xps)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function putConvertDocumentToXpsRequest(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling PutConvertDocumentToXps'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling putConvertDocumentToXps'
             );
         }
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentToXps'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling putConvertDocumentToXps'
             );
         }
 
@@ -3952,10 +4636,8 @@ trait ConversionApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($width !== null) {
             $queryParams['width'] = ObjectSerializer::toQueryValue($width);
@@ -3966,19 +4648,23 @@ trait ConversionApi
         }
         // query params
         if ($left_margin !== null) {
-            $queryParams['leftMargin'] = ObjectSerializer::toQueryValue($left_margin);
+            $queryParams['leftMargin']
+                = ObjectSerializer::toQueryValue($left_margin);
         }
         // query params
         if ($right_margin !== null) {
-            $queryParams['rightMargin'] = ObjectSerializer::toQueryValue($right_margin);
+            $queryParams['rightMargin']
+                = ObjectSerializer::toQueryValue($right_margin);
         }
         // query params
         if ($top_margin !== null) {
-            $queryParams['topMargin'] = ObjectSerializer::toQueryValue($top_margin);
+            $queryParams['topMargin']
+                = ObjectSerializer::toQueryValue($top_margin);
         }
         // query params
         if ($bottom_margin !== null) {
-            $queryParams['bottomMargin'] = ObjectSerializer::toQueryValue($bottom_margin);
+            $queryParams['bottomMargin']
+                = ObjectSerializer::toQueryValue($bottom_margin);
         }
         // query params
         if ($folder !== null) {
@@ -3990,25 +4676,23 @@ trait ConversionApi
         }
 
         // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/json']
+                ['multipart/form-data']
             );
         }
 
@@ -4017,8 +4701,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4033,14 +4719,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -4053,7 +4738,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'PUT',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -4062,149 +4747,89 @@ trait ConversionApi
         );
     }
 
-
     /**
-     * Operation GetConvertDocumentToMHTMLByUrl
+     * Operation putConvertDocumentToXpsAsync
      *
-     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+     * Converts the HTML document (located on storage) to
+     * XPS and uploads resulting file to storage.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.xps)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToMHTMLByUrl($source_url)
-    {
-        list($response) = $this->GetConvertDocumentToMHTMLByUrlWithHttpInfo($source_url);
-        return $response;
+    public function putConvertDocumentToXpsAsync(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
+        return $this->putConvertDocumentToXpsAsyncWithHttpInfo(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation GetConvertDocumentToMHTMLByUrlWithHttpInfo
+     * Operation putConvertDocumentToXpsAsyncWithHttpInfo
      *
-     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+     * Converts the HTML document (located on storage) to XPS
+     * and uploads resulting file to storage.
      *
-     * @param  string $source_url Source page URL. (required)
+     * @param string $name          Document name. (required)
+     * @param string $out_path      Full resulting filename
+     *                              (ex. /folder1/folder2/result.xps)
+     *                              (required)
+     * @param int    $width         Resulting document page width
+     *                              in points (1/96 inch). (optional)
+     * @param int    $height        Resulting document page height
+     *                              in points (1/96 inch). (optional)
+     * @param int    $left_margin   Left resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $right_margin  Right resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $top_margin    Top resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param int    $bottom_margin Bottom resulting document page margin
+     *                              in points (1/96 inch). (optional)
+     * @param string $folder        The source document folder. (optional)
+     * @param string $storage       The source and resulting
+     *                              document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToMHTMLByUrlWithHttpInfo($source_url)
-    {
+    public function putConvertDocumentToXpsAsyncWithHttpInfo(
+        $name, $out_path, $width = null, $height = null, $left_margin = null,
+        $right_margin = null, $top_margin = null, $bottom_margin = null,
+        $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToMHTMLByUrlRequest($source_url);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToMHTMLByUrlAsync
-     *
-     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
-     *
-     * @param  string $source_url Source page URL. (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToMHTMLByUrlAsync($source_url)
-    {
-        return $this->GetConvertDocumentToMHTMLByUrlAsyncWithHttpInfo($source_url)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation GetConvertDocumentToMHTMLByUrlAsyncWithHttpInfo
-     *
-     * Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
-     *
-     * @param  string $source_url Source page URL. (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToMHTMLByUrlAsyncWithHttpInfo($source_url)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToMHTMLByUrlRequest($source_url);
+        $request = $this->putConvertDocumentToXpsRequest(
+            $name, $out_path, $width, $height, $left_margin, $right_margin,
+            $top_margin, $bottom_margin, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4244,19 +4869,122 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToMHTMLByUrl'
+     * Operation getConvertDocumentToMHTMLByUrl
      *
-     * @param  string $source_url Source page URL. (required)
+     * Converts the HTML page from Web by its URL to MHTML returns
+     * resulting file in response content.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $source_url Source page URL. (required)
+     *
+     * @return SplFileObject
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    protected function GetConvertDocumentToMHTMLByUrlRequest($source_url)
+    public function getConvertDocumentToMHTMLByUrl($source_url)
+    {
+        list($response)
+            = $this->getConvertDocumentToMHTMLByUrlWithHttpInfo($source_url);
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToMHTMLByUrlWithHttpInfo
+     *
+     * Converts the HTML page from Web by its URL to MHTML
+     * returns resulting file in response content.
+     *
+     * @param string $source_url Source page URL. (required)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     */
+    public function getConvertDocumentToMHTMLByUrlWithHttpInfo($source_url)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToMHTMLByUrlRequest($source_url);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+            case 401:
+            case 404:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToMHTMLByUrl'
+     *
+     * @param string $source_url Source page URL. (required)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToMHTMLByUrlRequest($source_url)
     {
         // verify the required parameter 'source_url' is set
-        if ($source_url === null || (is_array($source_url) && count($source_url) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $source_url when calling GetConvertDocumentToMHTMLByUrl'
+        if (($source_url === null)
+            || (is_array($source_url) && count($source_url) === 0 )
+        ) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$source_url when calling getConvertDocumentToMHTMLByUrl'
             );
         }
 
@@ -4269,19 +4997,19 @@ trait ConversionApi
 
         // query params
         if ($source_url !== null) {
-            $queryParams['sourceUrl'] = ObjectSerializer::toQueryValue($source_url);
+            $queryParams['sourceUrl']
+                = ObjectSerializer::toQueryValue($source_url);
         }
-
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -4292,8 +5020,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4308,14 +5038,13 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -4328,7 +5057,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -4338,135 +5067,19 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToMarkdown
+     * Operation getConvertDocumentToMHTMLByUrlAsync
      *
-     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     * Converts the HTML page from Web by its URL to MHTML returns
+     * resulting file in response content.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder Source document folder. (optional)
-     * @param  string $storage Source document storage. (optional)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToMarkdown($name, $use_git = 'false', $folder = null, $storage = null)
+    public function getConvertDocumentToMHTMLByUrlAsync($source_url)
     {
-        list($response) = $this->GetConvertDocumentToMarkdownWithHttpInfo($name, $use_git, $folder, $storage);
-        return $response;
-    }
-
-    /**
-     * Operation GetConvertDocumentToMarkdownWithHttpInfo
-     *
-     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder Source document folder. (optional)
-     * @param  string $storage Source document storage. (optional)
-     *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function GetConvertDocumentToMarkdownWithHttpInfo($name, $use_git = 'false', $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToMarkdownRequest($name, $use_git, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation GetConvertDocumentToMarkdownAsync
-     *
-     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder Source document folder. (optional)
-     * @param  string $storage Source document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function GetConvertDocumentToMarkdownAsync($name, $use_git = 'false', $folder = null, $storage = null)
-    {
-        return $this->GetConvertDocumentToMarkdownAsyncWithHttpInfo($name, $use_git, $folder, $storage)
+        return $this->getConvertDocumentToMHTMLByUrlAsyncWithHttpInfo($source_url)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4475,22 +5088,20 @@ trait ConversionApi
     }
 
     /**
-     * Operation GetConvertDocumentToMarkdownAsyncWithHttpInfo
+     * Operation getConvertDocumentToMHTMLByUrlAsyncWithHttpInfo
      *
-     * Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+     * Converts the HTML page from Web by its URL to MHTML returns
+     * resulting file in response content.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder Source document folder. (optional)
-     * @param  string $storage Source document storage. (optional)
+     * @param string $source_url Source page URL. (required)
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function GetConvertDocumentToMarkdownAsyncWithHttpInfo($name, $use_git = 'false', $folder = null, $storage = null)
+    public function getConvertDocumentToMHTMLByUrlAsyncWithHttpInfo($source_url)
     {
         $returnType = '\SplFileObject';
-        $request = $this->GetConvertDocumentToMarkdownRequest($name, $use_git, $folder, $storage);
+        $request = $this->getConvertDocumentToMHTMLByUrlRequest($source_url);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4530,22 +5141,138 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'GetConvertDocumentToMarkdown'
+     * Operation getConvertDocumentToMarkdown
      *
-     * @param  string $name Document name. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder Source document folder. (optional)
-     * @param  string $storage Source document storage. (optional)
+     * Converts the HTML document (located on storage) to Markdown
+     * and returns resulting file in response content.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name    Document name. (required)
+     * @param string $use_git Use Git Markdown flavor to save.
+     *                        "true" or "false" (optional, default to "false")
+     * @param string $folder  Source document folder. (optional)
+     * @param string $storage Source document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    protected function GetConvertDocumentToMarkdownRequest($name, $use_git = 'false', $folder = null, $storage = null)
-    {
+    public function getConvertDocumentToMarkdown(
+        $name, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        list($response) = $this->getConvertDocumentToMarkdownWithHttpInfo(
+            $name, $use_git, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation getConvertDocumentToMarkdownWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown
+     * and returns resulting file in response content.
+     *
+     * @param string $name    Document name. (required)
+     * @param string $use_git Use Git Markdown flavor to save.
+     *                        "true" or "false" (optional, default to "false")
+     * @param string $folder  Source document folder. (optional)
+     * @param string $storage Source document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     */
+    public function getConvertDocumentToMarkdownWithHttpInfo(
+        $name, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->getConvertDocumentToMarkdownRequest(
+            $name, $use_git, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+            case 401:
+            case 404:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getConvertDocumentToMarkdown'
+     *
+     * @param string $name    Document name. (required)
+     * @param string $use_git Use Git Markdown flavor to save.
+     *                        "true" or "false" (optional, default to "false")
+     * @param string $folder  Source document folder. (optional)
+     * @param string $storage Source document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function getConvertDocumentToMarkdownRequest(
+        $name, $use_git = 'false', $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling GetConvertDocumentToMarkdown'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling getConvertDocumentToMarkdown'
             );
         }
 
@@ -4555,6 +5282,13 @@ trait ConversionApi
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
+
+        // path params
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
 
         // query params
         if ($use_git !== null) {
@@ -4569,24 +5303,15 @@ trait ConversionApi
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
         }
 
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['multipart/form-data']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['multipart/form-data'],
                 ['application/json']
             );
@@ -4597,8 +5322,10 @@ trait ConversionApi
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -4613,11 +5340,11 @@ trait ConversionApi
                 $httpBody = new MultipartStream($multipartContents);
 
             } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
+                $httpBody = json_encode($formParams);
 
             } else {
                 // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+                $httpBody = build_query($formParams);
             }
         }
 
@@ -4633,7 +5360,7 @@ trait ConversionApi
             $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -4642,149 +5369,55 @@ trait ConversionApi
         );
     }
 
-
     /**
-     * Operation PutConvertDocumentInRequestToMarkdown
+     * Operation getConvertDocumentToMarkdownAsync
      *
-     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     * Converts the HTML document (located on storage) to
+     * Markdown and returns resulting file in response content.
      *
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param string $name    Document name. (required)
+     * @param string $use_git Use Git Markdown flavor to save.
+     *                        "true" or "false" (optional, default to "false")
+     * @param string $folder  Source document folder. (optional)
+     * @param string $storage Source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToMarkdown($out_path, $file, $use_git = 'false')
-    {
-        list($response) = $this->PutConvertDocumentInRequestToMarkdownWithHttpInfo($out_path, $file, $use_git);
-        return $response;
+    public function getConvertDocumentToMarkdownAsync(
+        $name, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        return $this->getConvertDocumentToMarkdownAsyncWithHttpInfo(
+            $name, $use_git, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentInRequestToMarkdownWithHttpInfo
+     * Operation getConvertDocumentToMarkdownAsyncWithHttpInfo
      *
-     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+     * Converts the HTML document (located on storage) to Markdown
+     * and returns resulting file in response content.
      *
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * @param string $name    Document name. (required)
+     * @param string $use_git Use Git Markdown flavor to save.
+     *                        "true" or "false" (optional, default to "false")
+     * @param string $folder  Source document folder. (optional)
+     * @param string $storage Source document storage. (optional)
      *
-     * @throws \Client\Invoker\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentInRequestToMarkdownWithHttpInfo($out_path, $file, $use_git = 'false')
-    {
+    public function getConvertDocumentToMarkdownAsyncWithHttpInfo(
+        $name, $use_git = 'false', $folder = null, $storage = null
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToMarkdownRequest($out_path, $file, $use_git);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToMarkdownAsync
-     *
-     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
-     *
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToMarkdownAsync($out_path, $file, $use_git = 'false')
-    {
-        return $this->PutConvertDocumentInRequestToMarkdownAsyncWithHttpInfo($out_path, $file, $use_git)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentInRequestToMarkdownAsyncWithHttpInfo
-     *
-     * Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
-     *
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentInRequestToMarkdownAsyncWithHttpInfo($out_path, $file, $use_git = 'false')
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentInRequestToMarkdownRequest($out_path, $file, $use_git);
+        $request = $this->getConvertDocumentToMarkdownRequest(
+            $name, $use_git, $folder, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4824,27 +5457,153 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentInRequestToMarkdown'
+     * Operation postConvertDocumentInRequestToMarkdown
      *
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  \SplFileObject $file A file to be converted. (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
+     * Converts the HTML document (in request content) to
+     * Markdown and uploads resulting file to storage by specified path.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string        $out_path Full resulting file path in the storage
+     *                                (ex. /folder1/folder2/result.md)
+     *                                (required)
+     * @param SplFileObject $file     A file to be converted. (required)
+     * @param string        $use_git  Use Git Markdown flavor to save.
+     *                                "true" or "false" (optional,
+     *                                default to "false")
+     * @param string        $storage  Source document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    protected function PutConvertDocumentInRequestToMarkdownRequest($out_path, $file, $use_git = 'false')
-    {
+    public function postConvertDocumentInRequestToMarkdown(
+        $out_path, $file, $use_git = 'false', $storage = null
+    ) {
+        list($response) = $this->postConvertDocumentInRequestToMarkdownWithHttpInfo(
+            $out_path, $file, $use_git, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation postConvertDocumentInRequestToMarkdownWithHttpInfo
+     *
+     * Converts the HTML document (in request content) to Markdown
+     * and uploads resulting file to storage by specified path.
+     *
+     * @param string        $out_path Full resulting file path in the storage
+     *                                (ex. /folder1/folder2/result.md)
+     *                                (required)
+     * @param SplFileObject $file     A file to be converted. (required)
+     * @param string        $use_git  Use Git Markdown flavor to save.
+     *                                "true" or "false"
+     *                                (optional, default to "false")
+     * @param string        $storage  Source document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     */
+    public function postConvertDocumentInRequestToMarkdownWithHttpInfo(
+        $out_path, $file, $use_git, $storage
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->postConvertDocumentInRequestToMarkdownRequest(
+            $out_path, $file, $use_git, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+            case 401:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postConvertDocumentInRequestToMarkdown'
+     *
+     * @param string        $out_path Full resulting file path in the storage
+     *                                (ex. /folder1/folder2/result.md)
+     *                                (required)
+     * @param SplFileObject $file     A file to be converted. (required)
+     * @param string        $use_git  Use Git Markdown flavor to save.
+     *                                "true" or "false"
+     *                                (optional, default to "false")
+     * @param string        $storage  Source document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function postConvertDocumentInRequestToMarkdownRequest(
+        $out_path, $file, $use_git, $storage
+    ) {
         // verify the required parameter 'out_path' is set
         if ($out_path === null || (is_array($out_path) && count($out_path) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentInRequestToMarkdown'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling postConvertDocumentInRequestToMarkdown'
             );
         }
         // verify the required parameter 'file' is set
         if ($file === null || (is_array($file) && count($file) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $file when calling PutConvertDocumentInRequestToMarkdown'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$file when calling postConvertDocumentInRequestToMarkdown'
             );
         }
 
@@ -4853,20 +5612,66 @@ trait ConversionApi
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
-        $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($use_git !== null) {
             $queryParams['useGit'] = ObjectSerializer::toQueryValue($use_git);
         }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
 
-        $handle = fopen($file, 'rb');
-        $httpBody = fread($handle, filesize($file));
-        fclose($handle);
+        $multipart = true;
+        $formParams['file']
+            = try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->_headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if (($httpBody instanceof stdClass)
+                && $headers['Content-Type'] === 'application/json'
+            ) {
+                $httpBody = json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = build_query($formParams);
+            }
+        }
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -4878,166 +5683,70 @@ trait ConversionApi
             $headerParams
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
-            'PUT',
+            'POST',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
-
     /**
-     * Operation PutConvertDocumentToMarkdown
+     * Operation postConvertDocumentInRequestToMarkdownAsync
      *
-     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     * Converts the HTML document (in request content) to Markdown
+     * and uploads resulting file to storage by specified path.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string        $out_path Full resulting file path in the storage
+     *                                (ex. /folder1/folder2/result.md)
+     *                                (required)
+     * @param SplFileObject $file     A file to be converted. (required)
+     * @param string        $use_git  Use Git Markdown flavor to save.
+     *                                "true" or "false"
+     *                                (optional, default to "false")
+     * @param string        $storage  Source document storage. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToMarkdown($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
-    {
-        list($response) = $this->PutConvertDocumentToMarkdownWithHttpInfo($name, $out_path, $use_git, $folder, $storage);
-        return $response;
+    public function postConvertDocumentInRequestToMarkdownAsync(
+        $out_path, $file, $use_git = 'false', $storage = null
+    ) {
+        return $this->postConvertDocumentInRequestToMarkdownAsyncWithHttpInfo(
+            $out_path, $file, $use_git, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
     }
 
     /**
-     * Operation PutConvertDocumentToMarkdownWithHttpInfo
+     * Operation postConvertDocumentInRequestToMarkdownAsyncWithHttpInfo
      *
-     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+     * Converts the HTML document (in request content) to Markdown
+     * and uploads resulting file to storage by specified path.
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * @param string        $out_path Full resulting file path in the storage
+     *                                (ex. /folder1/folder2/result.md)
+     *                                (required)
+     * @param SplFileObject $file     A file to be converted. (required)
+     * @param string        $use_git  Use Git Markdown flavor to save.
+     *                                "true" or "false"
+     *                                (optional, default to "false")
+     * @param string        $storage  Source document storage. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function PutConvertDocumentToMarkdownWithHttpInfo($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
-    {
+    public function postConvertDocumentInRequestToMarkdownAsyncWithHttpInfo(
+        $out_path, $file, $use_git, $storage
+    ) {
         $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToMarkdownRequest($name, $out_path, $use_git, $folder, $storage);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation PutConvertDocumentToMarkdownAsync
-     *
-     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToMarkdownAsync($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
-    {
-        return $this->PutConvertDocumentToMarkdownAsyncWithHttpInfo($name, $out_path, $use_git, $folder, $storage)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation PutConvertDocumentToMarkdownAsyncWithHttpInfo
-     *
-     * Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
-     *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function PutConvertDocumentToMarkdownAsyncWithHttpInfo($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->PutConvertDocumentToMarkdownRequest($name, $out_path, $use_git, $folder, $storage);
+        $request = $this->postConvertDocumentInRequestToMarkdownRequest(
+            $out_path, $file, $use_git, $storage
+        );
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5077,43 +5786,170 @@ trait ConversionApi
     }
 
     /**
-     * Create request for operation 'PutConvertDocumentToMarkdown'
+     * Operation putConvertDocumentToMarkdown
      *
-     * @param  string $name Document name. (required)
-     * @param  string $out_path Full resulting file path in the storage (ex. /folder1/folder2/result.md) (required)
-     * @param  string $use_git Use Git Markdown flavor to save. "true" or "false" (optional, default to "false")
-     * @param  string $folder The source document folder. (optional)
-     * @param  string $storage The source and resulting document storage. (optional)
+     * Converts the HTML document (located on storage) to Markdown
+     * and uploads resulting file to storage by specified path.
      *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
+     * @param string $name     Document name. (required)
+     * @param string $out_path Full resulting file path in the storage
+     *                         (ex. /folder1/folder2/result.md)
+     *                         (required)
+     * @param string $use_git  Use Git Markdown flavor to save.
+     *                         "true" or "false"
+     *                         (optional, default to "false")
+     * @param string $folder   The source document folder. (optional)
+     * @param string $storage  The source and resulting
+     *                         document storage. (optional)
+     *
+     * @return SplFileObject
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    protected function PutConvertDocumentToMarkdownRequest($name, $out_path, $use_git = 'false', $folder = null, $storage = null)
-    {
+    public function putConvertDocumentToMarkdown(
+        $name, $out_path, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        list($response) = $this->putConvertDocumentToMarkdownWithHttpInfo(
+            $name, $out_path, $use_git, $folder, $storage
+        );
+        return $response;
+    }
+
+    /**
+     * Operation putConvertDocumentToMarkdownWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown
+     * and uploads resulting file to storage by specified path.
+     *
+     * @param string $name     Document name. (required)
+     * @param string $out_path Full resulting file path in the storage
+     *                         (ex. /folder1/folder2/result.md)
+     *                         (required)
+     * @param string $use_git  Use Git Markdown flavor to save.
+     *                         "true" or "false"
+     *                         (optional, default to "false")
+     * @param string $folder   The source document folder. (optional)
+     * @param string $storage  The source and resulting
+     *                         document storage. (optional)
+     *
+     * @return array of \SplFileObject, HTTP status code,
+     * HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     */
+    public function putConvertDocumentToMarkdownWithHttpInfo(
+        $name, $out_path, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->putConvertDocumentToMarkdownRequest(
+            $name, $out_path, $use_git, $folder, $storage
+        );
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse()
+                        ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse()
+                        ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+            case 401:
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\SplFileObject',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'putConvertDocumentToMarkdown'
+     *
+     * @param string $name     Document name. (required)
+     * @param string $out_path Full resulting file path in the storage
+     *                         (ex. /folder1/folder2/result.md)
+     *                         (required)
+     * @param string $use_git  Use Git Markdown flavor to save.
+     *                         "true" or "false"
+     *                         (optional, default to "false")
+     * @param string $folder   The source document folder. (optional)
+     * @param string $storage  The source and resulting
+     *                         document storage. (optional)
+     *
+     * @return Request
+     * @throws InvalidArgumentException
+     */
+    protected function putConvertDocumentToMarkdownRequest(
+        $name, $out_path, $use_git = 'false', $folder = null, $storage = null
+    ) {
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling PutConvertDocumentToMarkdown'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$name when calling putConvertDocumentToMarkdown'
             );
         }
         // verify the required parameter 'out_path' is set
         if ($out_path === null || (is_array($out_path) && count($out_path) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $out_path when calling PutConvertDocumentToMarkdown'
+            throw new InvalidArgumentException(
+                'Missing the required parameter '
+                .'$out_path when calling putConvertDocumentToMarkdown'
             );
         }
 
         $resourcePath = '/html/{name}/convert/md';
-        $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        if ($out_path !== null) {
-            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
-        }
+        $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+
         // query params
         if ($use_git !== null) {
             $queryParams['useGit'] = ObjectSerializer::toQueryValue($use_git);
@@ -5128,28 +5964,25 @@ trait ConversionApi
         }
 
         // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
+        $resourcePath = str_replace(
+            '{' . 'name' . '}',
+            ObjectSerializer::toPathValue($name),
+            $resourcePath
+        );
 
         // body params
         $_tempBody = null;
 
         if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
+            $headers = $this->_headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
         } else {
-            $headers = $this->headerSelector->selectHeaders(
+            $headers = $this->_headerSelector->selectHeaders(
                 ['application/json'],
-                ['application/json']
+                ['multipart/form-data']
             );
         }
-
 
         $defaultHeaders = [];
         if ($this->config['defaultUserAgent']) {
@@ -5158,15 +5991,113 @@ trait ConversionApi
 
         $headers = array_merge(
             $defaultHeaders,
-            $headerParams
+            $headerParams,
+            $headers
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        $query = build_query($queryParams);
         return new Request(
             'PUT',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
+    }
+
+    /**
+     * Operation putConvertDocumentToMarkdownAsync
+     *
+     * Converts the HTML document (located on storage) to
+     * Markdown and uploads resulting file to storage by specified path.
+     *
+     * @param string $name     Document name. (required)
+     * @param string $out_path Full resulting file path in the storage
+     *                         (ex. /folder1/folder2/result.md)
+     *                         (required)
+     * @param string $use_git  Use Git Markdown flavor to save.
+     *                         "true" or "false"
+     *                         (optional, default to "false")
+     * @param string $folder   The source document folder. (optional)
+     * @param string $storage  The source and resulting
+     *                         document storage. (optional)
+     *
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
+     */
+    public function putConvertDocumentToMarkdownAsync(
+        $name, $out_path, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        return $this->putConvertDocumentToMarkdownAsyncWithHttpInfo(
+            $name, $out_path, $use_git, $folder, $storage
+        )->then(
+            function ($response) {
+                return $response[0];
+            }
+        );
+    }
+
+    /**
+     * Operation putConvertDocumentToMarkdownAsyncWithHttpInfo
+     *
+     * Converts the HTML document (located on storage) to Markdown
+     * and uploads resulting file to storage by specified path.
+     *
+     * @param string $name     Document name. (required)
+     * @param string $out_path Full resulting file path in the storage
+     *                         (ex. /folder1/folder2/result.md)
+     *                         (required)
+     * @param string $use_git  Use Git Markdown flavor to save.
+     *                         "true" or "false"
+     *                         (optional, default to "false")
+     * @param string $folder   The source document folder. (optional)
+     * @param string $storage  The source and resulting
+     *                         document storage. (optional)
+     *
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
+     */
+    public function putConvertDocumentToMarkdownAsyncWithHttpInfo(
+        $name, $out_path, $use_git = 'false', $folder = null, $storage = null
+    ) {
+        $returnType = '\SplFileObject';
+        $request = $this->putConvertDocumentToMarkdownRequest(
+            $name, $out_path, $use_git, $folder, $storage
+        );
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
     }
 }
