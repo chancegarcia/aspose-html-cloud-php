@@ -75,10 +75,14 @@ Pass configuration to constructor (see in tests - BaseTest.php)
 ###Note: do not forget to add in php.ini
 ```code
 ...
-upload_max_filesize = 200M
+extension=php_openssl.dll
 ...
-curl.cainfo = "path_to_cert\cacert.pem"
+upload_max_filesize = 200M ; or 0 - unlimited
 ...
+max_execution_time = 0 ; unlimited
+...
+default_socket_timeout = 3600 ; for long time operations
+
 ```
 
 ## Tests
@@ -134,7 +138,6 @@ try {
 ```
 
 ## Documentation for API Endpoints
-
 All URIs are relative to *https://api.aspose.cloud/v3.0*
 
 <a name="html_api"></a>
@@ -168,18 +171,13 @@ Class | Method | HTTP request | Description
 *HtmlApi* | [**getDocumentFragmentsByCSSSelectorByUrl**](docs/DocumentApi.md#getDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
 *HtmlApi* | [**getDocumentImages**](docs/DocumentApi.md#getDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
 *HtmlApi* | [**getDocumentImagesByUrl**](docs/DocumentApi.md#getDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
-*HtmlApi* | [**getRecognizeAndImportToHtml**](docs/OcrApi.md#getRecognizeAndImportToHtml) | **GET** /html/{name}/ocr/import | Recognize text from the image file in the storage and import it to HTML format.
-*HtmlApi* | [**getRecognizeAndTranslateToHtml**](docs/OcrApi.md#getRecognizeAndTranslateToHtml) | **GET** /html/{name}/ocr/translate/{srcLang}/{resLang} | Recognize text from the image file in the storage, import it to HTML format and translate to specified language.
-*HtmlApi* | [**getTranslateDocument**](docs/TranslationApi.md#getTranslateDocument) | **GET** /html/{name}/translate/{srcLang}/{resLang} | Translate the HTML document specified by the name from default or specified storage.
-*HtmlApi* | [**getTranslateDocumentByUrl**](docs/TranslationApi.md#getTranslateDocumentByUrl) | **GET** /html/translate/{srcLang}/{resLang} | Translate the HTML document from Web specified by its URL.
-*HtmlApi* | [**getDetectHtmlKeywords**](docs/SummarizationApi.md#getDetectHtmlKeywords) | **GET** /html/{name}/summ/keywords | Get the HTML document keywords using the keyword detection service.
-*HtmlApi* | [**getDetectHtmlKeywordsByUrl**](docs/SummarizationApi.md#getDetectHtmlKeywordsByUrl) | **GET** /html/summ/keywords | Get the keywords from HTML document from Web specified by its URL using the keyword detection service
 *HtmlApi* | [**getMergeHtmlTemplate**](docs/TemplateMergeApi.md#getMergeHtmlTemplate) | **GET** /html/{templateName}/merge | Populate HTML document template with data located as a file in the storage.
 *HtmlApi* | [**postMergeHtmlTemplate**](docs/TemplateMergeApi.md#postMergeHtmlTemplate) | **POST** /html/{templateName}/merge | Populate HTML document template with data from the request body. Result document will be saved to storage.
 
 <a name="storage_api"></a>
 ## STORAGE API  
-
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
 *StorageApi* | [**copyFile**](docs/FileApi.md#copyfile) | **PUT** /html/storage/file/copy/{srcPath} | Copy file
 *StorageApi* | [**deleteFile**](docs/FileApi.md#deletefile) | **DELETE** /html/storage/file/{path} | Delete file
 *StorageApi* | [**downloadFile**](docs/FileApi.md#downloadfile) | **GET** /html/storage/file/{path} | Download file

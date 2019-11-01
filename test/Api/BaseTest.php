@@ -64,14 +64,17 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
  //Configuration - pass by constructor
         $configuration = array(
             "basePath" => "https://api-qa.aspose.cloud/v3.0",
+//            "basePath" => "https://localhost:5001/v3.0",
             "authPath" => "https://api-qa.aspose.cloud/connect/token",
             "apiKey" => "html.cloud",
             "appSID" => "html.cloud",
+//            "apiKey" => "c7ab7f6082d763f0bff521c2651f617c",
+//            "appSID" => "692a1fd0-f5a3-4b39-b665-1716e283f2f4",
             "testResult" => "\\testresult\\",
             "testData" => "\\testdata\\",
             "remoteFolder" => "HtmlTestDoc",
             "defaultUserAgent" => "Webkit",
-            "debugFile" => "php://output",
+            "debugFile" => "debug.txt",
             "debug" => false
         );
 

@@ -38,9 +38,6 @@ use RuntimeException;
 
 require_once 'ConversionApi.php';
 require_once 'DocumentApi.php';
-require_once 'OcrApi.php';
-require_once 'TranslationApi.php';
-require_once 'SummarizationApi.php';
 require_once 'TemplateMergeApi.php';
 require_once 'ImportApi.php';
 
@@ -56,8 +53,7 @@ require_once 'ImportApi.php';
  */
 class HtmlApi
 {
-    use ConversionApi, DocumentApi, OcrApi, TranslationApi, SummarizationApi,
-        TemplateMergeApi, ImportApi;
+    use ConversionApi, DocumentApi, TemplateMergeApi, ImportApi;
 
     /**
      * Http client

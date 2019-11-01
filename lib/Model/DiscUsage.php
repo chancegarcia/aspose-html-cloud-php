@@ -59,8 +59,8 @@ class DiscUsage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'used_size' => 'int',
-        'total_size' => 'int'
+        'used_size' => 'string',
+        'total_size' => 'string'
     ];
 
     /**
@@ -69,8 +69,8 @@ class DiscUsage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'used_size' => 'int64',
-        'total_size' => 'int64'
+        'used_size' => 'string',
+        'total_size' => 'string'
     ];
 
     /**
