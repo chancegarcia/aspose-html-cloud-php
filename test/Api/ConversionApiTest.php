@@ -85,7 +85,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.' . $out_format);
+        copy($result->getRealPath(), self::$testResult . $resultFile . '.' . $out_format . '.zip');
     }
 
     /**
@@ -273,7 +273,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
 
         //Copy result to testFolder
-        copy($result->getRealPath(), self::$testResult . $resultFile . '.' . $out_format);
+        copy($result->getRealPath(), self::$testResult . $resultFile . '.' . $out_format . '.zip');
     }
 
 
@@ -710,7 +710,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
-        $resultFile .="." . $out_format;
+        $resultFile .="." . $out_format . '.zip';
 
             //Convert html to image
         $filename = "test1.html";
@@ -1120,7 +1120,7 @@ class ConversionApiTest extends BaseTest
         $resultFile .= isset($right_margin) ? "R" . $right_margin . "_" : "R_";
         $resultFile .= isset($top_margin) ? "T" . $top_margin . "_" : "T_";
         $resultFile .= isset($bottom_margin) ? "B" . $bottom_margin  : "B_";
-        $resultFile .= "." . $out_format;
+        $resultFile .= "." . $out_format . '.zip';
 
         //test1.html already in storage
         $filename = "test1.html";
