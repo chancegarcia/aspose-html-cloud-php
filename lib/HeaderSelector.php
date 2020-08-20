@@ -20,12 +20,12 @@
  * php version 5.6
  *
  * @category  Aspose_Html_Cloud_SDK
- * @package   Asposehtmlcloudphp
+ * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2019 Aspose
+ * @copyright 2020 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @19.5.0@
- * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ * @version   GIT: @20.8.0@
+ * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
 namespace Client\Invoker;
@@ -34,10 +34,10 @@ namespace Client\Invoker;
  * Header selector class.
  *
  * @category HeaderSelector
- * @package  Asposehtmlcloudphp
+ * @package  html-sdk-php
  * @author   Alexander Makogon <alexander.makogon@aspose.com>
  * @license  https://opensource.org/licenses/mit-license.php  MIT License
- * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
+ * @link     https://packagist.org/packages/aspose/html-sdk-php
  */
 class HeaderSelector
 {
@@ -52,7 +52,10 @@ class HeaderSelector
      */
     public function selectHeaders($accept, $contentTypes)
     {
+        // Identity headers for SDK
         $headers = [];
+        $headers['x-aspose-client'] = "aspose.html-cloud php sdk";
+        $headers['x-aspose-client-version'] = "20.8.0";
 
         $accept = $this->_selectAcceptHeader($accept);
         if ($accept !== null) {

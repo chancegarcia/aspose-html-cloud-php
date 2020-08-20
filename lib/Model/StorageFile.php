@@ -20,12 +20,12 @@
  * php version 5.6
  *
  * @category  Aspose_Html_Cloud_SDK
- * @package   Asposehtmlcloudphp
+ * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2019 Aspose
+ * @copyright 2020 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @19.5.0@
- * @link      https://packagist.org/packages/aspose/aspose-html-cloud-php
+ * @version   GIT: @20.8.0@
+ * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
 namespace Client\Invoker\Model;
@@ -38,10 +38,10 @@ use DateTime;
  * Model for StorageFile response
  *
  * @category Models
- * @package  Asposehtmlcloudphp
+ * @package  html-sdk-php
  * @author   Alexander Makogon <alexander.makogon@aspose.com>
  * @license  https://opensource.org/licenses/mit-license.php  MIT License
- * @link     https://packagist.org/packages/aspose/aspose-html-cloud-php
+ * @link     https://packagist.org/packages/aspose/html-sdk-php
  */
 class StorageFile implements ModelInterface, ArrayAccess
 {

@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="BaseTest.php">
-*   Copyright (c) 2019 Aspose.HTML for Cloud
+*   Copyright (c) 2020 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -63,10 +63,15 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
 
  //Configuration - pass by constructor
         $configuration = array(
-            "basePath" => "https://api.aspose.cloud/v3.0",
-            "authPath" => "https://api.aspose.cloud/connect/token",
-            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+//            "basePath" => "https://api.aspose.cloud/v3.0",
+//            "authPath" => "https://api.aspose.cloud/connect/token",
+//            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+//            "basePath" => "https://api-qa.aspose.cloud/v3.0",
+            "basePath" => "http://localhost:5000/v3.0",
+            "authPath" => "https://api-qa.aspose.cloud/connect/token",
+            "apiKey" => "html.cloud",
+            "appSID" => "html.cloud",
             "testResult" => "\\testresult\\",
             "testData" => "\\testdata\\",
             "remoteFolder" => "HtmlTestDoc",

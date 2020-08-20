@@ -145,66 +145,68 @@ All URIs are relative to *https://api.aspose.cloud/v3.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*HtmlApi* | [**getConvertDocumentToImage**](docs/ConversionApi.md#getConvertDocumentToImage) | **GET** /html/{name}/convert/image/{outFormat} | Convert the HTML document from the storage by its name to the specified image format.
-*HtmlApi* | [**getConvertDocumentToImageByUrl**](docs/ConversionApi.md#getConvertDocumentToImageByUrl) | **GET** /html/convert/image/{outFormat} | Convert the HTML page from the web by its URL to the specified image format.
-*HtmlApi* | [**getConvertDocumentToPdf**](docs/ConversionApi.md#getConvertDocumentToPdf) | **GET** /html/{name}/convert/pdf | Convert the HTML document from the storage by its name to PDF.
-*HtmlApi* | [**getConvertDocumentToPdfByUrl**](docs/ConversionApi.md#getConvertDocumentToPdfByUrl) | **GET** /html/convert/pdf | Convert the HTML page from the web by its URL to PDF.
-*HtmlApi* | [**getConvertDocumentToXps**](docs/ConversionApi.md#getConvertDocumentToXps) | **GET** /html/{name}/convert/xps | Convert the HTML document from the storage by its name to XPS.
-*HtmlApi* | [**getConvertDocumentToXpsByUrl**](docs/ConversionApi.md#getConvertDocumentToXpsByUrl) | **GET** /html/convert/xps | Convert the HTML page from the web by its URL to XPS.
-*HtmlApi* | [**postConvertDocumentInRequestToImage**](docs/ConversionApi.md#postConvertDocumentInRequestToImage) | **POST** /html/convert/image/{outFormat} | Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
-*HtmlApi* | [**postConvertDocumentInRequestToPdf**](docs/ConversionApi.md#postConvertDocumentInRequestToPdf) | **POST** /html/convert/pdf | Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
-*HtmlApi* | [**postConvertDocumentInRequestToXps**](docs/ConversionApi.md#postConvertDocumentInRequestToXps) | **POST** /html/convert/xps | Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
-*HtmlApi* | [**putConvertDocumentToImage**](docs/ConversionApi.md#putConvertDocumentToImage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
-*HtmlApi* | [**putConvertDocumentToPdf**](docs/ConversionApi.md#putConvertDocumentToPdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
-*HtmlApi* | [**putConvertDocumentToXps**](docs/ConversionApi.md#putConvertDocumentToXps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
-*HtmlApi* | [**getConvertDocumentToMHTMLByUrl**](docs/ConversionApi.md#getConvertDocumentToMHTMLByUrl) | **GET** /html/convert/mhtml | Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
-*HtmlApi* | [**getConvertDocumentToMarkdown**](docs/ConversionApi.md#getConvertDocumentToMarkdown) | **GET** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
-*HtmlApi* | [**postConvertDocumentInRequestToMarkdown**](docs/ConversionApi.md#postConvertDocumentInRequestToMarkdown) | **POST** /html/convert/md | Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
-*HtmlApi* | [**putConvertDocumentToMarkdown**](docs/ConversionApi.md#putConvertDocumentToMarkdown) | **PUT** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
-*HtmlApi* | [**getConvertMarkdownToHtml**](docs/ImportApi.md#getConvertMarkdownToHtml) | **GET** /html/{name}/import/md | Converts the Markdown document (located on storage) to HTML and returns resulting file in response content.
-*HtmlApi* | [**postConvertMarkdownInRequestToHtml**](docs/ImportApi.md#postConvertMarkdownInRequestToHtml) | **POST** /html/import/md | Converts the Markdown document (in request content) to HTML and uploads resulting file to storage by specified path.
-*HtmlApi* | [**putConvertMarkdownToHtml**](docs/ImportApi.md#putConvertMarkdownToHtml) | **PUT** /html/{name}/import/md | Converts the Markdown document (located on storage) to HTML and uploads resulting file to storage by specified path.
-*HtmlApi* | [**getDocumentFragmentByXPath**](docs/DocumentApi.md#getDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
-*HtmlApi* | [**getDocumentByUrl**](docs/DocumentApi.md#getDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
-*HtmlApi* | [**getDocumentFragmentByXPathByUrl**](docs/DocumentApi.md#getDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
-*HtmlApi* | [**getDocumentFragmentsByCSSSelector**](docs/DocumentApi.md#getDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
-*HtmlApi* | [**getDocumentFragmentsByCSSSelectorByUrl**](docs/DocumentApi.md#getDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
-*HtmlApi* | [**getDocumentImages**](docs/DocumentApi.md#getDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
-*HtmlApi* | [**getDocumentImagesByUrl**](docs/DocumentApi.md#getDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
-*HtmlApi* | [**getMergeHtmlTemplate**](docs/TemplateMergeApi.md#getMergeHtmlTemplate) | **GET** /html/{templateName}/merge | Populate HTML document template with data located as a file in the storage.
-*HtmlApi* | [**postMergeHtmlTemplate**](docs/TemplateMergeApi.md#postMergeHtmlTemplate) | **POST** /html/{templateName}/merge | Populate HTML document template with data from the request body. Result document will be saved to storage.
+*HtmlApi* | [**getConvertDocumentToImage**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToImage) | **GET** /html/{name}/convert/image/{outFormat} | Convert the HTML document from the storage by its name to the specified image format.
+*HtmlApi* | [**getConvertDocumentToImageByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToImageByUrl) | **GET** /html/convert/image/{outFormat} | Convert the HTML page from the web by its URL to the specified image format.
+*HtmlApi* | [**getConvertDocumentToPdf**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToPdf) | **GET** /html/{name}/convert/pdf | Convert the HTML document from the storage by its name to PDF.
+*HtmlApi* | [**getConvertDocumentToPdfByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToPdfByUrl) | **GET** /html/convert/pdf | Convert the HTML page from the web by its URL to PDF.
+*HtmlApi* | [**getConvertDocumentToXps**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToXps) | **GET** /html/{name}/convert/xps | Convert the HTML document from the storage by its name to XPS.
+*HtmlApi* | [**getConvertDocumentToXpsByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToXpsByUrl) | **GET** /html/convert/xps | Convert the HTML page from the web by its URL to XPS.
+*HtmlApi* | [**postConvertDocumentInRequestToImage**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#postConvertDocumentInRequestToImage) | **POST** /html/convert/image/{outFormat} | Converts the HTML document (in request content) to the specified image format and uploads resulting file to storage.
+*HtmlApi* | [**postConvertDocumentInRequestToPdf**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#postConvertDocumentInRequestToPdf) | **POST** /html/convert/pdf | Converts the HTML document (in request content) to PDF and uploads resulting file to storage.
+*HtmlApi* | [**postConvertDocumentInRequestToXps**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#postConvertDocumentInRequestToXps) | **POST** /html/convert/xps | Converts the HTML document (in request content) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**putConvertDocumentToImage**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#putConvertDocumentToImage) | **PUT** /html/{name}/convert/image/{outFormat} | Converts the HTML document (located on storage) to the specified image format and uploads resulting file to storage.
+*HtmlApi* | [**putConvertDocumentToPdf**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#putConvertDocumentToPdf) | **PUT** /html/{name}/convert/pdf | Converts the HTML document (located on storage) to PDF and uploads resulting file to storage.
+*HtmlApi* | [**putConvertDocumentToXps**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#putConvertDocumentToXps) | **PUT** /html/{name}/convert/xps | Converts the HTML document (located on storage) to XPS and uploads resulting file to storage.
+*HtmlApi* | [**getConvertDocumentToMHTMLByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToMHTMLByUrl) | **GET** /html/convert/mhtml | Converts the HTML page from Web by its URL to MHTML returns resulting file in response content.
+*HtmlApi* | [**getConvertDocumentToMarkdown**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#getConvertDocumentToMarkdown) | **GET** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and returns resulting file in response content.
+*HtmlApi* | [**postConvertDocumentInRequestToMarkdown**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#postConvertDocumentInRequestToMarkdown) | **POST** /html/convert/md | Converts the HTML document (in request content) to Markdown and uploads resulting file to storage by specified path.
+*HtmlApi* | [**putConvertDocumentToMarkdown**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ConversionApi.md#putConvertDocumentToMarkdown) | **PUT** /html/{name}/convert/md | Converts the HTML document (located on storage) to Markdown and uploads resulting file to storage by specified path.
+*HtmlApi* | [**getConvertMarkdownToHtml**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ImportApi.md#getConvertMarkdownToHtml) | **GET** /html/{name}/import/md | Converts the Markdown document (located on storage) to HTML and returns resulting file in response content.
+*HtmlApi* | [**postConvertMarkdownInRequestToHtml**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ImportApi.md#postConvertMarkdownInRequestToHtml) | **POST** /html/import/md | Converts the Markdown document (in request content) to HTML and uploads resulting file to storage by specified path.
+*HtmlApi* | [**putConvertMarkdownToHtml**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ImportApi.md#putConvertMarkdownToHtml) | **PUT** /html/{name}/import/md | Converts the Markdown document (located on storage) to HTML and uploads resulting file to storage by specified path.
+*HtmlApi* | [**getDocumentFragmentByXPath**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
+*HtmlApi* | [**getDocumentByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
+*HtmlApi* | [**getDocumentFragmentByXPathByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
+*HtmlApi* | [**getDocumentFragmentsByCSSSelector**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
+*HtmlApi* | [**getDocumentFragmentsByCSSSelectorByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
+*HtmlApi* | [**getDocumentImages**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
+*HtmlApi* | [**getDocumentImagesByUrl**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DocumentApi.md#getDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
+*HtmlApi* | [**getMergeHtmlTemplate**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/TemplateMergeApi.md#getMergeHtmlTemplate) | **GET** /html/{templateName}/merge | Populate HTML document template with data located as a file in the storage.
+*HtmlApi* | [**postMergeHtmlTemplate**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/TemplateMergeApi.md#postMergeHtmlTemplate) | **POST** /html/{templateName}/merge | Populate HTML document template with data from the request body. Result document will be saved to storage.
+*HtmlApi* | [**getSeoWarning**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/SeoApi.md#getSeoWarning) | **GET** /html/seo | Page analysis and return of SEO warnings in json format.
+*HtmlApi* | [**getHtmlWarning**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/SeoApi.md#getHtmlWarning) | **GET** /html/validator | Checks the markup validity of Web documents in HTML, XHTML, etc., and return result in json format.
 
 <a name="storage_api"></a>
 ## STORAGE API  
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*StorageApi* | [**copyFile**](docs/FileApi.md#copyfile) | **PUT** /html/storage/file/copy/{srcPath} | Copy file
-*StorageApi* | [**deleteFile**](docs/FileApi.md#deletefile) | **DELETE** /html/storage/file/{path} | Delete file
-*StorageApi* | [**downloadFile**](docs/FileApi.md#downloadfile) | **GET** /html/storage/file/{path} | Download file
-*StorageApi* | [**moveFile**](docs/FileApi.md#movefile) | **PUT** /html/storage/file/move/{srcPath} | Move file
-*StorageApi* | [**uploadFile**](docs/FileApi.md#uploadfile) | **PUT** /html/storage/file/{path} | Upload file
-*StorageApi* | [**copyFolder**](docs/FolderApi.md#copyfolder) | **PUT** /html/storage/folder/copy/{srcPath} | Copy folder
-*StorageApi* | [**createFolder**](docs/FolderApi.md#createfolder) | **PUT** /html/storage/folder/{path} | Create the folder
-*StorageApi* | [**deleteFolder**](docs/FolderApi.md#deletefolder) | **DELETE** /html/storage/folder/{path} | Delete folder
-*StorageApi* | [**getFilesList**](docs/FolderApi.md#getfileslist) | **GET** /html/storage/folder/{path} | Get all files and folders within a folder
-*StorageApi* | [**moveFolder**](docs/FolderApi.md#movefolder) | **PUT** /html/storage/folder/move/{srcPath} | Move folder
-*StorageApi* | [**getDiscUsage**](docs/StorageApi.md#getdiscusage) | **GET** /html/storage/disc | Get disc usage
-*StorageApi* | [**getFileVersions**](docs/StorageApi.md#getfileversions) | **GET** /html/storage/version/{path} | Get file versions
-*StorageApi* | [**objectExists**](docs/StorageApi.md#objectexists) | **GET** /html/storage/exist/{path} | Check if file or folder exists
-*StorageApi* | [**storageExists**](docs/StorageApi.md#storageexists) | **GET** /html/storage/{storageName}/exist | Check if storage exists
+*StorageApi* | [**copyFile**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileApi.md#copyfile) | **PUT** /html/storage/file/copy/{srcPath} | Copy file
+*StorageApi* | [**deleteFile**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileApi.md#deletefile) | **DELETE** /html/storage/file/{path} | Delete file
+*StorageApi* | [**downloadFile**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileApi.md#downloadfile) | **GET** /html/storage/file/{path} | Download file
+*StorageApi* | [**moveFile**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileApi.md#movefile) | **PUT** /html/storage/file/move/{srcPath} | Move file
+*StorageApi* | [**uploadFile**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileApi.md#uploadfile) | **PUT** /html/storage/file/{path} | Upload file
+*StorageApi* | [**copyFolder**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FolderApi.md#copyfolder) | **PUT** /html/storage/folder/copy/{srcPath} | Copy folder
+*StorageApi* | [**createFolder**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FolderApi.md#createfolder) | **PUT** /html/storage/folder/{path} | Create the folder
+*StorageApi* | [**deleteFolder**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FolderApi.md#deletefolder) | **DELETE** /html/storage/folder/{path} | Delete folder
+*StorageApi* | [**getFilesList**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FolderApi.md#getfileslist) | **GET** /html/storage/folder/{path} | Get all files and folders within a folder
+*StorageApi* | [**moveFolder**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FolderApi.md#movefolder) | **PUT** /html/storage/folder/move/{srcPath} | Move folder
+*StorageApi* | [**getDiscUsage**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/StorageApi.md#getdiscusage) | **GET** /html/storage/disc | Get disc usage
+*StorageApi* | [**getFileVersions**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/StorageApi.md#getfileversions) | **GET** /html/storage/version/{path} | Get file versions
+*StorageApi* | [**objectExists**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/StorageApi.md#objectexists) | **GET** /html/storage/exist/{path} | Check if file or folder exists
+*StorageApi* | [**storageExists**](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/StorageApi.md#storageexists) | **GET** /html/storage/{storageName}/exist | Check if storage exists
 
 ## Documentation For Models
 
- - [DiscUsage](docs/DiscUsage.md)
- - [Error](docs/Error.md)
- - [ErrorDetails](docs/ErrorDetails.md)
- - [FileVersions](docs/FileVersions.md)
- - [FilesList](docs/FilesList.md)
- - [FilesUploadResult](docs/FilesUploadResult.md)
- - [ObjectExist](docs/ObjectExist.md)
- - [StorageExist](docs/StorageExist.md)
- - [StorageFile](docs/StorageFile.md)
- - [FileVersion](docs/FileVersion.md)
+ - [DiscUsage](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/DiscUsage.md)
+ - [Error](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/Error.md)
+ - [ErrorDetails](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ErrorDetails.md)
+ - [FileVersions](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileVersions.md)
+ - [FilesList](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FilesList.md)
+ - [FilesUploadResult](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FilesUploadResult.md)
+ - [ObjectExist](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/ObjectExist.md)
+ - [StorageExist](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/StorageExist.md)
+ - [StorageFile](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/StorageFile.md)
+ - [FileVersion](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/docs/FileVersion.md)
 
 ## Documentation For Authorization
 
@@ -217,7 +219,7 @@ Class | Method | HTTP request | Description
 
 ### Examples
 
-[Tests](./test/Api/) contain various examples of using the Aspose.HTML SDK.
+[Tests](https://github.com/aspose-html-cloud/aspose-html-cloud-php/tree/master/test/Api/) contain various examples of using the Aspose.HTML SDK.
 
 ## Author
 Aspose
