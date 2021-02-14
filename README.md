@@ -77,27 +77,40 @@ Download the files and include `autoload.php`:
 
 Example:   
 Pass configuration to constructor (see in tests - BaseTest.php)
+## Convert HTML to PNG in PHP
 
 ```php
-        $conf = array(
-            "basePath" => "https://api.aspose.cloud/v3.0",
-            "authPath" => "https://api.aspose.cloud/connect/token",
-            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-            "testResult" => "\\testresult\\",
-            "testData" => "\\testdata\\",
-            "remoteFolder" => "HtmlTestDoc",
-            "defaultUserAgent" => "Webkit",
-            "debugFile" => "php://output",
-            "debug" => false
-        );
+	// Get your ClientId and ClientSecret from https://dashboard.aspose.cloud (free registration required).
 
-            self::$api_html = new HtmlApi($configuration);
-            self::$api_stor = new StorageApi($configuration);
+	$conf = array(
+		"appSID" => "MY_CLIENT_ID",
+		"apiKey" => "MY_CLIENT_SECRET",
+		"basePath" => "https://api.aspose.cloud/v3.0",
+		"authPath" => "https://api.aspose.cloud/connect/token",
+		"testResult" => "\\testresult\\",
+		"testData" => "\\testdata\\",
+		"remoteFolder" => "HtmlTestDoc",
+		"defaultUserAgent" => "Webkit",
+		"debugFile" => "php://output",
+		"debug" => false
+	);
 
-// optional for test
-            self::$testFolder = realpath(__DIR__ . '/../..') . $configuration['testData'];
-            self::$testResult = realpath(__DIR__ . '/../..') . $configuration['testResult'];
+	$api_html = new HtmlApi($conf);
+	
+	$name = "sample.html"; // string | Document name.
+	$out_format = "png"; // string | Resulting image format.
+	$width = 800; // int | Resulting image width.
+	$height = 1000; // int | Resulting image height.
+	$left_margin = 10; // int | Left resulting image margin.
+	$right_margin = 10; // int | Right resulting image margin.
+	$top_margin = 10; // int | Top resulting image margin.
+	$bottom_margin = 10; // int | Bottom resulting image margin.
+	$resolution = 300; // int | Resolution of resulting image.
+	$folder = "folder_example"; // string | The source document folder.
+	$storage = "storage_example"; // string | The source document storage.
+
+	$result = $api_html->getConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
+	print_r($result);	
 ```
 
 ###Note: do not forget to add in php.ini
@@ -122,48 +135,6 @@ composer install
 ./vendor/bin/phpunit
 ```
 
-Please follow the [installation procedure](#installation--usage) and then run the following:
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$conf = array(
-	"basePath" => "https://api.aspose.cloud/v3.0",
-	"authPath" => "https://api.aspose.cloud/connect/token",
-	"apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	"appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-	"testResult" => "\\testresult\\",
-	"testData" => "\\testdata\\",
-	"remoteFolder" => "HtmlTestDoc",
-	"defaultUserAgent" => "Webkit",
-	"debugFile" => "php://output",
-	"debug" => false
-);
-
-$apiInstance = new Client\Invoker\Api\HtmlApi($conf);
-
-$name = "name_example"; // string | Document name.
-$out_format = "png"; // string | Resulting image format.
-$width = 800; // int | Resulting image width.
-$height = 1000; // int | Resulting image height.
-$left_margin = 10; // int | Left resulting image margin.
-$right_margin = 10; // int | Right resulting image margin.
-$top_margin = 10; // int | Top resulting image margin.
-$bottom_margin = 10; // int | Bottom resulting image margin.
-$resolution = 300; // int | Resolution of resulting image.
-$folder = "folder_example"; // string | The source document folder.
-$storage = "storage_example"; // string | The source document storage.
-
-try {
-    $result = $apiInstance->getConvertDocumentToImage($name, $out_format, $width, $height, $left_margin, $right_margin, $top_margin, $bottom_margin, $resolution, $folder, $storage);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling HtmlApi->getConvertDocumentToImage: ', $e->getMessage(), PHP_EOL;
-}
-
-?>
-```
 
 ## Documentation for API Endpoints
 All URIs are relative to *https://api.aspose.cloud/v3.0*
