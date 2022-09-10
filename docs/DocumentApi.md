@@ -1,16 +1,16 @@
 # Client\Invoker\Api\DocumentApi
 
-All URIs are relative to *https://api.aspose.cloud/v1.1*
+All URIs are relative to *https://api.aspose.cloud/v4.0*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getDocumentByUrl**](DocumentApi.md#getDocumentByUrl) | **GET** /html/download | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL.
-[**getDocumentFragmentByXPath**](DocumentApi.md#getDocumentFragmentByXPath) | **GET** /html/{name}/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query.
-[**getDocumentFragmentByXPathByUrl**](DocumentApi.md#getDocumentFragmentByXPathByUrl) | **GET** /html/fragments/{outFormat} | Return list of HTML fragments matching the specified XPath query by the source page URL.
-[**getDocumentFragmentsByCSSSelector**](DocumentApi.md#dgetDocumentFragmentsByCSSSelector) | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.
-[**getDocumentFragmentsByCSSSelectorByUrl**](DocumentApi.md#getDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector by the source page URL.
-[**getDocumentImages**](DocumentApi.md#getDocumentImages) | **GET** /html/{name}/images/all | Return all HTML document images packaged as a ZIP archive.
-[**getDocumentImagesByUrl**](DocumentApi.md#getDocumentImagesByUrl) | **GET** /html/images/all | Return all HTML page images packaged as a ZIP archive by the source page URL.
+| Method                                                                                              | HTTP request                                   | Description                                                                                  |
+|-----------------------------------------------------------------------------------------------------|------------------------------------------------|----------------------------------------------------------------------------------------------|
+| [**getDocumentByUrl**](DocumentApi.md#getDocumentByUrl)                                             | **GET** /html/download                         | Return all HTML page with linked resources packaged as a ZIP archive by the source page URL. |
+| [**getDocumentFragmentByXPath**](DocumentApi.md#getDocumentFragmentByXPath)                         | **GET** /html/{name}/fragments/{outFormat}     | Return list of HTML fragments matching the specified XPath query.                            |
+| [**getDocumentFragmentByXPathByUrl**](DocumentApi.md#getDocumentFragmentByXPathByUrl)               | **GET** /html/fragments/{outFormat}            | Return list of HTML fragments matching the specified XPath query by the source page URL.     |
+| [**getDocumentFragmentsByCSSSelector**](DocumentApi.md#dgetDocumentFragmentsByCSSSelector)          | **GET** /html/{name}/fragments/css/{outFormat} | Return list of HTML fragments matching the specified CSS selector.                           |
+| [**getDocumentFragmentsByCSSSelectorByUrl**](DocumentApi.md#getDocumentFragmentsByCSSSelectorByUrl) | **GET** /html/fragments/css/{outFormat}        | Return list of HTML fragments matching the specified CSS selector by the source page URL.    |
+| [**getDocumentImages**](DocumentApi.md#getDocumentImages)                                           | **GET** /html/{name}/images/all                | Return all HTML document images packaged as a ZIP archive.                                   |
+| [**getDocumentImagesByUrl**](DocumentApi.md#getDocumentImagesByUrl)                                 | **GET** /html/images/all                       | Return all HTML page images packaged as a ZIP archive by the source page URL.                |
 
 <a name="getDocumentByUrl"></a>
 # **getDocumentByUrl**
@@ -24,7 +24,7 @@ Return all HTML page with linked resources packaged as a ZIP archive by the sour
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -51,9 +51,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **source_url** | **string**| Source page URL. |
+| Name           | Type       | Description      | Notes |
+|----------------|------------|------------------|-------|
+| **source_url** | **string** | Source page URL. |       |
 
 ### Return type
 
@@ -78,7 +78,7 @@ Return list of HTML fragments matching the specified XPath query.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -109,13 +109,13 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **string**| The document name. | Presented as zip archive with one html file in the root or html file.
- **x_path** | **string**| XPath query string. |
- **out_format** | **string**| Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |
- **storage** | **string**| The document storage. | [optional]
- **folder** | **string**| The document folder. | [optional]
+| Name           | Type       | Description                                                         | Notes                                                                 |
+|----------------|------------|---------------------------------------------------------------------|-----------------------------------------------------------------------|
+| **name**       | **string** | The document name.                                                  | Presented as zip archive with one html file in the root or html file. |
+| **x_path**     | **string** | XPath query string.                                                 |                                                                       |
+| **out_format** | **string** | Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |                                                                       |
+| **storage**    | **string** | The document storage.                                               | [optional]                                                            |
+| **folder**     | **string** | The document folder.                                                | [optional]                                                            |
 
 ### Return type
 
@@ -140,7 +140,7 @@ Return list of HTML fragments matching the specified XPath query by the source p
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -169,11 +169,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **source_url** | **string**| Source page URL. |
- **x_path** | **string**| XPath query string. |
- **out_format** | **string**| Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |
+| Name           | Type       | Description                                                         | Notes |
+|----------------|------------|---------------------------------------------------------------------|-------|
+| **source_url** | **string** | Source page URL.                                                    |       |
+| **x_path**     | **string** | XPath query string.                                                 |       |
+| **out_format** | **string** | Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |       |
 
 ### Return type
 
@@ -198,7 +198,7 @@ Return list of HTML fragments matching the specified CSS selector.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -229,13 +229,13 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **string**| The document name. | Presented as zip archive with one html file in the root or html file.
- **selector** | **string**| CSS selector string. |
- **out_format** | **string**| Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |
- **folder** | **string**| The document folder. | [optional]
- **storage** | **string**| The document storage. | [optional]
+| Name           | Type       | Description                                                         | Notes                                                                 |
+|----------------|------------|---------------------------------------------------------------------|-----------------------------------------------------------------------|
+| **name**       | **string** | The document name.                                                  | Presented as zip archive with one html file in the root or html file. |
+| **selector**   | **string** | CSS selector string.                                                |                                                                       |
+| **out_format** | **string** | Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |                                                                       |
+| **folder**     | **string** | The document folder.                                                | [optional]                                                            |
+| **storage**    | **string** | The document storage.                                               | [optional]                                                            |
 
 ### Return type
 
@@ -260,7 +260,7 @@ Return list of HTML fragments matching the specified CSS selector by the source 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -289,11 +289,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **source_url** | **string**| Source page URL. |
- **selector** | **string**| CSS selector string. |
- **out_format** | **string**| Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |
+| Name           | Type       | Description                                                         | Notes |
+|----------------|------------|---------------------------------------------------------------------|-------|
+| **source_url** | **string** | Source page URL.                                                    |       |
+| **selector**   | **string** | CSS selector string.                                                |       |
+| **out_format** | **string** | Output format. Possible values: &#39;plain&#39; and &#39;json&#39;. |       |
 
 ### Return type
 
@@ -318,7 +318,7 @@ Return all HTML document images packaged as a ZIP archive.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -347,11 +347,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **string**| The document name. | Presented as zip archive with one html file in the root.
- **folder** | **string**| The document folder. | [optional]
- **storage** | **string**| The document storage. | [optional]
+| Name        | Type       | Description           | Notes                                                    |
+|-------------|------------|-----------------------|----------------------------------------------------------|
+| **name**    | **string** | The document name.    | Presented as zip archive with one html file in the root. |
+| **folder**  | **string** | The document folder.  | [optional]                                               |
+| **storage** | **string** | The document storage. | [optional]                                               |
 
 ### Return type
 
@@ -376,7 +376,7 @@ Return all HTML page images packaged as a ZIP archive by the source page URL.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $configuration = array(
-    "basePath" => "https://api.aspose.cloud/v1.1",
+    "basePath" => "https://api.aspose.cloud/v4.0",
     "authPath" => "https://api.aspose.cloud/oauth2/token",
     "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
@@ -403,9 +403,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **source_url** | **string**| Source page URL. |
+| Name           | Type       | Description      | Notes |
+|----------------|------------|------------------|-------|
+| **source_url** | **string** | Source page URL. |       |
 
 ### Return type
 

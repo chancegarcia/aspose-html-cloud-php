@@ -17,21 +17,21 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
 namespace Client\Invoker\Model;
 
-use \ArrayAccess;
-use \Client\Invoker\ObjectSerializer;
+use ArrayAccess;
+use Client\Invoker\ObjectSerializer;
 
 /**
  * Model for DiscUsage response
@@ -51,14 +51,14 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'DiscUsage';
+    protected static string $swaggerModelName = 'DiscUsage';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'used_size' => 'string',
         'total_size' => 'string'
     ];
@@ -68,7 +68,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'used_size' => 'string',
         'total_size' => 'string'
     ];
@@ -78,7 +78,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -88,7 +88,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -99,7 +99,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'used_size' => 'usedSize',
         'total_size' => 'totalSize'
     ];
@@ -109,7 +109,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'used_size' => 'setUsedSize',
         'total_size' => 'setTotalSize'
     ];
@@ -119,7 +119,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'used_size' => 'getUsedSize',
         'total_size' => 'getTotalSize'
     ];
@@ -130,7 +130,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -140,7 +140,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -150,7 +150,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -160,7 +160,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
@@ -168,22 +168,22 @@ class DiscUsage implements ModelInterface, ArrayAccess
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array | null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['used_size']
-            = isset($data['used_size']) ? $data['used_size'] : null;
+            = $data['used_size'] ?? null;
         $this->container['total_size']
-            = isset($data['total_size']) ? $data['total_size'] : null;
+            = $data['total_size'] ?? null;
     }
 
     /**
@@ -191,7 +191,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
         $invalidProperties = [];
 
@@ -210,7 +210,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -220,7 +220,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return int
      */
-    public function getUsedSize()
+    public function getUsedSize(): int
     {
         return $this->container['used_size'];
     }
@@ -232,7 +232,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setUsedSize($used_size)
+    public function setUsedSize(int $used_size): DiscUsage
     {
         $this->container['used_size'] = $used_size;
 
@@ -244,7 +244,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return int
      */
-    public function getTotalSize()
+    public function getTotalSize(): int
     {
         return $this->container['total_size'];
     }
@@ -256,7 +256,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setTotalSize($total_size)
+    public function setTotalSize(int $total_size): DiscUsage
     {
         $this->container['total_size'] = $total_size;
 
@@ -268,9 +268,9 @@ class DiscUsage implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -284,7 +284,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**

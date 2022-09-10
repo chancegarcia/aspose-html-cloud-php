@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -56,7 +56,7 @@ class ApiException extends Exception
      *
      * @var string[]|null
      */
-    protected $responseHeaders;
+    protected ?array $responseHeaders;
 
     /**
      * The deserialized response object
@@ -87,7 +87,7 @@ class ApiException extends Exception
      *
      * @return string[]|null HTTP response header
      */
-    public function getResponseHeaders()
+    public function getResponseHeaders(): ?array
     {
         return $this->responseHeaders;
     }

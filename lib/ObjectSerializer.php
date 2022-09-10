@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -33,7 +33,6 @@ namespace Client\Invoker;
 use DateTime;
 use Exception;
 use InvalidArgumentException;
-use Psr\Http\Message\StreamInterface;
 use SplFileObject;
 
 /**
@@ -51,13 +50,13 @@ class ObjectSerializer
      * Serialize data
      *
      * @param mixed  $data   the data to serialize
-     * @param string $type   the type of the data
-     * @param string $format the format of the data
+     * @param string|null $type   the type of the data
+     * @param string|null $format the format of the data
      *
      * @return string|object serialized form of $data
      */
     public static function sanitizeForSerialization(
-        $data, $type = null, $format = null
+        $data, string $type = null, string $format = null
     ) {
         if (is_scalar($data) || null === $data) {
             return $data;
@@ -121,7 +120,7 @@ class ObjectSerializer
      *
      * @return string the sanitized filename
      */
-    public static function sanitizeFilename($filename)
+    public static function sanitizeFilename(string $filename): string
     {
         if (preg_match("/.*[\/\\\\](.*)$/", $filename, $match)) {
             return $match[1];
@@ -138,7 +137,7 @@ class ObjectSerializer
      *
      * @return string the serialized object
      */
-    public static function toPathValue($value)
+    public static function toPathValue(string $value): string
     {
         return rawurlencode(self::toString($value));
     }
@@ -171,7 +170,7 @@ class ObjectSerializer
      *
      * @return string the header string
      */
-    public static function toHeaderValue($value)
+    public static function toHeaderValue(string $value)
     {
         return self::toString($value);
     }
@@ -219,14 +218,15 @@ class ObjectSerializer
      *                                           to a string
      * @param string $collectionFormat           the format use for serialization
      *                                           (csv, ssv, tsv, pipes, multi)
-     * @param bool   $allowCollectionFormatMulti allow collection format to be
+     * @param bool $allowCollectionFormatMulti allow collection format to be
      *                                           a multidimensional array
      *
      * @return string
      */
     public static function serializeCollection(
-        array $collection, $collectionFormat, $allowCollectionFormatMulti = false
-    ) {
+        array $collection, string $collectionFormat, bool $allowCollectionFormatMulti = false
+    ): string
+    {
         if ($allowCollectionFormatMulti && ('multi' === $collectionFormat)) {
             // http_build_query() almost does the job for us. We just
             // need to fix the result of multidimensional arrays.
@@ -257,13 +257,13 @@ class ObjectSerializer
      * Deserialize a JSON string into an object
      *
      * @param mixed    $data        Object or primitive to be deserialized
-     * @param string   $class       Class name is passed as a string
-     * @param string[] $httpHeaders HTTP headers
+     * @param string $class       Class name is passed as a string
+     * @param string[]|null $httpHeaders HTTP headers
      *
-     * @throws Exception
      * @return object|array|null an single or an array of $class instances
+     *@throws Exception
      */
-    public static function deserialize($data, $class, $httpHeaders = null)
+    public static function deserialize($data, string $class, array $httpHeaders = null)
     {
         if (null === $data) {
             return null;
@@ -276,7 +276,7 @@ class ObjectSerializer
                 $subClass = $subClass_array[1];
                 foreach ($data as $key => $value) {
                     $deserialized[$key]
-                        = self::deserialize($value, $subClass, null);
+                        = self::deserialize($value, $subClass);
                 }
             }
             return $deserialized;
@@ -284,7 +284,7 @@ class ObjectSerializer
             $subClass = substr($class, 0, -2);
             $values = [];
             foreach ($data as $key => $value) {
-                $values[] = self::deserialize($value, $subClass, null);
+                $values[] = self::deserialize($value, $subClass);
             }
             return $values;
         } elseif ($class === 'object') {
@@ -379,7 +379,7 @@ class ObjectSerializer
                 $propertyValue = $data->{$instance::attributeMap()[$property]};
                 if (isset($propertyValue)) {
                     $instance->$propertySetter(
-                        self::deserialize($propertyValue, $type, null)
+                        self::deserialize($propertyValue, $type)
                     );
                 }
             }

@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -46,21 +46,21 @@ interface ModelInterface
      *
      * @return string
      */
-    public function getModelName();
+    public function getModelName(): string;
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array
      */
-    public static function swaggerTypes();
+    public static function swaggerTypes(): array;
 
     /**
      * Array of property to format mappings. Used for (de)serialization
      *
      * @return array
      */
-    public static function swaggerFormats();
+    public static function swaggerFormats(): array;
 
     /**
      * Array of attributes where the key is the local name, and the value
@@ -68,28 +68,28 @@ interface ModelInterface
      *
      * @return array
      */
-    public static function attributeMap();
+    public static function attributeMap(): array;
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
      * @return array
      */
-    public static function setters();
+    public static function setters(): array;
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @return array
      */
-    public static function getters();
+    public static function getters(): array;
 
     /**
      * Show all the invalid properties with reasons.
      *
      * @return array
      */
-    public function listInvalidProperties();
+    public function listInvalidProperties(): array;
 
     /**
      * Validate all the properties in the model
@@ -97,5 +97,5 @@ interface ModelInterface
      *
      * @return bool
      */
-    public function valid();
+    public function valid(): bool;
 }

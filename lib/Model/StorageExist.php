@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -51,14 +51,14 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'StorageExist';
+    protected static string $swaggerModelName = 'StorageExist';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'exists' => 'bool'
     ];
 
@@ -67,7 +67,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'exists' => null
     ];
 
@@ -76,7 +76,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes() : array
     {
         return self::$swaggerTypes;
     }
@@ -86,7 +86,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats() : array
     {
         return self::$swaggerFormats;
     }
@@ -97,7 +97,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'exists' => 'exists'
     ];
 
@@ -106,7 +106,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'exists' => 'setExists'
     ];
 
@@ -115,7 +115,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'exists' => 'getExists'
     ];
 
@@ -125,7 +125,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap() : array
     {
         return self::$attributeMap;
     }
@@ -135,7 +135,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters() : array
     {
         return self::$setters;
     }
@@ -145,7 +145,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters() : array
     {
         return self::$getters;
     }
@@ -155,7 +155,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName() : string
     {
         return self::$swaggerModelName;
     }
@@ -163,19 +163,19 @@ class StorageExist implements ModelInterface, ArrayAccess
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array | null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['exists'] = isset($data['exists']) ? $data['exists'] : null;
+        $this->container['exists'] = $data['exists'] ?? null;
     }
 
     /**
@@ -183,7 +183,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties() : array
     {
         $invalidProperties = [];
 
@@ -199,7 +199,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid() : bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -209,7 +209,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return bool
      */
-    public function getExists()
+    public function getExists(): bool
     {
         return $this->container['exists'];
     }
@@ -221,7 +221,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setExists($exists)
+    public function setExists(bool $exists): StorageExist
     {
         $this->container['exists'] = $exists;
 
@@ -233,9 +233,9 @@ class StorageExist implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -249,7 +249,7 @@ class StorageExist implements ModelInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**

@@ -17,21 +17,21 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
 namespace Client\Invoker\Model;
 
-use \ArrayAccess;
-use \Client\Invoker\ObjectSerializer;
+use ArrayAccess;
+use Client\Invoker\ObjectSerializer;
 
 /**
  * Model for Error response
@@ -51,14 +51,14 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'Error';
+    protected static string $swaggerModelName = 'Error';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'code' => 'string',
         'message' => 'string',
         'description' => 'string',
@@ -70,7 +70,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'code' => null,
         'message' => null,
         'description' => null,
@@ -82,7 +82,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -92,7 +92,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -103,7 +103,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'code' => 'Code',
         'message' => 'Message',
         'description' => 'Description',
@@ -115,7 +115,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'code' => 'setCode',
         'message' => 'setMessage',
         'description' => 'setDescription',
@@ -127,7 +127,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'code' => 'getCode',
         'message' => 'getMessage',
         'description' => 'getDescription',
@@ -140,7 +140,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -150,7 +150,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -160,7 +160,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -170,7 +170,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
@@ -178,25 +178,25 @@ class Error implements ModelInterface, ArrayAccess
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array | null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        $this->container['code'] = $data['code'] ?? null;
         $this->container['message']
-            = isset($data['message']) ? $data['message'] : null;
+            = $data['message'] ?? null;
         $this->container['description']
-            = isset($data['description']) ? $data['description'] : null;
+            = $data['description'] ?? null;
         $this->container['inner_error']
-            = isset($data['inner_error']) ? $data['inner_error'] : null;
+            = $data['inner_error'] ?? null;
     }
 
     /**
@@ -204,11 +204,9 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -217,7 +215,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -227,7 +225,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->container['code'];
     }
@@ -239,7 +237,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(string $code): Error
     {
         $this->container['code'] = $code;
 
@@ -251,7 +249,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->container['message'];
     }
@@ -263,7 +261,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setMessage($message)
+    public function setMessage(string $message): Error
     {
         $this->container['message'] = $message;
 
@@ -275,7 +273,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->container['description'];
     }
@@ -287,7 +285,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description): Error
     {
         $this->container['description'] = $description;
 
@@ -299,7 +297,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return ErrorDetails
      */
-    public function getInnerError()
+    public function getInnerError(): ErrorDetails
     {
         return $this->container['inner_error'];
     }
@@ -311,7 +309,7 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setInnerError($inner_error)
+    public function setInnerError(ErrorDetails $inner_error): Error
     {
         $this->container['inner_error'] = $inner_error;
 
@@ -323,9 +321,9 @@ class Error implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -339,7 +337,7 @@ class Error implements ModelInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**

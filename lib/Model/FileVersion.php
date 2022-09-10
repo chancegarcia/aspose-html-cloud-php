@@ -17,20 +17,20 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
 namespace Client\Invoker\Model;
 
-use \Client\Invoker\ObjectSerializer;
+use Client\Invoker\ObjectSerializer;
 
 /**
  * Model for FileVersion response
@@ -50,14 +50,14 @@ class FileVersion extends StorageFile
      *
      * @var string
      */
-    protected static $swaggerModelName = 'FileVersion';
+    protected static string $swaggerModelName = 'FileVersion';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'version_id' => 'string',
         'is_latest' => 'bool'
     ];
@@ -67,7 +67,7 @@ class FileVersion extends StorageFile
      *
      * @var string[]
      */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'version_id' => null,
         'is_latest' => null
     ];
@@ -77,7 +77,7 @@ class FileVersion extends StorageFile
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes + parent::swaggerTypes();
     }
@@ -87,7 +87,7 @@ class FileVersion extends StorageFile
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats + parent::swaggerFormats();
     }
@@ -98,7 +98,7 @@ class FileVersion extends StorageFile
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'version_id' => 'versionId',
         'is_latest' => 'isLatest'
     ];
@@ -108,7 +108,7 @@ class FileVersion extends StorageFile
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'version_id' => 'setVersionId',
         'is_latest' => 'setIsLatest'
     ];
@@ -118,7 +118,7 @@ class FileVersion extends StorageFile
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'version_id' => 'getVersionId',
         'is_latest' => 'getIsLatest'
     ];
@@ -129,7 +129,7 @@ class FileVersion extends StorageFile
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return parent::attributeMap() + self::$attributeMap;
     }
@@ -139,7 +139,7 @@ class FileVersion extends StorageFile
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return parent::setters() + self::$setters;
     }
@@ -149,7 +149,7 @@ class FileVersion extends StorageFile
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return parent::getters() + self::$getters;
     }
@@ -159,7 +159,7 @@ class FileVersion extends StorageFile
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
@@ -167,7 +167,7 @@ class FileVersion extends StorageFile
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array | null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
@@ -175,9 +175,9 @@ class FileVersion extends StorageFile
         parent::__construct($data);
 
         $this->container['version_id']
-            = isset($data['version_id']) ? $data['version_id'] : null;
+            = $data['version_id'] ?? null;
         $this->container['is_latest']
-            = isset($data['is_latest']) ? $data['is_latest'] : null;
+            = $data['is_latest'] ?? null;
     }
 
     /**
@@ -185,7 +185,7 @@ class FileVersion extends StorageFile
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
         $invalidProperties = parent::listInvalidProperties();
 
@@ -201,7 +201,7 @@ class FileVersion extends StorageFile
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -211,7 +211,7 @@ class FileVersion extends StorageFile
      *
      * @return string
      */
-    public function getVersionId()
+    public function getVersionId(): string
     {
         return $this->container['version_id'];
     }
@@ -223,7 +223,7 @@ class FileVersion extends StorageFile
      *
      * @return $this
      */
-    public function setVersionId($version_id)
+    public function setVersionId(string $version_id): FileVersion
     {
         $this->container['version_id'] = $version_id;
 
@@ -235,7 +235,7 @@ class FileVersion extends StorageFile
      *
      * @return bool
      */
-    public function getIsLatest()
+    public function getIsLatest(): bool
     {
         return $this->container['is_latest'];
     }
@@ -248,7 +248,7 @@ class FileVersion extends StorageFile
      *
      * @return $this
      */
-    public function setIsLatest($is_latest)
+    public function setIsLatest(bool $is_latest): FileVersion
     {
         $this->container['is_latest'] = $is_latest;
 
@@ -259,9 +259,9 @@ class FileVersion extends StorageFile
      *
      * @param integer $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -275,7 +275,7 @@ class FileVersion extends StorageFile
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**

@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="StorageApiTest.php">
-*   Copyright (c) 2020 Aspose.HTML for Cloud
+*   Copyright (c) 2022 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,8 +33,6 @@ use Client\Invoker\Model\DiscUsage;
 use Client\Invoker\Model\FileVersions;
 use Client\Invoker\Model\ObjectExist;
 use Client\Invoker\Model\StorageExist;
-use DateTime;
-use InvalidArgumentException;
 use SplFileObject;
 
 /**
@@ -54,58 +52,13 @@ class StorageApiTest extends BaseTest
      * @throws ApiException on non-2xx response
      * @throws InvalidArgumentException
      * @return DiscUsage
-     */    public function testGetDiscUsage()
+     */
+    public function testGetDiscUsage() : void
     {
         $storage_name = null;
         $result = self::$api_stor->getDiscUsage($storage_name);
         $this->assertTrue($result->getUsedSize() > 0);
         $this->assertTrue($result->getTotalSize() > 0);
-    }
-
-    /**
-     * Test case for getFileVersions
-     *
-     * @param  string $path File path e.g. &#39;/file.ext&#39; (required)
-     * @param  string $storage_name Storage name (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return FileVersions
-     */
-    public function testGetFileVersions()
-    {
-        //Upload files to the storage
-        $name = "test1.html";
-        $file = $file = new SplFileObject(self::$testFolder . $name);
-        $folder = self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $name;
-        $storage_name = null;
-
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
-        $this->assertTrue(count($response->getUploaded()) == 1);
-        $this->assertTrue(count($response->getErrors()) == 0);
-
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
-        $this->assertTrue(count($response->getUploaded()) == 1);
-        $this->assertTrue(count($response->getErrors()) == 0);
-
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
-        $this->assertTrue(count($response->getUploaded()) == 1);
-        $this->assertTrue(count($response->getErrors()) == 0);
-
-        $result = self::$api_stor->getFileVersions($path, $storage_name);
-        // \Client\Invoker\Model\FileVersion[]
-        $files = $result->getValue();
-        $this->assertTrue(count($files) >= 3);
-        // \Client\Invoker\Model\FileVersion
-        $one_file = $files[0];
-        $this->assertTrue(strlen($one_file->getName()) > 0);
-        $this->assertFalse($one_file->getIsFolder());
-        $this->assertTrue($one_file->getModifiedDate() instanceof DateTime);
-        $this->assertTrue($one_file->getSize() >= 0);
-        $this->assertTrue(strlen($one_file->getPath()) > 0);
-        $this->assertTrue(strlen($one_file->getVersionId()) > 0);
-        $this->assertTrue($one_file->getIsLatest() !== null);
     }
 
     /**
@@ -119,35 +72,36 @@ class StorageApiTest extends BaseTest
      * @throws InvalidArgumentException
      * @return ObjectExist
      */
-    public function testObjectExists()
+    public function testObjectExists(): void
     {
-        $path_exist_file = 'HtmlTestDoc/test1.html';
+        //Upload files to the storage
+        $name = "test1.html";
         $storage_name = null;
         $version_id = null;
 
-        $result = self::$api_stor->objectExists($path_exist_file, $storage_name, $version_id);
+        $file = new SplFileObject(self::$testFolder . $name);
+        $folder = self::$api_html->config['remoteFolder'];
+        $response = self::$api_stor->uploadFile($folder, $file, $storage_name);
+        $this->assertTrue(count($response->getUploaded()) == 1);
+        $this->assertTrue(count($response->getErrors()) == 0);
+
+        $result = self::$api_stor->objectExists($folder . "/" . $name, $storage_name, $version_id);
         $this->assertTrue($result->getExists());
         $this->assertFalse($result->getIsFolder());
 
         $path_not_exist_file = 'HtmlTestDoc/test_not_exist.html';
-        $storage_name = null;
-        $version_id = null;
 
         $result = self::$api_stor->objectExists($path_not_exist_file, $storage_name, $version_id);
         $this->assertFalse($result->getExists());
         $this->assertFalse($result->getIsFolder());
 
-        $path_exist_folder = 'HtmlTestDoc';
-        $storage_name = null;
-        $version_id = null;
+        $path_exist_folder = $folder;
 
         $result = self::$api_stor->objectExists($path_exist_folder, $storage_name, $version_id);
         $this->assertTrue($result->getExists());
         $this->assertTrue($result->getIsFolder());
 
         $path_not_exist_folder = 'NotExistFolder';
-        $storage_name = null;
-        $version_id = null;
 
         $result = self::$api_stor->objectExists($path_not_exist_folder, $storage_name, $version_id);
         $this->assertFalse($result->getExists());
@@ -163,7 +117,7 @@ class StorageApiTest extends BaseTest
      * @throws InvalidArgumentException
      * @return StorageExist
      */
-    public function testStorageExists()
+    public function testStorageExists():void
     {
         $storage_name_not_exist = "NotExist";
         $result = self::$api_stor->storageExists($storage_name_not_exist);

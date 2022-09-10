@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -52,14 +52,14 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'StorageFile';
+    protected static string $swaggerModelName = 'StorageFile';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'name' => 'string',
         'is_folder' => 'bool',
         'modified_date' => '\DateTime',
@@ -72,7 +72,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'name' => null,
         'is_folder' => null,
         'modified_date' => 'date-time',
@@ -85,7 +85,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes() : array
     {
         return self::$swaggerTypes;
     }
@@ -95,7 +95,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats() : array
     {
         return self::$swaggerFormats;
     }
@@ -106,7 +106,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'name' => 'name',
         'is_folder' => 'isFolder',
         'modified_date' => 'modifiedDate',
@@ -119,7 +119,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $setters = [
+    protected static array $setters = [
         'name' => 'setName',
         'is_folder' => 'setIsFolder',
         'modified_date' => 'setModifiedDate',
@@ -132,7 +132,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $getters = [
+    protected static array $getters = [
         'name' => 'getName',
         'is_folder' => 'getIsFolder',
         'modified_date' => 'getModifiedDate',
@@ -146,7 +146,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap() : array
     {
         return self::$attributeMap;
     }
@@ -156,7 +156,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters() : array
     {
         return self::$setters;
     }
@@ -166,7 +166,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters() : array
     {
         return self::$getters;
     }
@@ -176,7 +176,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName() : string
     {
         return self::$swaggerModelName;
     }
@@ -184,25 +184,25 @@ class StorageFile implements ModelInterface, ArrayAccess
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array | null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['name'] = $data['name'] ?? null;
         $this->container['is_folder']
-            = isset($data['is_folder']) ? $data['is_folder'] : null;
+            = $data['is_folder'] ?? null;
         $this->container['modified_date']
-            = isset($data['modified_date']) ? $data['modified_date'] : null;
-        $this->container['size'] = isset($data['size']) ? $data['size'] : null;
-        $this->container['path'] = isset($data['path']) ? $data['path'] : null;
+            = $data['modified_date'] ?? null;
+        $this->container['size'] = $data['size'] ?? null;
+        $this->container['path'] = $data['path'] ?? null;
 
         // Initialize discriminator property with the model name.
         $discriminator = array_search('Type', self::$attributeMap, true);
@@ -214,7 +214,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties() : array
     {
         $invalidProperties = [];
 
@@ -233,7 +233,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid() : bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -243,7 +243,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->container['name'];
     }
@@ -255,7 +255,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setName($name)
+    public function setName(string $name): StorageFile
     {
         $this->container['name'] = $name;
 
@@ -267,7 +267,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return bool
      */
-    public function getIsFolder()
+    public function getIsFolder(): bool
     {
         return $this->container['is_folder'];
     }
@@ -279,7 +279,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setIsFolder($is_folder)
+    public function setIsFolder(bool $is_folder): StorageFile
     {
         $this->container['is_folder'] = $is_folder;
 
@@ -291,7 +291,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return DateTime
      */
-    public function getModifiedDate()
+    public function getModifiedDate(): DateTime
     {
         return $this->container['modified_date'];
     }
@@ -303,7 +303,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setModifiedDate($modified_date)
+    public function setModifiedDate(DateTime $modified_date): StorageFile
     {
         $this->container['modified_date'] = $modified_date;
 
@@ -315,7 +315,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return int
      */
-    public function getSize()
+    public function getSize(): int
     {
         return $this->container['size'];
     }
@@ -327,7 +327,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(int $size): StorageFile
     {
         $this->container['size'] = $size;
 
@@ -339,7 +339,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->container['path'];
     }
@@ -351,7 +351,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setPath($path)
+    public function setPath(string $path): StorageFile
     {
         $this->container['path'] = $path;
 
@@ -363,9 +363,9 @@ class StorageFile implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -379,7 +379,7 @@ class StorageFile implements ModelInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**

@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="FolderApiTest.php">
-*   Copyright (c) 2020 Aspose.HTML for Cloud
+*   Copyright (c) 2022 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,6 +32,7 @@ use Client\Invoker\ApiException;
 use Client\Invoker\Model\FilesList;
 use DateTime;
 use InvalidArgumentException;
+use SplFileObject;
 
 /**
  * FolderApiTest Class Doc Comment
@@ -53,11 +54,24 @@ class FolderApiTest extends BaseTest
      */
     public function testCreateFolder()
     {
-        $path = "HtmlTestDoc/TestCreateFolder";
+        $path = "TestCreateFolder";
         $storage_name = null;
 
         //If status code != 200 throw exception
         self::$api_stor->createFolder($path, $storage_name);
+
+        // Checking folder is exists
+        $result = self::$api_stor->objectExists($path);
+        $this->assertTrue($result->getExists());
+        $this->assertTrue($result->getIsFolder());
+
+        //Clear storage
+        self::$api_stor->deleteFolder($path, $storage_name, true);
+
+        // Checking folder is not exists
+        $result = self::$api_stor->objectExists($path);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
     }
 
     /**
@@ -73,41 +87,24 @@ class FolderApiTest extends BaseTest
      */
     public function testDeleteFolder()
     {
-        $path = "HtmlTestDoc/TestCreateFolder";
+        $path = "TestDeleteFolder";
         $storage_name = null;
         $recursive = true;
 
         //If status code != 200 throw exception
-        self::$api_stor->deleteFolder($path, $storage_name, $recursive);
-    }
+        self::$api_stor->createFolder($path, $storage_name, true);
 
-    /**
-     * Test case for copyFolder
-     *
-     * @param  string $src_path Source folder path e.g. &#39;/src&#39; (required)
-     * @param  string $dest_path Destination folder path e.g. &#39;/dst&#39; (required)
-     * @param  string $src_storage_name Source storage name (optional)
-     * @param  string $dest_storage_name Destination storage name (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return void
-     */
-    public function testCopyFolder()
-    {
-        $src_path = 'HtmlTestDoc';
-        $dest_path = "HtmlTestDocCopy";
-        $src_storage_name = null;
-        $dest_storage_name = null;
+        // Checking folder is exists
+        $result = self::$api_stor->objectExists($path);
+        $this->assertTrue($result->getExists());
+        $this->assertTrue($result->getIsFolder());
 
-        //If status code != 200 throw exception
-        self::$api_stor->copyFolder($src_path, $dest_path, $src_storage_name, $dest_storage_name);
+        self::$api_stor->deleteFolder($path, $storage_name, true);
 
-        //Delete dest folder
-        $recursive =true;
-
-        //If status code != 200 throw exception
-        self::$api_stor->deleteFolder($dest_path, $src_storage_name, $recursive);
+        // Checking folder is not exists
+        $result = self::$api_stor->objectExists($path);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
     }
 
     /**
@@ -124,14 +121,34 @@ class FolderApiTest extends BaseTest
      */
     public function testGetFilesList()
     {
-        $path = "HtmlTestDoc";
         $storage_name = null;
+        $name1 = "test.txt";
+        $name2 = "test1.html";
+        $name3 = "test_en.html";
+        $folder = self::$api_html->config['remoteFolder'];
 
-        $result = self::$api_stor->getFilesList($path, $storage_name);
+        $file1 = new SplFileObject(self::$testFolder . $name1);
+        $file2 = new SplFileObject(self::$testFolder . $name2);
+        $file3 = new SplFileObject(self::$testFolder . $name3);
+
+        $response = self::$api_stor->uploadFile($folder, $file1, $storage_name);
+        $this->assertTrue(count($response->getUploaded()) == 1);
+        $this->assertTrue(count($response->getErrors()) == 0);
+
+        $response = self::$api_stor->uploadFile($folder, $file2, $storage_name);
+        $this->assertTrue(count($response->getUploaded()) == 1);
+        $this->assertTrue(count($response->getErrors()) == 0);
+
+        $response = self::$api_stor->uploadFile($folder, $file3, $storage_name);
+        $this->assertTrue(count($response->getUploaded()) == 1);
+        $this->assertTrue(count($response->getErrors()) == 0);
+
+
+        $result = self::$api_stor->getFilesList($folder, $storage_name);
         // Array of the Client\Invoker\Model\StorageFile
         $files = $result->getValue();
-        $this->assertTrue(count($files) > 0);
-        //Client\Invoker\Model\StorageFile
+        $this->assertTrue(count($files) == 3);
+
         $one_file = $files[0];
         $this->assertTrue(strlen($one_file->getName()) > 0);
         $this->assertTrue($one_file->getIsFolder() !== null);
@@ -139,37 +156,13 @@ class FolderApiTest extends BaseTest
         $this->assertTrue($one_file->getSize() >= 0);
         $this->assertTrue(strlen($one_file->getPath()) > 0);
         print_r($files);
+
+        self::$api_stor->deleteFolder($folder, null, true);
+        // Checking folder is not exists
+        $result = self::$api_stor->objectExists($folder);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
+
     }
 
-    /**
-     * Test case for moveFolder
-     *
-     * @param  string $src_path Folder path to move e.g. &#39;/folder&#39; (required)
-     * @param  string $dest_path Destination folder path to move to e.g &#39;/dst&#39; (required)
-     * @param  string $src_storage_name Source storage name (optional)
-     * @param  string $dest_storage_name Destination storage name (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return void
-     */
-    public function testMoveFolder()
-    {
-        $src_path = "HtmlTestDoc/TestCreateFolder";
-        $src_storage_name = null;
-
-        //If status code != 200 throw exception
-        self::$api_stor->createFolder($src_path, $src_storage_name);
-
-        $dest_path = "HtmlTestDoc/TestMoveFolder";
-        $dest_storage_name = null;
-
-        //If status code != 200 throw exception
-        self::$api_stor->moveFolder($src_path, $dest_path, $src_storage_name, $dest_storage_name);
-
-        //Delete moved folder
-        //If status code != 200 throw exception
-        $recursive = true;
-        self::$api_stor->deleteFolder($dest_path, $dest_storage_name, $recursive);
-    }
 }

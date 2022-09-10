@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -47,14 +47,14 @@ use kamermans\OAuth2\OAuth2Middleware;
  */
 class Configuration
 {
-    private static $_client = null;
+    private static ?Client $_client = null;
 
     /**
      * Singleton - return client
      *
-     * @return HttpClient
+     * @return Client
      */
-    public static function getClient()
+    public static function getClient(): ?Client
     {
         if (null === static::$_client) {
             //For feel static fields

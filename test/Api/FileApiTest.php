@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="FileApiTest.php">
-*   Copyright (c) 2020 Aspose.HTML for Cloud
+*   Copyright (c) 2022 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -50,19 +50,25 @@ class FileApiTest extends BaseTest
      *
      * @throws ApiException on non-2xx response
      * @throws InvalidArgumentException
-     * @return FilesUploadResult
+     * @return void
      */
-    public function testUploadFile()
+    public function testUploadFile(): void
     {
         $name = "test.txt";
-        $file = $file = new SplFileObject(self::$testFolder . $name);
+        $file = new SplFileObject(self::$testFolder . $name);
         $folder = self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $name;
         $storage_name = null;
 
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
+        $response = self::$api_stor->uploadFile($folder, $file, $storage_name);
         $this->assertTrue(count($response->getUploaded()) == 1);
         $this->assertTrue(count($response->getErrors()) == 0);
+
+        // Clear storage
+        self::$api_stor->deleteFolder($folder, null, true);
+        // Checking folder is not exists
+        $result = self::$api_stor->objectExists($folder);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
     }
 
     /**
@@ -76,21 +82,32 @@ class FileApiTest extends BaseTest
      * @throws InvalidArgumentException
      * @return SplFileObject
      */
-    public function testDownloadFile()
+    public function testDownloadFile(): void
     {
         $name = "test.txt";
+        $file = new SplFileObject(self::$testFolder . $name);
         $folder = self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $name;
         $storage_name = null;
         $version_id = null;
 
-        $result = self::$api_stor->downloadFile($path, $storage_name, $version_id);
+        $response = self::$api_stor->uploadFile($folder, $file, $storage_name);
+        $this->assertTrue(count($response->getUploaded()) == 1);
+        $this->assertTrue(count($response->getErrors()) == 0);
+
+        $result = self::$api_stor->downloadFile($folder . "/" . $name, $storage_name, $version_id);
 
         $this->assertTrue($result->isFile(),"Error download file");
         $this->assertTrue($result->getSize() > 0,"Zero result");
 
         //Copy result to testFolder
         copy($result->getRealPath(), self::$testResult . $name);
+
+        // Clear storage
+        self::$api_stor->deleteFolder($folder, null, true);
+        // Checking folder is not exists
+        $result = self::$api_stor->objectExists($folder);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
     }
 
     /**
@@ -104,102 +121,42 @@ class FileApiTest extends BaseTest
      * @throws InvalidArgumentException
      * @return void
      */
-    public function testDeleteFile()
+    public function testDeleteFile(): void
     {
+
         $name = "test.txt";
+        $file = new SplFileObject(self::$testFolder . $name);
         $folder = self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $name;
         $storage_name = null;
         $version_id = null;
-        // If not 200 -> throw error
-        self::$api_stor->deleteFile($path, $storage_name, $version_id);
-    }
 
-    /**
-     * Test case for copyFile
-     *
-     * @param  string $src_path Source file path e.g. &#39;/folder/file.ext&#39; (required)
-     * @param  string $dest_path Destination file path (required)
-     * @param  string $src_storage_name Source storage name (optional)
-     * @param  string $dest_storage_name Destination storage name (optional)
-     * @param  string $version_id File version ID to copy (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return void
-     */
-
-    public function testCopyFile()
-    {
-        // Upload file to storage
-        $name = "test.txt";
-        $file = $file = new SplFileObject(self::$testFolder . $name);
-        $folder = self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $name;
-        $storage_name = null;
-
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
+        $response = self::$api_stor->uploadFile($folder, $file, $storage_name);
         $this->assertTrue(count($response->getUploaded()) == 1);
         $this->assertTrue(count($response->getErrors()) == 0);
 
-        //Copy file
-        $src_path = "HtmlTestDoc/test.txt";
-        $dest_path = "HtmlTestDoc/test_copy.txt";
-        $src_storage_name = null;
-        $dest_storage_name = null;
-        $version_id = null;
+        $full_path = $folder . "/" . $name;
+
+        // Checking file is exists
+        $result = self::$api_stor->objectExists($full_path);
+        $this->assertTrue($result->getExists());
+        $this->assertFalse($result->getIsFolder());
+
 
         // If not 200 -> throw error
-        self::$api_stor->copyFile($src_path, $dest_path, $src_storage_name, $dest_storage_name, $version_id);
+        self::$api_stor->deleteFile($full_path, $storage_name, $version_id);
 
-        // Delete source file
-        // If not 200 -> throw error
-        self::$api_stor->deleteFile($src_path, $src_storage_name, $version_id);
+        // Checking file is not exists
+        $result = self::$api_stor->objectExists($full_path);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
 
-        //Delete dest file
-        // If not 200 -> throw error
-        self::$api_stor->deleteFile($dest_path, $dest_storage_name, $version_id);
-    }
+        // Clear storage
+        self::$api_stor->deleteFolder($folder, null, true);
+        // Checking folder is not exists
+        $result = self::$api_stor->objectExists($folder);
+        $this->assertFalse($result->getExists());
+        $this->assertFalse($result->getIsFolder());
 
-    /**
-     * Test case for moveFile
-     *
-     * @param  string $src_path Source file path e.g. &#39;/src.ext&#39; (required)
-     * @param  string $dest_path Destination file path e.g. &#39;/dest.ext&#39; (required)
-     * @param  string $src_storage_name Source storage name (optional)
-     * @param  string $dest_storage_name Destination storage name (optional)
-     * @param  string $version_id File version ID to move (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return void
-     */
-    public function testMoveFile()
-    {
-        // Upload file to storage
-        $name = "test.txt";
-        $file = $file = new SplFileObject(self::$testFolder . $name);
-        $folder = self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $name;
-        $storage_name = null;
-
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
-        $this->assertTrue(count($response->getUploaded()) == 1);
-        $this->assertTrue(count($response->getErrors()) == 0);
-
-        // Move file
-        $src_path = "HtmlTestDoc/test.txt";
-        $dest_path = "HtmlTestDoc/test_moved.txt";
-        $src_storage_name = null;
-        $dest_storage_name = null;
-        $version_id = null;
-
-        // If not 200 -> throw error
-        self::$api_stor->moveFile($src_path, $dest_path, $src_storage_name, $dest_storage_name, $version_id);
-
-        //Delete dest file
-        // If not 200 -> throw error
-        self::$api_stor->deleteFile($dest_path, $dest_storage_name, $version_id);
     }
 
 }

@@ -2,7 +2,7 @@
 /*
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="BaseTest.php">
-*   Copyright (c) 2020 Aspose.HTML for Cloud
+*   Copyright (c) 2022 Aspose.HTML for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,47 +29,47 @@
 
 namespace Client\Invoker\Api;
 
-use PHPUnit_Framework_TestCase;
+
 use SplFileObject;
 
-abstract class BaseTest extends PHPUnit_Framework_TestCase
+abstract class BaseTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
      * Api object
      */
-    protected static $api_html;
+    protected static HtmlApi $api_html;
 
     /**
      * Storage Api
      */
-    protected static $api_stor;
+    protected static StorageApi $api_stor;
 
     /**
      * Folder with test samples
      */
-    protected static $testFolder;
+    protected static string $testFolder;
 
     /**
      * Folder for storage result
      */
-    protected static $testResult;
+    protected static string $testResult;
 
     /**
      * Setup before running any test cases
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass() : void
     {
 
  //Configuration - pass by constructor
         $configuration = array(
-            "basePath" => "https://api.aspose.cloud/v3.0",
+            "basePath" => "https://api.aspose.cloud/v4.0",
             "authPath" => "https://api.aspose.cloud/connect/token",
-            "apiKey" => "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            "appSID" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+            "apiKey" => "71a5b89b3f83cd39195d7fc39382babd",
+            "appSID" => "5add06cf-9af7-44f6-b180-dfcc2583cfcb",
             "testResult" => "\\testresult\\",
             "testData" => "\\testdata\\",
-            "remoteFolder" => "HtmlTestDoc",
+            "remoteFolder" => "HtmlTestDocPhpSdk",
             "defaultUserAgent" => "Webkit",
             "debugFile" => "debug.txt",
             "debug" => false
@@ -97,7 +97,7 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
 
     public function uploadHelper($filename, $uploadFolder = null)
     {
-        $file = $file = new SplFileObject(self::$testFolder . $filename);
+        $file = new SplFileObject(self::$testFolder . $filename);
         $folder = $uploadFolder ?: self::$api_html->config['remoteFolder'];
         $path = $folder . "/" . $filename;
         $storage_name = null;

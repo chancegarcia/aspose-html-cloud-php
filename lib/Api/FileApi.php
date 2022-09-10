@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 namespace Client\Invoker\Api;
@@ -34,11 +34,11 @@ use Client\Invoker\Model\FilesUploadResult;
 use Client\Invoker\ObjectSerializer;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\PromiseInterface;
-use function GuzzleHttp\Psr7\build_query;
+use GuzzleHttp\Psr7\Query;
+use GuzzleHttp\Psr7\Utils;
 use function GuzzleHttp\json_encode;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
-use function GuzzleHttp\Psr7\try_fopen;
 use InvalidArgumentException;
 use SplFileObject;
 use stdClass;
@@ -55,323 +55,20 @@ use stdClass;
 trait FileApi
 {
     /**
-     * Operation copyFile
-     *
-     * Copy file
-     *
-     * @param string $src_path          Source file path e.g.
-     *                                  '/folder/file.ext' (required)
-     * @param string $dest_path         Destination file path (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to copy (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return void
-     */
-    public function copyFile(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        $this->copyFileWithHttpInfo(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        );
-    }
-
-    /**
-     * Operation copyFileWithHttpInfo
-     *
-     * Copy file
-     *
-     * @param string $src_path          Source file path e.g.
-     *                                  '/folder/file.ext' (required)
-     * @param string $dest_path         Destination file path (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to copy (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return array of null, HTTP status code,
-     * HTTP response headers (array of strings)
-     */
-    public function copyFileWithHttpInfo(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        $returnType = '';
-        $request = $this->copyFileRequest(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        );
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse()
-                        ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse()
-                        ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation copyFileAsync
-     *
-     * Copy file
-     *
-     * @param string $src_path          Source file path e.g.
-     *                                  '/folder/file.ext' (required)
-     * @param string $dest_path         Destination file path (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to copy (optional)
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function copyFileAsync(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        return $this->copyFileAsyncWithHttpInfo(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        )->then(
-            function ($response) {
-                return $response[0];
-            }
-        );
-    }
-
-    /**
-     * Operation copyFileAsyncWithHttpInfo
-     *
-     * Copy file
-     *
-     * @param string $src_path          Source file path e.g.
-     *                                  '/folder/file.ext' (required)
-     * @param string $dest_path         Destination file path (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to copy (optional)
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function copyFileAsyncWithHttpInfo(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        $returnType = '';
-        $request = $this->copyFileRequest(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        );
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [
-                        null, $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'copyFile'
-     *
-     * @param string $src_path          Source file path e.g.
-     *                                  '/folder/file.ext' (required)
-     * @param string $dest_path         Destination file path (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to copy (optional)
-     *
-     * @throws InvalidArgumentException
-     * @return Request
-     */
-    protected function copyFileRequest(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        // verify the required parameter 'src_path' is set
-        if (($src_path === null)
-            || (is_array($src_path) && count($src_path) === 0)
-        ) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter '
-                .'$src_path when calling copyFile'
-            );
-        }
-        // verify the required parameter 'dest_path' is set
-        if (($dest_path === null)
-            || (is_array($dest_path) && count($dest_path) === 0)
-        ) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter '
-                .'$dest_path when calling copyFile'
-            );
-        }
-
-        $resourcePath = '/html/storage/file/copy/{srcPath}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'srcPath' . '}',
-            ObjectSerializer::toPathValue($src_path),
-            $resourcePath
-        );
-
-        $queryParams['destPath'] = ObjectSerializer::toQueryValue($dest_path);
-
-        // query params
-        if ($src_storage_name !== null) {
-            $queryParams['srcStorageName']
-                = ObjectSerializer::toQueryValue($src_storage_name);
-        }
-        // query params
-        if ($dest_storage_name !== null) {
-            $queryParams['destStorageName']
-                = ObjectSerializer::toQueryValue($dest_storage_name);
-        }
-        // query params
-        if ($version_id !== null) {
-            $queryParams['versionId']
-                = ObjectSerializer::toQueryValue($version_id);
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->_headerSelector->selectHeadersForMultipart(
-                ['multipart/form-data']
-            );
-        } else {
-            $headers = $this->_headerSelector->selectHeaders(
-                ['multipart/form-data'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if (($httpBody instanceof stdClass)
-                && $headers['Content-Type'] === 'application/json'
-            ) {
-                $httpBody = json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = build_query($formParams);
-            }
-        }
-
-        $defaultHeaders = [];
-        if ($this->config['defaultUserAgent']) {
-            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = build_query($queryParams);
-        return new Request(
-            'PUT',
-            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation deleteFile
      *
      * Delete file
      *
      * @param string $path         File path e.g.
      *                             '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to delete (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to delete (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
      * @return void
+     *@throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    public function deleteFile($path, $storage_name = null, $version_id = null)
+    public function deleteFile(string $path, string $storage_name = null, string $version_id = null)
     {
         $this->deleteFileWithHttpInfo($path, $storage_name, $version_id);
     }
@@ -382,17 +79,20 @@ trait FileApi
      * Delete file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to delete (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to delete (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
      * @return array of null, HTTP status code,
      * HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function deleteFileWithHttpInfo(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ): array
+    {
         $returnType = '';
         $request = $this->deleteFileRequest($path, $storage_name, $version_id);
 
@@ -439,13 +139,17 @@ trait FileApi
      * Delete file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to delete (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to delete (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function deleteFileAsync($path, $storage_name = null, $version_id = null)
+    public function deleteFileAsync(
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ) : PromiseInterface
     {
         return $this->deleteFileAsyncWithHttpInfo($path, $storage_name, $version_id)
             ->then(
@@ -461,15 +165,18 @@ trait FileApi
      * Delete file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to delete (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to delete (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function deleteFileAsyncWithHttpInfo(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ):  PromiseInterface
+    {
         $returnType = '';
         $request = $this->deleteFileRequest($path, $storage_name, $version_id);
 
@@ -504,43 +211,39 @@ trait FileApi
      * Create request for operation 'deleteFile'
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to delete (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to delete (optional)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     *@throws InvalidArgumentException
      */
     protected function deleteFileRequest(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ) : Request
+    {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if (empty($path)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$path when calling deleteFile'
             );
         }
 
-        $resourcePath = '/html/storage/file/{path}';
+        $resourcePath = '/html/file';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'path' . '}',
-            ObjectSerializer::toPathValue($path),
-            $resourcePath
-        );
+        $queryParams['path'] = ObjectSerializer::toQueryValue($path);
 
-        // query params
         if ($storage_name !== null) {
             $queryParams['storageName']
                 = ObjectSerializer::toQueryValue($storage_name);
         }
-        // query params
         if ($version_id !== null) {
             $queryParams['versionId']
                 = ObjectSerializer::toQueryValue($version_id);
@@ -587,7 +290,7 @@ trait FileApi
 
             } else {
                 // for HTTP post (form)
-                $httpBody = build_query($formParams);
+                $httpBody = Query::build($formParams);
             }
         }
 
@@ -602,7 +305,7 @@ trait FileApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
             'DELETE',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -617,14 +320,14 @@ trait FileApi
      * Download file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to download (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to download (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
      * @return SplFileObject
+     *@throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    public function downloadFile($path, $storage_name = null, $version_id = null)
+    public function downloadFile(string $path, string $storage_name = null, string $version_id = null) : SplFileObject
     {
         list($response) = $this->downloadFileWithHttpInfo(
             $path, $storage_name, $version_id
@@ -638,17 +341,20 @@ trait FileApi
      * Download file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to download (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to download (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code,
      * HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function downloadFileWithHttpInfo(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ) : array
+    {
         $returnType = '\SplFileObject';
         $request = $this->downloadFileRequest($path, $storage_name, $version_id);
 
@@ -719,15 +425,18 @@ trait FileApi
      * Download file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to download (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to download (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function downloadFileAsync(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ) : PromiseInterface
+    {
         return $this->downloadFileAsyncWithHttpInfo(
             $path, $storage_name, $version_id
         )->then(
@@ -743,15 +452,18 @@ trait FileApi
      * Download file
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to download (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to download (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function downloadFileAsyncWithHttpInfo(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ) : PromiseInterface
+    {
         $returnType = '\SplFileObject';
         $request = $this->downloadFileRequest($path, $storage_name, $version_id);
 
@@ -796,37 +508,34 @@ trait FileApi
      * Create request for operation 'downloadFile'
      *
      * @param string $path         File path e.g. '/folder/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID to download (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID to download (optional)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     * @throws InvalidArgumentException
      */
     protected function downloadFileRequest(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path,
+        string $storage_name = null,
+        string $version_id = null
+    ) : Request
+    {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if (empty($path)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$path when calling downloadFile'
             );
         }
 
-        $resourcePath = '/html/storage/file/{path}';
+        $resourcePath = '/html/file';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'path' . '}',
-            ObjectSerializer::toPathValue($path),
-            $resourcePath
-        );
-
+        $queryParams['path'] = ObjectSerializer::toQueryValue($path);
         // query params
         if ($storage_name !== null) {
             $queryParams['storageName']
@@ -879,7 +588,7 @@ trait FileApi
 
             } else {
                 // for HTTP post (form)
-                $httpBody = build_query($formParams);
+                $httpBody = Query::build($formParams);
             }
         }
 
@@ -894,313 +603,9 @@ trait FileApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
             'GET',
-            $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation moveFile
-     *
-     * Move file
-     *
-     * @param string $src_path          Source file path e.g. '/src.ext' (required)
-     * @param string $dest_path         Destination file path e.g.
-     *                                  '/dest.ext' (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to move (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return void
-     */
-    public function moveFile(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        $this->moveFileWithHttpInfo(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        );
-    }
-
-    /**
-     * Operation moveFileWithHttpInfo
-     *
-     * Move file
-     *
-     * @param string $src_path          Source file path e.g. '/src.ext' (required)
-     * @param string $dest_path         Destination file path
-     *                                  e.g. '/dest.ext' (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to move (optional)
-     *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @return array of null, HTTP status code,
-     * HTTP response headers (array of strings)
-     */
-    public function moveFileWithHttpInfo(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        $returnType = '';
-        $request = $this->moveFileRequest(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        );
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse()
-                        ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse()
-                        ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation moveFileAsync
-     *
-     * Move file
-     *
-     * @param string $src_path          Source file path e.g. '/src.ext' (required)
-     * @param string $dest_path         Destination file path
-     *                                  e.g. '/dest.ext' (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to move (optional)
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function moveFileAsync(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        return $this->moveFileAsyncWithHttpInfo(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        )->then(
-            function ($response) {
-                return $response[0];
-            }
-        );
-    }
-
-    /**
-     * Operation moveFileAsyncWithHttpInfo
-     *
-     * Move file
-     *
-     * @param string $src_path          Source file path e.g. '/src.ext' (required)
-     * @param string $dest_path         Destination file path
-     *                                  e.g. '/dest.ext' (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to move (optional)
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function moveFileAsyncWithHttpInfo(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        $returnType = '';
-        $request = $this->moveFileRequest(
-            $src_path, $dest_path, $src_storage_name,
-            $dest_storage_name, $version_id
-        );
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [
-                        null,
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'moveFile'
-     *
-     * @param string $src_path          Source file path e.g. '/src.ext' (required)
-     * @param string $dest_path         Destination file path
-     *                                  e.g. '/dest.ext' (required)
-     * @param string $src_storage_name  Source storage name (optional)
-     * @param string $dest_storage_name Destination storage name (optional)
-     * @param string $version_id        File version ID to move (optional)
-     *
-     * @throws InvalidArgumentException
-     * @return Request
-     */
-    protected function moveFileRequest(
-        $src_path, $dest_path, $src_storage_name = null,
-        $dest_storage_name = null, $version_id = null
-    ) {
-        // verify the required parameter 'src_path' is set
-        if (($src_path === null)
-            || (is_array($src_path) && count($src_path) === 0)
-        ) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter '
-                .'$src_path when calling moveFile'
-            );
-        }
-        // verify the required parameter 'dest_path' is set
-        if (($dest_path === null)
-            || (is_array($dest_path) && count($dest_path) === 0)
-        ) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter '
-                .'$dest_path when calling moveFile'
-            );
-        }
-
-        $resourcePath = '/html/storage/file/move/{srcPath}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'srcPath' . '}',
-            ObjectSerializer::toPathValue($src_path),
-            $resourcePath
-        );
-
-        $queryParams['destPath'] = ObjectSerializer::toQueryValue($dest_path);
-
-        // query params
-        if ($src_storage_name !== null) {
-            $queryParams['srcStorageName']
-                = ObjectSerializer::toQueryValue($src_storage_name);
-        }
-        // query params
-        if ($dest_storage_name !== null) {
-            $queryParams['destStorageName']
-                = ObjectSerializer::toQueryValue($dest_storage_name);
-        }
-        // query params
-        if ($version_id !== null) {
-            $queryParams['versionId']
-                = ObjectSerializer::toQueryValue($version_id);
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->_headerSelector->selectHeadersForMultipart(
-                ['multipart/form-data']
-            );
-        } else {
-            $headers = $this->_headerSelector->selectHeaders(
-                ['multipart/form-data'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if (($httpBody instanceof stdClass)
-                && $headers['Content-Type'] === 'application/json'
-            ) {
-                $httpBody = json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = build_query($formParams);
-            }
-        }
-
-        $defaultHeaders = [];
-        if ($this->config['defaultUserAgent']) {
-            $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = build_query($queryParams);
-        return new Request(
-            'PUT',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -1212,24 +617,17 @@ trait FileApi
      *
      * Upload file
      *
-     * @param string        $path         Path where to upload
-     *                                    including filename and
-     *                                    extension e.g. /file.ext or
-     *                                    /Folder 1/file.ext If the content is
-     *                                    multipart and path does not contains
-     *                                    the file name it tries to get them from
-     *                                    filename parameter from
-     *                                    Content-Disposition header. (required)
+     * @param string        $folder       Path where to upload excluding filename e.g. / or /Folder1 (required)
      * @param SplFileObject $file         File to upload (required)
-     * @param string        $storage_name Storage name (optional)
+     * @param string | null $storage_name Storage name (optional)
      *
      * @throws ApiException on non-2xx response
      * @throws InvalidArgumentException
      * @return FilesUploadResult
      */
-    public function uploadFile($path, $file, $storage_name = null)
+    public function uploadFile(string $folder, SplFileObject $file, string $storage_name = null) : FilesUploadResult
     {
-        list($response) = $this->uploadFileWithHttpInfo($path, $file, $storage_name);
+        list($response) = $this->uploadFileWithHttpInfo($folder, $file, $storage_name);
         return $response;
     }
 
@@ -1238,22 +636,20 @@ trait FileApi
      *
      * Upload file
      *
-     * @param string        $path         Path where to upload including filename
-     *                                    and extension e.g. /file.ext or
-     *                                    /Folder 1/file.ext If the content is
-     *                                    multipart and path does not contains
-     *                                    the file name it tries to get them from
-     *                                    filename parameter from Content-Disposition
-     *                                    header. (required)
+     * @param string $path       Path where to upload excluding filename e.g. / or /Folder1 (required)
      * @param SplFileObject $file         File to upload (required)
-     * @param string        $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
      * @return array of \Client\Invoker\Model\FilesUploadResult,
      * HTTP status code, HTTP response headers (array of strings)
+     *@throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
-    public function uploadFileWithHttpInfo($path, $file, $storage_name = null)
+    public function uploadFileWithHttpInfo(
+        string $path,
+        SplFileObject $file,
+        string $storage_name = null
+    ) : array
     {
         $returnType = '\Client\Invoker\Model\FilesUploadResult';
         $request = $this->uploadFileRequest($path, $file, $storage_name);
@@ -1324,7 +720,7 @@ trait FileApi
      *
      * Upload file
      *
-     * @param string        $path         Path where to upload including filename
+     * @param string $path         Path where to upload including filename
      *                                    and extension e.g. /file.ext or
      *                                    /Folder 1/file.ext If the content is
      *                                    multipart and path does not contains
@@ -1332,12 +728,16 @@ trait FileApi
      *                                    filename parameter from Content-Disposition
      *                                    header. (required)
      * @param SplFileObject $file         File to upload (required)
-     * @param string        $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function uploadFileAsync($path, $file, $storage_name = null)
+    public function uploadFileAsync(
+        string $path,
+        SplFileObject $file,
+        string $storage_name = null
+    ) : PromiseInterface
     {
         return $this->uploadFileAsyncWithHttpInfo($path, $file, $storage_name)
             ->then(
@@ -1352,7 +752,7 @@ trait FileApi
      *
      * Upload file
      *
-     * @param string        $path         Path where to upload including filename
+     * @param string $path         Path where to upload including filename
      *                                    and extension e.g. /file.ext or
      *                                    /Folder 1/file.ext If the content is
      *                                    multipart and path does not contains
@@ -1360,12 +760,16 @@ trait FileApi
      *                                    filename parameter from Content-Disposition
      *                                    header. (required)
      * @param SplFileObject $file         File to upload (required)
-     * @param string        $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
-    public function uploadFileAsyncWithHttpInfo($path, $file, $storage_name = null)
+    public function uploadFileAsyncWithHttpInfo(
+        string $path,
+        SplFileObject $file,
+        string $storage_name = null
+    ) : PromiseInterface
     {
         $returnType = '\Client\Invoker\Model\FilesUploadResult';
         $request = $this->uploadFileRequest($path, $file, $storage_name);
@@ -1410,7 +814,7 @@ trait FileApi
     /**
      * Create request for operation 'uploadFile'
      *
-     * @param string        $path         Path where to upload including filename
+     * @param string $path         Path where to upload including filename
      *                                    and extension e.g. /file.ext or
      *                                    /Folder 1/file.ext If the content is
      *                                    multipart and path does not contains
@@ -1418,43 +822,38 @@ trait FileApi
      *                                    filename parameter from Content-Disposition
      *                                    header. (required)
      * @param SplFileObject $file         File to upload (required)
-     * @param string        $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     * @throws InvalidArgumentException
      */
-    protected function uploadFileRequest($path, $file, $storage_name = null)
+    protected function uploadFileRequest(string $path, SplFileObject $file, string $storage_name = null) : Request
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if (empty($path)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$path when calling uploadFile'
             );
         }
         // verify the required parameter 'file' is set
-        if ($file === null || (is_array($file) && count($file) === 0)) {
+        if (empty($file)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$file when calling uploadFile'
             );
         }
 
-        $resourcePath = '/html/storage/file/{path}';
+        $resourcePath = '/html/file';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = true;
 
-        $formParams['File']
-            = try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+        $formParams['File'] = Utils::tryFopen(ObjectSerializer::toFormValue($file), 'rb');
 
-        $resourcePath = str_replace(
-            '{' . 'path' . '}',
-            ObjectSerializer::toPathValue($path),
-            $resourcePath
-        );
+        $queryParams['path'] = ObjectSerializer::toQueryValue($path);
 
         // query params
         if ($storage_name !== null) {
@@ -1503,7 +902,7 @@ trait FileApi
 
             } else {
                 // for HTTP post (form)
-                $httpBody = build_query($formParams);
+                $httpBody = Query::build($formParams);
             }
         }
 
@@ -1518,9 +917,9 @@ trait FileApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
-            'PUT',
+            'POST',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

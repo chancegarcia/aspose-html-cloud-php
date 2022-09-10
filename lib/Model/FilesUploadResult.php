@@ -17,21 +17,22 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
 namespace Client\Invoker\Model;
 
-use \ArrayAccess;
-use \Client\Invoker\ObjectSerializer;
+use ArrayAccess;
+use Client\Invoker\ObjectSerializer;
+
 
 /**
  * Model for FileUploadResult response
@@ -51,14 +52,14 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'FilesUploadResult';
+    protected static string $swaggerModelName = 'FilesUploadResult';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
      *
-     * @var string[]
+     * @var array
      */
-    protected static $swaggerTypes = [
+    protected static array $swaggerTypes = [
         'uploaded' => 'string[]',
         'errors' => '\Client\Invoker\Model\Error[]'
     ];
@@ -66,9 +67,9 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
     /**
      * Array of property to format mappings. Used for (de)serialization
      *
-     * @var string[]
+     * @var array
      */
-    protected static $swaggerFormats = [
+    protected static array $swaggerFormats = [
         'uploaded' => null,
         'errors' => null
     ];
@@ -78,7 +79,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerTypes()
+    public static function swaggerTypes(): array
     {
         return self::$swaggerTypes;
     }
@@ -88,7 +89,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function swaggerFormats()
+    public static function swaggerFormats(): array
     {
         return self::$swaggerFormats;
     }
@@ -97,9 +98,9 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      * Array of attributes where the key is the local name,
      * and the value is the original name
      *
-     * @var string[]
+     * @var array
      */
-    protected static $attributeMap = [
+    protected static array $attributeMap = [
         'uploaded' => 'uploaded',
         'errors' => 'errors'
     ];
@@ -107,9 +108,9 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
-     * @var string[]
+     * @var array
      */
-    protected static $setters = [
+    protected static array $setters = [
         'uploaded' => 'setUploaded',
         'errors' => 'setErrors'
     ];
@@ -117,9 +118,9 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
-     * @var string[]
+     * @var array
      */
-    protected static $getters = [
+    protected static array $getters = [
         'uploaded' => 'getUploaded',
         'errors' => 'getErrors'
     ];
@@ -130,7 +131,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -140,7 +141,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -150,7 +151,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -160,7 +161,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$swaggerModelName;
     }
@@ -168,22 +169,22 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param array | null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['uploaded']
-            = isset($data['uploaded']) ? $data['uploaded'] : null;
+            = $data['uploaded'] ?? null;
         $this->container['errors']
-            = isset($data['errors']) ? $data['errors'] : null;
+            = $data['errors'] ?? null;
     }
 
     /**
@@ -191,11 +192,9 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return array invalid properties with reasons
      */
-    public function listInvalidProperties()
+    public function listInvalidProperties(): array
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -204,7 +203,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -214,7 +213,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return string[]
      */
-    public function getUploaded()
+    public function getUploaded(): array
     {
         return $this->container['uploaded'];
     }
@@ -226,7 +225,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setUploaded($uploaded)
+    public function setUploaded(array $uploaded): FilesUploadResult
     {
         $this->container['uploaded'] = $uploaded;
 
@@ -238,7 +237,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return Error[]
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->container['errors'];
     }
@@ -250,7 +249,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setErrors($errors)
+    public function setErrors(array $errors): FilesUploadResult
     {
         $this->container['errors'] = $errors;
 
@@ -262,9 +261,9 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset) : bool
     {
         return isset($this->container[$offset]);
     }
@@ -278,7 +277,7 @@ class FilesUploadResult implements ModelInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**

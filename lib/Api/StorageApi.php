@@ -17,14 +17,14 @@
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- * php version 5.6
+ * php version 7.4
  *
  * @category  Aspose_Html_Cloud_SDK
  * @package   html-sdk-php
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
- * @copyright 2020 Aspose
+ * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @20.8.0@
+ * @version   GIT: @22.9.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -42,7 +42,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\PromiseInterface;
-use function GuzzleHttp\Psr7\build_query;
+use GuzzleHttp\Psr7\Query;
 use function GuzzleHttp\json_encode;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -86,15 +86,15 @@ class StorageApi
      *
      * @var HeaderSelector
      */
-    private $_headerSelector;
+    private HeaderSelector $_headerSelector;
 
     /**
      * Create HtmlApi
      *
-     * @param Configuration  $params   Configuration Api
-     * @param HeaderSelector $selector Headers
+     * @param array $params   Configuration Api
+     * @param HeaderSelector | null $selector Headers
      */
-    public function __construct($params, HeaderSelector $selector = null)
+    public function __construct(array $params, HeaderSelector $selector = null)
     {
         $this->client = Configuration::getClient($params);
         $this->config = $params;
@@ -116,14 +116,14 @@ class StorageApi
      *
      * Get disc usage
      *
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
+     * @return DiscUsage
      * @throws ApiException on non-2xx response
      * @throws GuzzleException
-     * @return DiscUsage
+     * @throws InvalidArgumentException
      */
-    public function getDiscUsage($storage_name = null)
+    public function getDiscUsage(string $storage_name = null): DiscUsage
     {
         list($response) = $this->getDiscUsageWithHttpInfo($storage_name);
         return $response;
@@ -134,15 +134,15 @@ class StorageApi
      *
      * Get disc usage
      *
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
-     * @throws GuzzleException
      * @return array of \Client\Invoker\Model\DiscUsage, HTTP status code,
      * HTTP response headers (array of strings)
+     * @throws ApiException on non-2xx response
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
      */
-    public function getDiscUsageWithHttpInfo($storage_name = null)
+    public function getDiscUsageWithHttpInfo(string $storage_name = null): array
     {
         $returnType = '\Client\Invoker\Model\DiscUsage';
         $request = $this->getDiscUsageRequest($storage_name);
@@ -213,12 +213,12 @@ class StorageApi
      *
      * Get disc usage
      *
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
-    public function getDiscUsageAsync($storage_name = null)
+    public function getDiscUsageAsync(string $storage_name = null): PromiseInterface
     {
         return $this->getDiscUsageAsyncWithHttpInfo($storage_name)
             ->then(
@@ -233,12 +233,12 @@ class StorageApi
      *
      * Get disc usage
      *
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
-    public function getDiscUsageAsyncWithHttpInfo($storage_name = null)
+    public function getDiscUsageAsyncWithHttpInfo(string $storage_name = null): PromiseInterface
     {
         $returnType = '\Client\Invoker\Model\DiscUsage';
         $request = $this->getDiscUsageRequest($storage_name);
@@ -283,12 +283,12 @@ class StorageApi
     /**
      * Create request for operation 'getDiscUsage'
      *
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     *@throws InvalidArgumentException
      */
-    protected function getDiscUsageRequest($storage_name = null)
+    protected function getDiscUsageRequest(string $storage_name = null): Request
     {
         $resourcePath = '/html/storage/disc';
         $formParams = [];
@@ -344,7 +344,7 @@ class StorageApi
 
             } else {
                 // for HTTP post (form)
-                $httpBody = build_query($formParams);
+                $httpBody = Query::build($formParams);
             }
         }
 
@@ -359,7 +359,7 @@ class StorageApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -374,14 +374,14 @@ class StorageApi
      * Get file versions
      *
      * @param string $path         File path e.g. '/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws ApiException on non-2xx response
+     * @return FileVersions
      * @throws InvalidArgumentException
      * @throws GuzzleException
-     * @return FileVersions
+     * @throws ApiException on non-2xx response
      */
-    public function getFileVersions($path, $storage_name = null)
+    public function getFileVersions(string $path, string $storage_name = null): FileVersions
     {
         list($response) = $this->getFileVersionsWithHttpInfo($path, $storage_name);
         return $response;
@@ -393,15 +393,15 @@ class StorageApi
      * Get file versions
      *
      * @param string $path         File path e.g. '/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
      * @return array of \Client\Invoker\Model\FileVersions,
      * HTTP status code, HTTP response headers (array of strings)
+     *@throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws ApiException on non-2xx response
      */
-    public function getFileVersionsWithHttpInfo($path, $storage_name = null)
+    public function getFileVersionsWithHttpInfo(string $path, string $storage_name = null): array
     {
         $returnType = '\Client\Invoker\Model\FileVersions';
         $request = $this->getFileVersionsRequest($path, $storage_name);
@@ -473,12 +473,12 @@ class StorageApi
      * Get file versions
      *
      * @param string $path         File path e.g. '/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
-    public function getFileVersionsAsync($path, $storage_name = null)
+    public function getFileVersionsAsync(string $path, string $storage_name = null): PromiseInterface
     {
         return $this->getFileVersionsAsyncWithHttpInfo($path, $storage_name)
             ->then(
@@ -494,12 +494,12 @@ class StorageApi
      * Get file versions
      *
      * @param string $path         File path e.g. '/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
-    public function getFileVersionsAsyncWithHttpInfo($path, $storage_name = null)
+    public function getFileVersionsAsyncWithHttpInfo(string $path, string $storage_name = null): PromiseInterface
     {
         $returnType = '\Client\Invoker\Model\FileVersions';
         $request = $this->getFileVersionsRequest($path, $storage_name);
@@ -545,34 +545,29 @@ class StorageApi
      * Create request for operation 'getFileVersions'
      *
      * @param string $path         File path e.g. '/file.ext' (required)
-     * @param string $storage_name Storage name (optional)
+     * @param string|null $storage_name Storage name (optional)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     *@throws InvalidArgumentException
      */
-    protected function getFileVersionsRequest($path, $storage_name = null)
+    protected function getFileVersionsRequest(string $path, string $storage_name = null): Request
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if (empty($path)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$path when calling getFileVersions'
             );
         }
 
-        $resourcePath = '/html/storage/version/{path}';
+        $resourcePath = '/html/storage/version';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'path' . '}',
-            ObjectSerializer::toPathValue($path),
-            $resourcePath
-        );
+        $queryParams['path'] = ObjectSerializer::toQueryValue($path);
 
         // query params
         if ($storage_name !== null) {
@@ -621,7 +616,7 @@ class StorageApi
 
             } else {
                 // for HTTP post (form)
-                $httpBody = build_query($formParams);
+                $httpBody = Query::build($formParams);
             }
         }
 
@@ -636,7 +631,7 @@ class StorageApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -652,15 +647,15 @@ class StorageApi
      *
      * @param string $path         File or folder path e.g. '/file.ext'
      *                             or '/folder' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
      * @return ObjectExist
+     *@throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws ApiException on non-2xx response
      */
-    public function objectExists($path, $storage_name = null, $version_id = null)
+    public function objectExists(string $path, string $storage_name = null, string $version_id = null): ObjectExist
     {
         list($response) = $this->objectExistsWithHttpInfo(
             $path, $storage_name, $version_id
@@ -675,18 +670,19 @@ class StorageApi
      *
      * @param string $path         File or folder path e.g. '/file.ext'
      *                             or '/folder' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID (optional)
      *
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
      * @return array of \Client\Invoker\Model\ObjectExist,
      * HTTP status code, HTTP response headers (array of strings)
+     * @throws InvalidArgumentException
+     * @throws GuzzleException
+     * @throws ApiException on non-2xx response
      */
     public function objectExistsWithHttpInfo(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path, string $storage_name = null, string $version_id = null
+    ): array
+    {
         $returnType = '\Client\Invoker\Model\ObjectExist';
         $request = $this->objectExistsRequest($path, $storage_name, $version_id);
 
@@ -758,15 +754,16 @@ class StorageApi
      *
      * @param string $path         File or folder path e.g. '/file.ext'
      *                             or '/folder' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
     public function objectExistsAsync(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path, string $storage_name = null, string $version_id = null
+    ): PromiseInterface
+    {
         return $this->objectExistsAsyncWithHttpInfo(
             $path, $storage_name, $version_id
         )->then(
@@ -783,14 +780,14 @@ class StorageApi
      *
      * @param string $path         File or folder path e.g. '/file.ext' or
      *                             '/folder' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID (optional)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
     public function objectExistsAsyncWithHttpInfo(
-        $path, $storage_name = null, $version_id = null
+        string $path, string $storage_name = null, string $version_id = null
     ) {
         $returnType = '\Client\Invoker\Model\ObjectExist';
         $request = $this->objectExistsRequest($path, $storage_name, $version_id);
@@ -837,36 +834,32 @@ class StorageApi
      *
      * @param string $path         File or folder path e.g. '/file.ext'
      *                             or '/folder' (required)
-     * @param string $storage_name Storage name (optional)
-     * @param string $version_id   File version ID (optional)
+     * @param string|null $storage_name Storage name (optional)
+     * @param string|null $version_id   File version ID (optional)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     *@throws InvalidArgumentException
      */
     protected function objectExistsRequest(
-        $path, $storage_name = null, $version_id = null
-    ) {
+        string $path, string $storage_name = null, string $version_id = null
+    ): Request
+    {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if (empty($path)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$path when calling objectExists'
             );
         }
 
-        $resourcePath = '/html/storage/exist/{path}';
+        $resourcePath = '/html/storage/exist';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'path' . '}',
-            ObjectSerializer::toPathValue($path),
-            $resourcePath
-        );
+        $queryParams['path'] = ObjectSerializer::toQueryValue($path);
 
         // query params
         if ($storage_name !== null) {
@@ -921,7 +914,7 @@ class StorageApi
 
             } else {
                 // for HTTP post (form)
-                $httpBody = build_query($formParams);
+                $httpBody = Query::build($formParams);
             }
         }
 
@@ -936,7 +929,7 @@ class StorageApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -957,7 +950,7 @@ class StorageApi
      * @throws GuzzleException
      * @throws ApiException on non-2xx response
      */
-    public function storageExists($storage_name)
+    public function storageExists(string $storage_name): StorageExist
     {
         list($response) = $this->storageExistsWithHttpInfo($storage_name);
         return $response;
@@ -970,13 +963,13 @@ class StorageApi
      *
      * @param string $storage_name Storage name (required)
      *
-     * @throws InvalidArgumentException*@throws GuzzleException
-     * @throws ApiException on non-2xx response
-     * @throws GuzzleException
      * @return array of \Client\Invoker\Model\StorageExist,
      * HTTP status code, HTTP response headers (array of strings)
+     *@throws ApiException on non-2xx response
+     * @throws GuzzleException
+     * @throws InvalidArgumentException*@throws GuzzleException
      */
-    public function storageExistsWithHttpInfo($storage_name)
+    public function storageExistsWithHttpInfo(string $storage_name): array
     {
         $returnType = '\Client\Invoker\Model\StorageExist';
         $request = $this->storageExistsRequest($storage_name);
@@ -1049,10 +1042,10 @@ class StorageApi
      *
      * @param string $storage_name Storage name (required)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
-    public function storageExistsAsync($storage_name)
+    public function storageExistsAsync(string $storage_name): PromiseInterface
     {
         return $this->storageExistsAsyncWithHttpInfo($storage_name)
             ->then(
@@ -1069,10 +1062,10 @@ class StorageApi
      *
      * @param string $storage_name Storage name (required)
      *
-     * @throws InvalidArgumentException
      * @return PromiseInterface
+     *@throws InvalidArgumentException
      */
-    public function storageExistsAsyncWithHttpInfo($storage_name)
+    public function storageExistsAsyncWithHttpInfo(string $storage_name): PromiseInterface
     {
         $returnType = '\Client\Invoker\Model\StorageExist';
         $request = $this->storageExistsRequest($storage_name);
@@ -1119,81 +1112,36 @@ class StorageApi
      *
      * @param string $storage_name Storage name (required)
      *
-     * @throws InvalidArgumentException
      * @return Request
+     * @throws InvalidArgumentException
      */
-    protected function storageExistsRequest($storage_name)
+    protected function storageExistsRequest(string $storage_name): Request
     {
         // verify the required parameter 'storage_name' is set
-        if (($storage_name === null)
-            || (is_array($storage_name) && count($storage_name) === 0)
-        ) {
+        if (empty($storage_name)) {
             throw new InvalidArgumentException(
                 'Missing the required parameter '
                 .'$storage_name when calling storageExists'
             );
         }
 
-        $resourcePath = '/html/storage/{storageName}/exist';
+        $resourcePath = '/html/storage/exist/storage';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
-        $multipart = false;
-
-        // path params
-        $resourcePath = str_replace(
-            '{' . 'storageName' . '}',
-            ObjectSerializer::toPathValue($storage_name),
-            $resourcePath
-        );
+        $queryParams['storageName'] = ObjectSerializer::toQueryValue($storage_name);
 
         // body params
         $_tempBody = null;
 
-        if ($multipart) {
-            $headers = $this->_headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->_headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if (($httpBody instanceof stdClass)
-                && $headers['Content-Type'] === 'application/json'
-            ) {
-                $httpBody = json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = build_query($formParams);
-            }
-        }
+        $headers = $this->_headerSelector->selectHeaders(
+            ['application/json'],
+            ['application/json']
+        );
 
         $defaultHeaders = [];
+
         if ($this->config['defaultUserAgent']) {
             $defaultHeaders['User-Agent'] = $this->config['defaultUserAgent'];
         }
@@ -1204,7 +1152,7 @@ class StorageApi
             $headers
         );
 
-        $query = build_query($queryParams);
+        $query = Query::build($queryParams);
         return new Request(
             'GET',
             $this->config['basePath'] . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1219,7 +1167,7 @@ class StorageApi
      * @throws RuntimeException on file opening failure
      * @return array of http client options
      */
-    protected function createHttpClientOption()
+    protected function createHttpClientOption(): array
     {
         $options = [];
         if ($this->config['debug']) {
