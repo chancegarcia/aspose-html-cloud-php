@@ -59,17 +59,17 @@ try {
 
 ### Parameters
 
-| Name              | Type       | Description                       | Notes      |
-|-------------------|------------|-----------------------------------|------------|
-| **$src**          | **string** | Full path to the source file.     | html, epub |
-| **$dst**          | **string** | Full path to the result file.     |            |
-| **$options**      | **string** | Option for conversion.            | [optional] |
-| **width**         | **int**    | Resulting width in pixel.         | [optional] |
-| **height**        | **int**    | Resulting height in pixel.        | [optional] |
-| **left_margin**   | **int**    | Left resulting margin in pixel.   | [optional] |
-| **right_margin**  | **int**    | Right resulting margin in pixel.  | [optional] |
-| **top_margin**    | **int**    | Top resulting margin in pixel.    | [optional] |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel. | [optional] |
+| Name               | Type       | Description                                                              | Notes      |
+|--------------------|------------|--------------------------------------------------------------------------|------------|
+| **$src**           | **string** | Full path to the source file.                                            | html, epub |
+| **$dst**           | **string** | Full path to the result file.                                            |            |
+| **$options**       | **string** | Option for conversion.                                                   | [optional] |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional] |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional] |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional] |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional] |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -110,18 +110,18 @@ try {
 ```
 
 ### Parameters
-| Name              | Type       | Description                       | Notes                   |
-|-------------------|------------|-----------------------------------|-------------------------|
-| **$src**          | **string** | Full path to the source file.     | html, epub              |
-| **$dst**          | **string** | Full path to the result file.     |                         |
-| **$storage**      | **string** | User's storage.                   | Null is default storage |
-| **$options**      | **string** | Option for conversion.            | [optional]              |
-| **width**         | **int**    | Resulting width in pixel.         | [optional]              |
-| **height**        | **int**    | Resulting height in pixel.        | [optional]              |
-| **left_margin**   | **int**    | Left resulting margin in pixel.   | [optional]              |
-| **right_margin**  | **int**    | Right resulting margin in pixel.  | [optional]              |
-| **top_margin**    | **int**    | Top resulting margin in pixel.    | [optional]              |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel. | [optional]              |
+| Name               | Type       | Description                                                              | Notes                   |
+|--------------------|------------|--------------------------------------------------------------------------|-------------------------|
+| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$dst**           | **string** | Full path to the result file.                                            |                         |
+| **$storage**       | **string** | User's storage.                                                          | Null is default storage |
+| **$options**       | **string** | Option for conversion.                                                   | [optional]              |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -163,18 +163,18 @@ try {
 ```
 
 ### Parameters
-| Name              | Type       | Description                       | Notes                   |
-|-------------------|------------|-----------------------------------|-------------------------|
-| **$src**          | **string** | Full path to the source file.     | html, epub              |
-| **$dst**          | **string** | Full path to the result file.     |                         |
-| **$storage**      | **string** | User's storage.                   | Null is default storage |
-| **$options**      | **string** | Option for conversion.            | [optional]              |
-| **width**         | **int**    | Resulting width in pixel.         | [optional]              |
-| **height**        | **int**    | Resulting height in pixel.        | [optional]              |
-| **left_margin**   | **int**    | Left resulting margin in pixel.   | [optional]              |
-| **right_margin**  | **int**    | Right resulting margin in pixel.  | [optional]              |
-| **top_margin**    | **int**    | Top resulting margin in pixel.    | [optional]              |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel. | [optional]              |
+| Name               | Type       | Description                                                              | Notes                   |
+|--------------------|------------|--------------------------------------------------------------------------|-------------------------|
+| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$dst**           | **string** | Full path to the result file.                                            |                         |
+| **$storage**       | **string** | User's storage.                                                          | Null is default storage |
+| **$options**       | **string** | Option for conversion.                                                   | [optional]              |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -216,18 +216,18 @@ try {
 ```
 
 ### Parameters
-| Name              | Type       | Description                       | Notes                   |
-|-------------------|------------|-----------------------------------|-------------------------|
-| **$src**          | **string** | Full path to the source file.     | html, epub              |
-| **$dst**          | **string** | Full path to the result file.     |                         |
-| **$storage**      | **string** | User's storage.                   | Null is default storage |
-| **$options**      | **string** | Option for conversion.            | [optional]              |
-| **width**         | **int**    | Resulting width in pixel.         | [optional]              |
-| **height**        | **int**    | Resulting height in pixel.        | [optional]              |
-| **left_margin**   | **int**    | Left resulting margin in pixel.   | [optional]              |
-| **right_margin**  | **int**    | Right resulting margin in pixel.  | [optional]              |
-| **top_margin**    | **int**    | Top resulting margin in pixel.    | [optional]              |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel. | [optional]              |
+| Name               | Type       | Description                                                              | Notes                   |
+|--------------------|------------|--------------------------------------------------------------------------|-------------------------|
+| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$dst**           | **string** | Full path to the result file.                                            |                         |
+| **$storage**       | **string** | User's storage.                                                          | Null is default storage |
+| **$options**       | **string** | Option for conversion.                                                   | [optional]              |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -269,17 +269,17 @@ try {
 ```
 
 ### Parameters
-| Name              | Type       | Description                       | Notes                   |
-|-------------------|------------|-----------------------------------|-------------------------|
-| **$src**          | **string** | Full path to the source file.     | html, epub              |
-| **$dst**          | **string** | Full path to the result file.     |                         |
-| **$options**      | **string** | Option for conversion.            | [optional]              |
-| **width**         | **int**    | Resulting width in pixel.         | [optional]              |
-| **height**        | **int**    | Resulting height in pixel.        | [optional]              |
-| **left_margin**   | **int**    | Left resulting margin in pixel.   | [optional]              |
-| **right_margin**  | **int**    | Right resulting margin in pixel.  | [optional]              |
-| **top_margin**    | **int**    | Top resulting margin in pixel.    | [optional]              |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel. | [optional]              |
+| Name               | Type       | Description                                                              | Notes      |
+|--------------------|------------|--------------------------------------------------------------------------|------------|
+| **$src**           | **string** | Full path to the source file.                                            | html, epub |
+| **$dst**           | **string** | Full path to the result file.                                            |            |
+| **$options**       | **string** | Option for conversion.                                                   | [optional] |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional] |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional] |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional] |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional] |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -321,18 +321,18 @@ try {
 ```
 
 ### Parameters
-| Name              | Type       | Description                       | Notes                   |
-|-------------------|------------|-----------------------------------|-------------------------|
-| **$src**          | **string** | Full path to the source file.     | html, epub              |
-| **$dst**          | **string** | Full path to the result file.     |                         |
-| **$storage**      | **string** | User's storage.                   | Null is default storage |
-| **$options**      | **string** | Option for conversion.            | [optional]              |
-| **width**         | **int**    | Resulting width in pixel.         | [optional]              |
-| **height**        | **int**    | Resulting height in pixel.        | [optional]              |
-| **left_margin**   | **int**    | Left resulting margin in pixel.   | [optional]              |
-| **right_margin**  | **int**    | Right resulting margin in pixel.  | [optional]              |
-| **top_margin**    | **int**    | Top resulting margin in pixel.    | [optional]              |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel. | [optional]              |
+| Name               | Type       | Description                                                              | Notes                   |
+|--------------------|------------|--------------------------------------------------------------------------|-------------------------|
+| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$dst**           | **string** | Full path to the result file.                                            |                         |
+| **$storage**       | **string** | User's storage.                                                          | Null is default storage |
+| **$options**       | **string** | Option for conversion.                                                   | [optional]              |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -374,21 +374,21 @@ try {
 ```
 
 ### Parameters
-| Name              | Type       | Description                          | Notes                   |
-|-------------------|------------|--------------------------------------|-------------------------|
-| **$src**          | **string** | Full path to the source file or url. | html, epub or url       |
-| **$dst**          | **string** | Full path to the result file.        |                         |
-| **$srcInLocal**   | **bool**   | Source file on the local disk.       |                         |
-| **$dstInLocal**   | **string** | Result file on the local disk.       |                         |
-| **$isUrl**        | **string** | Source is the website.               |                         |
-| **$options**      | **string** | Option for conversion.               | [optional]              |
-| **width**         | **int**    | Resulting width in pixel.            | [optional]              |
-| **height**        | **int**    | Resulting height in pixel.           | [optional]              |
-| **left_margin**   | **int**    | Left resulting margin in pixel.      | [optional]              |
-| **right_margin**  | **int**    | Right resulting margin in pixel.     | [optional]              |
-| **top_margin**    | **int**    | Top resulting margin in pixel.       | [optional]              |
-| **bottom_margin** | **int**    | Bottom resulting margin in pixel.    | [optional]              |
-| **$storage**      | **string** | User's storage.                      | Null is default storage |
+| Name               | Type       | Description                                                              | Notes                   |
+|--------------------|------------|--------------------------------------------------------------------------|-------------------------|
+| **$src**           | **string** | Full path to the source file or url.                                     | html, epub or url       |
+| **$dst**           | **string** | Full path to the result file.                                            |                         |
+| **$srcInLocal**    | **bool**   | Source file on the local disk.                                           |                         |
+| **$dstInLocal**    | **string** | Result file on the local disk.                                           |                         |
+| **$isUrl**         | **string** | Source is the website.                                                   |                         |
+| **$options**       | **string** | Option for conversion.                                                   | [optional]              |
+| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
+| **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**

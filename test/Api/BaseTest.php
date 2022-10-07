@@ -63,10 +63,15 @@ abstract class BaseTest extends \PHPUnit\Framework\TestCase
 
  //Configuration - pass by constructor
         $configuration = array(
-            "basePath" => "https://api.aspose.cloud/v4.0",
-            "authPath" => "https://api.aspose.cloud/connect/token",
-            "apiKey" => "71a5b89b3f83cd39195d7fc39382babd",
-            "appSID" => "5add06cf-9af7-44f6-b180-dfcc2583cfcb",
+//            "basePath" => "https://api.aspose.cloud/v4.0",
+//            "authPath" => "https://api.aspose.cloud/connect/token",
+//            "apiKey" => "71a5b89b3f83cd39195d7fc39382babd",
+//            "appSID" => "5add06cf-9af7-44f6-b180-dfcc2583cfcb",
+            "basePath" => "http://localhost:5000/v4.0",
+            "authPath" => "https://api-qa.aspose.cloud/connect/token",
+            "apiKey" => "html.cloud",
+            "appSID" => "html.cloud",
+
             "testResult" => "\\testresult\\",
             "testData" => "\\testdata\\",
             "remoteFolder" => "HtmlTestDocPhpSdk",

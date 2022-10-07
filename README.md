@@ -110,13 +110,14 @@ $conf = array(
 
 $apiInstance = new Client\Invoker\Api\HtmlApi($conf);
 
-$options = [
-    'width' => 800,
-    'height' => 600,
-    'left_margin' => 20,
-    'right_margin' => 20,
-    'top_margin' => 20,
-    'bottom_margin' => 20
+// For PDF, XPS and DOCX formats the size is in inches, for images (JPEG, BMP, PNG, TIFF, GIF) - in pixels.
+$options_a4 = [
+    'width' => 8.3,
+    'height' => 11.7,
+    'left_margin' => 0.2,
+    'right_margin' => 0.2,
+    'top_margin' => 0.2,
+    'bottom_margin' => 0.2
 ];
 
 $src = 'https://stallman.org/articles/anonymous-payments-thru-phones.html';
@@ -124,7 +125,7 @@ $dst = 'website.pdf'
 
 try {
     //Request to server Api
-    $result = self::$api_html->convertUrlToLocal($src, $dst, $options);
+    $result = self::$api_html->convertUrlToLocal($src, $dst, $options_a4);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling HtmlApi->convertUrlToLocal: ', $e->getMessage(), PHP_EOL;
