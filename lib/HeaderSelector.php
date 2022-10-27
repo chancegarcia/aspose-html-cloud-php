@@ -24,7 +24,7 @@
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
  * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @22.10.1@
+ * @version   GIT: @22.10.2@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -55,7 +55,7 @@ class HeaderSelector
         // Identity headers for SDK
         $headers = [];
         $headers['x-aspose-client'] = "aspose.html-cloud php sdk";
-        $headers['x-aspose-client-version'] = "20.8.0";
+        $headers['x-aspose-client-version'] = "22.9.1";
 
         $accept = $this->_selectAcceptHeader($accept);
         if ($accept !== null) {

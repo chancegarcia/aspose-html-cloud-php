@@ -28,8 +28,6 @@
 
 namespace Client\Invoker\Api;
 
-use Client\Invoker\ApiException;
-use InvalidArgumentException;
 use SplFileObject;
 
 /**
@@ -44,13 +42,13 @@ class ConversionApiTest extends BaseTest
      * Test case for conversion a local file to a local file for html format
      *
      * Convert the HTML document from the local disk by its name to the specified format.
-     * @param string $out_format Resulting format. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param string     $out_format Resulting format. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversion
      *
@@ -91,13 +89,13 @@ class ConversionApiTest extends BaseTest
      * Test case for conversion a local file to a storage file for html format
      *
      * Convert the HTML document from the local disk by its name to the specified format.
-     * @param string $out_format Resulting format. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param string     $out_format Resulting format. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversion
      *
@@ -139,13 +137,13 @@ class ConversionApiTest extends BaseTest
      * Test case for conversion the file from storage to the local file for html format
      *
      * Convert the HTML document from the storage by its name to the specified format.
-     * @param string $out_format Resulting format. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param string     $out_format Resulting format. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversion
      *
@@ -195,13 +193,13 @@ class ConversionApiTest extends BaseTest
      * Test case for conversion the file from storage to the storage for html format
      *
      * Convert the HTML document from the storage by its name to the specified format.
-     * @param string $out_format Resulting format. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param string     $out_format Resulting format. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversion
      *
@@ -252,13 +250,13 @@ class ConversionApiTest extends BaseTest
      * Test case for conversion a website to a local file for html format
      *
      * Convert a website to the specified format.
-     * @param string $out_format Resulting format. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param string     $out_format Resulting format. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversion
      *
@@ -299,13 +297,13 @@ class ConversionApiTest extends BaseTest
      * Test case for conversion a website to a storage file for html format
      *
      * Convert the website to the specified image format.
-     * @param string $out_format Resulting format. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param string     $out_format Resulting format. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversion
      *
@@ -343,16 +341,16 @@ class ConversionApiTest extends BaseTest
     }
 
     /**
-     * Test case for conversion a local file to a local file for html format
+     * Test case for conversion a local file to a local file for epub format
      *
-     * Convert the HTML document from the local disk by its name to the specified format.
-     * @param string $out_format Resulting format. For PDF, XPS, DOC -in inches, for images in pixels. (required)
-     * @param int|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
-     * @param int|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * Convert the EPUB document from the local disk by its name to the specified format.
+     * @param string     $out_format Resulting format. For PDF, XPS, DOC -in inches, for images in pixels. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
      *
      * @dataProvider providerConversionEpub
      *
@@ -389,6 +387,105 @@ class ConversionApiTest extends BaseTest
         $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from html format");
         $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from html format");
     }
+
+    /**
+     * Test case for conversion a local file to a local file for Markdown format
+     *
+     * Convert the Markdown document from the local disk by its name to the specified format.
+     * @param string     $out_format Resulting format. For PDF, XPS, DOC -in inches, for images in pixels. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     *
+     * @dataProvider providerConversionMarkdown
+     *
+     */
+    public function testConvertLocalToLocalMarkdown(
+        string $out_format,
+        float $width = null,
+        float $height = null,
+        float $left_margin = null,
+        float $right_margin = null,
+        float $top_margin = null,
+        float $bottom_margin = null
+    ) {
+        $src = self::$testFolder . "README.md";
+
+        $dst = self::$testResult
+            . $width . 'X'. $height . 'X'
+            . $left_margin . 'X'. $right_margin . 'X'
+            . $top_margin . 'X'. $bottom_margin . 'MD.' . $out_format;
+
+        $options = [
+            'width' => $width,
+            'height' => $height,
+            'left_margin' => $left_margin,
+            'right_margin' => $right_margin,
+            'top_margin' => $top_margin,
+            'bottom_margin' => $bottom_margin
+        ];
+
+        //Request to server Api
+        $result = self::$api_html->convertLocalToLocal($src, $dst, $options);
+
+        $this->assertTrue($result->getCode() == 200,"Error code after conversion from html format");
+        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from html format");
+        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from html format");
+    }
+
+
+    /**
+     * Test case for conversion a local file to a local file for MHTML format
+     *
+     * Convert the MHTML document from the local disk by its name to the specified format.
+     * @param string     $out_format Resulting format. For PDF, XPS, DOC -in inches, for images in pixels. (required)
+     * @param float|null $width Resulting width. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $height Resulting height. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $left_margin Left resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $right_margin Right resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $top_margin Top resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     * @param float|null $bottom_margin Bottom resulting margin. For PDF, XPS, DOC -in inches, for images in pixels. (optional)
+     *
+     * @dataProvider providerConversionMHTML
+     *
+     */
+    public function testConvertLocalToLocalMHTML(
+        string $out_format,
+        float $width = null,
+        float $height = null,
+        float $left_margin = null,
+        float $right_margin = null,
+        float $top_margin = null,
+        float $bottom_margin = null
+    ) {
+        $src = self::$testFolder . "fileformatinfo.mht";
+
+        $dst = self::$testResult
+            . $width . 'X'. $height . 'X'
+            . $left_margin . 'X'. $right_margin . 'X'
+            . $top_margin . 'X'. $bottom_margin . 'MHTML.' . $out_format;
+
+        $options = [
+            'width' => $width,
+            'height' => $height,
+            'left_margin' => $left_margin,
+            'right_margin' => $right_margin,
+            'top_margin' => $top_margin,
+            'bottom_margin' => $bottom_margin
+        ];
+
+        //Request to server Api
+        $result = self::$api_html->convertLocalToLocal($src, $dst, $options);
+
+        $this->assertTrue($result->getCode() == 200,"Error code after conversion from html format");
+        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from html format");
+        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from html format");
+    }
+
+
 
 
     public function providerConversion(): array
@@ -463,6 +560,147 @@ class ConversionApiTest extends BaseTest
     }
 
     public function providerConversionEpub(): array
+    {
+        return [
+            ["pdf"],
+            ["pdf", 8.5, 11.0],                        // letter
+            ["pdf", 11.0,  17.0,  0.1, 0.1, 0.1, 0.1], // tabloid
+            ["pdf", 11.7,  16.5, 0.1, 0.1, 0.1, 0.1],  // A3
+            ["pdf", 8.3, 11.7,  0.1, 0.1, 0.1, 0.1],   // A4
+            ["pdf", 5.8, 8.3, 0.2, 0.2, 0.2, 0.2],     // A5
+            ["pdf", 9.8, 13.9, 0.5, 0.5, 0.5, 0.5],    // B4
+
+            ["xps"],
+            ["xps", 8.5, 11.0],                        // letter
+            ["xps", 11.0,  17.0,  0.1, 0.1, 0.1, 0.1], // tabloid
+            ["xps", 11.7,  16.5, 0.1, 0.1, 0.1, 0.1],  // A3
+            ["xps", 8.3, 11.7,  0.1, 0.1, 0.1, 0.1],   // A4
+            ["xps", 5.8, 8.3, 0.2, 0.2, 0.2, 0.2],     // A5
+            ["xps", 9.8, 13.9, 0.5, 0.5, 0.5, 0.5],    // B4
+
+            ["docx"],
+            ["docx", 8.5, 11.0],                        // letter
+            ["docx", 11.0,  17.0,  0.1, 0.1, 0.1, 0.1], // tabloid
+            ["docx", 11.7,  16.5, 0.1, 0.1, 0.1, 0.1],  // A3
+            ["docx", 8.3, 11.7,  0.1, 0.1, 0.1, 0.1],   // A4
+            ["docx", 5.8, 8.3, 0.2, 0.2, 0.2, 0.2],     // A5
+            ["docx", 9.8, 13.9, 0.5, 0.5, 0.5, 0.5],    // B4
+
+            ["jpeg"],
+            ["jpeg", 500, 500],
+            ["jpeg", 700,  700,  50, 100, 150, 200],
+            ["jpeg", 800, 1000,  50,  50,  50,  50],
+            ["jpeg", 800,  800, 200, 150, 100,  50],
+            ["jpeg", 800, 1200, 100, 100, 100, 100],
+            ["jpeg", 800, 1400, 150, 150, 150, 150],
+
+            ["png"],
+            ["png", 500, 500],
+            ["png", 700, 700,   50, 100, 150, 200],
+            ["png", 800, 800,  200, 150, 100,  50],
+            ["png", 800, 1000,  50,  50,  50,  50],
+            ["png", 800, 1200, 100, 100, 100, 100],
+            ["png", 800, 1400, 150, 150, 150, 150],
+
+            ["bmp"],
+            ["bmp", 500, 500],
+            ["bmp", 700, 700,  200, 150,  10,  50],
+            ["bmp", 800, 800,   50, 100, 150, 200],
+            ["bmp", 800, 1000,  50,  50,  50,  50],
+            ["bmp", 800, 1200, 100, 100, 100, 100],
+            ["bmp", 800, 1400, 300, 200, 100,   0],
+
+            ["tiff"],
+            ["tiff", 500, 500],
+            ["tiff", 700, 700,  200, 150, 100,  50],
+            ["tiff", 800, 800,   50, 100, 150, 200],
+            ["tiff", 800, 1000,  50,  50,  50,  50],
+            ["tiff", 800, 1200, 100, 100, 100, 100],
+            ["tiff", 800, 1400, 150, 150, 150, 150],
+
+            ["gif"],
+            ["gif", 500, 500],
+            ["gif", 700, 700,  200, 150, 100,  50],
+            ["gif", 800, 800,   50, 100, 150, 200],
+            ["gif", 800, 1000,  50,  50,  50,  50],
+            ["gif", 800, 1200, 100, 100, 100, 100],
+            ["gif", 800, 1400, 150, 150, 150, 150]
+        ];
+    }
+
+    public function providerConversionMarkdown(): array
+    {
+        return [
+            ["pdf"],
+            ["pdf", 8.5, 11.0],                        // letter
+            ["pdf", 11.0,  17.0,  0.1, 0.1, 0.1, 0.1], // tabloid
+            ["pdf", 11.7,  16.5, 0.1, 0.1, 0.1, 0.1],  // A3
+            ["pdf", 8.3, 11.7,  0.1, 0.1, 0.1, 0.1],   // A4
+            ["pdf", 5.8, 8.3, 0.2, 0.2, 0.2, 0.2],     // A5
+            ["pdf", 9.8, 13.9, 0.5, 0.5, 0.5, 0.5],    // B4
+
+            ["xps"],
+            ["xps", 8.5, 11.0],                        // letter
+            ["xps", 11.0,  17.0,  0.1, 0.1, 0.1, 0.1], // tabloid
+            ["xps", 11.7,  16.5, 0.1, 0.1, 0.1, 0.1],  // A3
+            ["xps", 8.3, 11.7,  0.1, 0.1, 0.1, 0.1],   // A4
+            ["xps", 5.8, 8.3, 0.2, 0.2, 0.2, 0.2],     // A5
+            ["xps", 9.8, 13.9, 0.5, 0.5, 0.5, 0.5],    // B4
+
+            ["docx"],
+            ["docx", 8.5, 11.0],                        // letter
+            ["docx", 11.0,  17.0,  0.1, 0.1, 0.1, 0.1], // tabloid
+            ["docx", 11.7,  16.5, 0.1, 0.1, 0.1, 0.1],  // A3
+            ["docx", 8.3, 11.7,  0.1, 0.1, 0.1, 0.1],   // A4
+            ["docx", 5.8, 8.3, 0.2, 0.2, 0.2, 0.2],     // A5
+            ["docx", 9.8, 13.9, 0.5, 0.5, 0.5, 0.5],    // B4
+
+            ["html"],
+            ["mhtml"],
+
+            ["jpeg"],
+            ["jpeg", 500, 500],
+            ["jpeg", 700,  700,  50, 100, 150, 200],
+            ["jpeg", 800, 1000,  50,  50,  50,  50],
+            ["jpeg", 800,  800, 200, 150, 100,  50],
+            ["jpeg", 800, 1200, 100, 100, 100, 100],
+            ["jpeg", 800, 1400, 150, 150, 150, 150],
+
+            ["png"],
+            ["png", 500, 500],
+            ["png", 700, 700,   50, 100, 150, 200],
+            ["png", 800, 800,  200, 150, 100,  50],
+            ["png", 800, 1000,  50,  50,  50,  50],
+            ["png", 800, 1200, 100, 100, 100, 100],
+            ["png", 800, 1400, 150, 150, 150, 150],
+
+            ["bmp"],
+            ["bmp", 500, 500],
+            ["bmp", 700, 700,  200, 150,  10,  50],
+            ["bmp", 800, 800,   50, 100, 150, 200],
+            ["bmp", 800, 1000,  50,  50,  50,  50],
+            ["bmp", 800, 1200, 100, 100, 100, 100],
+            ["bmp", 800, 1400, 300, 200, 100,   0],
+
+            ["tiff"],
+            ["tiff", 500, 500],
+            ["tiff", 700, 700,  200, 150, 100,  50],
+            ["tiff", 800, 800,   50, 100, 150, 200],
+            ["tiff", 800, 1000,  50,  50,  50,  50],
+            ["tiff", 800, 1200, 100, 100, 100, 100],
+            ["tiff", 800, 1400, 150, 150, 150, 150],
+
+            ["gif"],
+            ["gif", 500, 500],
+            ["gif", 700, 700,  200, 150, 100,  50],
+            ["gif", 800, 800,   50, 100, 150, 200],
+            ["gif", 800, 1000,  50,  50,  50,  50],
+            ["gif", 800, 1200, 100, 100, 100, 100],
+            ["gif", 800, 1400, 150, 150, 150, 150]
+        ];
+    }
+
+    public function providerConversionMHTML(): array
     {
         return [
             ["pdf"],

@@ -5,6 +5,8 @@ All URIs are relative to *https://api.aspose.cloud/v4.0*
 Possible conversions:
 - HTML -> PDF, XPS, DOCX, MD, MHTML, JPEG, BMP, PNG, TIFF, GIF
 - EPUB -> PDF, XPS, DOCX, JPEG, BMP, PNG, TIFF, GIF
+- MD -> PDF, XPS, DOCX, HTML, MHTML, JPEG, BMP, PNG, TIFF, GIF
+- MHTML -> PDF, XPS, DOCX, JPEG, BMP, PNG, TIFF, GIF
 
 | Class     | Method                                                                  | Description                                                              |
 |-----------|-------------------------------------------------------------------------|--------------------------------------------------------------------------|
@@ -64,12 +66,12 @@ try {
 | **$src**           | **string** | Full path to the source file.                                            | html, epub |
 | **$dst**           | **string** | Full path to the result file.                                            |            |
 | **$options**       | **string** | Option for conversion.                                                   | [optional] |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional] |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional] |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional] |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional] |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional] |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional] |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional] |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional] |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -116,12 +118,12 @@ try {
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -169,12 +171,12 @@ try {
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -222,12 +224,12 @@ try {
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -274,12 +276,12 @@ try {
 | **$src**           | **string** | Full path to the source file.                                            | html, epub |
 | **$dst**           | **string** | Full path to the result file.                                            |            |
 | **$options**       | **string** | Option for conversion.                                                   | [optional] |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional] |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional] |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional] |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional] |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional] |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional] |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional] |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional] |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -327,12 +329,12 @@ try {
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
 **[ConversionResult](ConversionResult.md)**
@@ -382,12 +384,12 @@ try {
 | **$dstInLocal**    | **string** | Result file on the local disk.                                           |                         |
 | **$isUrl**         | **string** | Source is the website.                                                   |                         |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
-| **$width**         | **int**    | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
-| **$height**        | **int**    | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
-| **$left_margin**   | **int**    | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
-| **$right_margin**  | **int**    | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
-| **$top_margin**    | **int**    | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
-| **$bottom_margin** | **int**    | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
+| **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional]              |
+| **$height**        | **float**  | Resulting height in pixel. For PDF, XPS or DOC formats in inches.        | [optional]              |
+| **$left_margin**   | **float**  | Left resulting margin in pixel. For PDF, XPS or DOC formats in inches.   | [optional]              |
+| **$right_margin**  | **float**  | Right resulting margin in pixel. For PDF, XPS or DOC formats in inches.  | [optional]              |
+| **$top_margin**    | **float**  | Top resulting margin in pixel. For PDF, XPS or DOC formats in inches.    | [optional]              |
+| **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 
 ### Return type
