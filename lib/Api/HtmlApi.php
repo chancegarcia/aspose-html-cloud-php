@@ -24,7 +24,7 @@
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
  * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @22.10.2@
+ * @version   GIT: @22.11.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -37,7 +37,6 @@ use Client\Invoker\Model\ConversionResult;
 use Client\Invoker\ObjectSerializer;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use RuntimeException;
@@ -199,6 +198,7 @@ class HtmlApi
 
         $opt = [];
         if($options) {
+            // Map page size
             if (array_key_exists('width',$options) && $options['width'])
                 $opt['width'] = $options['width'];
             if (array_key_exists('height',$options) && $options['height'])
@@ -211,6 +211,27 @@ class HtmlApi
                 $opt['leftmargin'] = $options['left_margin'];
             if (array_key_exists('right_margin',$options) && $options['right_margin'])
                 $opt['rightmargin'] = $options['right_margin'];
+            // Map background
+            if (array_key_exists('background',$options) && $options['background'])
+                $opt['background'] = $options['background'];
+
+            //Map jpeg quality for PDF format
+            if (array_key_exists('jpeg_quality',$options) && $options['jpeg_quality'])
+                $opt['jpegquality'] = $options['jpeg_quality'];
+
+            //Map useGit flavor for Markdown
+            if (array_key_exists('use_git',$options) && $options['use_git'])
+                $opt['usegit'] = $options['use_git'];
+
+            // Map trace parameters
+            if (array_key_exists('error_threshold',$options) && $options['error_threshold'])
+                $opt['error_threshold'] = $options['error_threshold'];
+            if (array_key_exists('max_iterations',$options) && $options['max_iterations'])
+                $opt['max_iterations'] = $options['max_iterations'];
+            if (array_key_exists('colors_limit',$options) && $options['colors_limit'])
+                $opt['colors_limit'] = $options['colors_limit'];
+            if (array_key_exists('line_width',$options) && $options['line_width'])
+                $opt['line_width'] = $options['line_width'];
         }
 
         if(count($opt))
@@ -341,21 +362,18 @@ class HtmlApi
         $ext = strtolower(pathinfo($src)['extension']);
         switch($ext) {
             case "htm":
-            case "html":
                 return "html";
             case "mht":
-            case "mhtml":
                 return "mhtml";
             case "xml":
-            case "xhtml":
                 return "xhtml";
-            case "epub":
-            case "svg":
-            case "md":
+            case "jpg":
+                return "jpeg";
+            case "tif":
+                return "tiff";
+            default:
                 return $ext;
         }
-
-        return "html";
     }
 
     private function executeRequest($request) : ConversionResult {

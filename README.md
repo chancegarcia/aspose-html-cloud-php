@@ -142,7 +142,8 @@ Possible conversions:
 - EPUB -> PDF, XPS, DOCX, JPEG, BMP, PNG, TIFF, GIF
 - MD -> PDF, XPS, DOCX, HTML, MHTML, JPEG, BMP, PNG, TIFF, GIF
 - MHTML -> PDF, XPS, DOCX, JPEG, BMP, PNG, TIFF, GIF
-
+- SVG -> PDF, XPS, JPEG, BMP, PNG, TIFF, GIF
+- JPEG, BMP, PNG, TIFF, GIF -> SVG
 
 <a name="html_api"></a>
 ## HTML API
@@ -156,6 +157,17 @@ Possible conversions:
 | *HtmlApi* | [**convertUrlToLocal**](docs/ConversionApi.md#converturltolocal)             | Convert the website and saving result to the local file.                 |
 | *HtmlApi* | [**convertUrlToStorage**](docs/ConversionApi.md#converturltostorage)         | Convert the website and saving result to the storage.                    |
 | *HtmlApi* | [**convert**](docs/ConversionApi.md#convert)                                 | General function for conversion.                                         |
+
+## conversionOptions
+| Options                                                          | Description                                       |
+|------------------------------------------------------------------|---------------------------------------------------|
+| [**PDFOptions**](docs/ConversionOptions.md#PDFOptions)           | Convert to the PDF format.                        |
+| [**ImageOptions**](docs/ConversionOptions.md#ImageOptions)       | Convert to images (JPEG, PNG, GIF, TIFF, BMP).    |
+| [**XPSOptions**](docs/ConversionOptions.md#XPSOptions)           | Convert to the XPS format.                        |
+| [**DocOptions**](docs/ConversionOptions.md#DocOptions)           | Convert to the DOCX format.                       |
+| [**SvgOptions**](docs/ConversionOptions.md#SvgOptions)           | Trace images to the SVG format.                   |
+| [**MarkdownOptions**](docs/ConversionOptions.md#MarkdownOptions) | Convert the HTML document to the markdown format. |
+
 
 <a name="storage_api"></a>
 ## STORAGE API  

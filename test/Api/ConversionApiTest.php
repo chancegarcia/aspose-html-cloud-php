@@ -383,9 +383,9 @@ class ConversionApiTest extends BaseTest
         //Request to server Api
         $result = self::$api_html->convertLocalToLocal($src, $dst, $options);
 
-        $this->assertTrue($result->getCode() == 200,"Error code after conversion from html format");
-        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from html format");
-        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from html format");
+        $this->assertTrue($result->getCode() == 200,"Error code after conversion from epub format");
+        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from epub format");
+        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from epub format");
     }
 
     /**
@@ -431,9 +431,9 @@ class ConversionApiTest extends BaseTest
         //Request to server Api
         $result = self::$api_html->convertLocalToLocal($src, $dst, $options);
 
-        $this->assertTrue($result->getCode() == 200,"Error code after conversion from html format");
-        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from html format");
-        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from html format");
+        $this->assertTrue($result->getCode() == 200,"Error code after conversion from md format");
+        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion md html format");
+        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from md format");
     }
 
 
@@ -480,12 +480,98 @@ class ConversionApiTest extends BaseTest
         //Request to server Api
         $result = self::$api_html->convertLocalToLocal($src, $dst, $options);
 
-        $this->assertTrue($result->getCode() == 200,"Error code after conversion from html format");
-        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from html format");
-        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from html format");
+        $this->assertTrue($result->getCode() == 200,"Error code after conversion from mhtml format");
+        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from mhtml format");
+        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from mhtml format");
     }
 
+    /**
+     * Test case for conversion a local file to a local file for SVG format
+     *
+     * Convert the SVG document from the local disk by its name to the specified format.
+     * @param string      $out_format Resulting format. For PDF, XPS -  in inches, for images in pixels. (required)
+     * @param float|null  $width Resulting width. For PDF, XPS - in inches, for images in pixels. (optional)
+     * @param float|null  $height Resulting height. For PDF, XPS - in inches, for images in pixels. (optional)
+     * @param float|null  $left_margin Left resulting margin. For PDF, XPS- in inches, for images in pixels. (optional)
+     * @param float|null  $right_margin Right resulting margin. For PDF, XPS - in inches, for images in pixels. (optional)
+     * @param float|null  $top_margin Top resulting margin. For PDF, XPS - in inches, for images in pixels. (optional)
+     * @param float|null  $bottom_margin Bottom resulting margin. For PDF, XPS - in inches, for images in pixels. (optional)
+     * @param string|null $background CSS background like '#FF0000'. (optional)
+     *
+     * @dataProvider providerConversionSVG
+     *
+     */
+    public function testConvertLocalToLocalSVG(
+        string $out_format,
+        float $width = null,
+        float $height = null,
+        float $left_margin = null,
+        float $right_margin = null,
+        float $top_margin = null,
+        float $bottom_margin = null,
+        string $background = null
+    ) {
+        $src = self::$testFolder . "testpage1.svg";
 
+        $dst = self::$testResult
+            . $width . 'X'. $height . 'X'
+            . $left_margin . 'X'. $right_margin . 'X'
+            . $top_margin . 'X'. $bottom_margin . 'X_' . ltrim($background, '#') . '_SVG.' . $out_format;
+
+        $options = [
+            'width' => $width,
+            'height' => $height,
+            'left_margin' => $left_margin,
+            'right_margin' => $right_margin,
+            'top_margin' => $top_margin,
+            'bottom_margin' => $bottom_margin,
+            'background' => $background
+        ];
+
+        //Request to server Api
+        $result = self::$api_html->convertLocalToLocal($src, $dst, $options);
+
+        $this->assertTrue($result->getCode() == 200,"Error code after conversion from svg format");
+        $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from svg format");
+        $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from svg format");
+    }
+
+    public function testConvertLocalToLocalImgToSVG() {
+
+        $formats = ['bmp', 'jpg', 'gif', 'png', 'tiff'];
+        foreach ($formats as $f){
+            $src = self::$testFolder . "car." . $f;
+            $dst = self::$testResult. 'car_' . $f . '.svg';
+
+            $result = self::$api_html->convertLocalToLocal($src, $dst);
+
+            $this->assertTrue($result->getCode() == 200,"Error code after conversion from image to svg format");
+            $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from image to svg format");
+            $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from image to svg format");
+        }
+    }
+
+    public function testConvertLocalToLocalImgToSVGWithOpts() {
+
+        $formats = ['bmp', 'jpg', 'gif', 'png', 'tiff'];
+        foreach ($formats as $f){
+            $src = self::$testFolder . "car." . $f;
+            $dst = self::$testResult. 'car_opts_' . $f . '.svg';
+
+            $opts = [
+                'error_threshold' => 30,
+                'max_iterations' => 50,
+                'colors_limit' => 3,
+                'line_width' => 2.0,
+            ];
+
+            $result = self::$api_html->convertLocalToLocal($src, $dst, $opts);
+
+            $this->assertTrue($result->getCode() == 200,"Error code after conversion from image to svg format");
+            $this->assertTrue($result->getStatus() == 'completed',"Error status after conversion from image to svg format");
+            $this->assertTrue(file_exists($result->getFile()),"File not exists after conversion from image to svg format");
+        }
+    }
 
 
     public function providerConversion(): array
@@ -766,6 +852,67 @@ class ConversionApiTest extends BaseTest
             ["gif", 800, 1000,  50,  50,  50,  50],
             ["gif", 800, 1200, 100, 100, 100, 100],
             ["gif", 800, 1400, 150, 150, 150, 150]
+        ];
+    }
+
+    public function providerConversionSVG(): array
+    {
+        return [
+//            ["pdf"],
+//            ["pdf", 8.5,  11.0],                                // letter
+            ["pdf", 11.0, 17.0, 0.1, 0.1, 0.1, 0.1, '#FF0000'], // tabloid
+            ["pdf", 11.7, 16.5, 0.1, 0.1, 0.1, 0.1, '#00FF00'], // A3
+            ["pdf", 8.3,  11.7, 0.1, 0.1, 0.1, 0.1, '#0000FF'], // A4
+            ["pdf", 5.8,  8.3,  0.2, 0.2, 0.2, 0.2, '#00FFFF'], // A5
+            ["pdf", 9.8,  13.9, 0.5, 0.5, 0.5, 0.5, '#FFFF00'], // B4
+
+            ["xps"],
+            ["xps", 8.5,  11.0],                                // letter
+            ["xps", 11.0, 17.0, 0.1, 0.1, 0.1, 0.1, '#FF0000'], // tabloid
+            ["xps", 11.7, 16.5, 0.1, 0.1, 0.1, 0.1, '#00FF00'], // A3
+            ["xps", 8.3,  11.7, 0.1, 0.1, 0.1, 0.1, '#0000FF'], // A4
+            ["xps", 5.8,  8.3,  0.2, 0.2, 0.2, 0.2, '#00FFFF'], // A5
+            ["xps", 9.8,  13.9, 0.5, 0.5, 0.5, 0.5, '#FFFF00'], // B4
+
+            ["jpeg"],
+            ["jpeg", 500, 500],
+            ["jpeg", 700,  700,  50, 100, 150, 200, '#FF0000'],
+            ["jpeg", 800, 1000,  50,  50,  50,  50, '#00FF00'],
+            ["jpeg", 800,  800, 200, 150, 100,  50, '#0000FF'],
+            ["jpeg", 800, 1200, 100, 100, 100, 100, '#00FFFF'],
+            ["jpeg", 800, 1400, 150, 150, 150, 150, '#FFFF00'],
+
+            ["png"],
+            ["png", 500, 500],
+            ["png", 700, 700,   50, 100, 150, 200, '#FF0000'],
+            ["png", 800, 800,  200, 150, 100,  50, '#00FF00'],
+            ["png", 800, 1000,  50,  50,  50,  50, '#0000FF'],
+            ["png", 800, 1200, 100, 100, 100, 100, '#00FFFF'],
+            ["png", 800, 1400, 150, 150, 150, 150, '#FFFF00'],
+
+            ["bmp"],
+            ["bmp", 500, 500],
+            ["bmp", 700, 700,  200, 150,  10,  50, '#FF0000'],
+            ["bmp", 800, 800,   50, 100, 150, 200, '#00FF00'],
+            ["bmp", 800, 1000,  50,  50,  50,  50, '#0000FF'],
+            ["bmp", 800, 1200, 100, 100, 100, 100, '#00FFFF'],
+            ["bmp", 800, 1400, 300, 200, 100,   0, '#FFFF00'],
+
+            ["tiff"],
+            ["tiff", 500, 500],
+            ["tiff", 700, 700,  200, 150, 100,  50, '#FF0000'],
+            ["tiff", 800, 800,   50, 100, 150, 200, '#00FF00'],
+            ["tiff", 800, 1000,  50,  50,  50,  50, '#0000FF'],
+            ["tiff", 800, 1200, 100, 100, 100, 100, '#00FFFF'],
+            ["tiff", 800, 1400, 150, 150, 150, 150, '#FFFF00'],
+
+            ["gif"],
+            ["gif", 500, 500],
+            ["gif", 700, 700,  200, 150, 100,  50, '#FF0000'],
+            ["gif", 800, 800,   50, 100, 150, 200, '#00FF00'],
+            ["gif", 800, 1000,  50,  50,  50,  50, '#0000FF'],
+            ["gif", 800, 1200, 100, 100, 100, 100, '#00FFFF'],
+            ["gif", 800, 1400, 150, 150, 150, 150, '#FFFF00']
         ];
     }
 }

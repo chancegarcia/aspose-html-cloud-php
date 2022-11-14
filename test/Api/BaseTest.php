@@ -104,17 +104,16 @@ abstract class BaseTest extends \PHPUnit\Framework\TestCase
     {
         $file = new SplFileObject(self::$testFolder . $filename);
         $folder = $uploadFolder ?: self::$api_html->config['remoteFolder'];
-        $path = $folder . "/" . $filename;
         $storage_name = null;
 
-        $response = self::$api_stor->uploadFile($path, $file, $storage_name);
+        $response = self::$api_stor->uploadFile($folder, $file, $storage_name);
         $this->assertTrue(count($response->getUploaded()) == 1);
         $this->assertTrue(count($response->getErrors()) == 0);
 
         //Assert - file exist
         $version_id = null;
 
-        $result = self::$api_stor->objectExists($path, $storage_name, $version_id);
+        $result = self::$api_stor->objectExists($response->setUploaded()[0], $storage_name, $version_id);
         $this->assertTrue($result->getExists());
         $this->assertFalse($result->getIsFolder());
    }

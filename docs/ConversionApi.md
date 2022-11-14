@@ -7,6 +7,8 @@ Possible conversions:
 - EPUB -> PDF, XPS, DOCX, JPEG, BMP, PNG, TIFF, GIF
 - MD -> PDF, XPS, DOCX, HTML, MHTML, JPEG, BMP, PNG, TIFF, GIF
 - MHTML -> PDF, XPS, DOCX, JPEG, BMP, PNG, TIFF, GIF
+- SVG -> PDF, XPS, JPEG, BMP, PNG, TIFF, GIF
+- JPEG, BMP, PNG, TIFF, GIF -> SVG
 
 | Class     | Method                                                                  | Description                                                              |
 |-----------|-------------------------------------------------------------------------|--------------------------------------------------------------------------|
@@ -17,6 +19,17 @@ Possible conversions:
 | *HtmlApi* | [**convertUrlToLocal**](ConversionApi.md#converturltolocal)             | Convert the website and saving result to the local file.                 |
 | *HtmlApi* | [**convertUrlToStorage**](ConversionApi.md#converturltostorage)         | Convert the website and saving result to the storage.                    |
 | *HtmlApi* | [**convert**](ConversionApi.md#convert)                                 | General function for conversion.                                         |
+
+
+## conversionOptions
+| Options                                                     | Description                                       |
+|-------------------------------------------------------------|---------------------------------------------------|
+| [**PDFOptions**](ConversionOptions.md#PDFOptions)           | Convert to the PDF format.                        |
+| [**ImageOptions**](ConversionOptions.md#ImageOptions)       | Convert to images (JPEG, PNG, GIF, TIFF, BMP).    |
+| [**XPSOptions**](ConversionOptions.md#XPSOptions)           | Convert to the XPS format.                        |
+| [**DocOptions**](ConversionOptions.md#DocOptions)           | Convert to the DOCX format.                       |
+| [**SvgOptions**](ConversionOptions.md#SvgOptions)           | Trace images to the SVG format.                   |
+| [**MarkdownOptions**](ConversionOptions.md#MarkdownOptions) | Convert the HTML document to the markdown format. |
 
 ## convertLocalToLocal
 > convertLocalToLocal(string $src, string $dst, array $options = null) : [ConversionResult](ConversionResult.md)

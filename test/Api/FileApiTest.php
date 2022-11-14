@@ -44,7 +44,7 @@ class FileApiTest extends BaseTest
     /**
      * Test case for uploadFile
      *
-     * @param  string $path Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext             If the content is multipart and path does not contains the file name it tries to get them from filename parameter             from Content-Disposition header. (required)
+     * @param  string $path Folder where to upload exclude filename and extension e.g. / or /Folder. (required)
      * @param  SplFileObject $file File to upload (required)
      * @param  string $storage_name Storage name (optional)
      *

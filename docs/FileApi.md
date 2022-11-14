@@ -122,12 +122,12 @@ $configuration = array(
 
 $apiInstance = new Client\Invoker\Api\StorageApi($configuration);
 
-$path = "FolderInStorage"; // string | Path where to upload excluding filename e.g. "/" or "Folder"
+$folder = "FolderInStorage"; // string | Path where to upload excluding filename e.g. "/" or "Folder"
 $file = "/path/to/file.txt"; // \SplFileObject | File to upload
 $storage_name = "storage_name_example"; // string | Storage name
 
 try {
-    $result = $apiInstance->uploadFile($path, $file, $storage_name);
+    $result = $apiInstance->uploadFile($folder, $file, $storage_name);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling FileApi->uploadFile: ', $e->getMessage(), PHP_EOL;
@@ -139,7 +139,7 @@ try {
 
 | Name             | Type               | Description                                                  | Notes      |
 |------------------|--------------------|--------------------------------------------------------------|------------|
-| **path**         | **string**         | Path where to upload excluding filename e.g. "/" or "Folder" |            |
+| **folder**       | **string**         | Path where to upload excluding filename e.g. "/" or "Folder" |            |
 | **file**         | **\SplFileObject** | File to upload                                               |            |
 | **storage_name** | **string**         | Storage name                                                 | [optional] |
 
