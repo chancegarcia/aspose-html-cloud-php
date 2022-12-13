@@ -4,7 +4,7 @@ All URIs are relative to *https://api.aspose.cloud/v4.0*
 
 | Method                                               | HTTP request                              | Description                    |
 |------------------------------------------------------|-------------------------------------------|--------------------------------|
-| [**getDiscUsage**](StorageApi.md#getDiscUsage)       | **GET** /html/storage/disc                | Get disc usage                 |
+| [**getDiscUsage**](StorageApi.md#getDiscUsage)       | **GET** /html/storage/disc/usage          | Get disc usage                 |
 | [**objectExists**](StorageApi.md#objectExists)       | **GET** /html/storage/exist/{path}        | Check if file or folder exists |
 | [**storageExists**](StorageApi.md#storageExists)     | **GET** /html/storage/{storageName}/exist | Check if storage exists        |
 

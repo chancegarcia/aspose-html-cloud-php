@@ -1,4 +1,4 @@
-# Client\Invoker\Model\ConversionResult
+# Client\Invoker\Model\OperationResult
 
 ## Properties
 | Name            | Type        | Description                                                                     | Notes                                                   |

@@ -24,7 +24,7 @@
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
  * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @22.11.1@
+ * @version   GIT: @22.12.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -33,7 +33,7 @@ namespace Client\Invoker\Api;
 use Client\Invoker\ApiException;
 use Client\Invoker\Configuration;
 use Client\Invoker\HeaderSelector;
-use Client\Invoker\Model\ConversionResult;
+use Client\Invoker\Model\OperationResult;
 use Client\Invoker\ObjectSerializer;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -132,10 +132,10 @@ class HtmlApi
      * @param ?array    $options       Options for conversion. (optional)
      * @param ?string   $storage_name  User's storage name. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convert(string $src, string $dest, bool $srcInLocal, bool $dstInLocal, bool $isUrl, ?array $options=null, ?string $storage_name=null) : ConversionResult {
+    public function convert(string $src, string $dest, bool $srcInLocal, bool $dstInLocal, bool $isUrl, ?array $options=null, ?string $storage_name=null) : OperationResult {
 
         if($srcInLocal){
             $file = new SplFileObject($src);
@@ -276,10 +276,10 @@ class HtmlApi
      * @param string    $dst           Path to the result file. (required)
      * @param ?array    $options       Options for conversion. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convertLocalToLocal(string $src, string $dst, array $options = null) : ?ConversionResult {
+    public function convertLocalToLocal(string $src, string $dst, array $options = null) : ?OperationResult {
         return $this->convert($src, $dst, true, true, false, $options);
     }
 
@@ -291,10 +291,10 @@ class HtmlApi
      * @param ?string   $storage       User's storage name. (optional)
      * @param ?array    $options       Options for conversion. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convertLocalToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?ConversionResult {
+    public function convertLocalToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
         return $this->convert($src, $dst, true, false, false, $options, $storage);
     }
 
@@ -306,10 +306,10 @@ class HtmlApi
      * @param ?string   $storage       User's storage name. (optional)
      * @param ?array    $options       Options for conversion. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convertStorageToLocal(string $src, string $dst, ?string $storage, ?array $options = null) : ?ConversionResult {
+    public function convertStorageToLocal(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
         return $this->convert($src, $dst, false, true, false, $options, $storage);
     }
 
@@ -321,10 +321,10 @@ class HtmlApi
      * @param ?string   $storage       User's storage name. (optional)
      * @param ?array    $options       Options for conversion. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convertStorageToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?ConversionResult {
+    public function convertStorageToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
         return $this->convert($src, $dst, false, false, false, $options, $storage);
     }
 
@@ -335,10 +335,10 @@ class HtmlApi
      * @param string    $dst           Path to the result file. (required)
      * @param ?array    $options       Options for conversion. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convertUrlToLocal(string $src, string $dst, ?array $options = null) : ?ConversionResult {
+    public function convertUrlToLocal(string $src, string $dst, ?array $options = null) : ?OperationResult {
         return $this->convert($src, $dst, false, true, true, $options);
     }
 
@@ -350,12 +350,103 @@ class HtmlApi
      * @param ?string   $storage       User's storage name. (optional)
      * @param ?array    $options       Options for conversion. (optional)
      *
-     * @return ?ConversionResult
+     * @return ?OperationResult
      * @throws ApiException on non-2xx response
      */
-    public function convertUrlToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?ConversionResult {
+    public function convertUrlToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
         return $this->convert($src, $dst, false, false, true, $options, $storage);
     }
+
+    /**
+     * Vectorize an image on the local disk to the SVG format and save result on the local disk.
+     *
+     * @param string    $src           Path to a source file. (required)
+     * @param string    $dst           Path to the result file. (required)
+     * @param ?array    $options       Options for vectorization. (optional)
+     *
+     * @return ?OperationResult
+     * @throws ApiException on non-2xx response
+     */
+    public function vectorizeLocalToLocal(string $src, string $dst, array $options = null) : ?OperationResult {
+        return $this->vectorize($src, $dst, true, true, $options);
+    }
+
+    /**
+     * Vectorize an image on the local disk to the SVG format and save result on the storage.
+     *
+     * @param string    $src           Path to a source file. (required)
+     * @param string    $dst           Path to the result file. (required)
+     * @param ?string   $storage       User's storage name. (optional)
+     * @param ?array    $options       Options for vectorization. (optional)
+     *
+     * @return ?OperationResult
+     * @throws ApiException on non-2xx response
+     */
+    public function vectorizeLocalToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
+        return $this->vectorize($src, $dst, true, false, $options, $storage);
+    }
+
+    /**
+     * Vectorize an image on the storage to the SVG format and save result on the local disk.
+     *
+     * @param string    $src           Path to a source file. (required)
+     * @param string    $dst           Path to the result file. (required)
+     * @param ?string   $storage       User's storage name. (optional)
+     * @param ?array    $options       Options for vectorization. (optional)
+     *
+     * @return ?OperationResult
+     * @throws ApiException on non-2xx response
+     */
+    public function vectorizeStorageToLocal(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
+        return $this->vectorize($src, $dst, false, true, $options, $storage);
+    }
+
+    /**
+     * Vectorize an image on the storage to the specific format and save result on the storage.
+     *
+     * @param string    $src           Path to a source file. (required)
+     * @param string    $dst           Path to the result file. (required)
+     * @param ?string   $storage       User's storage name. (optional)
+     * @param ?array    $options       Options for vectorization. (optional)
+     *
+     * @return ?OperationResult
+     * @throws ApiException on non-2xx response
+     */
+    public function vectorizeStorageToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : ?OperationResult {
+        return $this->vectorize($src, $dst, false, false, $options, $storage);
+    }
+
+    /**
+     * General function for vectorization
+     *
+     * Vectorize an image to the SVG format.
+     *
+     * @param string    $src           Path to a source file. (required)
+     * @param string    $dest          Path to the result. (required)
+     * @param bool      $srcInLocal    Source file located on the local disk. (required)
+     * @param bool      $dstInLocal    Result file located on the local disk. (required)
+     * @param ?array    $options       Options for vectorization. (optional)
+     * @param ?string   $storage_name  User's storage name. (optional)
+     *
+     * @return ?OperationResult
+     * @throws ApiException Format is not support
+     */
+    public function vectorize(string $src, string $dest, bool $srcInLocal, bool $dstInLocal, ?array $options=null, ?string $storage_name=null) :?OperationResult {
+
+        $inputFormat = $this->getInputFormat($src);
+        $outputFormat = strtolower(pathinfo($dest)['extension']);
+
+        if (!in_array($inputFormat, array("bmp", "png", "gif", "tiff", "jpeg"))) {
+            throw new RuntimeException("Input format must be an image.");
+        }
+
+        if ($outputFormat != "svg") {
+            throw new RuntimeException("Output format must be SVG.");
+        }
+
+        return $this->convert($src, $dest, $srcInLocal, $dstInLocal, false, $options, $storage_name);
+    }
+
 
     private function getInputFormat(string $src) : string {
 
@@ -376,7 +467,7 @@ class HtmlApi
         }
     }
 
-    private function executeRequest($request) : ConversionResult {
+    private function executeRequest($request) : OperationResult {
 
         try {
             $options = $this->createHttpClientOption();
@@ -409,13 +500,13 @@ class HtmlApi
             $responseBody = $response->getBody();
             $content = $responseBody->getContents();
             $content = json_decode($content);
-            return ObjectSerializer::deserialize($content, '\Client\Invoker\Model\ConversionResult', []);
+            return ObjectSerializer::deserialize($content, '\Client\Invoker\Model\OperationResult', []);
 
         } catch (ApiException $e) {
             if ($e->getCode() == 200) {
                 $data = ObjectSerializer::deserialize(
                     $e->getResponseBody(),
-                    'ConversionResult',
+                    'OperationResult',
                     $e->getResponseHeaders()
                 );
                 $e->setResponseObject($data);
@@ -425,7 +516,7 @@ class HtmlApi
 
     }
 
-    private function checkStatus(string $id) : ConversionResult {
+    private function checkStatus(string $id) : OperationResult {
 
         $resourcePath = "/html/conversion/" . $id;
 

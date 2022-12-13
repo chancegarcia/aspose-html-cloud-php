@@ -121,11 +121,11 @@ $options_a4 = [
 ];
 
 $src = 'https://stallman.org/articles/anonymous-payments-thru-phones.html';
-$dst = 'website.pdf'
+$dst = 'website.pdf';
 
 try {
     //Request to server Api
-    $result = self::$api_html->convertUrlToLocal($src, $dst, $options_a4);
+    $result = $apiInstance->convertUrlToLocal($src, $dst, $options_a4);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling HtmlApi->convertUrlToLocal: ', $e->getMessage(), PHP_EOL;
@@ -148,15 +148,21 @@ Possible conversions:
 <a name="html_api"></a>
 ## HTML API
 
-| Class     | Method                                                                       | Description                                                              |
-|-----------|------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| *HtmlApi* | [**convertLocalToLocal**](docs/ConversionApi.md#convertlocaltolocal)         | Convert the HTML or EPUB document from the local file to the local file. |
-| *HtmlApi* | [**convertLocalToStorage**](docs/ConversionApi.md#convertlocaltostorage)     | Convert the HTML or EPUB document from the local file to the storage.    |
-| *HtmlApi* | [**convertStorageToLocal**](docs/ConversionApi.md#convertstoragetolocal)     | Convert the HTML or EPUB document from the storage to the local file.    |
-| *HtmlApi* | [**convertStorageToStorage**](docs/ConversionApi.md#convertstoragetostorage) | Convert the HTML or EPUB document from the storage to the storage.       |
-| *HtmlApi* | [**convertUrlToLocal**](docs/ConversionApi.md#converturltolocal)             | Convert the website and saving result to the local file.                 |
-| *HtmlApi* | [**convertUrlToStorage**](docs/ConversionApi.md#converturltostorage)         | Convert the website and saving result to the storage.                    |
-| *HtmlApi* | [**convert**](docs/ConversionApi.md#convert)                                 | General function for conversion.                                         |
+| Class     | Method                                                                              | Description                                               |
+|-----------|-------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| *HtmlApi* | [**convertLocalToLocal**](docs/ConversionApi.md#convertlocaltolocal)                | Convert a document from the local file to the local file. |
+| *HtmlApi* | [**convertLocalToStorage**](docs/ConversionApi.md#convertlocaltostorage)            | Convert a document from the local file to the storage.    |
+| *HtmlApi* | [**convertStorageToLocal**](docs/ConversionApi.md#convertstoragetolocal)            | Convert a document from the storage to the local file.    |
+| *HtmlApi* | [**convertStorageToStorage**](docs/ConversionApi.md#convertstoragetostorage)        | Convert a document from the storage to the storage.       |
+| *HtmlApi* | [**convertUrlToLocal**](docs/ConversionApi.md#converturltolocal)                    | Convert the website and saving result to the local file.  |
+| *HtmlApi* | [**convertUrlToStorage**](docs/ConversionApi.md#converturltostorage)                | Convert the website and saving result to the storage.     |
+| *HtmlApi* | [**convert**](docs/ConversionApi.md#convert)                                        | General function for conversion.                          |
+| *HtmlApi* | [**vectorizeLocalToLocal**](docs/VectorizationApi.md#vectorizelocaltolocal)         | Vectorize an image from the local file to the local file. |
+| *HtmlApi* | [**vectorizeLocalToStorage**](docs/VectorizationApi.md#vectorizelocaltostorage)     | Vectorize an image from the local file to the storage.    |
+| *HtmlApi* | [**vectorizeStorageToLocal**](docs/VectorizationApi.md#vectorizestoragetolocal)     | Vectorize an image from the storage to the local file.    |
+| *HtmlApi* | [**vectorizeStorageToStorage**](docs/VectorizationApi.md#vectorizestoragetostorage) | Vectorize an image from the storage to the storage.       |
+| *HtmlApi* | [**vectorize**](docs/VectorizationApi.md#vectorize)                                 | General function for vectorization.                       |
+
 
 ## conversionOptions
 | Options                                                          | Description                                       |
@@ -167,6 +173,15 @@ Possible conversions:
 | [**DocOptions**](docs/ConversionOptions.md#DocOptions)           | Convert to the DOCX format.                       |
 | [**SvgOptions**](docs/ConversionOptions.md#SvgOptions)           | Trace images to the SVG format.                   |
 | [**MarkdownOptions**](docs/ConversionOptions.md#MarkdownOptions) | Convert the HTML document to the markdown format. |
+
+## vectorizationOptions
+
+| Field               | Type  | Description                                                                                             | Note     |
+|---------------------|-------|---------------------------------------------------------------------------------------------------------|----------|
+| **error_threshold** | float | This parameter defines maximum deviation of points to fitted curve. By default it is 30.                | Optional |
+| **max_iterations**  | int   | This parameter defines number of iteration for least-squares approximation method. By default it is 30. | Optional |
+| **colors_limit**    | int   | The maximum number of colors used to quantize an image. Default value is 25.                            | Optional |
+| **line_width**      | float | The value of this parameter is affected by the graphics scale. Default value is 1.                      | Optional |
 
 
 <a name="storage_api"></a>

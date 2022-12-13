@@ -24,7 +24,7 @@
  * @author    Alexander Makogon <alexander.makogon@aspose.com>
  * @copyright 2022 Aspose
  * @license   https://opensource.org/licenses/mit-license.php  MIT License
- * @version   GIT: @22.11.1@
+ * @version   GIT: @22.12.1@
  * @link      https://packagist.org/packages/aspose/html-sdk-php
  */
 
@@ -41,7 +41,7 @@ use Client\Invoker\ObjectSerializer;
  * @license  https://opensource.org/licenses/mit-license.php  MIT License
  * @link     https://packagist.org/packages/aspose/html-sdk-php
  */
-class ConversionResult implements ModelInterface, ArrayAccess
+class OperationResult implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class ConversionResult implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static string $swaggerModelName = 'ConversionResult';
+    protected static string $swaggerModelName = 'OperationResult';
 
     /**
       * Property to type mappings. Used for (de)serialization
@@ -249,7 +249,7 @@ class ConversionResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setCode(int $code): ConversionResult
+    public function setCode(int $code): OperationResult
     {
         $this->container['code'] = $code;
 
@@ -273,7 +273,7 @@ class ConversionResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setId(string $id): ConversionResult
+    public function setId(string $id): OperationResult
     {
         $this->container['id'] = $id;
 
@@ -297,7 +297,7 @@ class ConversionResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setStatus(string $status): ConversionResult
+    public function setStatus(string $status): OperationResult
     {
         $this->container['status'] = $status;
 
@@ -321,7 +321,7 @@ class ConversionResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setDescription(string $description): ConversionResult
+    public function setDescription(string $description): OperationResult
     {
         $this->container['description'] = $description;
 
@@ -345,7 +345,7 @@ class ConversionResult implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setFile(string $file): ConversionResult
+    public function setFile(string $file): OperationResult
     {
         $this->container['file'] = $file;
 

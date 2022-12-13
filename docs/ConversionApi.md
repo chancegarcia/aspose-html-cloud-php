@@ -1,4 +1,4 @@
-# Client\Invoker\Api\ConversionApi
+# Client\Invoker\Api\HtmlApi
 
 All URIs are relative to *https://api.aspose.cloud/v4.0*
 
@@ -10,15 +10,15 @@ Possible conversions:
 - SVG -> PDF, XPS, JPEG, BMP, PNG, TIFF, GIF
 - JPEG, BMP, PNG, TIFF, GIF -> SVG
 
-| Class     | Method                                                                  | Description                                                              |
-|-----------|-------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| *HtmlApi* | [**convertLocalToLocal**](ConversionApi.md#convertlocaltolocal)         | Convert the HTML or EPUB document from the local file to the local file. |
-| *HtmlApi* | [**convertLocalToStorage**](ConversionApi.md#convertlocaltostorage)     | Convert the HTML or EPUB document from the local file to the storage.    |
-| *HtmlApi* | [**convertStorageToLocal**](ConversionApi.md#convertstoragetolocal)     | Convert the HTML or EPUB document from the storage to the local file.    |
-| *HtmlApi* | [**convertStorageToStorage**](ConversionApi.md#convertstoragetostorage) | Convert the HTML or EPUB document from the storage to the storage.       |
-| *HtmlApi* | [**convertUrlToLocal**](ConversionApi.md#converturltolocal)             | Convert the website and saving result to the local file.                 |
-| *HtmlApi* | [**convertUrlToStorage**](ConversionApi.md#converturltostorage)         | Convert the website and saving result to the storage.                    |
-| *HtmlApi* | [**convert**](ConversionApi.md#convert)                                 | General function for conversion.                                         |
+| Class     | Method                                                                  | Description                                               |
+|-----------|-------------------------------------------------------------------------|-----------------------------------------------------------|
+| *HtmlApi* | [**convertLocalToLocal**](ConversionApi.md#convertlocaltolocal)         | Convert a document from the local file to the local file. |
+| *HtmlApi* | [**convertLocalToStorage**](ConversionApi.md#convertlocaltostorage)     | Convert a document from the local file to the storage.    |
+| *HtmlApi* | [**convertStorageToLocal**](ConversionApi.md#convertstoragetolocal)     | Convert a document from the storage to the local file.    |
+| *HtmlApi* | [**convertStorageToStorage**](ConversionApi.md#convertstoragetostorage) | Convert a document from the storage to the storage.       |
+| *HtmlApi* | [**convertUrlToLocal**](ConversionApi.md#converturltolocal)             | Convert the website and saving result to the local file.  |
+| *HtmlApi* | [**convertUrlToStorage**](ConversionApi.md#converturltostorage)         | Convert the website and saving result to the storage.     |
+| *HtmlApi* | [**convert**](ConversionApi.md#convert)                                 | General function for conversion.                          |
 
 
 ## conversionOptions
@@ -32,9 +32,9 @@ Possible conversions:
 | [**MarkdownOptions**](ConversionOptions.md#MarkdownOptions) | Convert the HTML document to the markdown format. |
 
 ## convertLocalToLocal
-> convertLocalToLocal(string $src, string $dst, array $options = null) : [ConversionResult](ConversionResult.md)
+> convertLocalToLocal(string $src, string $dst, array $options = null) : [OperationResult](OperationResult.md)
 
-Convert the HTML, EPUB from the local file to the local file.
+Convert a document from the local file to the local file.
 
 ### Example
 ```php
@@ -76,7 +76,7 @@ try {
 
 | Name               | Type       | Description                                                              | Notes      |
 |--------------------|------------|--------------------------------------------------------------------------|------------|
-| **$src**           | **string** | Full path to the source file.                                            | html, epub |
+| **$src**           | **string** | Full path to the source file.                                            |            |
 | **$dst**           | **string** | Full path to the result file.                                            |            |
 | **$options**       | **string** | Option for conversion.                                                   | [optional] |
 | **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
@@ -87,14 +87,14 @@ try {
 | **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
 
 ## **convertLocalToStorage**
-> convertLocalToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : [ConversionResult](ConversionResult.md)
+> convertLocalToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : [OperationResult](OperationResult.md)
 
-Convert the HTML or EPUB from the local file to the storage.
+Convert a document from the local file to the storage.
 
 ### Example
 ```php
@@ -112,7 +112,7 @@ $configuration = array(
 $api_html = new HtmlApi($configuration);
 
 $src = "c:/test.html";
-$dst = 'c:/test.pdf';
+$dst = 'FolderInStorage/test.pdf';
 $options = null;
 
 try {
@@ -127,7 +127,7 @@ try {
 ### Parameters
 | Name               | Type       | Description                                                              | Notes                   |
 |--------------------|------------|--------------------------------------------------------------------------|-------------------------|
-| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$src**           | **string** | Full path to the source file.                                            |                         |
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
@@ -139,15 +139,15 @@ try {
 | **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
 
 ## **convertStorageToLocal**
-> convertStorageToLocal(string $src, string $dst, ?string $storage, ?array $options = null) : [ConversionResult](ConversionResult.md)
+> convertStorageToLocal(string $src, string $dst, ?string $storage, ?array $options = null) : [OperationResult](OperationResult.md)
 
-Convert the HTML or EPUB from the storage to the local file.
+Convert a document from the storage to the local file.
 
 ### Example
 ```php
@@ -180,7 +180,7 @@ try {
 ### Parameters
 | Name               | Type       | Description                                                              | Notes                   |
 |--------------------|------------|--------------------------------------------------------------------------|-------------------------|
-| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$src**           | **string** | Full path to the source file.                                            |                         |
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
@@ -192,15 +192,15 @@ try {
 | **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
 
 ## **convertStorageToStorage**
-> convertStorageToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : [ConversionResult](ConversionResult.md)
+> convertStorageToStorage(string $src, string $dst, ?string $storage, ?array $options = null) : [OperationResult](OperationResult.md)
 
-Convert the HTML or EPUB from the storage to the storage.
+Convert a document from the storage to the storage.
 
 ### Example
 ```php
@@ -233,7 +233,7 @@ try {
 ### Parameters
 | Name               | Type       | Description                                                              | Notes                   |
 |--------------------|------------|--------------------------------------------------------------------------|-------------------------|
-| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$src**           | **string** | Full path to the source file.                                            |                         |
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
@@ -245,13 +245,13 @@ try {
 | **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
 
 ## **convertUrlToLocal**
-> convertUrlToLocal(string $src, string $dst, ?array $options = null) : [ConversionResult](ConversionResult.md)
+> convertUrlToLocal(string $src, string $dst, ?array $options = null) : [OperationResult](OperationResult.md)
 
 Convert the website to the local file.
 
@@ -286,7 +286,7 @@ try {
 ### Parameters
 | Name               | Type       | Description                                                              | Notes      |
 |--------------------|------------|--------------------------------------------------------------------------|------------|
-| **$src**           | **string** | Full path to the source file.                                            | html, epub |
+| **$src**           | **string** | Url of the website.                                                      |            |
 | **$dst**           | **string** | Full path to the result file.                                            |            |
 | **$options**       | **string** | Option for conversion.                                                   | [optional] |
 | **$width**         | **float**  | Resulting width in pixel. For PDF, XPS or DOC formats in inches.         | [optional] |
@@ -297,13 +297,13 @@ try {
 | **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional] |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
 
 ## **convertUrlToStorage**
-> convertUrlToStorage(string $src, string $dst, ?array $options = null) : [ConversionResult](ConversionResult.md)
+> convertUrlToStorage(string $src, string $dst, ?array $options = null) : [OperationResult](OperationResult.md)
 
 Convert the website to the storage.
 
@@ -338,7 +338,7 @@ try {
 ### Parameters
 | Name               | Type       | Description                                                              | Notes                   |
 |--------------------|------------|--------------------------------------------------------------------------|-------------------------|
-| **$src**           | **string** | Full path to the source file.                                            | html, epub              |
+| **$src**           | **string** | URL of the website.                                                      |                         |
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 | **$options**       | **string** | Option for conversion.                                                   | [optional]              |
@@ -350,13 +350,13 @@ try {
 | **$bottom_margin** | **float**  | Bottom resulting margin in pixel. For PDF, XPS or DOC formats in inches. | [optional]              |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
 
 ## **convert**
-> convert(string $src, string $dst, bool $srcInLocal, bool $dstInLocal, bool $isUrl, ?array $options=null, ?string $storage=null) : [ConversionResult](ConversionResult.md)
+> convert(string $src, string $dst, bool $srcInLocal, bool $dstInLocal, bool $isUrl, ?array $options=null, ?string $storage=null) : [OperationResult](OperationResult.md)
 
 General function for conversion.
 
@@ -391,7 +391,7 @@ try {
 ### Parameters
 | Name               | Type       | Description                                                              | Notes                   |
 |--------------------|------------|--------------------------------------------------------------------------|-------------------------|
-| **$src**           | **string** | Full path to the source file or url.                                     | html, epub or url       |
+| **$src**           | **string** | Full path to the source file or url.                                     | file or url             |
 | **$dst**           | **string** | Full path to the result file.                                            |                         |
 | **$srcInLocal**    | **bool**   | Source file on the local disk.                                           |                         |
 | **$dstInLocal**    | **string** | Result file on the local disk.                                           |                         |
@@ -406,7 +406,7 @@ try {
 | **$storage**       | **string** | User's storage.                                                          | Null is default storage |
 
 ### Return type
-**[ConversionResult](ConversionResult.md)**
+**[OperationResult](OperationResult.md)**
 
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)  [[Back to README]](../README.md)
