@@ -26,7 +26,7 @@
 * --------------------------------------------------------------------------------------------------------------------
 */
 
-namespace Client\Invoker\Api;
+namespace Client\Invoker\Test\Api;
 
 use SplFileObject;
 

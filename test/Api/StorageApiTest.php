@@ -26,13 +26,14 @@
 * --------------------------------------------------------------------------------------------------------------------
 */
 
-namespace Client\Invoker\Api;
+namespace Client\Invoker\Test\Api;
 
 use Client\Invoker\ApiException;
 use Client\Invoker\Model\DiscUsage;
 use Client\Invoker\Model\FileVersions;
 use Client\Invoker\Model\ObjectExist;
 use Client\Invoker\Model\StorageExist;
+use InvalidArgumentException;
 use SplFileObject;
 
 /**

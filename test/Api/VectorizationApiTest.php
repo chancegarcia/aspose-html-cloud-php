@@ -25,7 +25,7 @@
 * </summary>
 * --------------------------------------------------------------------------------------------------------------------
 */
-
+namespace Client\Invoker\Test\Api;
 
 use SplFileObject;
 
@@ -35,7 +35,7 @@ use SplFileObject;
  * @category Class
  * @package  Client\Invoker\Api
  */
-class VectorizationApiTest extends \Client\Invoker\Api\BaseTest
+class VectorizationApiTest extends BaseTest
 {
     public function testVectorizationLocalToLocal() {
 

@@ -29,7 +29,7 @@
         "psr-4": { "Client\\Invoker\\" : "lib/" }
     },
     "autoload-dev": {
-        "psr-4": { "Client\\Invoker\\" : "test/" }
+        "psr-4": { "Client\\Invoker\\Test\\" : "test/" }
     },
      "version": "22.12.1"
 }

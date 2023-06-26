@@ -26,10 +26,10 @@
 * --------------------------------------------------------------------------------------------------------------------
 */
 
+namespace Client\Invoker\Test\Api;
 
-namespace Client\Invoker\Api;
-
-
+use Client\Invoker\Api\HtmlApi;
+use Client\Invoker\Api\StorageApi;
 use SplFileObject;
 
 abstract class BaseTest extends \PHPUnit\Framework\TestCase
