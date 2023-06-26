@@ -72,8 +72,8 @@ abstract class BaseTest extends \PHPUnit\Framework\TestCase
             "apiKey" => "html.cloud",
             "appSID" => "html.cloud",
 
-            "testResult" => "\\testresult\\",
-            "testData" => "\\testdata\\",
+            "testResult" => DIRECTORY_SEPARATOR .  "testresult" . DIRECTORY_SEPARATOR,
+            "testData" => DIRECTORY_SEPARATOR . "testdata" . DIRECTORY_SEPARATOR,
             "remoteFolder" => "HtmlTestDocPhpSdk",
             "defaultUserAgent" => "Webkit",
             "debugFile" => "debug.txt",

@@ -30,8 +30,6 @@
 
 namespace Client\Invoker;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use kamermans\OAuth2\GrantType\ClientCredentials;

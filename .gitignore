@@ -1,3 +1,5 @@
 .idea/*
 vendor/*
 testresult/*
+/phpunit.xml
+.phpunit.result.cache
